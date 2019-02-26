@@ -24,71 +24,62 @@ import qualified Text.Pandoc.Readers.HTML as R
 import Text.Pandoc.Class
 import Text.Pandoc
 
-import Text.Blaze.Html
+--import Text.Blaze.Html
 
 import qualified Data.Text.IO as T
 
 
-
+-- mappend from Monoid - joining of pandoc parts
+-- http://hackage.haskell.org/package/pandoc-types-1.19/docs/Text-Pandoc-Builder.html#v:-60--62-
 myDoc :: Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc
-myDoc defFiltered reqFiltered archFiltered techFiltered testFiltered = defFiltered <> reqFiltered <> archFiltered <> techFiltered <> testFiltered
+myDoc defFiltered reqFiltered archFiltered techFiltered testFiltered = setTitle "Project" $ defFiltered <> reqFiltered <> archFiltered <> techFiltered <> testFiltered
              
              
 defDoc :: Maybe [(String, String)] -> Pandoc
-defDoc Nothing = str ""
-defDoc Just [x:xs] =
-  setTitle "My title" $ doc $
-  para "This is the first paragraph" <>
-  para ("And " <> emph "another" <> ".") <>
-  bulletList [ para "item one" <> para "continuation"
-             , plain ("item two and a " <>
-               link "/url" "go to url" "link")
-             ]
-             
-
+defDoc Nothing = setAuthors [""] $ doc $ para linebreak
+--defDoc Just [] = str ""
+defDoc (Just x) = doc $ para linebreak <> para (strong "Definitions") <>
+  docLoop (Just x)
+  
+  
 reqDoc :: Maybe [(String, String)] -> Pandoc
-reqDoc Nothing =
-  setTitle "My title" $ doc $
-  para "This is the first paragraph" <>
-  para ("And " <> emph "another" <> ".") <>
-  bulletList [ para "item one" <> para "continuation"
-             , plain ("item two and a " <>
-               link "/url" "go to url" "link")
-             ]
-             
-             
+reqDoc Nothing = setAuthors [""] $ doc $ para linebreak
+--reqDoc Just [] = str ""
+reqDoc (Just x) = doc $ para linebreak <> para (strong "Requirements") <>
+  docLoop (Just x)
+  
+  
 archDoc :: Maybe [(String, String)] -> Pandoc
-archDoc Nothing =
-  setTitle "My title" $ doc $
-  para "This is the first paragraph" <>
-  para ("And " <> emph "another" <> ".") <>
-  bulletList [ para "item one" <> para "continuation"
-             , plain ("item two and a " <>
-               link "/url" "go to url" "link")
-             ]
-             
-             
+archDoc Nothing = setAuthors [""] $ doc $ para linebreak
+--archDoc Just [] = str ""
+archDoc (Just x) = doc $ para linebreak <> para (strong "Architecture") <>
+  docLoop (Just x)
+  
+  
 techDoc :: Maybe [(String, String)] -> Pandoc
-techDoc Nothing =
-  setTitle "My title" $ doc $
-  para "This is the first paragraph" <>
-  para ("And " <> emph "another" <> ".") <>
-  bulletList [ para "item one" <> para "continuation"
-             , plain ("item two and a " <>
-               link "/url" "go to url" "link")
-             ]
-             
-             
+techDoc Nothing = setAuthors [""] $ doc $ para linebreak
+--techDoc Just [] = str ""
+techDoc (Just x) = doc $ para linebreak <> para (strong "Technology") <>
+  docLoop (Just x)
+  
+  
 testDoc :: Maybe [(String, String)] -> Pandoc
-testDoc Nothing =
-  setTitle "My title" $ doc $
-  para "This is the first paragraph" <>
-  para ("And " <> emph "another" <> ".") <>
-  bulletList [ para "item one" <> para "continuation"
-             , plain ("item two and a " <>
-               link "/url" "go to url" "link")
-             ]
- 
+testDoc Nothing = setAuthors [""] $ doc $ para linebreak
+--testDoc Just [] = str ""
+testDoc (Just x) = doc $ para linebreak <> para (strong "Tests") <>
+  docLoop (Just x)
+  
+  
+docLoop :: Maybe [(String, String)] -> Blocks  
+docLoop (Just ((x,y):xs)) = 
+    para (emph (text x)) <>
+    para (text y) <> 
+    docLoop (Just xs)
+    
+docLoop (Just []) = para linebreak
+docLoop Nothing = para linebreak
+                  
+
  
 writeHtml :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
 writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered = 
