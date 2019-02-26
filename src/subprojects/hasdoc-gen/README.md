@@ -1,0 +1,1 @@
+# hasdoc-gen

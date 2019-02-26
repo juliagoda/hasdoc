@@ -1,0 +1,35 @@
+PRZETŁUMACZENIE NA JĘZYK ANGIELSKI
+- w oknach menu
+- w oknie wizarda
+
+- wczytywanie zaznaczonych formatów (checkboxes) (x)
+
+- uzupełnienie dokumentacji w menu
+- uzupełnienie źródeł w menu (książki)
+- uzupełnienie informacji o używane moduły w Visual Studio Code
+- uzupełnienie informacji o wskazówkach
+
+- uzyskanie sposobu na automatyczne wykrycie ścieżki pliku stack/uniwersalne wykrywanie ścieżek względnych do zasobów (x)
+
+- walidacja danych wejściowych w wizardzie (x)
+
+- wprowadzenie danych do pliku html
+- zapis danych w dodatkowo wybranych formatach
+
+- wprowadzenie danych do drukowanego pliku pdf
+
+- zapis przerwanego stanu wizarda
+
+- wczytywanie stanu bieżącego z wybranego pliku html/pdf;
+
+- przetestowanie drukowania pliku
+
+- uzupełnienie plików szablonowych css
+
+- wprowadzenie wczytanych konfiguracji do opcji drukowania
+
+- stworzenie brakującej grafiki i ikon (x/2)
+
+- stworzenie wyglądu/stylu
+
+- format czcionek

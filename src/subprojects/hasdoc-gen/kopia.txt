@@ -1,0 +1,45 @@
+tests:
+  hasdoc-gen-test:
+    main:                test-hasdoc-gen.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hasdoc-gen
+    
+    
+-- for cabal
+
+test-suite hasdoc-gen-test
+  type: exitcode-stdio-1.0
+  main-is: test-hasdoc-gen.hs
+  other-modules:  Tests.File.Conversion
+                  Tests.File.HTML
+                  Tests.File.Print
+                  Tests.File.View
+                  Tests.GUI.Site.Architecture
+                  Tests.GUI.Site.Definition
+                  Tests.GUI.Site.Introduction
+                  Tests.GUI.Site.Requirements
+                  Tests.GUI.Site.Technology
+                  Tests.GUI.Site.Tests
+                  Tests.Text.Site.Architecture.Content
+                  Tests.Text.Site.Architecture.Help
+                  Tests.Text.Site.Definition.Content
+                  Tests.Text.Site.Definition.Help
+                  Tests.Text.Site.Introduction
+                  Tests.Text.Site.Requirements.Content
+                  Tests.Text.Site.Requirements.Help
+                  Tests.Text.Site.Technology.Content
+                  Tests.Text.Site.Technology.Help
+                  Tests.Text.Site.Tests.Content
+                  Tests.Text.Site.Tests.Help
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , hasdoc-gen
+  default-language: Haskell2010

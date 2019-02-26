@@ -1,0 +1,51 @@
+name:                hasdoc
+version:             1.0
+github:              "juliagoda/hasdoc"
+license:             BSD3
+author:              Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
+maintainer:          Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
+copyright:           (c) 2019 Jagoda "juliagoda" Górska
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/juliagoda/hasdoc#readme>
+
+dependencies:
+- base >=4.4 && <4.11
+#- hasdoc-gen >= 1.0
+
+library:
+  source-dirs: src
+
+executables:
+  hasdoc:
+    main:                Hasdoc.hs
+    source-dirs:         .
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-M2G
+    - -Wall
+    - -fno-warn-unused-do-bind
+    dependencies:
+    - hasdoc
+    
+#tests:
+#  hasdoc-test:
+#    main:                test-hasdoc.hs
+#    source-dirs:         test
+#    ghc-options:
+#    - -threaded
+#    - -rtsopts
+#    - -with-rtsopts=-N
+#    dependencies:
+#   - hasdoc
