@@ -1,0 +1,123 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 4678ea42d6a73feeda95a69fb2f137676f7f63403ebd795b5d865e3876d1f32b
+
+name:           hasdoc
+version:        1.0
+description:    Please see the README on GitHub at <https://github.com/juliagoda/hasdoc#readme>
+homepage:       https://github.com/juliagoda/hasdoc#readme
+bug-reports:    https://github.com/juliagoda/hasdoc/issues
+author:         Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
+maintainer:     Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
+copyright:      (c) 2019 Jagoda "juliagoda" Górska
+stability:      alpha
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+category:       Application
+data-files:
+                 -- templates
+                 data/templates/default.css
+                 -- translations
+                 data/translations/*.msg
+                 data/icons/*.png
+                 -- documentation
+                 doc/using-hasdoc.md
+extra-source-files:
+                 -- documentation
+                 INSTALL.md, AUTHORS.md, README.md,
+                 BUGS.txt, ChangeLog.md,
+                 -- stack build plan
+                 stack.yaml
+
+source-repository head
+  type: git
+  location: https://github.com/juliagoda/hasdoc
+
+
+library
+  build-depends: wx >=0.93,
+                 wxcore,
+                 containers >=0.2 && <0.6,
+                 Cabal >=2.2 && <2.5,
+                 process >=1.1 && <1.5,
+                 base >=4.4 && <4.11,
+                 app-settings >=0.2.0.12,
+                 open-browser,
+                 executable-path,
+                 directory, 
+                 pandoc >=2.6,
+                 HsYAML >=0.1.1.1 && <0.2,
+                 haddock-library >=1.7 && <1.8,
+                 hslua >=1.0.1 && <1.1,
+                 hslua-module-text >=0.2 && <0.3,
+                 ipynb >=0.1 && <0.2,
+                 pandoc-types >=1.17.5 && <1.18,
+                 skylighting >=0.7.6 && <0.8,
+                 texmath >=0.11 && <0.12,
+                 skylighting-core >=0.7.6 && <0.7.7,
+                 text >=1.2.3.1,
+                 blaze-html >=0.9.1.1,
+                 shakespeare >=2.0.20,
+                 filepath >=1.4.2.1,
+                 hasdoc-gen >=1.0
+  exposed-modules:
+      Application.Hasdoc
+      Application.Hasdoc.GUI.MainWindow
+      Application.Hasdoc.GUI.MainWidget
+      Application.Hasdoc.GUI.Menu
+      Application.Hasdoc.GUI.Menu.Settings
+      Application.Hasdoc.GUI.Menu.About
+      Application.Hasdoc.GUI.Menu.About.Author
+      Application.Hasdoc.GUI.Menu.About.Doc
+      Application.Hasdoc.GUI.Menu.About.Homepage
+      Application.Hasdoc.GUI.Menu.About.Issues
+      Application.Hasdoc.GUI.Menu.About.Tips
+      Application.Hasdoc.GUI.Menu.About.Tools
+      Application.Hasdoc.GUI.Menu.Program.AppClose
+      Application.Hasdoc.GUI.Menu.Program.StateLoad
+      Application.Hasdoc.GUI.Menu.Program.StateSave
+      Application.Hasdoc.Settings.General
+  other-modules:
+      Paths_hasdoc
+  hs-source-dirs:
+      src
+  default-language: Haskell2010
+
+  
+executable hasdoc
+  main-is: Hasdoc.hs
+  other-modules: Paths_hasdoc
+  hs-source-dirs: .
+  ghc-options:   -rtsopts -with-rtsopts=-M4G -Wall -fno-warn-unused-do-bind -threaded
+  build-depends:
+    base >=4.4 && <4.11
+    , wx >=0.93
+    , wxcore
+    , app-settings >=0.2.0.12
+    , containers >=0.2 && <0.6
+    , open-browser
+    , directory
+    , executable-path
+    , pandoc >=2.6
+    , HsYAML >=0.1.1.1 && <0.2
+    , haddock-library >=1.7 && <1.8
+    , hslua >=1.0.1 && <1.1
+    , hslua-module-text >=0.2 && <0.3
+    , ipynb >=0.1 && <0.2
+    , pandoc-types >=1.17.5 && <1.18
+    , skylighting >=0.7.6 && <0.8
+    , texmath >=0.11 && <0.12
+    , skylighting-core >=0.7.6 && <0.7.7
+    , text >=1.2.3.1
+    , blaze-html >=0.9.1.1
+    , shakespeare >=2.0.20
+    , filepath >=1.4.2.1
+    , hasdoc
+    , hasdoc-gen
+  buildable: True
+  default-language: Haskell2010
