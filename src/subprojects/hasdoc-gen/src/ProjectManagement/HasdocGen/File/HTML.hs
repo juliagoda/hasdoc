@@ -7,15 +7,17 @@
             ,TemplateHaskell
             ,OverloadedStrings #-}
 
+            
 module ProjectManagement.HasdocGen.File.HTML
 (
-writeHtml
+writeChosenFormats
 )
 where
     
     
 
 import ProjectManagement.HasdocGen.File.Settings    
+import ProjectManagement.HasdocGen.File.Conversion
     
 import Text.Pandoc.Builder
 import Text.Pandoc.Options
@@ -25,60 +27,60 @@ import Text.Pandoc.Class
 import Text.Pandoc
 
 --import Text.Blaze.Html
-
 import qualified Data.Text.IO as T
 
 
--- mappend from Monoid - joining of pandoc parts
--- http://hackage.haskell.org/package/pandoc-types-1.19/docs/Text-Pandoc-Builder.html#v:-60--62-
-myDoc :: Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc
-myDoc defFiltered reqFiltered archFiltered techFiltered testFiltered = setTitle "Project" $ defFiltered <> reqFiltered <> archFiltered <> techFiltered <> testFiltered
-             
-             
-defDoc :: Maybe [(String, String)] -> Pandoc
-defDoc Nothing = setAuthors [""] $ doc $ para linebreak
---defDoc Just [] = str ""
-defDoc (Just x) = doc $ para linebreak <> para (strong "Definitions") <>
-  docLoop (Just x)
-  
-  
-reqDoc :: Maybe [(String, String)] -> Pandoc
-reqDoc Nothing = setAuthors [""] $ doc $ para linebreak
---reqDoc Just [] = str ""
-reqDoc (Just x) = doc $ para linebreak <> para (strong "Requirements") <>
-  docLoop (Just x)
-  
-  
-archDoc :: Maybe [(String, String)] -> Pandoc
-archDoc Nothing = setAuthors [""] $ doc $ para linebreak
---archDoc Just [] = str ""
-archDoc (Just x) = doc $ para linebreak <> para (strong "Architecture") <>
-  docLoop (Just x)
-  
-  
-techDoc :: Maybe [(String, String)] -> Pandoc
-techDoc Nothing = setAuthors [""] $ doc $ para linebreak
---techDoc Just [] = str ""
-techDoc (Just x) = doc $ para linebreak <> para (strong "Technology") <>
-  docLoop (Just x)
-  
-  
-testDoc :: Maybe [(String, String)] -> Pandoc
-testDoc Nothing = setAuthors [""] $ doc $ para linebreak
---testDoc Just [] = str ""
-testDoc (Just x) = doc $ para linebreak <> para (strong "Tests") <>
-  docLoop (Just x)
-  
-  
-docLoop :: Maybe [(String, String)] -> Blocks  
-docLoop (Just ((x,y):xs)) = 
-    para (emph (text x)) <>
-    para (text y) <> 
-    docLoop (Just xs)
-    
-docLoop (Just []) = para linebreak
-docLoop Nothing = para linebreak
-                  
+-- the function stays here, because HTML is always generated and as first
+writeChosenFormats :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
+writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltered = 
+    do
+        writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered
+        
+        options <- loadWriterOtherOpts "docbook"
+        writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "dbk" docbookFormat
+        
+        writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered
+        
+        options <- loadWriterOtherOpts "tei"
+        writeFilePandocOptsT writeTEI options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "tei" teiFormat
+        
+        options <- loadWriterOtherOpts "dokuwiki"
+        writeFilePandocOptsT writeDokuWiki options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "dokuwiki" dokuWikiFormat
+        
+        options <- loadWriterOtherOpts "haddock"
+        writeFilePandocOptsT writeHaddock options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "haddock" haddockFormat
+        
+        options <- loadWriterOtherOpts "latex"
+        writeFilePandocOptsT writeLaTeX options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "tex" latexFormat
+        
+        options <- loadWriterOtherOpts "json"
+        writeFilePandocOptsT writePlain options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "json" jsonFormat
+        
+        options <- loadWriterOtherOpts "markdown_phpextra"
+        writeFilePandocOptsT writeMarkdown options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "php" phpMarkdownFormat
+        
+        options <- loadWriterOtherOpts "mediawiki"
+        writeFilePandocOptsT writeMediaWiki options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "mediawiki" mediaWikiFormat
+        
+        options <- loadWriterOtherOpts "opendocument"
+        writeFilePandocOptsT writeOpenDocument options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "sxw" openDocFormat
+        
+        options <- loadWriterOtherOpts "ipynb"
+        writeFilePandocOptsT writeIpynb options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "ipynb" jupyterFormat
+        
+        options <- loadWriterOtherOpts "docx"
+        writeFilePandocOptsB writeDocx options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "docx" docxFormat
+        
+        options <- loadWriterOtherOpts "epub"
+        writeFilePandocOptsB writeEPUB3 options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "epub" epubv3Format
+        
+        options <- loadWriterOtherOpts "odt"
+        writeFilePandocOptsB writeODT options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "odt" openOfficeFormat
+        
+        options <- loadWriterOtherOpts "pptx"
+        writeFilePandocOptsB writePowerpoint options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "pptx" powerPointFormat
+        
+        
 
  
 writeHtml :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
@@ -95,33 +97,32 @@ readHtml =
         htmld <- T.readFile "test.html"
         options <- loadReaderPandocOpts
         runIOorExplode $ R.readHtml options htmld
-
-
--- helper :: PandocMonad m => m TI.Text
--- helper = 
---     do 
---         
---         writeHtml5String options myDoc
         
         
 loadWriterPandocOpts :: IO WriterOptions                
 loadWriterPandocOpts = 
     do 
-       -- t <- readFile "ccc.html"
-       -- let gg = Just t
         template <- runIOorExplode $ getDefaultTemplate "html" 
         readTemp <- readTemplate 
         let gg = Just template
-        return $ def { writerTOCDepth = 4, writerTableOfContents = True, writerTemplate = gg, writerVariables = [("css", getAppCssPath ++ "/" ++ ((convIntToCss . readTemp) templateName)), ("header-includes", "<style>p { background-color: magenta; }</style>")] } 
-        
+        return $ def { writerTOCDepth = 4, writerTableOfContents = True, writerTemplate = gg, writerVariables = [("css", getAppCssPath ++ "/" ++ ((convIntToCss . readTemp) templateName))]} --("header-includes", "<style>p { background-color: magenta; }</style>")] } 
+                
         
 loadReaderPandocOpts :: IO ReaderOptions                
 loadReaderPandocOpts = return $ def { readerStripComments = True, readerStandalone = True } 
-    
 
-convIntToCss :: Int -> String
-convIntToCss 0 = "default.css"
-convIntToCss 1 = "blue.css"
-convIntToCss 2 = "green.css"
-convIntToCss 3 = "orange.css"
-convIntToCss _ = "default.css"
+           
+             
+-- writeGithubMarkdownFile :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
+-- writeGithubMarkdownFile defFiltered reqFiltered archFiltered techFiltered testFiltered =     
+--     do
+--         readTemp <- readTemplate 
+--         case readTemp jupyterFormat of
+--              True -> do
+--                  options <- loadWriterOtherOpts "gfm"
+--                  rawOdt <- runIOorExplode $ writeIpynb options $ myDoc (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) 
+--                  T.writeFile "test.gfm" rawOdt
+--              False -> return ()
+             
+
+

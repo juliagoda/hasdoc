@@ -46,7 +46,7 @@ runGenerationSeq :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (
 runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets = 
     do
         checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets
-        writeHtml (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets)
+        writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets)
 --         createPreview mainwindow defFiltered
 --         printFile mainwindow defFiltered
         

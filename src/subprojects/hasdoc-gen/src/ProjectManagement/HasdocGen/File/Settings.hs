@@ -15,7 +15,23 @@ getAppIconsPath,
 getAppCssPath,
 getAppLangPath,
 readTemplate,
-templateName
+templateName,
+docbookFormat,
+zimWikiFormat,
+teiFormat,
+docxFormat,
+dokuWikiFormat,
+epubv3Format,
+haddockFormat,
+latexFormat,
+jsonFormat,
+phpMarkdownFormat,    
+mediaWikiFormat,
+openOfficeFormat,
+openDocFormat,
+powerPointFormat,
+jupyterFormat,
+githubMarkdownFormat
 )
 where
     
@@ -61,8 +77,10 @@ getPathForLocation location = case location of
     AutoFromAppName appName -> getConfigFileName appName
     Path path -> return path
 
+    
 getConfigFileName :: String -> IO String
 getConfigFileName appName = (++"config.ini") <$> getSettingsFolder appName
+
 
 getSettingsFolder :: String -> IO FilePath
 getSettingsFolder appName = do
