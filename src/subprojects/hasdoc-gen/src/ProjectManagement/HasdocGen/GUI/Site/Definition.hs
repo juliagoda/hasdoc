@@ -18,9 +18,9 @@ import ProjectManagement.HasdocGen.Text.Site.Definition.Content
 createDefPage :: Wizard () -> IO (WizardPageSimple (), [(StaticText (), TextCtrl ())])
 createDefPage mainwizard = 
     do
-        defPage <- wizardPageSimple mainwizard [text := "Definicje", style := wxEVT_WIZARD_HELP, identity := 50 ]
+        defPage <- wizardPageSimple mainwizard [text := "Definicje", style := wxEVT_WIZARD_HELP]
         --p <- panel archPage []
-        sw <- scrolledWindow defPage [ text := "dd", scrollRate := sz 10 10, style := wxVSCROLL, identity := 51 ]
+        sw <- scrolledWindow defPage [ text := "dd", scrollRate := sz 10 10, style := wxVSCROLL]
         
         
         titleText <- staticText sw [ text := "Definicje", fontSize := 16, fontWeight := WeightBold ]

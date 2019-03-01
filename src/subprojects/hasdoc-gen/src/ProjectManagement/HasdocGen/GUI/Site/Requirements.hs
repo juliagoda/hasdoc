@@ -25,58 +25,58 @@ createReqPage mainwizard =
         titleText <- staticText sw [ text := "Wymagania", fontSize := 16, fontWeight := WeightBold ]
         
         labelText1 <- staticText sw [ text := task1, fontShape := ShapeItalic ]
-        desc1 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint1 ] 
+        desc1 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint1, identity := 51] 
         
         labelText2 <- staticText sw [ text := task2, fontShape := ShapeItalic ]
-        desc2 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint2 ] 
+        desc2 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint2, identity := 52]
         
         labelText3 <- staticText sw [ text := task3, fontShape := ShapeItalic ]
-        desc3 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint3 ] 
+        desc3 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint3, identity := 53] 
         
         labelText4 <- staticText sw [ text := task4, fontShape := ShapeItalic ]
-        desc4 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint4 ] 
+        desc4 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint4, identity := 54]
         
         labelText5 <- staticText sw [ text := task5, fontShape := ShapeItalic ]
-        desc5 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint5 ] 
+        desc5 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint5, identity := 55]
         
         labelText6 <- staticText sw [ text := task6, fontShape := ShapeItalic ]
-        desc6 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint6 ] 
+        desc6 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint6, identity := 56]
         
         labelText7 <- staticText sw [ text := task7, fontShape := ShapeItalic ]
-        desc7 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint7 ] 
+        desc7 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint7, identity := 57] 
         
         labelText8 <- staticText sw [ text := task8, fontShape := ShapeItalic ]
-        desc8 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint8 ] 
+        desc8 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint8, identity := 58]
         
         labelText9 <- staticText sw [ text := task9, fontShape := ShapeItalic ]
-        desc9 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint9 ] 
+        desc9 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint9, identity := 59] 
         
         labelText10 <- staticText sw [ text := task10, fontShape := ShapeItalic ]
-        desc10 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint10 ]
+        desc10 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint10, identity := 60]
         
         labelText11 <- staticText sw [ text := task11, fontShape := ShapeItalic ]
-        desc11 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint11 ] 
+        desc11 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint11, identity := 61]
         
         labelText12 <- staticText sw [ text := task12, fontShape := ShapeItalic ]
-        desc12 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint12 ] 
+        desc12 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint12, identity := 62] 
         
         labelText13 <- staticText sw [ text := task13, fontShape := ShapeItalic ]
-        desc13 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint13 ] 
+        desc13 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint13, identity := 63] 
         
         labelText14 <- staticText sw [ text := task14, fontShape := ShapeItalic ]
-        desc14 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint14 ] 
+        desc14 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint14, identity := 64] 
         
         labelText15 <- staticText sw [ text := task15, fontShape := ShapeItalic ]
-        desc15 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint15 ] 
+        desc15 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint15, identity := 65] 
         
         labelText16 <- staticText sw [ text := task16, fontShape := ShapeItalic ]
-        desc16 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint16 ]
+        desc16 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint16, identity := 66]
         
         labelText17 <- staticText sw [ text := task17, fontShape := ShapeItalic ]
-        desc17 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint17 ]
+        desc17 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint17, identity := 67]
         
         labelText18 <- staticText sw [ text := task18, fontShape := ShapeItalic ]
-        desc18 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint18 ]
+        desc18 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint18, identity := 68]
         
         
         let widgetsPairs = [(labelText1, desc1), (labelText2, desc2), (labelText3, desc3), (labelText4, desc4), (labelText5, desc5), (labelText6, desc6), (labelText7, desc7), (labelText8, desc8), (labelText9, desc9), (labelText10, desc10), (labelText11, desc11), (labelText12, desc12), (labelText13, desc13), (labelText14, desc14), (labelText15, desc15), (labelText16, desc16), (labelText17, desc17), (labelText18, desc18)]
