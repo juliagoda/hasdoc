@@ -19,7 +19,8 @@ mainwindow :: IO ()
 mainwindow = 
     do 
         window <- frame [text := "Hasdoc", resizeable := True, visible := True, clientSize  := sz 640 480, picture := (getAppIconsPath ++ "/hasdoc.png")]   
-        createMainMenu window
+        tbar   <- toolBar window []
+        createMainMenu window tbar
         createMainWidget window
         
         status <- statusField [text := ""] 

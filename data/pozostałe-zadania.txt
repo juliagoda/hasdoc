@@ -14,7 +14,7 @@ PRZETŁUMACZENIE NA JĘZYK ANGIELSKI
 - walidacja danych wejściowych w wizardzie (x)
 
 - wprowadzenie danych do pliku html (x)
-- zapis danych w dodatkowo wybranych formatach
+- zapis danych w dodatkowo wybranych formatach (x)
 
 - wprowadzenie danych do drukowanego pliku pdf
 

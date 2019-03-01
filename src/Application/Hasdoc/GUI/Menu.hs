@@ -51,17 +51,17 @@ makeTranslator = do
     
     
 
-createMainMenu :: Frame () -> IO ()
-createMainMenu mainWindow = 
+createMainMenu :: Frame () -> ToolBar () -> IO ()
+createMainMenu mainWindow tbar = 
     do 
-        programPane <- getProgramPane mainWindow
-        settingsPane <- getSettingsPane mainWindow
-        aboutPane <- getAboutPane mainWindow
+        programPane <- getProgramPane mainWindow tbar
+        settingsPane <- getSettingsPane mainWindow tbar
+        aboutPane <- getAboutPane mainWindow tbar
         set mainWindow [menuBar := [programPane, settingsPane, aboutPane]]
         
         
-getProgramPane :: Frame () -> IO (Menu ())
-getProgramPane mainWindow =
+getProgramPane :: Frame () -> ToolBar () -> IO (Menu ())
+getProgramPane mainWindow tbar =
     do 
         translate <- makeTranslator
         programPane <- menuPane [ text := translate MsgProgramMenu ]
@@ -71,24 +71,24 @@ getProgramPane mainWindow =
         menuLine programPane
         quitItem <- menuItem programPane [ text := translate MsgQuitMenu, help := translate MsgQuitMenuHelp ] -- image := (getAppIconsPath ++ "/exit-menu.png") ]
         set quitItem  [on command := closeMainWindow mainWindow]
-        tbar   <- toolBar mainWindow []
-        toolMenu tbar saveItem  "Open"  (getAppIconsPath ++ "/doc-window.png")  []
-        toolMenu tbar loadItem "About" (getAppIconsPath ++ "/authors-window.png") []
+        toolMenu tbar saveItem "Save" (getAppIconsPath ++ "/save-window.png")  []
+        toolMenu tbar loadItem "Load" (getAppIconsPath ++ "/load-window.png") []
         return programPane
         
         
-getSettingsPane :: Frame () -> IO (Menu ())
-getSettingsPane mainWindow =
+getSettingsPane :: Frame () -> ToolBar () -> IO (Menu ())
+getSettingsPane mainWindow tbar =
     do 
         translate <- makeTranslator
         optionsPane <- menuPane [ text := translate MsgOptionsMenu ]
         settItem  <- menuItem optionsPane [ text := translate MsgSettingsMenu, help := translate MsgSettingsMenuHelp ] --image := (getAppIconsPath ++ "/settings-menu.png") ]
         set settItem [on command := openSettingsWindow mainWindow]
+        toolMenu tbar settItem "Settings" (getAppIconsPath ++ "/settings-window.png")  []
         return optionsPane
           
         
-getAboutPane :: Frame () -> IO (Menu ())
-getAboutPane mainWindow =
+getAboutPane :: Frame () -> ToolBar () -> IO (Menu ())
+getAboutPane mainWindow tbar =
     do 
         translate <- makeTranslator
         aboutPane <- menuPane [ text := translate MsgAboutMenu ]
@@ -98,4 +98,6 @@ getAboutPane mainWindow =
         toolsItem <- menuItem aboutPane [ text := translate MsgToolsMenu, help := translate MsgToolsMenuHelp, on command := openToolsWindow mainWindow ] --image := (getAppIconsPath ++ "/tools-menu.png") ]
         tipsItem <- menuItem aboutPane [ text := translate MsgTipsMenu, help := translate MsgTipsMenuHelp, on command := openTipsWindow mainWindow ] --image := (getAppIconsPath ++ "/tips-menu.png") ]
         docItem <- menuItem aboutPane [ text := translate MsgDocMenu, help := translate MsgDocMenuHelp, on command := openDocWindow mainWindow ] --image := (getAppIconsPath ++ "/doc-menu.png") ]
+        toolMenu tbar docItem "Documentation" (getAppIconsPath ++ "/doc-window.png")  []
+        toolMenu tbar issueItem "Issue" (getAppIconsPath ++ "/issue-window.png")  []
         return aboutPane

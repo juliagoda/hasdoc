@@ -129,15 +129,9 @@ openWizard mainWindow =
         let testWidgets = snd testPage
         endPage <- createEndPage mainWindow mainwizard defWidgets reqWidgets archWidgets techWidgets testWidgets
         
-        
-        
         chain [introPage, fst defPage, fst reqPage, fst archPage, fst techPage, fst testPage, endPage]
         runWizard mainwizard introPage
-        
-        readTemp <- readTemplate 
-        
-        warningDialog mainwizard "warning" $ (show . readTemp) templateName
-        
+                
         return ()
         
 

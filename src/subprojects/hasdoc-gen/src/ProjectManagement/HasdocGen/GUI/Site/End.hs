@@ -47,7 +47,7 @@ runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWi
     do
         checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets
         writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets)
---         createPreview mainwindow defFiltered
+        createPreview mainwindow (mapAndFilter defWidgets)
 --         printFile mainwindow defFiltered
         
 
@@ -62,7 +62,9 @@ checkAllEntries mainWindow defWidgets reqWidgets archWidgets techWidgets testWid
 checkIfAllEmpty :: Frame () -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
 checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets = case defWidgets `mplus` reqWidgets `mplus` archWidgets `mplus` techWidgets `mplus` testWidgets of
                                                                                  Nothing -> warningDialog mainWindow "ostrzeżenie" "żadne pole nie zostało wypełnione"
+                                                                                 Just [] -> warningDialog mainWindow "ostrzeżenie" "żadne pole nie zostało wypełnione"
                                                                                  Just [x] -> warningDialog mainWindow "ostrzeżenie" "coś tam jest"
+                                                                                 Just ((x,y):xs) -> warningDialog mainWindow "ostrzeżenie" "coś tam jest"
 
 
 mapToStrings :: [(StaticText (), TextCtrl ())] -> Maybe [(String, String)]
