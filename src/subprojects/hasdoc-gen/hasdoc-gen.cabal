@@ -1,0 +1,84 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 12f8408bc0c8a7e1215609ed2ff68695305ea563ee61e3dc34a8e03180b76a5f
+
+name:           hasdoc-gen
+version:        1.0
+description:    Please see the README on GitHub at <https://github.com/juliagoda/hasdoc-gen#readme>
+homepage:       https://github.com/juliagoda/hasdoc-gen#readme
+bug-reports:    https://github.com/juliagoda/hasdoc-gen/issues
+author:         Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
+maintainer:     Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
+copyright:      (c) 2019 Jagoda "juliagoda" Górska
+license:        BSD3
+license-file:   LICENSE
+category:       Application
+build-type:     Simple
+extra-source-files:
+                 -- documentation
+                 README.md,
+                 ChangeLog.md,
+                 -- stack build plan
+                 stack.yaml
+
+source-repository head
+  type: git
+  location: https://github.com/juliagoda/hasdoc-gen
+
+library
+  build-depends: wx >=0.93,
+                 wxcore,
+                 containers >=0.2 && <0.6,
+                 Cabal >=2.2 && <2.5,
+                 process >=1.1 && <1.5,
+                 base >=4.4 && <4.11,
+                 pandoc >=2.6,
+                 HsYAML >=0.1.1.1 && <0.2,
+                 haddock-library >=1.7 && <1.8,
+                 hslua >=1.0.1 && <1.1,
+                 hslua-module-text >=0.2 && <0.3,
+                 ipynb >=0.1 && <0.2,
+                 pandoc-types >=1.17.5 && <1.18,
+                 skylighting >=0.7.6 && <0.8,
+                 texmath >=0.11 && <0.12,
+                 skylighting-core >=0.7.6 && <0.7.7,
+                 text >=1.2.3.1,
+                 blaze-html >=0.9.1.1,
+                 shakespeare >=2.0.20,
+                 monadplus ==1.4.2,
+                 app-settings >=0.2.0.12,
+                 directory,
+                 bytestring
+  exposed-modules:
+      ProjectManagement.HasdocGen
+      ProjectManagement.HasdocGen.File.Conversion
+      ProjectManagement.HasdocGen.File.HTML
+      ProjectManagement.HasdocGen.File.Print
+      ProjectManagement.HasdocGen.File.View
+      ProjectManagement.HasdocGen.File.Settings
+      ProjectManagement.HasdocGen.GUI.MainWizard
+      ProjectManagement.HasdocGen.GUI.Site.Architecture
+      ProjectManagement.HasdocGen.GUI.Site.Definition
+      ProjectManagement.HasdocGen.GUI.Site.Introduction
+      ProjectManagement.HasdocGen.GUI.Site.Requirements
+      ProjectManagement.HasdocGen.GUI.Site.Technology
+      ProjectManagement.HasdocGen.GUI.Site.Tests
+      ProjectManagement.HasdocGen.GUI.Site.End
+      ProjectManagement.HasdocGen.Text.Site.Architecture.Content
+      ProjectManagement.HasdocGen.Text.Site.Architecture.Help
+      ProjectManagement.HasdocGen.Text.Site.Definition.Content
+      ProjectManagement.HasdocGen.Text.Site.Definition.Help
+      ProjectManagement.HasdocGen.Text.Site.Requirements.Content
+      ProjectManagement.HasdocGen.Text.Site.Requirements.Help
+      ProjectManagement.HasdocGen.Text.Site.Technology.Content
+      ProjectManagement.HasdocGen.Text.Site.Technology.Help
+      ProjectManagement.HasdocGen.Text.Site.Tests.Content
+      ProjectManagement.HasdocGen.Text.Site.Tests.Help
+  other-modules: Paths_hasdoc_gen
+  hs-source-dirs: src
+  ghc-options:   -rtsopts -with-rtsopts=-M3G -Wall -fno-warn-unused-do-bind -threaded
+  default-language: Haskell2010
