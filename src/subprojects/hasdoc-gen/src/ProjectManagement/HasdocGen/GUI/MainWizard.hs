@@ -154,7 +154,8 @@ saveTempChanges wind ev =
              propagateEvent
          _ -> return ()
          
-         
+
+--holdWizardInputs :: (
 --ifContentHold :: (place of content) -> Bool -- check if action from menu "load state" was triggered and if there is some text to put in
          
 -- loadSavedState :: Bool -> (Contents) -> IO () -- ifContentHold is True, then get access to all child textctrl widgets of wizard and put values in          

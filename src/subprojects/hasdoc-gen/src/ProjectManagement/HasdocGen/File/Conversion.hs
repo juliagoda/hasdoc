@@ -43,8 +43,8 @@ import Text.Pandoc
 
 -- mappend from Monoid - joining of pandoc parts
 -- http://hackage.haskell.org/package/pandoc-types-1.19/docs/Text-Pandoc-Builder.html#v:-60--62-
-myDoc :: Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc
-myDoc defFiltered reqFiltered archFiltered techFiltered testFiltered = setTitle "Project" $ defFiltered <> reqFiltered <> archFiltered <> techFiltered <> testFiltered
+myDoc :: String -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc
+myDoc projectTitle defFiltered reqFiltered archFiltered techFiltered testFiltered = setTitle (text projectTitle) $ defFiltered <> reqFiltered <> archFiltered <> techFiltered <> testFiltered
 
 
 loadWriterOtherOpts :: String -> IO WriterOptions                
@@ -103,38 +103,38 @@ docLoop Nothing = para linebreak
 
 
 
-writeZimWikiFile :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
-writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered =     
+writeZimWikiFile :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> String -> IO ()
+writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle =     
     do
         readTemp <- readTemplate 
         case readTemp zimWikiFormat of
              True -> do
-                 rawZimWiki <- runIOorExplode $ writeZimWiki (def { writerTOCDepth = 4, writerTableOfContents = False}) $ myDoc (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered)
-                 T.writeFile "project.zim" rawZimWiki
+                 rawZimWiki <- runIOorExplode $ writeZimWiki (def { writerTOCDepth = 4, writerTableOfContents = False}) $ myDoc projectTitle (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered)
+                 T.writeFile (projectTitle ++ "/project.zim") rawZimWiki
              False -> return ()
              
    
             
-writeFilePandocOptsT :: (WriterOptions -> Pandoc -> PandocIO Text) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> IO ()
-writeFilePandocOptsT func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett =     
+writeFilePandocOptsT :: (WriterOptions -> Pandoc -> PandocIO Text) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> String -> IO ()
+writeFilePandocOptsT func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett projectTitle =     
     do
         readTemp <- readTemplate 
         case readTemp sett of
              True -> do
-                 rawFile <- runIOorExplode $ func loadWriterOpts $ myDoc defFiltered reqFiltered archFiltered techFiltered testFiltered 
-                 T.writeFile ("project." ++ format) rawFile
+                 rawFile <- runIOorExplode $ func loadWriterOpts $ myDoc projectTitle defFiltered reqFiltered archFiltered techFiltered testFiltered 
+                 T.writeFile (projectTitle ++ "/project." ++ format) rawFile
              False -> return ()
              
              
              
-writeFilePandocOptsB :: (WriterOptions -> Pandoc -> PandocIO B.ByteString) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> IO ()
-writeFilePandocOptsB func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett =     
+writeFilePandocOptsB :: (WriterOptions -> Pandoc -> PandocIO B.ByteString) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> String -> IO ()
+writeFilePandocOptsB func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett projectTitle =     
     do
         readTemp <- readTemplate 
         case readTemp sett of
              True -> do
-                 rawFile <- runIOorExplode $ func loadWriterOpts $ myDoc defFiltered reqFiltered archFiltered techFiltered testFiltered
-                 B.writeFile ("project." ++ format) rawFile
+                 rawFile <- runIOorExplode $ func loadWriterOpts $ myDoc projectTitle defFiltered reqFiltered archFiltered techFiltered testFiltered
+                 B.writeFile (projectTitle ++ "/project." ++ format) rawFile
              False -> return ()
              
              

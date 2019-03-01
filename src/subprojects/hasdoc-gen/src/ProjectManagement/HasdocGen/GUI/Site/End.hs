@@ -5,6 +5,7 @@ createEndPage
 where
 
 import Data.Bits
+import Data.Char
 import Graphics.UI.WX
 import Graphics.UI.WX.Controls
 import Graphics.UI.WXCore.WxcTypes
@@ -31,10 +32,13 @@ createEndPage mainwindow mainwizard defWidgets reqWidgets archWidgets techWidget
         st1 <- staticText sw [text := "Koniec", fontSize := 16, fontWeight := WeightBold ]
         st2 <- staticText sw [text := "Możesz sprawdzić poprawność wprowadzonych danych, naciskając na przycisk \"Sprawdź dane\" lub możesz od razu przejść do generowania plików i opcji drukowania, naciskając w przycisk \"Generuj plik\"."]
         
-        generate <- button sw [text := "Generuj plik", tooltip := "Uruchamia kolejno sekwencję : testowanie wprowadzonych dotychczasowych danych, generowanie pliku, podgląd, drukowanie", on command := runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets ]
-        check <- button sw [text := "Sprawdź dane", tooltip := "Uruchamia same testy wprowadzonych danych z całego wizarda. Opcjonalne rubryki mogą zostać puste.", on command := checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets ]
+        titleLabel <- staticText sw [text := "Podaj tytuł dla swojego projektu: "]
+        titleEntry <- textEntry sw []
         
-        set sw [ layout := fill $ minsize (sz 500 700) $ margin 10 $ column 5 [floatTop $ marginTop $ margin 20 $ widget st1, minsize (sz 400 300) $ floatCenter $ marginBottom $ margin 20 $ widget st2, floatCenter $ marginTop $ margin 20 $ minsize (sz 200 100) $ row 5 [widget check, widget generate]]]
+        generate <- button sw [text := "Generuj plik", tooltip := "Uruchamia kolejno sekwencję : testowanie wprowadzonych dotychczasowych danych, generowanie pliku, podgląd, drukowanie", on command := runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry ]
+        check <- button sw [text := "Sprawdź dane", tooltip := "Uruchamia same testy wprowadzonych danych z całego wizarda. Opcjonalne rubryki mogą zostać puste.", on command := checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry ]
+        
+        set sw [ layout := fill $ minsize (sz 500 700) $ margin 10 $ column 5 [floatTop $ marginTop $ margin 20 $ widget st1, minsize (sz 400 300) $ floatCenter $ marginBottom $ margin 20 $ widget st2, floatCenter $ marginTop $ margin 20 $ minsize (sz 200 100) $ row 5 [widget titleLabel, widget titleEntry], floatCenter $ marginTop $ margin 20 $ minsize (sz 200 100) $ row 5 [widget check, widget generate]]]
         
         set endPage [layout := fill $ widget sw]
         
@@ -42,11 +46,11 @@ createEndPage mainwindow mainwizard defWidgets reqWidgets archWidgets techWidget
 
         
         
-runGenerationSeq :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> IO ()
-runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets = 
+runGenerationSeq :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> TextCtrl () -> IO ()
+runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = 
     do
-        checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets
-        writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets)
+        checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry
+        writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
         createPreview mainwindow (mapAndFilter defWidgets)
 --         printFile mainwindow defFiltered
         
@@ -55,16 +59,20 @@ mapAndFilter :: [(StaticText (), TextCtrl ())] -> Maybe [(String, String)]
 mapAndFilter listWidgets = mapToStrings listWidgets >>= filterEmptyLines        
         
 
-checkAllEntries :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> IO ()
-checkAllEntries mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets = checkIfAllEmpty mainWindow (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets)
+checkAllEntries :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> TextCtrl () -> IO ()
+checkAllEntries mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = checkIfAllEmpty mainWindow (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
 
 
-checkIfAllEmpty :: Frame () -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
-checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets = case defWidgets `mplus` reqWidgets `mplus` archWidgets `mplus` techWidgets `mplus` testWidgets of
+checkIfAllEmpty :: Frame () -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> TextCtrl () -> IO ()
+checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets textEntry = 
+    do
+        titleText <- get textEntry text
+        if null (dropWhile isSpace titleText) then warningDialog mainWindow "ostrzeżenie" "Tytuł projektu nie został podany" else putStrLn $ "Tytuł projektu to " ++ titleText
+        case defWidgets `mplus` reqWidgets `mplus` archWidgets `mplus` techWidgets `mplus` testWidgets of
                                                                                  Nothing -> warningDialog mainWindow "ostrzeżenie" "żadne pole nie zostało wypełnione"
                                                                                  Just [] -> warningDialog mainWindow "ostrzeżenie" "żadne pole nie zostało wypełnione"
-                                                                                 Just [x] -> warningDialog mainWindow "ostrzeżenie" "coś tam jest"
-                                                                                 Just ((x,y):xs) -> warningDialog mainWindow "ostrzeżenie" "coś tam jest"
+                                                                                 Just [x] -> return ()
+                                                                                 Just ((x,y):xs) -> return ()
 
 
 mapToStrings :: [(StaticText (), TextCtrl ())] -> Maybe [(String, String)]
