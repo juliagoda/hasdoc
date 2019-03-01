@@ -1,7 +1,9 @@
 module Application.Hasdoc.GUI.Menu.About.Homepage
 (
 openHomepage
-) where
+) 
+where
+
 
 import Graphics.UI.WX
 import Web.Browser (openBrowser)
@@ -9,5 +11,5 @@ import Application.Hasdoc.GUI.Menu.About
 
 
 openHomepage :: Frame () -> IO ()
-openHomepage mainWindow = openBrowser "https://github.com/juliagoda/antimicro" >>= showBrowserStatus mainWindow
+openHomepage mainWindow = openBrowser "https://github.com/juliagoda/hasdoc" >>= showBrowserStatus mainWindow
     

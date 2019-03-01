@@ -1,7 +1,9 @@
 module Application.Hasdoc.GUI.Menu.About.Issues
 (
 openIssuesPage
-) where
+) 
+where
+
 
 import Graphics.UI.WX
 import Web.Browser (openBrowser)
@@ -9,4 +11,4 @@ import Application.Hasdoc.GUI.Menu.About
 
 
 openIssuesPage :: Frame() -> IO ()
-openIssuesPage mainWindow = openBrowser "https://github.com/juliagoda/antimicro/issues" >>= showBrowserStatus mainWindow
+openIssuesPage mainWindow = openBrowser "https://github.com/juliagoda/hasdoc/issues" >>= showBrowserStatus mainWindow
