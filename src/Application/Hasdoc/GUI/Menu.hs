@@ -22,6 +22,7 @@ import Graphics.UI.WX
 
 import Application.Hasdoc.GUI.Menu.Program.AppClose
 import Application.Hasdoc.GUI.Menu.Program.StateLoad
+import Application.Hasdoc.GUI.Menu.Program.StateSave
 import Application.Hasdoc.GUI.Menu.Settings
 import Application.Hasdoc.GUI.Menu.About.Tools
 import Application.Hasdoc.GUI.Menu.About.Tips
@@ -65,8 +66,8 @@ getProgramPane mainWindow tbar =
     do 
         translate <- makeTranslator
         programPane <- menuPane [ text := translate MsgProgramMenu ]
-        saveItem  <- menuItem programPane [ text := translate MsgSaveStateMenu, help := translate MsgSaveStateMenuHelp] --image := (getAppIconsPath ++ "/save-menu.png") ]
-        loadItem  <- menuItem programPane [ text := translate MsgLoadStateMenu, help := translate MsgLoadStateMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.pdf"])]] --image := (getAppIconsPath ++ "/load-menu.png") ]
+        saveItem  <- menuItem programPane [ text := translate MsgSaveStateMenu, help := translate MsgSaveStateMenuHelp, on command := saveFileDialog mainWindow [(translate MsgLoadFilesExt, ["*.hdoc"])]] --image := (getAppIconsPath ++ "/save-menu.png") ]
+        loadItem  <- menuItem programPane [ text := translate MsgLoadStateMenu, help := translate MsgLoadStateMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.hdoc"])]] --image := (getAppIconsPath ++ "/load-menu.png") ]
         importItem <- menuItem programPane [ text := translate MsgImportFromFileMenu, help := translate MsgImportFromFileMenuHelp ] -- image := (getAppIconsPath ++ "/import-menu.png") ]
         menuLine programPane
         quitItem <- menuItem programPane [ text := translate MsgQuitMenu, help := translate MsgQuitMenuHelp ] -- image := (getAppIconsPath ++ "/exit-menu.png") ]

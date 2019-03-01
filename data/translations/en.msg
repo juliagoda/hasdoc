@@ -8,7 +8,7 @@ SaveStateMenu: &Save state  Ctrl+S
 SaveStateMenuHelp: saves informations from the current session
 LoadStateMenu: &Load State  Ctrl+L
 LoadStateMenuHelp: loads saved state informations
-LoadFilesExt: pdf files
+LoadFilesExt: hasdoc files
 ImportFromFileMenu: &Import from file  Ctrl+I 
 ImportFromFileMenuHelp: imports informations into wizard from saved pdf file
 QuitMenu: &Quit  Ctrl+E
