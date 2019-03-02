@@ -16,6 +16,7 @@ import System.IO.Unsafe
 
 import Control.Monad
 import Control.Monad.Plus
+import Control.Concurrent
 
 import ProjectManagement.HasdocGen.File.Print
 import ProjectManagement.HasdocGen.File.HTML
@@ -50,8 +51,9 @@ runGenerationSeq :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (
 runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = 
     do
         checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry
-        writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
-        createPreview mainwindow (mapAndFilter defWidgets)
+        forkIO $ writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
+        -- createPreview mainwindow (mapAndFilter defWidgets)
+        return ()
 --         printFile mainwindow defFiltered
         
 
