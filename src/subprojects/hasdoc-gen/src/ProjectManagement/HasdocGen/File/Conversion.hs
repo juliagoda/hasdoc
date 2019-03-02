@@ -27,7 +27,7 @@ where
     
 import ProjectManagement.HasdocGen.File.Settings 
 
-import Data.Text (Text)
+import Data.Text (Text, unpack)
 import qualified Data.ByteString.Lazy as B
 import qualified Data.Text.IO as T
 
@@ -56,49 +56,57 @@ loadWriterOtherOpts defTemp =
 
 
 
-defDoc :: Maybe [(String, String)] -> Pandoc
-defDoc Nothing = setAuthors [""] $ doc $ para linebreak
+defDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
+defDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
 --defDoc Just [] = str ""
-defDoc (Just x) = doc $ para linebreak <> para (strong "Definitions") <>
-  docLoop (Just x)
+defDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("definitions", ["pages"], [("","")]) (para (strong "Definitions") <>
+  docLoop (Just x) wrOptions)
   
   
-reqDoc :: Maybe [(String, String)] -> Pandoc
-reqDoc Nothing = setAuthors [""] $ doc $ para linebreak
+reqDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
+reqDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
 --reqDoc Just [] = str ""
-reqDoc (Just x) = doc $ para linebreak <> para (strong "Requirements") <>
-  docLoop (Just x)
+reqDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("requirements", ["pages"], [("","")]) (para (strong "Requirements") <>
+  docLoop (Just x) wrOptions)
   
   
-archDoc :: Maybe [(String, String)] -> Pandoc
-archDoc Nothing = setAuthors [""] $ doc $ para linebreak
+archDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
+archDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
 --archDoc Just [] = str ""
-archDoc (Just x) = doc $ para linebreak <> para (strong "Architecture") <>
-  docLoop (Just x)
+archDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("architecture", ["pages"], [("","")]) (para (strong "Architecture") <>
+  docLoop (Just x) wrOptions)
   
   
-techDoc :: Maybe [(String, String)] -> Pandoc
-techDoc Nothing = setAuthors [""] $ doc $ para linebreak
+techDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
+techDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
 --techDoc Just [] = str ""
-techDoc (Just x) = doc $ para linebreak <> para (strong "Technology") <>
-  docLoop (Just x)
+techDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("technology", ["pages"], [("","")]) (para (strong "Technology") <>
+  docLoop (Just x) wrOptions)
   
   
-testDoc :: Maybe [(String, String)] -> Pandoc
-testDoc Nothing = setAuthors [""] $ doc $ para linebreak
+testDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
+testDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
 --testDoc Just [] = str ""
-testDoc (Just x) = doc $ para linebreak <> para (strong "Tests") <>
-  docLoop (Just x)
+testDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("tests", ["pages"], [("","")]) (para (strong "Tests") <>
+  docLoop (Just x) wrOptions)
   
   
-docLoop :: Maybe [(String, String)] -> Blocks  
-docLoop (Just ((x,y):xs)) = 
-    para (emph (text x)) <>
-    para (text y) <> 
-    docLoop (Just xs)
+--   let nodes = inlinesToNodes opts ils
+--       op = tagWithAttributes opts True False "span" attr
+--   in  if isEnabled Ext_raw_html opts
+--          then ((node (HTML_INLINE op) [] : nodes ++
+--                 [node (HTML_INLINE (T.pack "</span>")) []]) ++)
+  
+  
+docLoop :: Maybe [(String, String)] -> WriterOptions -> Blocks  
+docLoop (Just ((x,y):xs)) wrOptions = 
+    para (spanWith ("", ["questions"], [("title","hint")]) (text x) <>
+    linebreak <>
+    spanWith ("", ["answers"], [("title","hint")]) (text y)) <>
+    docLoop (Just xs) wrOptions
     
-docLoop (Just []) = para linebreak
-docLoop Nothing = para linebreak
+docLoop (Just []) wrOptions = para linebreak
+docLoop Nothing wrOptions = para linebreak
 
 
 
@@ -109,7 +117,8 @@ writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered 
         readTemp <- readTemplate 
         case readTemp zimWikiFormat of
              True -> do
-                 rawZimWiki <- runIOorExplode $ writeZimWiki (def { writerTOCDepth = 4, writerTableOfContents = False}) $ myDoc projectTitle (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered)
+                 let wrOptions = (def { writerTOCDepth = 4, writerTableOfContents = False})
+                 rawZimWiki <- runIOorExplode $ writeZimWiki wrOptions $ myDoc projectTitle (defDoc defFiltered wrOptions) (reqDoc reqFiltered wrOptions) (archDoc archFiltered wrOptions) (techDoc techFiltered wrOptions) (testDoc testFiltered wrOptions)
                  T.writeFile (projectTitle ++ "/project.zim") rawZimWiki
              False -> return ()
              

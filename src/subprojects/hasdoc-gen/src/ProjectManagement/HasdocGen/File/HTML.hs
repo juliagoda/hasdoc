@@ -43,48 +43,48 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
         writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle
         
         options <- loadWriterOtherOpts "docbook"
-        writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "dbk" docbookFormat projectTitle
+        writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "dbk" docbookFormat projectTitle
         
         writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle
         
         options <- loadWriterOtherOpts "tei"
-        writeFilePandocOptsT writeTEI options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "tei" teiFormat projectTitle
+        writeFilePandocOptsT writeTEI options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "tei" teiFormat projectTitle
         
         options <- loadWriterOtherOpts "dokuwiki"
-        writeFilePandocOptsT writeDokuWiki options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "dokuwiki" dokuWikiFormat projectTitle
+        writeFilePandocOptsT writeDokuWiki options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "dokuwiki" dokuWikiFormat projectTitle
         
         options <- loadWriterOtherOpts "haddock"
-        writeFilePandocOptsT writeHaddock options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "haddock" haddockFormat projectTitle
+        writeFilePandocOptsT writeHaddock options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "haddock" haddockFormat projectTitle
         
         options <- loadWriterOtherOpts "latex"
-        writeFilePandocOptsT writeLaTeX options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "tex" latexFormat projectTitle
+        writeFilePandocOptsT writeLaTeX options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "tex" latexFormat projectTitle
         
         options <- loadWriterOtherOpts "json"
-        writeFilePandocOptsT writePlain options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "json" jsonFormat projectTitle
+        writeFilePandocOptsT writePlain options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "json" jsonFormat projectTitle
         
         options <- loadWriterOtherOpts "markdown_phpextra"
-        writeFilePandocOptsT writeMarkdown options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "php" phpMarkdownFormat projectTitle
+        writeFilePandocOptsT writeMarkdown options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "php" phpMarkdownFormat projectTitle
         
         options <- loadWriterOtherOpts "mediawiki"
-        writeFilePandocOptsT writeMediaWiki options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "mediawiki" mediaWikiFormat projectTitle
+        writeFilePandocOptsT writeMediaWiki options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "mediawiki" mediaWikiFormat projectTitle
         
         options <- loadWriterOtherOpts "opendocument"
-        writeFilePandocOptsT writeOpenDocument options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "sxw" openDocFormat projectTitle
+        writeFilePandocOptsT writeOpenDocument options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "sxw" openDocFormat projectTitle
         
         options <- loadWriterOtherOpts "ipynb"
-        writeFilePandocOptsT writeIpynb options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "ipynb" jupyterFormat projectTitle
+        writeFilePandocOptsT writeIpynb options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "ipynb" jupyterFormat projectTitle
         
         options <- loadWriterOtherOpts "docx"
-        writeFilePandocOptsB writeDocx options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "docx" docxFormat projectTitle
+        writeFilePandocOptsB writeDocx options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "docx" docxFormat projectTitle
         
         options <- loadWriterOtherOpts "epub"
-        writeFilePandocOptsB writeEPUB3 options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "epub" epubv3Format projectTitle
+        writeFilePandocOptsB writeEPUB3 options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "epub" epubv3Format projectTitle
         
         options <- loadWriterOtherOpts "odt"
-        writeFilePandocOptsB writeODT options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "odt" openOfficeFormat projectTitle
+        writeFilePandocOptsB writeODT options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "odt" openOfficeFormat projectTitle
         
         options <- loadWriterOtherOpts "pptx"
-        writeFilePandocOptsB writePowerpoint options (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) "pptx" powerPointFormat projectTitle
+        writeFilePandocOptsB writePowerpoint options (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options) "pptx" powerPointFormat projectTitle
         
         
 
@@ -93,7 +93,7 @@ writeHtml :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(Str
 writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle = 
     do
         options <- loadWriterPandocOpts
-        rawHtml <- runIOorExplode $ writeHtml5String options $ myDoc projectTitle (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered)
+        rawHtml <- runIOorExplode $ writeHtml5String options $ myDoc projectTitle (defDoc defFiltered options) (reqDoc reqFiltered options) (archDoc archFiltered options) (techDoc techFiltered options) (testDoc testFiltered options)
         T.writeFile (projectTitle ++ "/project.html") rawHtml
 
         
