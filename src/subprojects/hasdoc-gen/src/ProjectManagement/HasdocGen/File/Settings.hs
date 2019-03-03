@@ -15,6 +15,7 @@ getAppIconsPath,
 getAppCssPath,
 getAppLangPath,
 readTemplate,
+languageSett,
 templateName,
 docbookFormat,
 zimWikiFormat,
@@ -193,4 +194,5 @@ patternTemplate False = return $ (\sett -> removeSett sett)
     
 removeSett :: (Show a, Read a) => Setting a -> a
 removeSett (Setting _ x) = x
+
 

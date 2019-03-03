@@ -52,12 +52,12 @@ runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWi
     do
         checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry
         forkIO $ writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
-        -- createPreview mainwindow (mapAndFilter defWidgets)
+        --createPreview mainwindow (mapAndFilter defWidgets)
         return ()
 --         printFile mainwindow defFiltered
         
 
-mapAndFilter :: [(StaticText (), TextCtrl ())] -> Maybe [(String, String)]          
+mapAndFilter :: [(StaticText (), TextCtrl ())] -> Maybe [(Int, String, String)]          
 mapAndFilter listWidgets = mapToStrings listWidgets >>= filterEmptyLines        
         
 
@@ -65,7 +65,7 @@ checkAllEntries :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText ()
 checkAllEntries mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = checkIfAllEmpty mainWindow (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
 
 
-checkIfAllEmpty :: Frame () -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> TextCtrl () -> IO ()
+checkIfAllEmpty :: Frame () -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> TextCtrl () -> IO ()
 checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets textEntry = 
     do
         titleText <- get textEntry text
@@ -74,11 +74,11 @@ checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWid
                                                                                  Nothing -> warningDialog mainWindow "ostrzeżenie" "żadne pole nie zostało wypełnione"
                                                                                  Just [] -> warningDialog mainWindow "ostrzeżenie" "żadne pole nie zostało wypełnione"
                                                                                  Just [x] -> return ()
-                                                                                 Just ((x,y):xs) -> return ()
+                                                                                 Just ((x,y,z):xs) -> return ()
 
 
-mapToStrings :: [(StaticText (), TextCtrl ())] -> Maybe [(String, String)]
-mapToStrings tabWidgets = Just $ [(unsafePerformIO $ get a text, unsafePerformIO $ get b text) | (a, b) <- tabWidgets] 
+mapToStrings :: [(StaticText (), TextCtrl ())] -> Maybe [(Int, String, String)]
+mapToStrings tabWidgets = Just $ [(unsafePerformIO $ get b identity, unsafePerformIO $ get a text, unsafePerformIO $ get b text) | (a, b) <- tabWidgets] 
 --mapM (\(x,y) -> return $ (unsafePerformIO $ get (fst x) text, unsafePerformIO $ get (snd y) text)) tabWidgets
 
 
@@ -86,7 +86,7 @@ mapToStrings tabWidgets = Just $ [(unsafePerformIO $ get a text, unsafePerformIO
 --filterEmptyLines answers = filterM (\x -> liftM (not . null) $ get (snd x) text) answers
 
 
-filterEmptyLines :: [(String, String)] -> Maybe [(String, String)]
-filterEmptyLines answers = case filter (not . null . snd) answers of
+filterEmptyLines :: [(Int, String, String)] -> Maybe [(Int, String, String)]
+filterEmptyLines answers = case filter (not . null . thd) answers of
                                 [] -> Nothing
                                 x -> Just x 

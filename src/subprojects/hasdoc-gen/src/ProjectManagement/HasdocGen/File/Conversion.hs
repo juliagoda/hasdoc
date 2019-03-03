@@ -21,7 +21,8 @@ reqDoc,
 archDoc,
 techDoc,
 testDoc,
-convIntToCss
+convIntToCss,
+settLangIntToString
 )
 where
     
@@ -56,39 +57,39 @@ loadWriterOtherOpts defTemp =
 
 
 
-defDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
-defDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
+defDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
+defDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --defDoc Just [] = str ""
-defDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("definitions", ["pages"], [("","")]) (para (strong "Definitions") <>
-  docLoop (Just x) wrOptions)
+defDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("definitions", ["pages"], [("lang", lang)]) (para (strong "Definitions") <>
+  docLoop (Just x) wrOptions lang)
   
   
-reqDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
-reqDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
+reqDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
+reqDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --reqDoc Just [] = str ""
-reqDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("requirements", ["pages"], [("","")]) (para (strong "Requirements") <>
-  docLoop (Just x) wrOptions)
+reqDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("requirements", ["pages"], [("lang", lang)]) (para (strong "Requirements") <>
+  docLoop (Just x) wrOptions lang)
   
   
-archDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
-archDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
+archDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
+archDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --archDoc Just [] = str ""
-archDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("architecture", ["pages"], [("","")]) (para (strong "Architecture") <>
-  docLoop (Just x) wrOptions)
+archDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("architecture", ["pages"], [("lang", lang)]) (para (strong "Architecture") <>
+  docLoop (Just x) wrOptions lang)
   
   
-techDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
-techDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
+techDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
+techDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --techDoc Just [] = str ""
-techDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("technology", ["pages"], [("","")]) (para (strong "Technology") <>
-  docLoop (Just x) wrOptions)
+techDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("technology", ["pages"], [("lang", lang)]) (para (strong "Technology") <>
+  docLoop (Just x) wrOptions lang)
   
   
-testDoc :: Maybe [(String, String)] -> WriterOptions -> Pandoc
-testDoc Nothing wrOptions = setAuthors [""] $ doc $ para linebreak
+testDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
+testDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --testDoc Just [] = str ""
-testDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("tests", ["pages"], [("","")]) (para (strong "Tests") <>
-  docLoop (Just x) wrOptions)
+testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) (para (strong "Tests") <>
+  docLoop (Just x) wrOptions lang)
   
   
 --   let nodes = inlinesToNodes opts ils
@@ -98,27 +99,27 @@ testDoc (Just x) wrOptions = doc $ para linebreak <> divWith ("tests", ["pages"]
 --                 [node (HTML_INLINE (T.pack "</span>")) []]) ++)
   
   
-docLoop :: Maybe [(String, String)] -> WriterOptions -> Blocks  
-docLoop (Just ((x,y):xs)) wrOptions = 
-    para (spanWith ("", ["questions"], [("title","hint")]) (text x) <>
+docLoop :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Blocks  
+docLoop (Just ((x,y,z):xs)) wrOptions lang = 
+    para (spanWith ("question" ++ (show x), ["questions"], [("lang", lang)]) (text y) <>
     linebreak <>
-    spanWith ("", ["answers"], [("title","hint")]) (text y)) <>
-    docLoop (Just xs) wrOptions
+    spanWith ((show x), ["answers"], [("lang", lang)]) (text z)) <>
+    docLoop (Just xs) wrOptions lang
     
-docLoop (Just []) wrOptions = para linebreak
-docLoop Nothing wrOptions = para linebreak
+docLoop (Just []) wrOptions lang = para linebreak
+docLoop Nothing wrOptions lang = para linebreak
 
 
 
 
-writeZimWikiFile :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> String -> IO ()
-writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle =     
+writeZimWikiFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> IO ()
+writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang =     
     do
         readTemp <- readTemplate 
         case readTemp zimWikiFormat of
              True -> do
                  let wrOptions = (def { writerTOCDepth = 4, writerTableOfContents = False})
-                 rawZimWiki <- runIOorExplode $ writeZimWiki wrOptions $ myDoc projectTitle (defDoc defFiltered wrOptions) (reqDoc reqFiltered wrOptions) (archDoc archFiltered wrOptions) (techDoc techFiltered wrOptions) (testDoc testFiltered wrOptions)
+                 rawZimWiki <- runIOorExplode $ writeZimWiki wrOptions $ myDoc projectTitle (defDoc defFiltered wrOptions lang) (reqDoc reqFiltered wrOptions lang) (archDoc archFiltered wrOptions lang) (techDoc techFiltered wrOptions lang) (testDoc testFiltered wrOptions lang)
                  T.writeFile (projectTitle ++ "/project.zim") rawZimWiki
              False -> return ()
              
@@ -154,3 +155,10 @@ convIntToCss 1 = "blue.css"
 convIntToCss 2 = "green.css"
 convIntToCss 3 = "orange.css"
 convIntToCss _ = "default.css"
+
+
+settLangIntToString :: Int -> String
+settLangIntToString 0 = "pl"
+settLangIntToString 1 = "en"
+settLangIntToString _ = "en"
+
