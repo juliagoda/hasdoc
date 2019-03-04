@@ -26,9 +26,11 @@ import Text.Pandoc.Builder
 import Text.Pandoc.Options
 import Text.Pandoc.Writers.HTML
 import qualified Text.Pandoc.Readers.HTML as R
+import qualified Data.ByteString.Lazy as B
 import qualified Data.HashMap.Strict as H
 import Text.Pandoc.Class
 import Text.Pandoc
+import Text.Pandoc.PDF
 
 import System.Directory
 import Text.HTML.TagSoup
@@ -49,7 +51,9 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
         readTemp <- readTemplate
         let lang = ((settLangIntToString . readTemp) languageSett)
         createDirectory projectTitle
+        
         writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang
+        
         
         options <- loadWriterOtherOpts "docbook"
         writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dbk" docbookFormat projectTitle
@@ -95,6 +99,8 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
         options <- loadWriterOtherOpts "pptx"
         writeFilePandocOptsB writePowerpoint options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "pptx" powerPointFormat projectTitle
         
+        writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang
+        
         
  
 writeHtml :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> IO ()
@@ -103,7 +109,19 @@ writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered project
         options <- loadWriterPandocOpts
         rawHtml <- runIOorExplode $ writeHtml5String options $ myDoc projectTitle (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang)
         T.writeFile (projectTitle ++ "/project.html") rawHtml
-
+        
+        
+-- as first whhtmltopdf is needed - find and install it on your system
+-- without installed wkhtmltopdf appears error: hasdoc: wkhtmltopdf: createProcess: runInteractiveProcess: exec: invalid argument (Bad file descriptor), but it doesn't crash application
+writePDFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> IO ()
+writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang = 
+    do
+        options <- loadWriterPandocOpts
+        rawPdf <- runIOorExplode $ makePDF "wkhtmltopdf" [] writeHtml5String options $ myDoc projectTitle (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang)
+        case rawPdf of
+             Left a -> putStrLn $ "Nastąpił błąd podczas tworzenia pliku Pdf"
+             Right b -> B.writeFile (projectTitle ++ "/project.pdf") b
+        
         
 readHtmlFile :: FilePath -> IO ()
 readHtmlFile filepath = 
