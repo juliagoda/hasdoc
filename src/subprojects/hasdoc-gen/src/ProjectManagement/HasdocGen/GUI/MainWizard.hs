@@ -180,6 +180,7 @@ loadAbortedChanges wizardParent =
         home <- getHomeDirectory
         tempHdocExists <- doesFileExist (home ++ "/.hasdoc-gen/temp/temp.hdoc")
         case tempHdocExists of
+             False -> return ()
              True -> do
                  loadedParser <- readIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc")
                  case loadedParser of
@@ -194,11 +195,8 @@ loadAbortedChanges wizardParent =
                                                           let results1 = map (\x -> unsafePerformIO $ get x children) listOfChildren
                                                           let results2 = (map . map) (\x -> unsafePerformIO $ get x children) results1
                                                           sequence_ $ concat $ concat $ (map . map . map) (\x -> set x [text := T.unpack (fromMaybe (T.pack $ unsafePerformIO (get x text)) (Map.lookup (T.pack $ show $ unsafePerformIO $ get x identity) mapList))]) results2
-             False -> return ()
-        
-        
-
-
+             
+       
              
 -- based on http://hackage.haskell.org/package/ini-0.4.1/docs/src/Data.Ini.html#keys             
 hashValues :: T.Text -- ^ Section name
