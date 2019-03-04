@@ -11,6 +11,7 @@ packages:
 
 extra-deps: 
 - containers-0.5.11.0
+- unordered-containers-0.2.9.0
 - Cabal-2.4.1.0
 - process-1.4.3.0
 - pandoc-2.6
@@ -30,4 +31,5 @@ extra-deps:
 - app-settings-0.2.0.12
 - directory-1.3.0.2
 - bytestring-0.10.8.2
+- ini-0.4.1
 #- pandoc-2.1.2

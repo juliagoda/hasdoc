@@ -33,6 +33,7 @@ library
   build-depends: wx >=0.93,
                  wxcore,
                  containers >=0.2 && <0.6,
+                 unordered-containers >=0.2.9.0,
                  Cabal >=2.2 && <2.5,
                  process >=1.1 && <1.5,
                  base >=4.4 && <4.11,
@@ -51,6 +52,7 @@ library
                  shakespeare >=2.0.20,
                  monadplus ==1.4.2,
                  app-settings >=0.2.0.12,
+                 ini >=0.4.1,
                  directory,
                  bytestring
   exposed-modules:

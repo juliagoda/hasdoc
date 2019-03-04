@@ -26,18 +26,18 @@ import ProjectManagement.HasdocGen.File.HTML
 createEndPage :: Frame () -> Wizard () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> IO (WizardPageSimple ())
 createEndPage mainwindow mainwizard defWidgets reqWidgets archWidgets techWidgets testWidgets = 
     do
-        endPage <- wizardPageSimple mainwizard [text := "Koniec", style := wxHELP ]
+        endPage <- wizardPageSimple mainwizard [text := "Koniec", style := wxHELP, identity := 1106]
         
-        sw <- scrolledWindow endPage [ scrollRate := sz 10 10, style := wxVSCROLL ]
+        sw <- scrolledWindow endPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1107]
         
-        st1 <- staticText sw [text := "Koniec", fontSize := 16, fontWeight := WeightBold ]
-        st2 <- staticText sw [text := "Możesz sprawdzić poprawność wprowadzonych danych, naciskając na przycisk \"Sprawdź dane\" lub możesz od razu przejść do generowania plików i opcji drukowania, naciskając w przycisk \"Generuj plik\"."]
+        st1 <- staticText sw [text := "Koniec", fontSize := 16, fontWeight := WeightBold, identity := 1108]
+        st2 <- staticText sw [text := "Możesz sprawdzić poprawność wprowadzonych danych, naciskając na przycisk \"Sprawdź dane\" lub możesz od razu przejść do generowania plików i opcji drukowania, naciskając w przycisk \"Generuj plik\".", identity := 1109]
         
-        titleLabel <- staticText sw [text := "Podaj tytuł dla swojego projektu: "]
-        titleEntry <- textEntry sw []
+        titleLabel <- staticText sw [text := "Podaj tytuł dla swojego projektu: ", identity := 1110]
+        titleEntry <- textEntry sw [identity := 1111]
         
-        generate <- button sw [text := "Generuj plik", tooltip := "Uruchamia kolejno sekwencję : testowanie wprowadzonych dotychczasowych danych, generowanie pliku, podgląd, drukowanie", on command := runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry ]
-        check <- button sw [text := "Sprawdź dane", tooltip := "Uruchamia same testy wprowadzonych danych z całego wizarda. Opcjonalne rubryki mogą zostać puste.", on command := checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry ]
+        generate <- button sw [text := "Generuj plik", tooltip := "Uruchamia kolejno sekwencję : testowanie wprowadzonych dotychczasowych danych, generowanie pliku, podgląd, drukowanie", on command := runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry, identity := 1112]
+        check <- button sw [text := "Sprawdź dane", tooltip := "Uruchamia same testy wprowadzonych danych z całego wizarda. Opcjonalne rubryki mogą zostać puste.", on command := checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry, identity := 1113]
         
         set sw [ layout := fill $ minsize (sz 500 700) $ margin 10 $ column 5 [floatTop $ marginTop $ margin 20 $ widget st1, minsize (sz 400 300) $ floatCenter $ marginBottom $ margin 20 $ widget st2, floatCenter $ marginTop $ margin 20 $ minsize (sz 200 100) $ row 5 [widget titleLabel, widget titleEntry], floatCenter $ marginTop $ margin 20 $ minsize (sz 200 100) $ row 5 [widget check, widget generate]]]
         

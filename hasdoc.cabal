@@ -43,6 +43,7 @@ library
   build-depends: wx >=0.93,
                  wxcore,
                  containers >=0.2 && <0.6,
+                 unordered-containers >=0.2.9.0,
                  Cabal >=2.2 && <2.5,
                  process >=1.1 && <1.5,
                  base >=4.4 && <4.11,
@@ -64,6 +65,7 @@ library
                  blaze-html >=0.9.1.1,
                  shakespeare >=2.0.20,
                  filepath >=1.4.2.1,
+                 ini >=0.4.1,
                  hasdoc-gen >=1.0
   exposed-modules:
       Application.Hasdoc
@@ -100,6 +102,7 @@ executable hasdoc
     , wxcore
     , app-settings >=0.2.0.12
     , containers >=0.2 && <0.6
+    , unordered-containers >=0.2.9.0
     , open-browser
     , directory
     , executable-path
@@ -117,6 +120,7 @@ executable hasdoc
     , blaze-html >=0.9.1.1
     , shakespeare >=2.0.20
     , filepath >=1.4.2.1
+    , ini >=0.4.1
     , hasdoc
     , hasdoc-gen
   buildable: True

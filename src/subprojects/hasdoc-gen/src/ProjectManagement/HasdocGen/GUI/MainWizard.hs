@@ -5,8 +5,14 @@ openWizard
 where
 
 import Data.Bits
+import Data.Char
+import Data.Maybe
 import qualified Data.Map.Lazy as Map
 import System.IO.Unsafe
+import qualified Data.Text as T
+import qualified Data.HashMap.Strict as H
+import Data.Ini
+import System.Directory
 
 import Graphics.UI.WX
 import Graphics.UI.WX.Controls
@@ -130,7 +136,11 @@ openWizard mainWindow =
         endPage <- createEndPage mainWindow mainwizard defWidgets reqWidgets archWidgets techWidgets testWidgets
         
         chain [introPage, fst defPage, fst reqPage, fst archPage, fst techPage, fst testPage, endPage]
+        loadAbortedChanges mainwizard
+        
         runWizard mainwizard introPage
+        
+        
                 
         return ()
         
@@ -140,21 +150,64 @@ saveTempChanges :: Window a -> EventWizard -> IO ()
 saveTempChanges wind ev = 
     case ev of
          WizardCancel veto -> do 
-             listOfChildren <- get wind children
-             let results1 = map (\x -> unsafePerformIO $ get x children) listOfChildren -- access directly to wizard pages
-             let results2 = (map.map) (\x -> unsafePerformIO $ get x children) results1 -- access directly to scrolled windows
-             let results = Map.fromList $ concat $ concat $ (map . map . map) (\x -> (,) (unsafePerformIO $ get x identity) (unsafePerformIO $ get x text)) results2 -- access directly to all widgets in scrolled windows
-             --res <- Map.lookup 1 results
-             case Map.lookup 1 results of 
-                  Nothing -> warningDialog wind "warning" "Not found"
-                  Just x -> warningDialog wind "warning" x
+             saveAll wind
+--              case Map.lookup 1 results of 
+--                   Nothing -> warningDialog wind "warning" "Not found"
+--                   Just x -> warningDialog wind "warning" x
              propagateEvent
          WizardFinished -> do
-             warningDialog wind "warning" "you need a break"
+             saveAll wind
              propagateEvent
          _ -> return ()
          
-
+         
+saveAll :: Window a -> IO ()
+saveAll wizardParent = 
+    do 
+        listOfChildren <- get wizardParent children
+        let results1 = map (\x -> unsafePerformIO $ get x children) listOfChildren -- access directly to wizard pages
+        let results2 = (map.map) (\x -> unsafePerformIO $ get x children) results1 -- access directly to scrolled windows
+        let results = filter (not . null . snd) $ concat $ concat $ (map . map . map) (\x -> if (unsafePerformIO $ get x identity) < 215 && not (all isSpace (unsafePerformIO $ get x text)) then (,) (show $ unsafePerformIO $ get x identity) (unsafePerformIO $ get x text) else (,) "" "") results2 -- access directly to all widgets in scrolled windows
+        let hhash = H.fromList [(T.pack "Answers", [(T.pack x, T.pack y) | (x,y) <- results] )]
+        home <- getHomeDirectory
+        createDirectoryIfMissing True (home ++ "/.hasdoc-gen/temp")
+        --writeFile "temp/temp.hdoc" ""
+        
+        writeIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc") (Ini {iniGlobals=mempty, iniSections=hhash})
+        
+        
+loadAbortedChanges :: Window a -> IO ()
+loadAbortedChanges wizardParent = 
+    do
+        home <- getHomeDirectory
+        loadedParser <- readIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc")
+        case loadedParser of
+             Left a -> putStrLn $ a
+             Right b -> case keys (T.pack "Answers") b of
+                             Left c -> putStrLn $ c
+                             Right d -> case hashValues (T.pack "Answers") b of
+                                             Left e -> putStrLn $ e
+                                             Right f -> do
+                                                 let mapList = Map.fromList $ zip d f
+                                                 infoDialog wizardParent "info" (show mapList)
+                                                 listOfChildren <- get wizardParent children
+                                                 let results1 = map (\x -> unsafePerformIO $ get x children) listOfChildren
+                                                 let results2 = (map . map) (\x -> unsafePerformIO $ get x children) results1
+                                                 sequence_ $ concat $ concat $ (map . map . map) (\x -> set x [text := T.unpack (fromMaybe (T.pack $ unsafePerformIO (get x text)) (Map.lookup (T.pack $ show $ unsafePerformIO $ get x identity) mapList))]) results2
+                                                 
+                                                 
+             
+-- based on http://hackage.haskell.org/package/ini-0.4.1/docs/src/Data.Ini.html#keys             
+hashValues :: T.Text -- ^ Section name
+     -> Ini -> Either String [T.Text]
+hashValues name i =
+  case H.lookup name (iniSections i) of
+    Nothing -> Left ("Couldn't find section: " ++ T.unpack name)
+    Just section -> Right (map snd section)
+        
+-- filterEmptyLines :: [(T.Text, T.Text)] -> [Window ()] -> [(T.Text, T.Text)]
+-- filterEmptyLines tt (x:xs) = if (unsafePerformIO $ get x identity) < 215 then ((,) (T.pack $ show $ unsafePerformIO $ get x identity) (T.pack $ unsafePerformIO $ get x text)) : tt else filterEmptyLines tt xs
+-- filterEmptyLines tt [] = tt
 --holdWizardInputs :: (
 --ifContentHold :: (place of content) -> Bool -- check if action from menu "load state" was triggered and if there is some text to put in
          

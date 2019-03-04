@@ -9,6 +9,7 @@ SaveStateMenuHelp: zapisuje z bieżącej sesji informacje
 LoadStateMenu: &Wczytaj stan  Ctrl+L
 LoadStateMenuHelp: wczytuje zapisaną wcześniej sesję
 LoadFilesExt: Pliki hasdoc
+LoadImportedFilesExt: pliki html
 ImportFromFileMenu: &Importuj z pliku  Ctrl+I 
 ImportFromFileMenuHelp: importuje treści do wizarda z wygenerowanego wcześniej pliku (domyślnie z formatem *.pdf)
 QuitMenu: &Zakończ  Ctrl+E
