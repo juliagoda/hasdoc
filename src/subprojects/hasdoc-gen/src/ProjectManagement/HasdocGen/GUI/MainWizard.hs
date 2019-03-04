@@ -140,8 +140,6 @@ openWizard mainWindow =
         
         runWizard mainwizard introPage
         
-        
-                
         return ()
         
 
@@ -180,22 +178,27 @@ loadAbortedChanges :: Window a -> IO ()
 loadAbortedChanges wizardParent = 
     do
         home <- getHomeDirectory
-        loadedParser <- readIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc")
-        case loadedParser of
-             Left a -> putStrLn $ a
-             Right b -> case keys (T.pack "Answers") b of
-                             Left c -> putStrLn $ c
-                             Right d -> case hashValues (T.pack "Answers") b of
-                                             Left e -> putStrLn $ e
-                                             Right f -> do
-                                                 let mapList = Map.fromList $ zip d f
-                                                 infoDialog wizardParent "info" (show mapList)
-                                                 listOfChildren <- get wizardParent children
-                                                 let results1 = map (\x -> unsafePerformIO $ get x children) listOfChildren
-                                                 let results2 = (map . map) (\x -> unsafePerformIO $ get x children) results1
-                                                 sequence_ $ concat $ concat $ (map . map . map) (\x -> set x [text := T.unpack (fromMaybe (T.pack $ unsafePerformIO (get x text)) (Map.lookup (T.pack $ show $ unsafePerformIO $ get x identity) mapList))]) results2
-                                                 
-                                                 
+        tempHdocExists <- doesFileExist (home ++ "/.hasdoc-gen/temp/temp.hdoc")
+        case tempHdocExists of
+             True -> do
+                 loadedParser <- readIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc")
+                 case loadedParser of
+                      Left a -> putStrLn $ a
+                      Right b -> case keys (T.pack "Answers") b of
+                                      Left c -> putStrLn $ c
+                                      Right d -> case hashValues (T.pack "Answers") b of
+                                                      Left e -> putStrLn $ e
+                                                      Right f -> do
+                                                          let mapList = Map.fromList $ zip d f
+                                                          listOfChildren <- get wizardParent children
+                                                          let results1 = map (\x -> unsafePerformIO $ get x children) listOfChildren
+                                                          let results2 = (map . map) (\x -> unsafePerformIO $ get x children) results1
+                                                          sequence_ $ concat $ concat $ (map . map . map) (\x -> set x [text := T.unpack (fromMaybe (T.pack $ unsafePerformIO (get x text)) (Map.lookup (T.pack $ show $ unsafePerformIO $ get x identity) mapList))]) results2
+             False -> return ()
+        
+        
+
+
              
 -- based on http://hackage.haskell.org/package/ini-0.4.1/docs/src/Data.Ini.html#keys             
 hashValues :: T.Text -- ^ Section name
