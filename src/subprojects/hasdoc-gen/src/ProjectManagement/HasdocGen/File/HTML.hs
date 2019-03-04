@@ -11,10 +11,10 @@
 module ProjectManagement.HasdocGen.File.HTML
 (
 writeChosenFormats,
-thd
+thd,
+readHtmlFile
 )
 where
-    
     
 
 import ProjectManagement.HasdocGen.File.Settings    
@@ -26,13 +26,19 @@ import Text.Pandoc.Builder
 import Text.Pandoc.Options
 import Text.Pandoc.Writers.HTML
 import qualified Text.Pandoc.Readers.HTML as R
+import qualified Data.HashMap.Strict as H
 import Text.Pandoc.Class
 import Text.Pandoc
 
 import System.Directory
+import Text.HTML.TagSoup
+import Text.StringLike
+import Text.Read (readMaybe)
+import Data.Ini
 
 --import Text.Blaze.Html
 import qualified Data.Text.IO as T
+import qualified Data.Text as TT 
 
 
 -- the function stays here, because HTML is always generated and as first
@@ -90,7 +96,6 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
         writeFilePandocOptsB writePowerpoint options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "pptx" powerPointFormat projectTitle
         
         
-
  
 writeHtml :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> IO ()
 writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang = 
@@ -100,12 +105,39 @@ writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered project
         T.writeFile (projectTitle ++ "/project.html") rawHtml
 
         
-readHtml :: IO Pandoc
-readHtml = 
+readHtmlFile :: FilePath -> IO ()
+readHtmlFile filepath = 
     do
-        htmld <- T.readFile "project.html"
-        options <- loadReaderPandocOpts
-        runIOorExplode $ R.readHtml options htmld
+        htmld <- T.readFile filepath
+        let tagsMap = iterateTags (parseTags htmld) []
+        let hhash = H.fromList [(TT.pack "Answers", tagsMap)]
+        home <- getHomeDirectory
+        createDirectoryIfMissing True (home ++ "/.hasdoc-gen/temp")
+        writeIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc") (Ini {iniGlobals=mempty, iniSections=hhash})
+         
+ 
+iterateTags :: [Tag TT.Text] -> [(TT.Text, TT.Text)] -> [(TT.Text, TT.Text)]
+iterateTags (x:y:z:xs) outputL = case isTagOpen x && isTagText y of
+                              True -> if TT.null (getTagOpenId x) then iterateTags (y:z:xs) outputL else iterateTags (xs) (((,) (getTagOpenId x) (fromTagText y)) : outputL)
+                              False -> iterateTags (y:z:xs) outputL
+iterateTags (x:y:z) outputL = case isTagOpen x && isTagText y of
+                                   True -> if TT.null (getTagOpenId x) then iterateTags [] outputL else iterateTags [] (((,) (getTagOpenId x) (fromTagText y)) : outputL)
+                                   False -> iterateTags [] outputL
+iterateTags [] outputL = outputL
+
+
+getTagOpenId :: Tag TT.Text -> TT.Text
+getTagOpenId (TagOpen "span" atts) = case ifIdentIsInt (readMaybe (TT.unpack (fromAttrib "id" (TagOpen "span" atts))) :: Maybe Int) of
+                                        True -> fromAttrib "id" (TagOpen "span" atts)
+                                        False -> ""
+getTagOpenId (TagOpen _ _) = ""
+getTagOpenId _ = ""
+
+
+-- https://alvinalexander.com/source-code/haskell/safe-string-to-int-conversion-in-haskell-example        
+ifIdentIsInt :: Maybe Int -> Bool
+ifIdentIsInt Nothing = False
+ifIdentIsInt (Just a) = if a < 215 then True else False
         
         
 loadWriterPandocOpts :: IO WriterOptions                

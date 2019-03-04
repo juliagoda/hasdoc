@@ -149,9 +149,6 @@ saveTempChanges wind ev =
     case ev of
          WizardCancel veto -> do 
              saveAll wind
---              case Map.lookup 1 results of 
---                   Nothing -> warningDialog wind "warning" "Not found"
---                   Just x -> warningDialog wind "warning" x
              propagateEvent
          WizardFinished -> do
              saveAll wind
@@ -169,8 +166,6 @@ saveAll wizardParent =
         let hhash = H.fromList [(T.pack "Answers", [(T.pack x, T.pack y) | (x,y) <- results] )]
         home <- getHomeDirectory
         createDirectoryIfMissing True (home ++ "/.hasdoc-gen/temp")
-        --writeFile "temp/temp.hdoc" ""
-        
         writeIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc") (Ini {iniGlobals=mempty, iniSections=hhash})
         
         
