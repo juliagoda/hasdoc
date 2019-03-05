@@ -21,7 +21,7 @@ build-type:     Simple
 category:       Application
 data-files:
                  -- templates
-                 data/templates/default.css
+                 data/templates/*.css
                  -- translations
                  data/translations/*.msg
                  data/icons/*.png

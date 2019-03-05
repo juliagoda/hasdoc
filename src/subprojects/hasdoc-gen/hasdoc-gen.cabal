@@ -18,6 +18,14 @@ license:        BSD3
 license-file:   LICENSE
 category:       Application
 build-type:     Simple
+data-files:
+                 -- templates
+                 data/templates/*.css
+                 -- translations
+                 data/translations/*.msg
+                 data/icons/*.png
+                 -- documentation
+                 doc/generator-contents.md
 extra-source-files:
                  -- documentation
                  README.md,
