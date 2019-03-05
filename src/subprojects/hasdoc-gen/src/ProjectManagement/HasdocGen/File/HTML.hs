@@ -44,83 +44,83 @@ import qualified Data.Text as TT
 
 
 -- the function stays here, because HTML is always generated and as first
-writeChosenFormats :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> WX.TextCtrl () -> IO ()
-writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltered projectEntry = 
+writeChosenFormats :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> WX.TextCtrl () -> FilePath -> IO ()
+writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltered projectEntry chosenDir = 
     do
         projectTitle <- WX.get projectEntry WX.text
         readTemp <- readTemplate
         let lang = ((settLangIntToString . readTemp) languageSett)
-        createDirectory projectTitle
+        createDirectory (chosenDir ++ "/" ++ projectTitle)
         
-        writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang
+        writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
         
         
         options <- loadWriterOtherOpts "docbook"
-        writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dbk" docbookFormat projectTitle
+        writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dbk" docbookFormat projectTitle chosenDir
         
-        writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang
+        writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
         
         options <- loadWriterOtherOpts "tei"
-        writeFilePandocOptsT writeTEI options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "tei" teiFormat projectTitle
+        writeFilePandocOptsT writeTEI options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "tei" teiFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "dokuwiki"
-        writeFilePandocOptsT writeDokuWiki options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dokuwiki" dokuWikiFormat projectTitle
+        writeFilePandocOptsT writeDokuWiki options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dokuwiki" dokuWikiFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "haddock"
-        writeFilePandocOptsT writeHaddock options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "haddock" haddockFormat projectTitle
+        writeFilePandocOptsT writeHaddock options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "haddock" haddockFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "latex"
-        writeFilePandocOptsT writeLaTeX options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "tex" latexFormat projectTitle
+        writeFilePandocOptsT writeLaTeX options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "tex" latexFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "json"
-        writeFilePandocOptsT writePlain options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "json" jsonFormat projectTitle
+        writeFilePandocOptsT writePlain options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "json" jsonFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "markdown_phpextra"
-        writeFilePandocOptsT writeMarkdown options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "php" phpMarkdownFormat projectTitle
+        writeFilePandocOptsT writeMarkdown options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "php" phpMarkdownFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "mediawiki"
-        writeFilePandocOptsT writeMediaWiki options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "mediawiki" mediaWikiFormat projectTitle
+        writeFilePandocOptsT writeMediaWiki options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "mediawiki" mediaWikiFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "opendocument"
-        writeFilePandocOptsT writeOpenDocument options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "sxw" openDocFormat projectTitle
+        writeFilePandocOptsT writeOpenDocument options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "sxw" openDocFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "ipynb"
-        writeFilePandocOptsT writeIpynb options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "ipynb" jupyterFormat projectTitle
+        writeFilePandocOptsT writeIpynb options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "ipynb" jupyterFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "docx"
-        writeFilePandocOptsB writeDocx options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "docx" docxFormat projectTitle
+        writeFilePandocOptsB writeDocx options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "docx" docxFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "epub"
-        writeFilePandocOptsB writeEPUB3 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "epub" epubv3Format projectTitle
+        writeFilePandocOptsB writeEPUB3 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "epub" epubv3Format projectTitle chosenDir
         
         options <- loadWriterOtherOpts "odt"
-        writeFilePandocOptsB writeODT options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "odt" openOfficeFormat projectTitle
+        writeFilePandocOptsB writeODT options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "odt" openOfficeFormat projectTitle chosenDir
         
         options <- loadWriterOtherOpts "pptx"
-        writeFilePandocOptsB writePowerpoint options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "pptx" powerPointFormat projectTitle
+        writeFilePandocOptsB writePowerpoint options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "pptx" powerPointFormat projectTitle chosenDir
         
-        writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang
+        writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
         
         
  
-writeHtml :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> IO ()
-writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang = 
+writeHtml :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> FilePath -> IO ()
+writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir = 
     do
         options <- loadWriterPandocOpts
         rawHtml <- runIOorExplode $ writeHtml5String options $ myDoc projectTitle (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang)
-        T.writeFile (projectTitle ++ "/project.html") rawHtml
+        T.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project.html") rawHtml
         
         
 -- as first whhtmltopdf is needed - find and install it on your system
--- without installed wkhtmltopdf appears error: hasdoc: wkhtmltopdf: createProcess: runInteractiveProcess: exec: invalid argument (Bad file descriptor), but it doesn't crash application
-writePDFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> IO ()
-writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang = 
+-- without installed wkhtmltopdf appears error: hasdoc: wkhtmltopdf: createProcess: runInteractiveProcess: exec: invalid argument (Bad file descriptor) - but it doesn't crash application
+writePDFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> FilePath -> IO ()
+writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir = 
     do
         options <- loadWriterPandocOpts
         rawPdf <- runIOorExplode $ makePDF "wkhtmltopdf" [] writeHtml5String options $ myDoc projectTitle (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang)
         case rawPdf of
              Left a -> putStrLn $ "Nastąpił błąd podczas tworzenia pliku Pdf"
-             Right b -> B.writeFile (projectTitle ++ "/project.pdf") b
+             Right b -> B.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project.pdf") b
         
         
 readHtmlFile :: FilePath -> IO ()
@@ -138,6 +138,7 @@ iterateTags :: [Tag TT.Text] -> [(TT.Text, TT.Text)] -> [(TT.Text, TT.Text)]
 iterateTags (x:y:z:xs) outputL = case isTagOpen x && isTagText y of
                               True -> if TT.null (getTagOpenId x) then iterateTags (y:z:xs) outputL else iterateTags (xs) (((,) (getTagOpenId x) (fromTagText y)) : outputL)
                               False -> iterateTags (y:z:xs) outputL
+                              
 iterateTags (x:y:z) outputL = case isTagOpen x && isTagText y of
                                    True -> if TT.null (getTagOpenId x) then iterateTags [] outputL else iterateTags [] (((,) (getTagOpenId x) (fromTagText y)) : outputL)
                                    False -> iterateTags [] outputL

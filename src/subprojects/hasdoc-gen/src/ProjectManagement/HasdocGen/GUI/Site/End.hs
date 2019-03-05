@@ -20,6 +20,7 @@ import Control.Concurrent
 
 import ProjectManagement.HasdocGen.File.Print
 import ProjectManagement.HasdocGen.File.HTML
+import ProjectManagement.HasdocGen.File.View
 
 
 
@@ -50,9 +51,13 @@ createEndPage mainwindow mainwizard defWidgets reqWidgets archWidgets techWidget
 runGenerationSeq :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> TextCtrl () -> IO ()
 runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = 
     do
-        checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry
-        forkIO $ writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
-        --createPreview mainwindow (mapAndFilter defWidgets)
+        projectTitle <- get titleEntry text
+        chosenPath <- dirOpenDialog mainwindow True "Wybierz folder dla wygenerowania plików" ""
+        case chosenPath of
+             Nothing -> return ()
+             Just a -> checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry >> 
+                       writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry a >>
+                       runPdfPreview (a ++ "/" ++ projectTitle ++ "/project.pdf")
         return ()
 --         printFile mainwindow defFiltered
         
@@ -79,11 +84,6 @@ checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWid
 
 mapToStrings :: [(StaticText (), TextCtrl ())] -> Maybe [(Int, String, String)]
 mapToStrings tabWidgets = Just $ [(unsafePerformIO $ get b identity, unsafePerformIO $ get a text, unsafePerformIO $ get b text) | (a, b) <- tabWidgets] 
---mapM (\(x,y) -> return $ (unsafePerformIO $ get (fst x) text, unsafePerformIO $ get (snd y) text)) tabWidgets
-
-
---filterEmptyLines :: [(StaticText (), TextCtrl ())] -> IO [(StaticText (), TextCtrl ())]
---filterEmptyLines answers = filterM (\x -> liftM (not . null) $ get (snd x) text) answers
 
 
 filterEmptyLines :: [(Int, String, String)] -> Maybe [(Int, String, String)]

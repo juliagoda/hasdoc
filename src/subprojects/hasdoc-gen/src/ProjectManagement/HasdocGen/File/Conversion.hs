@@ -91,13 +91,7 @@ testDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) (para (strong "Tests") <>
   docLoop (Just x) wrOptions lang)
   
-  
---   let nodes = inlinesToNodes opts ils
---       op = tagWithAttributes opts True False "span" attr
---   in  if isEnabled Ext_raw_html opts
---          then ((node (HTML_INLINE op) [] : nodes ++
---                 [node (HTML_INLINE (T.pack "</span>")) []]) ++)
-  
+    
   
 docLoop :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Blocks  
 docLoop (Just ((x,y,z):xs)) wrOptions lang = 
@@ -112,39 +106,39 @@ docLoop Nothing wrOptions lang = para linebreak
 
 
 
-writeZimWikiFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> IO ()
-writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang =     
+writeZimWikiFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> FilePath -> IO ()
+writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir =     
     do
         readTemp <- readTemplate 
         case readTemp zimWikiFormat of
              True -> do
                  let wrOptions = (def { writerTOCDepth = 4, writerTableOfContents = False})
                  rawZimWiki <- runIOorExplode $ writeZimWiki wrOptions $ myDoc projectTitle (defDoc defFiltered wrOptions lang) (reqDoc reqFiltered wrOptions lang) (archDoc archFiltered wrOptions lang) (techDoc techFiltered wrOptions lang) (testDoc testFiltered wrOptions lang)
-                 T.writeFile (projectTitle ++ "/project.zim") rawZimWiki
+                 T.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project.zim") rawZimWiki
              False -> return ()
              
    
             
-writeFilePandocOptsT :: (WriterOptions -> Pandoc -> PandocIO Text) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> String -> IO ()
-writeFilePandocOptsT func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett projectTitle =     
+writeFilePandocOptsT :: (WriterOptions -> Pandoc -> PandocIO Text) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> String -> FilePath -> IO ()
+writeFilePandocOptsT func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett projectTitle chosenDir =     
     do
         readTemp <- readTemplate 
         case readTemp sett of
              True -> do
                  rawFile <- runIOorExplode $ func loadWriterOpts $ myDoc projectTitle defFiltered reqFiltered archFiltered techFiltered testFiltered 
-                 T.writeFile (projectTitle ++ "/project." ++ format) rawFile
+                 T.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project." ++ format) rawFile
              False -> return ()
              
              
              
-writeFilePandocOptsB :: (WriterOptions -> Pandoc -> PandocIO B.ByteString) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> String -> IO ()
-writeFilePandocOptsB func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett projectTitle =     
+writeFilePandocOptsB :: (WriterOptions -> Pandoc -> PandocIO B.ByteString) -> WriterOptions -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> Pandoc -> String -> Setting Bool -> String -> FilePath -> IO ()
+writeFilePandocOptsB func loadWriterOpts defFiltered reqFiltered archFiltered techFiltered testFiltered format sett projectTitle chosenDir =     
     do
         readTemp <- readTemplate 
         case readTemp sett of
              True -> do
                  rawFile <- runIOorExplode $ func loadWriterOpts $ myDoc projectTitle defFiltered reqFiltered archFiltered techFiltered testFiltered
-                 B.writeFile (projectTitle ++ "/project." ++ format) rawFile
+                 B.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project." ++ format) rawFile
              False -> return ()
              
              
