@@ -37,11 +37,13 @@ strong {
 }
 
 @media print {
+    
 	div {
 		page-break-before: always;
 	}
+	
 	#title-block-header {
-		height: 100%;
+		height: 15%;
 		width: 100%;
 		display: flex;
 		position: absolute;

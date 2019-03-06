@@ -22,7 +22,23 @@ import Data.Maybe
 import Data.AppSettings
 import System.IO.Unsafe
 
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
 import Application.Hasdoc.Settings.General
+
+
+
+-- data SettingsApp = SettingsApp
+-- 
+-- mkMessage "SettingsApp" getAppLangPath "en"
+-- 
+-- 
+-- 
+-- makeTranslator :: (RenderMessage SettingsApp SettingsAppMessage) => IO (SettingsAppMessage -> String)
+-- makeTranslator = do
+--     readResult <- readSettings (AutoFromAppName "hasdoc")
+--     let conf = fst readResult
+--     return (\message -> T.unpack $ renderMsg SettingsApp (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 
@@ -30,6 +46,7 @@ import Application.Hasdoc.Settings.General
 openSettingsWindow :: Frame () -> IO ()
 openSettingsWindow mainWindow = 
     do 
+        --translate <- makeTranslator
         settWindow <- frameTool [text := "Ustawienia", resizeable := True, visible := True, clientSize  := sz 640 480, picture := (getAppIconsPath ++ "/settings-window.png")]  mainWindow  
         --settWindow <- dialog mainWindow [text := "Ustawienia", visible := True, clientSize  := sz 640 480] 
         createTabsWidget settWindow
@@ -38,6 +55,8 @@ openSettingsWindow mainWindow =
 createTabsWidget :: Frame () -> IO ()
 createTabsWidget settWindow = 
     do
+        --translate <- makeTranslator
+        
         p <- panel settWindow []
         notebook' <- notebook p []
         
@@ -45,7 +64,7 @@ createTabsWidget settWindow =
         p1   <- panel  notebook' []
         
         let rlabels = ["polski", "english"]
-        langDesc <- staticText p1 [ text := "cdfgdgcghfgfghxgcghfvgjfcg" ]
+        langDesc <- staticText p1 [ text := "Wybierz jeden z poniższych języków. Po wyborze i dokonaniu zapisu wymagany jest restart programu." ]
         
         r1 <- singleListBox p1 [items := ["polski","english"]] --on select ::= rob cos po zaznaczeniu]
         
@@ -57,21 +76,20 @@ createTabsWidget settWindow =
         c1   <- checkBox p3 []
         c2   <- checkBox p3 []
         
-        let openWidget = openAfterFocus c2 extExecPath $ fileOpenDialog settWindow True True "wczytuje zapisaną wcześniej sesję" [("Pliki wykonywalne", ["*"])] execPath "" -- Higher order functions, Curried functions
+        let openWidget = openAfterFocus c2 extExecPath $ fileOpenDialog settWindow True True "wczytaj zapisaną wcześniej sesję" [("Pliki wykonywalne", ["*"])] execPath "" -- Higher order functions, Curried functions
         set extExecPath [ on focus := openWidget, enabled := False, clientSize  := sz 200 20 ] 
-        peviewDesc <- staticText p3 [ text := "cdfgdgcghfgfghxgcghfvgjfcg" ]
-        set c1 [text := "Domyślny podgląd wbudowany", on command := changeAppTextEntry patternM extExecPath c2 True True c1, checked := True ]
+        peviewDesc <- staticText p3 [ text := "Wybierz program zewnętrzny do przeglądania generowanego pliku pdf oraz do przeglądania dokumentacji w tym formacie. Jeśli nie chcesz obejrzeć pliku po jego wygenerowaniu, wybierz pierwszą opcję." ]
+        set c1 [text := "Brak", on command := changeAppTextEntry patternM extExecPath c2 True True c1, checked := True ]
         set c2 [text := "Program zewnętrzny", on command := changeAppTextEntry patternE extExecPath c1 True True c2, checked := False ]       
 
         
-        p4   <- panel  notebook' []
+        p4   <- panel  notebook' [enabled := False]
         
-        printDesc <- staticText p4 [ text := "cdfgdgcghfgfghxgcghfvgjfcg" ]
+        printDesc <- staticText p4 [ text := "Wybierz ustawienia dla okna drukowania. Można ten etap pominąć i nanieść zmiany w oknie generowanym przed etapem drukowania." ]
 
-        let printersList = ["mies","noot","aap"]
+        let printersList = []
         printersBox  <- comboBox p4 
                   [items      := printersList
-                  ,tooltip    := "unsorted single-selection listbox"
                   ,identity   := 17]
                   
         intSpinBox <- spinCtrl p4 1 500 [ tooltip := "Inaczej skala w procentach" ]
@@ -79,7 +97,6 @@ createTabsWidget settWindow =
         let formatsList = ["A0", "A1", "A2", "A3", "A4", "A5", "A6", "B4", "B5", "B6"]          
         formatBox  <- comboBox p4 
                   [items      := formatsList
-                  ,tooltip    := "unsorted single-selection listbox"
                   ,identity   := 18]
                   
         scopeEntry <- textEntry p4 []
@@ -87,7 +104,6 @@ createTabsWidget settWindow =
         let orientationsList = ["Pionowa", "Pozioma"]          
         orientationBox  <- comboBox p4 
                   [items      := orientationsList
-                  ,tooltip    := "unsorted single-selection listbox"
                   ,identity   := 19]
                      
         marginsEntry <- textEntry p4 []
@@ -95,13 +111,11 @@ createTabsWidget settWindow =
         let coloursList = ["Kolor","Skala szarości"]          
         coloursBox  <- comboBox p4 
                   [items      := coloursList
-                  ,tooltip    := "unsorted single-selection listbox"
                   ,identity   := 20]
                   
         let bilaterallyList = ["Wyłącz","Simplex", "Long Edge", "Short Edge"]          
         bilaterallyBox  <- comboBox p4 
                   [items      := bilaterallyList
-                  ,tooltip    := "unsorted single-selection listbox"
                   ,identity   := 21]
                   
         let listComboBoxes = [printersBox, formatBox, orientationBox, coloursBox, bilaterallyBox]
@@ -109,7 +123,7 @@ createTabsWidget settWindow =
         
         p5   <- panel notebook' []
         
-        formatsDesc <- staticText p5 [ text := "cdfgdgcghfgfghxgcghfvgjfcg" ]
+        formatsDesc <- staticText p5 [ text := "Wybierz wyjściowe formaty danych poniżej. Zostaną one stworzone w wybranej ścieżce oraz katalogu o nazwie projektu. Pliki html oraz pdf są tworzone zawsze." ]
         formatBox1   <- checkBox p5 [text := "ZimWiki", identity := 1]
         formatBox2   <- checkBox p5 [text := "TEI", identity := 2]
         formatBox3   <- checkBox p5 [text := "DocBook 5", identity := 3]
@@ -132,8 +146,8 @@ createTabsWidget settWindow =
         
         p6   <- panel  notebook' []
         
-        let rlabels = ["domyślny", "blue", "green", "orange"]
-        templateDesc <- staticText p6 [ text := "cdfgdgcghfgfghxgcghfvgjfcg" ]
+        let rlabels = ["default", "blue", "green", "orange"]
+        templateDesc <- staticText p6 [ text := "Wybierz jeden z poniższych plików css dla wyjściowego pliku html, na podstawie którego powstanie plik pdf. Pierwsza opcja oznacza wydruk bez kolorów." ]
         templatesRadioBox   <- radioBox p6 Vertical rlabels   [text := "Lista szablonów"]
         
 

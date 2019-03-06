@@ -23,10 +23,12 @@ body {
 
 @media print {
     
+    div:before { background: #fff7ea; }
+    div:after { background: #fff7ea; }
     div { page-break-before: always; background: #fff7ea; }
 
     #title-block-header { 
-        height: 100%;
+        height: 15%;
         width: 100%;
         display: flex;
         position: fixed;

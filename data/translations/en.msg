@@ -4,29 +4,29 @@ LabelRunWiz: Place for overthinking and describing new project with the possibil
 LabelQuizWiz: Try, whenever you fluctuate between sequential and iterative approach
 
 ProgramMenu: &Program
-SaveStateMenu: &Save state  Ctrl+S
+SaveStateMenu: &Save state  S
 SaveStateMenuHelp: saves informations from the current session
-LoadStateMenu: &Load State  Ctrl+L
+LoadStateMenu: &Load State  L
 LoadStateMenuHelp: loads saved state informations
 LoadFilesExt: hasdoc files
 LoadImportedFilesExt: html files
-ImportFromFileMenu: &Import from file  Ctrl+I 
-ImportFromFileMenuHelp: imports informations into wizard from saved pdf file
-QuitMenu: &Quit  Ctrl+E
+ImportFromFileMenu: &Import from file  I 
+ImportFromFileMenuHelp: imports informations into wizard from saved html file
+QuitMenu: &Quit  Q
 QuitMenuHelp: closes application
 OptionsMenu: &Options
-SettingsMenu: &Settings  Ctrl+U
+SettingsMenu: &Settings  T
 SettingsMenuHelp: creates new window with settings
 AboutMenu: &About Hasdoc
-AuthorMenu: &About authors  Ctrl+A
+AuthorMenu: &About authors
 AuthorMenuHelp: contains informations about authors
-HomepageMenu: &Homepage  Ctrl+H
+HomepageMenu: &Homepage  W
 HomepageMenuHelp: opens website with default browser
-IssuesMenu: &Issues  Ctrl+F
+IssuesMenu: &Issues  B
 IssuesMenuHelp: opens website about issues and ideas of application with default browser
-ToolsMenu: &Tools  Ctrl+T
+ToolsMenu: &Tools
 ToolsMenuHelp: contains list of used programming languages, editors, libraries
-TipsMenu: &Tips  Ctrl+P
+TipsMenu: &Tips
 TipsMenuHelp: contains list of other ideas for creating new project
-DocMenu: &Documentation  Ctrl+D
+DocMenu: &Documentation  D
 DocMenuHelp: FAQ

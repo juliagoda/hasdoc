@@ -19,6 +19,7 @@ where
   
 
 import Graphics.UI.WX
+import Graphics.UI.WXCore
 
 import Application.Hasdoc.GUI.Menu.Program.AppClose
 import Application.Hasdoc.GUI.Menu.Program.StateLoad
@@ -51,14 +52,22 @@ makeTranslator = do
     return (\message -> T.unpack $ renderMsg MenuWidget (settLangIntToString $ getSetting' conf languageSett) message)
     
     
-
 createMainMenu :: Frame () -> ToolBar () -> IO ()
 createMainMenu mainWindow tbar = 
     do 
+        translate <- makeTranslator
         programPane <- getProgramPane mainWindow tbar
         settingsPane <- getSettingsPane mainWindow tbar
         aboutPane <- getAboutPane mainWindow tbar
-        set mainWindow [menuBar := [programPane, settingsPane, aboutPane]]
+        set mainWindow [menuBar := [programPane, settingsPane, aboutPane], 
+            on (charKey 's') := saveFileDialog mainWindow [(translate MsgLoadFilesExt, ["*.hdoc"])],
+            on (charKey 'l') := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.hdoc"])] False,
+            on (charKey 'i') := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.html"])] True,
+            on (charKey 'q') := closeMainWindow mainWindow,
+            on (charKey 't') := openSettingsWindow mainWindow,
+            on (charKey 'w') := openHomepage mainWindow,
+            on (charKey 'b') := openIssuesPage mainWindow,
+            on (charKey 'd') := openDocWindow mainWindow ]
         
         
 getProgramPane :: Frame () -> ToolBar () -> IO (Menu ())
