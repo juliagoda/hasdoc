@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.Text.Site.Requirements.Content
 (
 task1,
@@ -20,59 +33,80 @@ task17,
 task18
 )
 where
+    
+    
+import ProjectManagement.HasdocGen.File.Settings
+    
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data ReqPageContent = ReqPageContent
+
+mkMessage "ReqPageContent" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage ReqPageContent ReqPageContentMessage) => IO (ReqPageContentMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg ReqPageContent (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 
 task1 :: String
-task1 = "Opisz wszystkie wejścia systemu - źródła danych, dokładność, zakres wartości i częstotliwości"
+task1 = (unsafePerformIO makeTranslator) MsgReqQuestion1
 
 task2 :: String
-task2 = "Opisz wszystkie wyjścia systemu - miejsca docelowe danych, dokładność, zakres wartości, częstotliwość i format"
+task2 = (unsafePerformIO makeTranslator) MsgReqQuestion2
 
 task3 :: String
-task3 = "Opisz wszystkie formaty wyjściowe stron WWW, raportów, itd"
+task3 = (unsafePerformIO makeTranslator) MsgReqQuestion3
 
 task4 :: String
-task4 = "Opisz wszystkie zewnętrzne interfejsy sprzętowe i programowe"
+task4 = (unsafePerformIO makeTranslator) MsgReqQuestion4
 
 task5 :: String
-task5 = "Opisz wszystkie zewnętrzne interfejsy komunikacyjne, w tym sposób nawiązywania komunikacji, metody kontroli błędów i protokoły komunikacyjne"
+task5 = (unsafePerformIO makeTranslator) MsgReqQuestion5
 
 task6 :: String
-task6 = "Opisz wszystkie funkcje, które oczekuje użytkownik"
+task6 = (unsafePerformIO makeTranslator) MsgReqQuestion6
 
 task7 :: String
-task7 = "Wymień wszystkie krytyczne wymagania, bez których aplikacja nie ma sensu"
+task7 = (unsafePerformIO makeTranslator) MsgReqQuestion7
 
 task8 :: String
-task8 = "Czy każda z funkcjonalności posiada jakąś wartość rynkową? Czy ich istnienie zwiększa wartość produktu? Dlaczego? Przy każdej z nich możesz podać choć jeden powód." 
+task8 = (unsafePerformIO makeTranslator) MsgReqQuestion8 
 
 task9 :: String
-task9 = "Opisz dane wykorzystywane przez każdą funkcję i jej dane wynikowe"
+task9 = (unsafePerformIO makeTranslator) MsgReqQuestion9
 
 task10 :: String
-task10 = "Czy program będzie umożliwiał ingerencję użytkownika? Jeśli tak, to jaki będzie czas reakcji dla każdej takiej pojedynczej operacji?"
+task10 = (unsafePerformIO makeTranslator) MsgReqQuestion10
 
 task11 :: String
-task11 = "Jaki czas jest akceptowalny dla programu w przypadku takich operacji jak przetwarzanie danych, szybkość ich transmisji, etc?"
+task11 = (unsafePerformIO makeTranslator) MsgReqQuestion11
 
 task12 :: String
-task12 = "Opisz poziom bezpieczeństwa i metody przed przyszłymi ewentualnymi zagrożeniami"
+task12 = (unsafePerformIO makeTranslator) MsgReqQuestion12
 
 task13 :: String
-task13 = "Jaka minimalna pamięć komputera i miejsce na dysku są nieodzowne do stworzenia i działania programu?"
+task13 = (unsafePerformIO makeTranslator) MsgReqQuestion13
 
 task14 :: String
-task14 = "Czy potrafisz przedstawić definicję nieudanego, aktualnego projektu?"
+task14 = (unsafePerformIO makeTranslator) MsgReqQuestion14
 
 task15 :: String
-task15 = "Czy wymagania zostały napisane w języku zrozumiałym dla użytkownika końcowego i wszystkich pracujących nad projektem? Czy zostało to potwierdzone?"
+task15 = (unsafePerformIO makeTranslator) MsgReqQuestion15
 
 task16 :: String
-task16 = "Czy jesteś w stanie przewidzieć zmiany w wymaganiach, jakie mogą się pojawić? Jakie zmiany mogą ulec zmianie? Jak bardzo jest to prawdopodobne, że użytkownik poprosi o modyfikacje?"
+task16 = (unsafePerformIO makeTranslator) MsgReqQuestion16
 
 task17 :: String
-task17 = "Czy wymagania są ze sobą sprzeczne? Jeśli tak, to które? Dlaczego?"
+task17 = (unsafePerformIO makeTranslator) MsgReqQuestion17
 
 task18 :: String
-task18 = "Czy wymagania wydają się rozsądne i możliwe w implementacji? Dlaczego?"
+task18 = (unsafePerformIO makeTranslator) MsgReqQuestion18

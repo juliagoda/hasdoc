@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.Text.Site.Architecture.Help
 (
 hint1,
@@ -28,75 +41,96 @@ hint24
 where
 
 
+import ProjectManagement.HasdocGen.File.Settings
+
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data ArchPageHelp = ArchPageHelp
+
+mkMessage "ArchPageHelp" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage ArchPageHelp ArchPageHelpMessage) => IO (ArchPageHelpMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg ArchPageHelp (settLangIntToString $ getSetting' conf languageSett) message)
+
+
 
 hint1 :: String
-hint1 = "W jakich ścieżkach będą się znajdować pliki dokumentacyjne, źródłowe, grafika, pliki konfiguracyjne, etc.? Jak będzie mniej więcej wyglądało rozbicie klas/modułów w katalogach?"
+hint1 = (unsafePerformIO makeTranslator) MsgArchHint1
 
 hint2 :: String
-hint2 = "Za co będą odpowiadać poszczególne klasy/moduły? Jaka będzie ich główna rola?"
+hint2 = (unsafePerformIO makeTranslator) MsgArchHint2
 
 hint3 :: String
-hint3 = "Dlaczego np. dokonano wyboru pomiędzy listą, tablicą, kolejką, map czy hash? Czy wiadomo jakie techniki programowania charakterystyczne dla języka/paradygmatu programowania zostaną zastosowane? Dlaczego?"
+hint3 = (unsafePerformIO makeTranslator) MsgArchHint3
 
 hint4 :: String
-hint4 = "Które z tworzonych struktur kodu będą zawierały odniesienia do wszystkich metod/zmiennych/etc.? Do niektórych? Do żadnych?"
+hint4 = (unsafePerformIO makeTranslator) MsgArchHint4
 
 hint5 :: String
-hint5 = "Czy istnieje potrzeba przechowywania któryś z danych poza aplikacją? W systemie? Na serwerze?"
+hint5 = (unsafePerformIO makeTranslator) MsgArchHint5
 
 hint6 :: String
-hint6 = "Czy istnieją jakieś zasady na terenie firmy, które muszą być przestrzegane także podczas tworzenia aplikacji?"
+hint6 = (unsafePerformIO makeTranslator) MsgArchHint6
 
 hint7 :: String
-hint7 = "Jakiego rodzaju będzie to interfejs? Graficzny? Tekstowy? Z wierszem poleceń? Głosowy? Gestowy? Łączony? Jak on będzie wyglądał, działał?"
+hint7 = (unsafePerformIO makeTranslator) MsgArchHint7
 
 hint8 :: String
-hint8 = "W jakich miejscach aplikacji będzie używana grafika, pliki konfiguracyjne, etc? Jak będą załadowywane dane do aplikacji? Jak będą one modyfikowane? Jak będą one zapisywane?"
+hint8 = (unsafePerformIO makeTranslator) MsgArchHint8
 
 hint9 :: String
-hint9 = "Czy aplikacja będzie ściśle powiązana z obsługą i przeróbką plików multimedialnych, gier trójwymiarowych, etc? Jeśli tak, to jakie śa minimalne wymaganie systemowe do działania programu?"
+hint9 = (unsafePerformIO makeTranslator) MsgArchHint9
 
 hint10 :: String
-hint10 = "np. gwałtowny wzrost użytkowników na stronie internetowej, duża ilość osób zarejestrowanych w bazie danych, etc?"
+hint10 = (unsafePerformIO makeTranslator) MsgArchHint10
 
 hint11 :: String
-hint11 = "np. niektóre programy potrafią wymieniać między sobą pliki konfiguracyjne, zapisy stanów gier, bezpośrednio przekazywać wartości poprzez pomost itd."
+hint11 = (unsafePerformIO makeTranslator) MsgArchHint11
 
 hint12 :: String
-hint12 = "Czy warto uwzględniać internacjonalizację dla aplikacji?"
+hint12 = (unsafePerformIO makeTranslator) MsgArchHint12
 
 hint13 :: String
-hint13 = "Kiedy będą wykrywane błędy? Na jakim etapie? Czy będą szczegółowo monitorowane?"
+hint13 = (unsafePerformIO makeTranslator) MsgArchHint13
 
 hint14 :: String
-hint14 = "Można więc scharakteryzować wykrywanie błędów w sposób detekcyjny lub naprawczy, a nawet połączony"
+hint14 = (unsafePerformIO makeTranslator) MsgArchHint14
 
 hint15 :: String
-hint15 = "Chodzi o miejsca, które opierają się na bezpośredniej interakcji z użytkownikami - klikaniu myszką, przycisku klawiatury, itd"
+hint15 = (unsafePerformIO makeTranslator) MsgArchHint15
 
 hint16 :: String
-hint16 = "Czy szacowany czas wdrożenia funkcjonalności nie zajmie za dużo czasu? Czy budżet firmy, dostęp do sprzętu nie będzie zbyt ograniczony dla każdego z wymagań? Czy jakiekolwiek materiały związane z wdrożeniem funkcjonalności są łatwo dostępne i zrozumiałe dla zespołu?"
+hint16 = (unsafePerformIO makeTranslator) MsgArchHint16
 
 hint17 :: String
-hint17 = "Jak będzie reagował program w razie wystąpienia błędów? Jakie będzie wykonywał kroki?"
+hint17 = (unsafePerformIO makeTranslator) MsgArchHint17
 
 hint18 :: String
-hint18 = "Czy przewidujesz występowanie nieoczekiwanych sytuacji? Zamierzasz korzystać z kodu działącego na zasadzie try ... catch?"
+hint18 = (unsafePerformIO makeTranslator) MsgArchHint18
 
 hint19 :: String
-hint19 = "Obsługa błędów będzie odbywać się w miejscu wykrycia, w osobnej specjalnie przeznaczonej do tego klasie/module lub w jeszcze w inny sposób?"
+hint19 = (unsafePerformIO makeTranslator) MsgArchHint19
 
 hint20 :: String
-hint20 = "Skorzystasz z gotowej biblioteki do obsługi błędów, czy zbudujesz własny? Dlaczego?"
+hint20 = (unsafePerformIO makeTranslator) MsgArchHint20
 
 hint21 :: String
-hint21 = "Które miejsca w kodzie będą wymagały większej uwagi podczas konstrukcji niż inne z powodu występowania błędów, a w których miejscach wystarczą proste rozwiązania?" 
+hint21 = (unsafePerformIO makeTranslator) MsgArchHint21
 
 hint22 :: String
-hint22 = "Czy istnieją jakieś płatne biblioteki, edytory, innego typu oprogramowanie które przydadzą się w projekcie? Czy istnieje gdzieś podobny program, na którym można by było się wzorować?"
+hint22 = (unsafePerformIO makeTranslator) MsgArchHint22
 
 hint23 :: String
-hint23 = "Jakie miejsca programu mogą w przyszłości zostać wzbogacone o większą ilość komponentów? Czy dodawanie ich będzie wymagało skomplikowanych kroków?"
+hint23 = (unsafePerformIO makeTranslator) MsgArchHint23
 
 hint24 :: String
-hint24 = "w zależności czy tworzy ją osoba prywatna czy firma"
+hint24 = (unsafePerformIO makeTranslator) MsgArchHint24

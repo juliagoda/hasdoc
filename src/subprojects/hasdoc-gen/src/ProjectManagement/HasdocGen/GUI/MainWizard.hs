@@ -29,92 +29,6 @@ import ProjectManagement.HasdocGen.GUI.Site.End
 
 import ProjectManagement.HasdocGen.File.Settings 
 
---import Application.Hasdoc.Settings.General
-
--- frame  ::             [Prop (Frame ())] -> IO (Frame ())
--- f    <- frame    [text := "Hello!"]
-
--- button :: Window a -> [Prop (Button ())] -> IO (Button ())
--- quit <- button f [text := "Quit", on command := close f]
-
--- set    :: w -> [Prop w] -> IO ()
--- set f [layout := widget quit]
-
--- wizard :: Window a -> [Prop (Wizard ())] -> IO (Wizard ())
-
--- wizardPageSimple :: Wizard a -> [Prop (WizardPageSimple ())] -> IO (WizardPageSimple ()) -> Create an empty simple wizard page.
-
--- runWizard :: Wizard a -> WizardPage b -> IO Bool -> Run the wizard.
-
--- windowDestroyEventGetWindow :: WindowDestroyEvent a -> IO (Window ()) -> usage: (windowDestroyEventGetWindow obj).
-
--- type WindowDestroyEvent a = CommandEvent (CWindowDestroyEvent a)
-
--- windowDestroy :: Window a -> IO Bool (to ten)
-
--- windowDestroyChildren :: Window a -> IO Bool
-
-
--- myEventId :: Int
--- myEventId = WXCore.wxID_HIGHEST+100
-    -- the custom event ID, avoid clash with Graphics.UI.WXCore.Types.varTopId
-
--- | the custom event is registered as a menu event
--- createMyEvent :: IO (WXCore.CommandEvent ())
--- createMyEvent =
-   -- WXCore.commandEventCreate WXCore.wxEVT_COMMAND_MENU_SELECTED myEventId
-
--- registerMyEvent :: WXCore.EvtHandler a -> IO () -> IO ()
--- registerMyEvent win io =settings-window
-   -- WXCore.evtHandlerOnMenuCommand win myEventId io
-   
--- runWizard mainwiz firstPage
-
--- (Attr w a) := a infixr 0	
--- Assign a value to an attribute.
--- 
--- (Attr w a) :~ (a -> a) infixr 0	
--- Apply an update function to an attribute.
--- 
--- (Attr w a) ::= (w -> a) infixr 0	
--- Assign a value to an attribute with the widget as argument.
--- 
--- (Attr w a) ::~ (w -> a -> a) infixr 0	
--- Apply an update function to an attribute with the widget as an argument.
-
-
-
-
--- window w funkcji mainwizard zostanie podmieniony na główne okno z poziomu aplikacji głównej
-   
--- wizardEvent :: Event (Wizard a) (EventWizard -> IO ())
--- data Event w a -> An event for a widget w that expects an event handler of type a.
--- on :: Event w a -> Attr w a -> Transform an event to an attribute.
--- propagateEvent :: IO () -> Pass the event on the next wxWidgets event handler, either on this window or its parent. Always call this method when you do not process the event. (This function just call skipCurrentEvent).
--- data EventWizard 
--- WizardCancel Veto
--- WizardFinished
-
-
--- wizEvents :: [(Int, WizardEvent a -> IO EventWizard)]
--- wizEvents
---     = [(wxEVT_WIZARD_PAGE_CHANGED     ,withDir (withPage WizardPageChanged))
---       ,(wxEVT_WIZARD_PAGE_CHANGING    ,withVeto $ withDir (withPage WizardPageChanging))
---      ,(wxEVT_WIZARD_BEFORE_PAGE_CHANGED, withVeto WizardBeforePageChanged) -- missing from ClassesMZ
---       ,(wxEVT_WIZARD_PAGE_SHOWN       ,withPage WizardPageShown)
---       ,(wxEVT_WIZARD_CANCEL           ,withVeto (withPage WizardCancel))
---       ,(wxEVT_WIZARD_HELP             ,withPage  WizardHelp)
---       ,(wxEVT_WIZARD_FINISHED         ,withPage WizardFinished)]
---     where -- page getter is missing from ClassesMZ, omitting page for the time being
-
--- windowOnClose :: Window a -> IO () -> IO ()
--- windowOnDestroy :: Window a -> IO () -> IO ()
--- windowOnDelete :: Window a -> IO () -> IO ()
-
-
--- calendarEvent :: Event (CalendarCtrl a) (EventCalendar -> IO ())
--- calendarEvent
---   = newEvent "wizardClosing" calendarCtrlGetOnCalEvent calendarCtrlOnCalEvent
 
         
 openWizard :: Frame () -> IO ()
@@ -201,10 +115,3 @@ hashValues name i =
     Nothing -> Left ("Couldn't find section: " ++ T.unpack name)
     Just section -> Right (map snd section)
         
--- filterEmptyLines :: [(T.Text, T.Text)] -> [Window ()] -> [(T.Text, T.Text)]
--- filterEmptyLines tt (x:xs) = if (unsafePerformIO $ get x identity) < 215 then ((,) (T.pack $ show $ unsafePerformIO $ get x identity) (T.pack $ unsafePerformIO $ get x text)) : tt else filterEmptyLines tt xs
--- filterEmptyLines tt [] = tt
---holdWizardInputs :: (
---ifContentHold :: (place of content) -> Bool -- check if action from menu "load state" was triggered and if there is some text to put in
-         
--- loadSavedState :: Bool -> (Contents) -> IO () -- ifContentHold is True, then get access to all child textctrl widgets of wizard and put values in          

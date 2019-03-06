@@ -5,7 +5,10 @@
             ,UndecidableInstances
             ,ScopedTypeVariables
             ,TemplateHaskell
-            ,OverloadedStrings #-}
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
 
             
 module ProjectManagement.HasdocGen.File.HTML
@@ -41,7 +44,23 @@ import Data.Ini
 --import Text.Blaze.Html
 import qualified Data.Text.IO as T
 import qualified Data.Text as TT 
+    
+import Data.AppSettings
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
+data HTMLfile = HTMLfile
+
+mkMessage "HTMLfile" getAppLangPath "en"
+
+
+
+makeTranslator :: (RenderMessage HTMLfile HTMLfileMessage) => IO (HTMLfileMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> TT.unpack $ renderMsg HTMLfile (settLangIntToString $ getSetting' conf languageSett) message)
+
+    
 
 -- the function stays here, because HTML is always generated and as first
 writeChosenFormats :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> WX.TextCtrl () -> FilePath -> IO ()
@@ -49,7 +68,7 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
     do
         projectTitle <- WX.get projectEntry WX.text
         readTemp <- readTemplate
-        let lang = ((settLangIntToString . readTemp) languageSett)
+        let lang = ((settLangIntToStringShort . readTemp) languageSett)
         createDirectory (chosenDir ++ "/" ++ projectTitle)
         
         writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
@@ -116,10 +135,11 @@ writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered project
 writePDFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> FilePath -> IO ()
 writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir = 
     do
+        translate <- makeTranslator
         options <- loadWriterPandocOpts
         rawPdf <- runIOorExplode $ makePDF "wkhtmltopdf" [] writeHtml5String options $ myDoc projectTitle (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang)
         case rawPdf of
-             Left a -> putStrLn $ "Nastąpił błąd podczas tworzenia pliku Pdf"
+             Left a -> putStrLn $ (translate MsgCreatedPdfError)
              Right b -> B.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project.pdf") b
         
         

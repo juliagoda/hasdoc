@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.GUI.Site.Tests
 (
 createTestsPage
@@ -15,18 +28,35 @@ import Graphics.UI.WX.Window
 import ProjectManagement.HasdocGen.File.Print
 import ProjectManagement.HasdocGen.Text.Site.Tests.Content
 import ProjectManagement.HasdocGen.Text.Site.Tests.Help
+import ProjectManagement.HasdocGen.File.Settings
+
+import Data.AppSettings
+import qualified Data.Text as T
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data TestsPage = TestsPage
+
+mkMessage "TestsPage" getAppLangPath "en"
 
 
+makeTranslator :: (RenderMessage TestsPage TestsPageMessage) => IO (TestsPageMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg TestsPage (settLangIntToString $ getSetting' conf languageSett) message)
+
+
+    
+    
 createTestsPage :: Wizard () -> IO (WizardPageSimple (), [(StaticText (), TextCtrl ())])
 createTestsPage mainwizard = 
     do        
-        testPage <- wizardPageSimple mainwizard [text := "Testy", style := wxEVT_WIZARD_HELP, identity := 1089]
-
+        translate <- makeTranslator
+        testPage <- wizardPageSimple mainwizard [text := (translate MsgTestsTitle), style := wxEVT_WIZARD_HELP, identity := 1089]
         sw <- scrolledWindow testPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1090]
         
         
-        titleText <- staticText sw [ text := "Testy", fontSize := 16, fontWeight := WeightBold, identity := 1091]
-        
+        titleText <- staticText sw [ text := (translate MsgTestsTitle), fontSize := 16, fontWeight := WeightBold, identity := 1091]
    
         labelText1 <- staticText sw [ text := task1, fontShape := ShapeItalic, identity := 1092]
         desc1 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint1, identity := 201] 
@@ -69,19 +99,12 @@ createTestsPage mainwizard =
         
         labelText14 <- staticText sw [ text := task14, fontShape := ShapeItalic, identity := 1105]
         desc14 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint14, identity := 214] 
---         
---         labelText15 <- staticText sw [ text := task15, fontShape := ShapeItalic ]
---         desc15 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint15 ] 
---         
---         labelText16 <- staticText sw [ text := task16, fontShape := ShapeItalic ]
---         desc16 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint16 ] 
 
 
         let widgetsPairs = [(labelText1, desc1), (labelText2, desc2), (labelText3, desc3), (labelText4, desc4), (labelText5, desc5)]
         
         
         set sw [layout := fill $ minsize (sz 500 600) $ margin 10 $ column 5 [ floatTop $ marginTop $ margin 20 $ widget titleText, minsize (sz 450 600) $ floatCenter $ marginBottom $ margin 20 (grid 3 5 [[widget labelText1, fill $ minsize (sz 400 100) $ widget desc1], [widget labelText2, fill $ minsize (sz 400 100) $ widget desc2], [widget labelText3, fill $ minsize (sz 400 100) $ widget desc3], [widget labelText4, fill $ minsize (sz 400 100) $ widget desc4], [widget labelText5, fill $ minsize (sz 400 100) $ widget desc5], [widget labelText6, fill $ minsize (sz 400 100) $ widget desc6], [widget labelText7, fill $ minsize (sz 400 100) $ widget desc7], [widget labelText8, fill $ minsize (sz 400 100) $ widget desc8], [widget labelText9, fill $ minsize (sz 400 100) $ widget desc9], [widget labelText10, fill $ minsize (sz 400 100) $ widget desc10], [widget labelText11, fill $ minsize (sz 400 100) $ widget desc11], [widget labelText12, fill $ minsize (sz 400 100) $ widget desc12], [widget labelText13, fill $ minsize (sz 400 100) $ widget desc13], [widget labelText14, fill $ minsize (sz 400 100) $ widget desc14]])]]
-        --[widget labelText15, fill $ minsize (sz 400 100) $ widget desc15], [widget labelText16, fill $ minsize (sz 400 100) $ widget desc16]])]]-}
         
         set testPage [layout := fill $ widget sw]
         

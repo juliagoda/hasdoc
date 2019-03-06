@@ -10,6 +10,8 @@
             
 module ProjectManagement.HasdocGen.File.Settings
 (
+settLangIntToString,
+renderMsg,
 getDataDirPath,
 getAppIconsPath,
 getAppCssPath,
@@ -50,6 +52,22 @@ import System.Directory
 import qualified Paths_hasdoc_gen as Paths
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+
+settToLocale :: String -> T.Text
+settToLocale "polski" = "pl"
+settToLocale "english" = "en"
+
+
+settLangIntToString :: Int -> String
+settLangIntToString 0 = "polski"
+settLangIntToString 1 = "english"
+settLangIntToString _ = "english"
+
+
+renderMsg :: (RenderMessage a b) => a -> String -> b -> T.Text
+renderMsg master txt message =
+  renderMessage master [(settToLocale txt)] message
 
 
 getDataDirPath :: FilePath
@@ -99,7 +117,7 @@ languageSett :: Setting Int
 languageSett = Setting "language" 0
 
 previewAppSett :: Setting String
-previewAppSett = Setting "previewApp" "embedded"
+previewAppSett = Setting "previewApp" "Off"
 
 printerSett :: Setting Int
 printerSett = Setting "printer" 0

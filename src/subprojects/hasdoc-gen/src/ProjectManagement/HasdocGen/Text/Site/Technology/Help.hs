@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.Text.Site.Technology.Help
 (
 hint1,
@@ -27,80 +40,101 @@ hint24,
 hint25
 )
 where
+    
+    
+import ProjectManagement.HasdocGen.File.Settings
+
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data TechPageHelp = TechPageHelp
+
+mkMessage "TechPageHelp" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage TechPageHelp TechPageHelpMessage) => IO (TechPageHelpMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg TechPageHelp (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 
 hint1 :: String
-hint1 = "Jakie języki programowania wybierasz do konstrukcji programu? W jakich wersjach? Dlaczego?"
+hint1 = (unsafePerformIO makeTranslator) MsgTechHint1
 
 hint2 :: String
-hint2 = "Czy istnieją jakieś konkretne powody?"
+hint2 = (unsafePerformIO makeTranslator) MsgTechHint2
 
 hint3 :: String
-hint3 = "Czy jakakolwiek biblioteka, dokumentacja, moduł istniejący dla danego języka ułatwi osiągnięcie celów?"
+hint3 = (unsafePerformIO makeTranslator) MsgTechHint3
 
 hint4 :: String
-hint4 = "Jeśli jest to język multiparadygmatyczny (hybrydowy), to z jakich cech będzie korzystał program?"
+hint4 = (unsafePerformIO makeTranslator) MsgTechHint4
 
 hint5 :: String
-hint5 = "Z pomocą jakiego edytora będzie projektowany program? Będzie to IDE czy notatnik? Inny sposób? Dlaczego?"
+hint5 = (unsafePerformIO makeTranslator) MsgTechHint5
 
 hint6 :: String
-hint6 = "program zewnętrzny"
+hint6 = (unsafePerformIO makeTranslator) MsgTechHint6
 
 hint7 :: String
-hint7 = "Ile stanowisk komputerowych może być potrzebnych do stworzenia produktu?"
+hint7 = (unsafePerformIO makeTranslator) MsgTechHint7
 
 hint8 :: String
-hint8 = "Ile osób/zespołów będzie potrzebnych do ukończenia programu?" 
+hint8 = (unsafePerformIO makeTranslator) MsgTechHint8 
 
 hint9 :: String
-hint9 = "Git? Mercurial? Bazaar? BitKeeper? Perforce? Inny? Z nakładką graficzną czy z pomocą konsoli?"
+hint9 = (unsafePerformIO makeTranslator) MsgTechHint9
 
 hint10 :: String
-hint10 = "Jaki kompilator zostanie użyty podczas prac?"
+hint10 = (unsafePerformIO makeTranslator) MsgTechHint10
 
 hint11 :: String
-hint11 = "Na jakim/jakich systemie operacyjnym będzie tworzony kod? Dlaczego?"
+hint11 = (unsafePerformIO makeTranslator) MsgTechHint11
 
 hint12 :: String
-hint12 = "Czy będzie wdrożone narzędzie do refaktoryzacji kodu? Jakie?"
+hint12 = (unsafePerformIO makeTranslator) MsgTechHint12
 
 hint13 :: String
-hint13 = "Jaki debugger będzie wykorzystywany? Dlaczego?"
+hint13 = (unsafePerformIO makeTranslator) MsgTechHint13
 
 hint14 :: String
-hint14 = "parametry mogą mieć szczególne znaczenie, gdy program dotyczy grafiki, modelowania trójwymiarowego, materiałów filmowych, etc"
+hint14 = (unsafePerformIO makeTranslator) MsgTechHint14
 
 hint15 :: String
-hint15 = "Z pomocą programu graficznego systemowego? Aplikacji internetowej? Innych?"
+hint15 = (unsafePerformIO makeTranslator) MsgTechHint15
 
 hint16 :: String
-hint16 = "Czy będzie pod uwagę brana wirtualizacja systemów? Jeśli tak, to jak się nazywa się aplikacja? Dlaczego dokonano takiego wyboru? Jakie systemy będą wirtualizowane?"
+hint16 = (unsafePerformIO makeTranslator) MsgTechHint16
 
 hint17 :: String
-hint17 = "Dokumentacja użytkowania programu dla użytkowników końcowych, dokumentacja techniczna dla osób z branży"
+hint17 = (unsafePerformIO makeTranslator) MsgTechHint17
 
 hint18 :: String
-hint18 = "Inne rodzaje aplikacji, które nie były wcześniej wymieniane oraz ich nazwy, np. muzyczne, astronomiczne etc."
+hint18 = (unsafePerformIO makeTranslator) MsgTechHint18
 
 hint19 :: String
-hint19 = "biblioteki stworzone z myślą wybranych językach programowania"
+hint19 = (unsafePerformIO makeTranslator) MsgTechHint19
 
 hint20 :: String
-hint20 = "Czy wybór każdej z technologii jest aktualny? Czy istnieje duże zagrożenie, że niedługo ktoreś z nich zostanie przestarzałe i nierozwijane?"
+hint20 = (unsafePerformIO makeTranslator) MsgTechHint20
 
 hint21 :: String
-hint21 = "jeśli dokumentacja zawiera duże braki, to czy zespół posiada wystarczającą wiedzę, by sprostać oczekiwaniom?"
+hint21 = (unsafePerformIO makeTranslator) MsgTechHint21
 
 hint22 :: String
-hint22 = "ze względu na przyzwyczajenia zdarza się, że programiści starają się wprowadzać sposoby rozwiązywania problemów, charakterystycznych dla innego języka programowania. Konwencje pisania kodu mogą się znacznie różnić między językami."
+hint22 = (unsafePerformIO makeTranslator) MsgTechHint22
 
 hint23 :: String
-hint23 = "przykładami takich wzorców są: Mediator, Fasada, Kompozyt, Adapter, Singleton, Prototyp i wiele innych"
+hint23 = (unsafePerformIO makeTranslator) MsgTechHint23
 
 hint24 :: String
-hint24 = "do grupy metodyki Agile zaliczają się takie metody jak Scrum, Kanban, XP, Lean, DSDM, FBB, Crystal ..."
+hint24 = (unsafePerformIO makeTranslator) MsgTechHint24
 
 hint25 :: String
-hint25 = "Jakie konfiguracje sieciowe, systemowe czy w programach pomocnicznych są niezbędne do pracy nad projektem?"
+hint25 = (unsafePerformIO makeTranslator) MsgTechHint25

@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.Text.Site.Definition.Content
 (
 task1,
@@ -12,35 +25,56 @@ task9,
 task10
 )
 where
+    
+import ProjectManagement.HasdocGen.File.Settings
+    
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data DefPageContent = DefPageContent
+
+mkMessage "DefPageContent" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage DefPageContent DefPageContentMessage) => IO (DefPageContentMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg DefPageContent (settLangIntToString $ getSetting' conf languageSett) message)
+
 
 
 
 task1 :: String
-task1 = "Określ problem, który budowany system ma rozwiązywać"
+task1 = (unsafePerformIO makeTranslator) MsgDefQuestion1
 
 task2 :: String
-task2 = "Czy potrafisz opisać podstawowe kroki, jakie program ma wykonać, by rozwiązać problem? Przedstaw heurystykę w wersji uproszczonej"
+task2 = (unsafePerformIO makeTranslator) MsgDefQuestion2
 
 task3 :: String
-task3 = "Czy tworzenie twojego programu wymaga specjalnych pozwoleń czy uprawnień?"
+task3 = (unsafePerformIO makeTranslator) MsgDefQuestion3
 
 task4 :: String
-task4 = "Z jakich dziedzin nauki będzie wymagana wiedza, by przygotować funkcjonalności? Jakie działy będą brane pod uwagę?"
+task4 = (unsafePerformIO makeTranslator) MsgDefQuestion4
 
 task5 :: String
-task5 = "Kto będzie klientem docelowym?"
+task5 = (unsafePerformIO makeTranslator) MsgDefQuestion5
 
 task6 :: String
-task6 = "Do jakich sprzętów fizycznych ograniczać się ma program na tyle, aby miało to sens?"
+task6 = (unsafePerformIO makeTranslator) MsgDefQuestion6
 
 task7 :: String
-task7 = "Czy program ma się różnić w zależności od klientów docelowych? Krajów świata? Kontynentów? W jaki sposób?"
+task7 = (unsafePerformIO makeTranslator) MsgDefQuestion7
 
 task8 :: String
-task8 = "Czy bierzesz pod uwagę kompatybilność wsteczną? Dlaczego?"
+task8 = (unsafePerformIO makeTranslator) MsgDefQuestion8
 
 task9 :: String
-task9 = "Czy program lub jego część stoi w opozycji do prawa w państwie, w którym mieszkasz? Dlaczego?"
+task9 = (unsafePerformIO makeTranslator) MsgDefQuestion9
 
 task10 :: String
-task10 = "Jakie zagrożenia związane z działaniem i użytkowaniem programu mogłyby wystąpić w przyszłości? Opisz wstępnie"
+task10 = (unsafePerformIO makeTranslator) MsgDefQuestion10

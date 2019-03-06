@@ -5,7 +5,10 @@
             ,UndecidableInstances
             ,ScopedTypeVariables
             ,TemplateHaskell
-            ,OverloadedStrings #-}
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
 
 
 
@@ -22,7 +25,7 @@ archDoc,
 techDoc,
 testDoc,
 convIntToCss,
-settLangIntToString
+settLangIntToStringShort
 )
 where
     
@@ -31,6 +34,7 @@ import ProjectManagement.HasdocGen.File.Settings
 import Data.Text (Text, unpack)
 import qualified Data.ByteString.Lazy as B
 import qualified Data.Text.IO as T
+import System.IO.Unsafe
 
 import Data.AppSettings
 
@@ -40,6 +44,18 @@ import Text.Pandoc.Writers.HTML
 import Text.Pandoc.Class
 import Text.Pandoc
 
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data ConversionPandoc = ConversionPandoc
+
+mkMessage "ConversionPandoc" getAppLangPath "en"
+
+
+makeTranslator :: (RenderMessage ConversionPandoc ConversionPandocMessage) => IO (ConversionPandocMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> unpack $ renderMsg ConversionPandoc (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 -- mappend from Monoid - joining of pandoc parts
@@ -60,35 +76,35 @@ loadWriterOtherOpts defTemp =
 defDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 defDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --defDoc Just [] = str ""
-defDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("definitions", ["pages"], [("lang", lang)]) (para (strong "Definitions") <>
+defDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("definitions", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgDefinitionTitle) <>
   docLoop (Just x) wrOptions lang)
   
-  
+
 reqDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 reqDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --reqDoc Just [] = str ""
-reqDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("requirements", ["pages"], [("lang", lang)]) (para (strong "Requirements") <>
+reqDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("requirements", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgReqTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 archDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 archDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --archDoc Just [] = str ""
-archDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("architecture", ["pages"], [("lang", lang)]) (para (strong "Architecture") <>
+archDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("architecture", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgArchTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 techDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 techDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --techDoc Just [] = str ""
-techDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("technology", ["pages"], [("lang", lang)]) (para (strong "Technology") <>
+techDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("technology", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgTechnologyTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 testDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 testDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --testDoc Just [] = str ""
-testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) (para (strong "Tests") <>
+testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgTestsTitle) <>
   docLoop (Just x) wrOptions lang)
   
     
@@ -151,8 +167,8 @@ convIntToCss 3 = "orange.css"
 convIntToCss _ = "default.css"
 
 
-settLangIntToString :: Int -> String
-settLangIntToString 0 = "pl"
-settLangIntToString 1 = "en"
-settLangIntToString _ = "en"
+settLangIntToStringShort :: Int -> String
+settLangIntToStringShort 0 = "pl"
+settLangIntToStringShort 1 = "en"
+settLangIntToStringShort _ = "en"
 

@@ -1,3 +1,15 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
 
 module ProjectManagement.HasdocGen.Text.Site.Tests.Content
 (
@@ -17,47 +29,67 @@ task13,
 task14
 )
 where
+    
+import ProjectManagement.HasdocGen.File.Settings
+    
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data TestPageContent = TestPageContent
+
+mkMessage "TestPageContent" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage TestPageContent TestPageContentMessage) => IO (TestPageContentMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg TestPageContent (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 
 task1 :: String
-task1 = "Czy programiści będą przygotowywać testy przed rozpoczęciem pracy z właściwym kodem? Dlaczego?"
+task1 = (unsafePerformIO makeTranslator) MsgTestQuestion1
 
 task2 :: String
-task2 = "Czy programiści będą samodzielnie pisać testy jednostkowe? Dlaczego?"
+task2 = (unsafePerformIO makeTranslator) MsgTestQuestion2
 
 task3 :: String
-task3 = "Czy analiza działania kodu będzie wyprzedzała dołączanie kodu do repozytorium?"
+task3 = (unsafePerformIO makeTranslator) MsgTestQuestion3
 
 task4 :: String
-task4 = "Czy będą wykonywane testy integracyjne przed dołączaniem kodu do repozytorium?"
+task4 = (unsafePerformIO makeTranslator) MsgTestQuestion4
 
 task5 :: String
-task5 = "Czy programiści będą wzajemnie przeglądać swój kod?"
+task5 = (unsafePerformIO makeTranslator) MsgTestQuestion5
 
 task6 :: String
-task6 = "Jakie będą testy dla każdego punktu specyfikacji wymagań?"
+task6 = (unsafePerformIO makeTranslator) MsgTestQuestion6
 
 task7 :: String
-task7 = "Czy będzie uwzględnione ułatwienie ręcznego sprawdzania wyników pracy programu?"
+task7 = (unsafePerformIO makeTranslator) MsgTestQuestion7
 
 task8 :: String
-task8 = "Jakie testy będą przeprowadzane dla minimalnej konfiguracji programu?"
+task8 = (unsafePerformIO makeTranslator) MsgTestQuestion8
 
 task9 :: String
-task9 = "Jakie testy będą przeprowadzane dla maksymalnej konfiguracji programu?"
+task9 = (unsafePerformIO makeTranslator) MsgTestQuestion9
 
 task10 :: String
-task10 = "Czy program będzie testowany pod kątem zgodności ze starszymi urządzeniami, systemami operacyjnymi i interfejsami? Wiadomo dla jakich konkretnie?"
+task10 = (unsafePerformIO makeTranslator) MsgTestQuestion10
 
 task11 :: String
-task11 = "Czy testy będą uwzględniać typowe wartości?"
+task11 = (unsafePerformIO makeTranslator) MsgTestQuestion11
 
 task12 :: String
-task12 = "Czy podczas projektowania testów będą uwzględniane testy typu \"corner cases\"?"
+task12 = (unsafePerformIO makeTranslator) MsgTestQuestion12
 
 task13 :: String
-task13 = "Czy będą sprawdzane i definiowane wartości graniczne: największe, najmniejsze i przesunięte o jeden?"
+task13 = (unsafePerformIO makeTranslator) MsgTestQuestion13
 
 task14 :: String
-task14 = "Czy choć część testów będzie wzorowanych na starszych dla typowych sytuacji z przeszłości, czy wszystkie będą tworzone od nowa?"
+task14 = (unsafePerformIO makeTranslator) MsgTestQuestion14

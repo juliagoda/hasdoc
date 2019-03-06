@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.GUI.Site.Requirements
 (
 createReqPage
@@ -13,16 +26,34 @@ import Graphics.UI.WX.Window
 
 import ProjectManagement.HasdocGen.Text.Site.Requirements.Help
 import ProjectManagement.HasdocGen.Text.Site.Requirements.Content
+import ProjectManagement.HasdocGen.File.Settings
+
+import Data.AppSettings
+import qualified Data.Text as T
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data ReqPage = ReqPage
+
+mkMessage "ReqPage" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage ReqPage ReqPageMessage) => IO (ReqPageMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg ReqPage (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 createReqPage :: Wizard () -> IO (WizardPageSimple (), [(StaticText (), TextCtrl ())])
 createReqPage mainwizard = 
     do
-        reqPage <- wizardPageSimple mainwizard [text := "Wymagania", style := wxEVT_WIZARD_HELP, identity := 1013 ]
-        --p <- panel archPage []
+        translate <- makeTranslator
+        reqPage <- wizardPageSimple mainwizard [text := (translate MsgReqTitle), style := wxEVT_WIZARD_HELP, identity := 1013 ]
         sw <- scrolledWindow reqPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1014 ]
         
-        titleText <- staticText sw [ text := "Wymagania", fontSize := 16, fontWeight := WeightBold, identity := 1015 ]
+        titleText <- staticText sw [ text := (translate MsgReqTitle), fontSize := 16, fontWeight := WeightBold, identity := 1015 ]
         
         labelText1 <- staticText sw [ text := task1, fontShape := ShapeItalic, identity := 1016 ]
         desc1 <- textCtrl sw [enabled := True, wrap := WrapLine, tooltip := hint1, identity := 51] 

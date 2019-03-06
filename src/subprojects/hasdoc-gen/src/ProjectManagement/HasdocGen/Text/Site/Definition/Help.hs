@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.Text.Site.Definition.Help
 (
 hint1,
@@ -12,35 +25,55 @@ hint9,
 hint10
 )
 where
+    
+import ProjectManagement.HasdocGen.File.Settings
+
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data DefPageHelp = DefPageHelp
+
+mkMessage "DefPageHelp" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage DefPageHelp DefPageHelpMessage) => IO (DefPageHelpMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg DefPageHelp (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 
 hint1 :: String
-hint1 = "chodzi o przedstawienie misji produktu, w jakim celu powstaje. Opis powinien zawierać sam problem bez sposobu rozwiązania"
+hint1 = (unsafePerformIO makeTranslator) MsgDefHint1
 
 hint2 :: String
-hint2 = "Na przykład można to wykonać w formie opowiadania. Wyobraź sobie, że program istnieje i zawiera najważniejsze funkcjonalności"
+hint2 = (unsafePerformIO makeTranslator) MsgDefHint2
 
 hint3 :: String
-hint3 = "Czy mogą na przykład zaistnieć sytuacje w przyszłości, gdy ktoś pozwie o naruszanie praw autorskich?"
+hint3 = (unsafePerformIO makeTranslator) MsgDefHint3
 
 hint4 :: String
-hint4 = "Przykładami dziedzin nauki są na przykład: nauki biologiczne, sztuki muzyczne, nauki fizyczne. Jednak warto podać dodatkowo ich działy, ponieważ niemalże z całą pewnością znajomość całej dziedziny jest zbędna."
+hint4 = (unsafePerformIO makeTranslator) MsgDefHint4
 
 hint5 :: String
-hint5 = "Kto będzie głównie używał programu?"
+hint5 = (unsafePerformIO makeTranslator) MsgDefHint5
 
 hint6 :: String
-hint6 = "Dla jakich urządzeń program będzie wspierany?"
+hint6 = (unsafePerformIO makeTranslator) MsgDefHint6
 
 hint7 :: String
-hint7 = "Czy domyślny styl programu i treść może być utrudnieniem dla osób z innych krajów?"
+hint7 = (unsafePerformIO makeTranslator) MsgDefHint7
 
 hint8 :: String
-hint8 = "Czy dane przechowywane w np. bazie danych czy chmurze będą wczytywane przez każdą dotychczasową wersję programu?"
+hint8 = (unsafePerformIO makeTranslator) MsgDefHint8
 
 hint9 :: String
-hint9 = "Czy jakiekolwiek odwołanie, treść, grafika, kod w programie się znajdujące mogą spowodować problemy prawne?"
+hint9 = (unsafePerformIO makeTranslator) MsgDefHint9
 
 hint10 :: String
-hint10 = "Czy mogą pojawić się jakieś konkretne rodzaje zagrożeń dla działania programu, ochrony danych osobowych, praw autorskich, etc.? Czy istnieje zagrożenie niepowołanego dostępu? Włamania cybernetycznego? Podmiany danych?" 
+hint10 = (unsafePerformIO makeTranslator) MsgDefHint10 

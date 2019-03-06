@@ -27,8 +27,9 @@ mainwindow =
         
         status <- statusField [text := ""] 
         set window [statusBar := [status]]
+        focusOn window
 
-
+        
 removeTempDir :: IO ()
 removeTempDir = do
     home <- getHomeDirectory

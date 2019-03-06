@@ -2,13 +2,21 @@
             ,FlexibleInstances
             ,FlexibleContexts
             ,TypeSynonymInstances
-            ,UndecidableInstances #-}
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
 
 module Application.Hasdoc.GUI.Menu.Settings
 (
 openSettingsWindow
 ) 
 where
+    
+import Application.Hasdoc.Settings.General    
     
 import Graphics.UI.WX
 import Graphics.UI.WX.Window
@@ -21,41 +29,39 @@ import qualified Data.Map.Lazy as Map
 import Data.Maybe
 import Data.AppSettings
 import System.IO.Unsafe
+import System.FilePath
+
+import qualified Data.Text as T
+
+
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
-import Application.Hasdoc.Settings.General
+data SettingsApp = SettingsApp
+
+mkMessage "SettingsApp" getAppLangPath "en"
 
 
 
--- data SettingsApp = SettingsApp
--- 
--- mkMessage "SettingsApp" getAppLangPath "en"
--- 
--- 
--- 
--- makeTranslator :: (RenderMessage SettingsApp SettingsAppMessage) => IO (SettingsAppMessage -> String)
--- makeTranslator = do
---     readResult <- readSettings (AutoFromAppName "hasdoc")
---     let conf = fst readResult
---     return (\message -> T.unpack $ renderMsg SettingsApp (settLangIntToString $ getSetting' conf languageSett) message)
-
-
+makeTranslator :: (RenderMessage SettingsApp SettingsAppMessage) => IO (SettingsAppMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg SettingsApp (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 openSettingsWindow :: Frame () -> IO ()
 openSettingsWindow mainWindow = 
     do 
-        --translate <- makeTranslator
-        settWindow <- frameTool [text := "Ustawienia", resizeable := True, visible := True, clientSize  := sz 640 480, picture := (getAppIconsPath ++ "/settings-window.png")]  mainWindow  
-        --settWindow <- dialog mainWindow [text := "Ustawienia", visible := True, clientSize  := sz 640 480] 
+        translate <- makeTranslator
+        settWindow <- frameTool [text := translate MsgSettWindow, resizeable := True, visible := True, clientSize  := sz 640 480, picture := (getAppIconsPath ++ "/settings-window.png")]  mainWindow  
         createTabsWidget settWindow
         
         
 createTabsWidget :: Frame () -> IO ()
 createTabsWidget settWindow = 
     do
-        --translate <- makeTranslator
+        translate <- makeTranslator
         
         p <- panel settWindow []
         notebook' <- notebook p []
@@ -64,9 +70,9 @@ createTabsWidget settWindow =
         p1   <- panel  notebook' []
         
         let rlabels = ["polski", "english"]
-        langDesc <- staticText p1 [ text := "Wybierz jeden z poniższych języków. Po wyborze i dokonaniu zapisu wymagany jest restart programu." ]
+        langDesc <- staticText p1 [ text := translate MsgLangLabel ]
         
-        r1 <- singleListBox p1 [items := ["polski","english"]] --on select ::= rob cos po zaznaczeniu]
+        r1 <- singleListBox p1 [items := ["polski","english"]] --on select ::= do something after selecting]
         
         
         p3   <- panel notebook' []        
@@ -76,23 +82,23 @@ createTabsWidget settWindow =
         c1   <- checkBox p3 []
         c2   <- checkBox p3 []
         
-        let openWidget = openAfterFocus c2 extExecPath $ fileOpenDialog settWindow True True "wczytaj zapisaną wcześniej sesję" [("Pliki wykonywalne", ["*"])] execPath "" -- Higher order functions, Curried functions
+        let openWidget = openAfterFocus c2 extExecPath $ fileOpenDialog settWindow True True (translate MsgLoadLabel) [((translate MsgExeFiles), ["*"])] execPath "" -- Higher order functions, Curried functions
         set extExecPath [ on focus := openWidget, enabled := False, clientSize  := sz 200 20 ] 
-        peviewDesc <- staticText p3 [ text := "Wybierz program zewnętrzny do przeglądania generowanego pliku pdf oraz do przeglądania dokumentacji w tym formacie. Jeśli nie chcesz obejrzeć pliku po jego wygenerowaniu, wybierz pierwszą opcję." ]
-        set c1 [text := "Brak", on command := changeAppTextEntry patternM extExecPath c2 True True c1, checked := True ]
-        set c2 [text := "Program zewnętrzny", on command := changeAppTextEntry patternE extExecPath c1 True True c2, checked := False ]       
+        peviewDesc <- staticText p3 [ text := (translate MsgViewerLabel) ]
+        set c1 [text :=(translate MsgNoViewer), on command ::= changeAppTextEntry patternM extExecPath c2 False True, checked := True ]
+        set c2 [text := (translate MsgExternalViewer), on command ::= changeAppTextEntry patternE extExecPath c1 True True, checked := False ]       
 
         
         p4   <- panel  notebook' [enabled := False]
         
-        printDesc <- staticText p4 [ text := "Wybierz ustawienia dla okna drukowania. Można ten etap pominąć i nanieść zmiany w oknie generowanym przed etapem drukowania." ]
+        printDesc <- staticText p4 [ text := (translate MsgPrintDesc) ]
 
         let printersList = []
         printersBox  <- comboBox p4 
                   [items      := printersList
                   ,identity   := 17]
                   
-        intSpinBox <- spinCtrl p4 1 500 [ tooltip := "Inaczej skala w procentach" ]
+        intSpinBox <- spinCtrl p4 1 500 [ tooltip := (translate MsgScaleHint) ]
                   
         let formatsList = ["A0", "A1", "A2", "A3", "A4", "A5", "A6", "B4", "B5", "B6"]          
         formatBox  <- comboBox p4 
@@ -101,19 +107,19 @@ createTabsWidget settWindow =
                   
         scopeEntry <- textEntry p4 []
                   
-        let orientationsList = ["Pionowa", "Pozioma"]          
+        let orientationsList = [(translate MsgOrientVChoice), (translate MsgOrientHChoice)]          
         orientationBox  <- comboBox p4 
                   [items      := orientationsList
                   ,identity   := 19]
                      
         marginsEntry <- textEntry p4 []
                   
-        let coloursList = ["Kolor","Skala szarości"]          
+        let coloursList = [(translate MsgColourChoice),(translate MsgGreyChoice)]          
         coloursBox  <- comboBox p4 
                   [items      := coloursList
                   ,identity   := 20]
                   
-        let bilaterallyList = ["Wyłącz","Simplex", "Long Edge", "Short Edge"]          
+        let bilaterallyList = [(translate MsgBiOff),"Simplex", "Long Edge", "Short Edge"]          
         bilaterallyBox  <- comboBox p4 
                   [items      := bilaterallyList
                   ,identity   := 21]
@@ -123,7 +129,7 @@ createTabsWidget settWindow =
         
         p5   <- panel notebook' []
         
-        formatsDesc <- staticText p5 [ text := "Wybierz wyjściowe formaty danych poniżej. Zostaną one stworzone w wybranej ścieżce oraz katalogu o nazwie projektu. Pliki html oraz pdf są tworzone zawsze." ]
+        formatsDesc <- staticText p5 [ text := (translate MsgExtFilesLabel) ]
         formatBox1   <- checkBox p5 [text := "ZimWiki", identity := 1]
         formatBox2   <- checkBox p5 [text := "TEI", identity := 2]
         formatBox3   <- checkBox p5 [text := "DocBook 5", identity := 3]
@@ -147,19 +153,19 @@ createTabsWidget settWindow =
         p6   <- panel  notebook' []
         
         let rlabels = ["default", "blue", "green", "orange"]
-        templateDesc <- staticText p6 [ text := "Wybierz jeden z poniższych plików css dla wyjściowego pliku html, na podstawie którego powstanie plik pdf. Pierwsza opcja oznacza wydruk bez kolorów." ]
-        templatesRadioBox   <- radioBox p6 Vertical rlabels   [text := "Lista szablonów"]
+        templateDesc <- staticText p6 [ text := (translate MsgTemplatesLabel) ]
+        templatesRadioBox   <- radioBox p6 Vertical rlabels   [text := (translate MsgTemplatesList) ]
         
 
-        let tab1 = tab "Język" (container p1 (margin 10 $ column 10 [ floatTop $ widget langDesc, floatTopLeft $ (column 5 [fill (widget r1)])]))
+        let tab1 = tab (translate MsgLangTab) (container p1 (margin 10 $ column 10 [ floatTop $ widget langDesc, floatTopLeft $ (column 5 [fill (widget r1)])]))
         
-        let tab3 = tab "Podgląd pliku" (container p3 (margin 10 $ column 10 [ floatTop $ widget peviewDesc, floatTopLeft $ (grid 3 5 [[widget c1, label ""], [widget c2, widget extExecPath]])]))
+        let tab3 = tab (translate MsgPreviewTab) (container p3 (margin 10 $ column 10 [ floatTop $ widget peviewDesc, floatTopLeft $ (grid 3 5 [[widget c1, label ""], [widget c2, widget extExecPath]])]))
             
-        let tab4 = tab "Drukowanie" (container p4 (margin 10 $ column 10 [ floatTop $ widget printDesc, floatTopLeft $ (grid 3 5 [[label "Domyślna drukarka", widget printersBox], [label "Domyślny format", widget formatBox], [label "Domyślna orientacja", widget orientationBox], [label "Domyślne uwzględnienie kolorów", widget coloursBox], [label "Tryb drukowania obustronnego", widget bilaterallyBox], [label "Domyślna rozdzielczość w %, np. 50, 100, 200 (Puste pole oznacza domyślną wartość 100 %)", widget intSpinBox], [label "Domyślne marginesy w mm, górnyMargines-prawyMargines-dolnyMargines-lewyMargines np. 25-25-25-25 (Puste pole oznacza użycie domyślnych ustawień)", widget marginsEntry], [label "Domyślny zakres drukowanych stron w formacie XX-XX lub XX, gdzie XX to dowolna liczba całkowita, np. 1-15, 23 (puste pole oznacza wszystkie strony)", widget scopeEntry]])]))
+        let tab4 = tab (translate MsgPrintingTab) (container p4 (margin 10 $ column 10 [ floatTop $ widget printDesc, floatTopLeft $ (grid 3 5 [[label (translate MsgPrintLabel), widget printersBox], [label (translate MsgFormatLabel), widget formatBox], [label (translate MsgOrientLabel), widget orientationBox], [label (translate MsgColourLabel), widget coloursBox], [label (translate MsgBiPrintLabel), widget bilaterallyBox], [label (translate MsgResLabel), widget intSpinBox], [label (translate MsgMargingsLabel), widget marginsEntry], [label (translate MsgScopeLabel), widget scopeEntry]])]))
             
-        let tab5 = tab "Formaty plików" (container p5 (margin 10 $ column 10 [ floatTop $ widget formatsDesc, floatCenter $ (grid 3 5 [[widget formatBox1, widget formatBox2, widget formatBox3, widget formatBox4], [widget formatBox5, widget formatBox6, widget formatBox7, widget formatBox8], [widget formatBox9, widget formatBox10, widget formatBox11, widget formatBox12], [widget formatBox13, widget formatBox14, widget formatBox15, widget formatBox16]])]))
+        let tab5 = tab (translate MsgExtOfFilesTab) (container p5 (margin 10 $ column 10 [ floatTop $ widget formatsDesc, floatCenter $ (grid 3 5 [[widget formatBox1, widget formatBox2, widget formatBox3, widget formatBox4], [widget formatBox5, widget formatBox6, widget formatBox7, widget formatBox8], [widget formatBox9, widget formatBox10, widget formatBox11, widget formatBox12], [widget formatBox13, widget formatBox14, widget formatBox15, widget formatBox16]])]))
             
-        let tab6 = tab "Szablony" (container p6 (margin 10 $ column 10 [ floatTop $ widget templateDesc, floatTopLeft $ (column 5 [hstretch (widget templatesRadioBox)])]))
+        let tab6 = tab (translate MsgTemplatesSetTab) (container p6 (margin 10 $ column 10 [ floatTop $ widget templateDesc, floatTopLeft $ (column 5 [hstretch (widget templatesRadioBox)])]))
             
         let nbtab = tabs notebook' [tab1, tab3, tab4, tab5, tab6]
             
@@ -168,9 +174,9 @@ createTabsWidget settWindow =
         loadChanges templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes
         
         
-        saveBtn <- button p [ text := "Zapisz", enabled := True, on command := saveChanges (holdInfoAboutLang r1) (holdInfoAboutTexts marginsEntry scopeEntry extExecPath c1 c2) (holdInfoAboutPrint listComboBoxes) (holdInfoAboutFormats formatsBoxes) (holdInfoAboutPrintRes intSpinBox) (holdInfoAboutTemplates templatesRadioBox) ]
-        resetBtn <- button p [ text := "Resetuj", enabled := True, on command := setDefaults templatesRadioBox r1 c1 intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes  ]
-        cancelBtn <- button p [ text := "Anuluj", on command := close settWindow ]
+        saveBtn <- button p [ text := (translate MsgSaveBtn), enabled := True, on command := saveChanges (holdInfoAboutLang r1) (holdInfoAboutTexts marginsEntry scopeEntry extExecPath c1 c2) (holdInfoAboutPrint listComboBoxes) (holdInfoAboutFormats formatsBoxes) (holdInfoAboutPrintRes intSpinBox) (holdInfoAboutTemplates templatesRadioBox) ]
+        resetBtn <- button p [ text := (translate MsgResetBtn), enabled := True, on command := setDefaults templatesRadioBox r1 c1 intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes  ]
+        cancelBtn <- button p [ text := (translate MsgCancelBtn), on command := close settWindow ]
         
         -- =================================================
         
@@ -223,8 +229,8 @@ patternM textEntry chbox False False = return ()
 -- chbox == Domyślny
 patternE :: TextCtrl () -> CheckBox () -> Bool -> Bool -> IO ()
 patternE textEntry chbox True True = set chbox [ checked := False ] >> set textEntry [ enabled := True ]
-patternE textEntry chbox True False = set textEntry [ text := "", enabled := False ]
 patternE textEntry chbox False True = set textEntry [ enabled := True ]
+patternE textEntry chbox True False = set textEntry [ text := "", enabled := False ]
 patternE textEntry chbox False False = return ()
 
 
@@ -236,10 +242,11 @@ getText w
  
 -- detectAppName defaultChecked choosenChecked choosenAppName 
 detectAppName :: Bool -> Bool -> String -> String
-detectAppName True False "embedded" = "embedded"
-detectAppName False True [] = "embedded"
+detectAppName True False "Brak" = "Off"
+detectAppName True False "Off" = "Off"
+detectAppName False True [] = "Off"
 detectAppName False True app = app
-detectAppName _ _ _ = "embedded"
+detectAppName _ _ _ = "Off"
 
 
 -- filter use

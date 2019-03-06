@@ -64,7 +64,7 @@ languageSett :: Setting Int
 languageSett = Setting "language" 0
 
 previewAppSett :: Setting String
-previewAppSett = Setting "previewApp" "embedded"
+previewAppSett = Setting "previewApp" "Off"
 
 printerSett :: Setting Int
 printerSett = Setting "printer" 0
@@ -144,31 +144,6 @@ templateName = Setting "templateCss" 0
 
 formatsMap :: Map.Map Int (Setting Bool)
 formatsMap = Map.fromList [(1, zimWikiFormat), (2, teiFormat), (3, docbookFormat), (4, docxFormat), (5, dokuWikiFormat), (6, epubv3Format), (7, haddockFormat), (8, latexFormat), (9, jsonFormat), (10, phpMarkdownFormat), (11, mediaWikiFormat), (12, openOfficeFormat), (13, openDocFormat), (14, powerPointFormat), (15, jupyterFormat), (16, githubMarkdownFormat)]
-
-
-
--- convIdToSett :: forall a. (Show a, Read a) => Int -> Setting a
--- convIdToSett 1 = zimWikiFormat  
--- convIdToSett 2 = teiFormat  
--- convIdToSett 3 = docbookFormat  
--- convIdToSett 4 = docxFormat  
--- convIdToSett 5 = dokuWikiFormat  
--- convIdToSett 6 = epubv3Format
--- convIdToSett 7 = haddockFormat 
--- convIdToSett 8 = latexFormat 
--- convIdToSett 9 = jsonFormat 
--- convIdToSett 10 = phpMarkdownFormat 
--- convIdToSett 11 = mediaWikiFormat
--- convIdToSett 12 = openOfficeFormat 
--- convIdToSett 13 = openDocFormat
--- convIdToSett 14 = powerPointFormat 
--- convIdToSett 15 = jupyterFormat
--- convIdToSett 16 = githubMarkdownFormat 
--- convIdToSett 17 = printerSett 
--- convIdToSett 18 = formatSett 
--- convIdToSett 19 = orientationSett
--- convIdToSett 20 = colourPrintSett
--- convIdToSett 21 = bilaterallySett 
 
 
 
@@ -274,47 +249,9 @@ mapCheckboxes conf checkbox =
     
     
 readPreviewApp :: CheckBox () -> CheckBox () -> TextCtrl () -> String -> IO ()
-readPreviewApp builtinBox chosenBox textEntry "embedded" = set builtinBox [checked := True]
+readPreviewApp builtinBox chosenBox textEntry "Brak" = set builtinBox [checked := True]
+readPreviewApp builtinBox chosenBox textEntry "Off" = set builtinBox [checked := True]
 readPreviewApp builtinBox chosenBox textEntry x = set chosenBox [checked := True] >> set textEntry [text := x]
-
-
- 
--- loadChangesSets :: (Selection w, Items w String, Read b, Show b) => [w] -> Attr w b -> GetSetting -> IO ()
--- loadChangesSets [x:xs] attr getSett = 
---     do
---         ident <- get x identity 
---         set x [attr := getSett $ convIdToSett ident]
---         loadChangesSets xs attr getSett
---         
--- loadChangesSets x attr getSett = 
---     do
---         ident <- get x identity 
---         set x [attr := getSett $ convIdToSett ident]
---         
--- loadChangesSets [] _ _ = return ()
--- 
--- 
--- 
--- loadChangesFormats ::[CheckBox ()] -> Attr w Bool -> GetSetting -> IO ()
--- loadChangesFormats [x:xs] attr getSett = 
---     do
---         ident <- get x identity 
---         set x [checked := getSett $ convIdToSett ident]
---         loadChangesFormats xs attr getSett
---         
--- loadChangesFormats x attr getSett = 
---     do
---         ident <- get x identity 
---         set x [checked := getSett $ convIdToSett ident]
---         
--- loadChangesFormats [] _ _ = return ()
- 
- 
--- makeTranslator :: (RenderMessage a b) => IO (b -> String)
--- makeTranslator = do
---     readResult <- readSettings (AutoFromAppName "hasdoc")
---     let conf = fst readResult
---     return (\message -> T.unpack $ renderMsg App (settLangIntToString $ getSetting' conf languageSett) message)
     
     
 -- template    

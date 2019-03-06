@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.Text.Site.Requirements.Help
 (
 hint1,
@@ -20,59 +33,80 @@ hint17,
 hint18
 )
 where
+    
+    
+import ProjectManagement.HasdocGen.File.Settings
+
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data ReqPageHelp = ReqPageHelp
+
+mkMessage "ReqPageHelp" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage ReqPageHelp ReqPageHelpMessage) => IO (ReqPageHelpMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg ReqPageHelp (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 
 hint1 :: String
-hint1 = "Skąd i czy pobierane będą dane do programu? Z jakim formatem danych trzeba będzie pracować? Jak często te dane będą wczytywane? Jakie typy wartości znajdą się wewnątrz?"
+hint1 = (unsafePerformIO makeTranslator) MsgReqHint1
 
 hint2 :: String
-hint2 = "Dokąd będą zapisywane dane wygenerowane z programu? W jakim formacie będą zapisywane? Jak często? Jakie typy danych będą się tam znajdować? W jakich zakresach od do?"
+hint2 = (unsafePerformIO makeTranslator) MsgReqHint2
 
 hint3 :: String
-hint3 = "Czy prócz plików multimedialnych program będzie miał własną stronę internetową? Będzie odczytywał i generował inne pliki? Jakie formaty dodatkowe będą brane pod uwagę?"
+hint3 = (unsafePerformIO makeTranslator) MsgReqHint3
 
 hint4 :: String
-hint4 = "Z jakim sprzętem i oprogramowaniem będzie komunikował się program?"
+hint4 = (unsafePerformIO makeTranslator) MsgReqHint4
 
 hint5 :: String
-hint5 = "pod warunkiem, że będzie następowało połączenie z internetem"
+hint5 = (unsafePerformIO makeTranslator) MsgReqHint5
 
 hint6 :: String
-hint6 = "Czy zostały dostrzeżone i uwzględnione wszystkie wymienione wymagania przez użytkownika/zleceniodawcy?"
+hint6 = (unsafePerformIO makeTranslator) MsgReqHint6
 
 hint7 :: String
-hint7 = "np. tworzenie klasy samochodu, w której nie znajdzie się informacja na temat kół czy silnika sprawia, że obiekt przestaje być samochodem z definicji"
+hint7 = (unsafePerformIO makeTranslator) MsgReqHint7
 
 hint8 :: String
-hint8 = "Czy każda z uwzględnionych funkcjonalności sprawia, że wartość aplikacji wzrasta w jakimś stopniu?" 
+hint8 = (unsafePerformIO makeTranslator) MsgReqHint8 
 
 hint9 :: String
-hint9 = "Jakie zadanie ma każda z funkcji i co ma zwracać?"
+hint9 = (unsafePerformIO makeTranslator) MsgReqHint9
 
 hint10 :: String
-hint10 = "Czy między programem, a użytkownikiem będzie zachodziła jakakolwiek interakcja bezpośrednia? W postaci gestów, głosu, wiersza poleceń, ruchu i kliknięcia myszki? Jak długo w każdym z przypadków program będzie oczekiwał reakcji ze strony użytkownika?"
+hint10 = (unsafePerformIO makeTranslator) MsgReqHint10
 
 hint11 :: String
-hint11 = "innym przykładem może być czas odpowiedzi zwrotnej przez serwer, bazy danych"
+hint11 = (unsafePerformIO makeTranslator) MsgReqHint11
 
 hint12 :: String
-hint12 = "jakiekolwiek zagrożenia, które mogą mieć wpływ na działanie programu, kradzież danych, usuwanie danych, niepowołany monitoring pracy programu."
+hint12 = (unsafePerformIO makeTranslator) MsgReqHint12
 
 hint13 :: String
-hint13 = "Jak dużo pamięci trzeba zarezerwować, aby programu dało się używać w stopniu podstawowym?"
+hint13 = (unsafePerformIO makeTranslator) MsgReqHint13
 
 hint14 :: String
-hint14 = "Jak wyglądałoby działanie programu w sposób odwrotny do zamierzonego?"
+hint14 = (unsafePerformIO makeTranslator) MsgReqHint14
 
 hint15 :: String
-hint15 = "Czy wykaz zawiera zwroty i słowa niezrozumiałe? Czy zawiera za dużo branżowego żargonu i specjalistycznych słów, których nie rozumieją użytkownicy/zleceniodawcy? "
+hint15 = (unsafePerformIO makeTranslator) MsgReqHint15
 
 hint16 :: String
-hint16 = "Czy jesteś w stanie przewidzieć zmiany w wymaganiach, jakie mogą się pojawić? Jakie zmiany mogą ulec zmianie? Jak bardzo jest to prawdopodobne, że użytkownik poprosi o modyfikacje?"
+hint16 = (unsafePerformIO makeTranslator) MsgReqHint16
 
 hint17 :: String
-hint17 = "Cele osobnych wymagań mogą mieć odwrotne skutki, które będą miały przeróżny wpływ na wynik końcowy."
+hint17 = (unsafePerformIO makeTranslator) MsgReqHint17
 
 hint18 :: String
-hint18 = "Czy np. nie przekracza budżetu i kompetencji pracowników?"
+hint18 = (unsafePerformIO makeTranslator) MsgReqHint18

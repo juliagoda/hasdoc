@@ -1,3 +1,16 @@
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
+
+
 module ProjectManagement.HasdocGen.Text.Site.Architecture.Content
 (
 task1,
@@ -26,78 +39,100 @@ task23,
 task24
 )
 where
+    
+
+import ProjectManagement.HasdocGen.File.Settings
+    
+import Data.AppSettings
+import qualified Data.Text as T
+import System.IO.Unsafe
+import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
+
+data ArchPageContent = ArchPageContent
+
+mkMessage "ArchPageContent" getAppLangPath "en"
+
+
+
+
+makeTranslator :: (RenderMessage ArchPageContent ArchPageContentMessage) => IO (ArchPageContentMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg ArchPageContent (settLangIntToString $ getSetting' conf languageSett) message)
+
 
 
 
 task1 :: String
-task1 = "Przedstaw organizację projektu. Jakie elementy i gdzie będą się znajdować?"
+task1 = (unsafePerformIO makeTranslator) MsgArchQuestion1
 
 task2 :: String
-task2 = "Przedstaw i opisz podstawowe klasy/moduły projektu. Czy program będzie tak duży, że będzie zawierał podsystemy? Jak one będą rozmieszczone?"
+task2 = (unsafePerformIO makeTranslator) MsgArchQuestion2
 
 task3 :: String
-task3 = "Jeżeli już została podjęta decyzja o wykorzystywanych technikach, rodzaju kontenerów na dane, to wyjaśnij, dlaczego dokonano takiego wyboru?"
+task3 = (unsafePerformIO makeTranslator) MsgArchQuestion3
 
 task4 :: String
-task4 = "Jakie klasy/moduły powinny mieć do siebie dostęp? Powinien być pełny dostęp, czy raczej częściowy? Dlaczego?"
+task4 = (unsafePerformIO makeTranslator) MsgArchQuestion4
 
 task5 :: String
-task5 = "Dokonałeś wcześniej wyboru sposobu przechowywania danych? Jeśli tak, to dlaczego dokonano konkretnego wyboru?"
+task5 = (unsafePerformIO makeTranslator) MsgArchQuestion5
 
 task6 :: String
-task6 = "Czy istnieją jakieś reguły biznesowe w firmie, które muszą zostać uwzględnione w projekcie? Jakie?"
+task6 = (unsafePerformIO makeTranslator) MsgArchQuestion6
 
 task7 :: String
-task7 = "Opisz interfejs użytkownika, o ile istnieje i nie był opisywany w wymaganiach."
+task7 = (unsafePerformIO makeTranslator) MsgArchQuestion7
 
 task8 :: String
-task8 = "Jak będzie wyglądało zarządzanie zasobami - bazą danych, plikami, grafiką, etc.?"
+task8 = (unsafePerformIO makeTranslator) MsgArchQuestion8
 
 task9 :: String
-task9 = "Czy uwzględnienie minimalnych parametrów dla tworzonego projektu prócz pamięci ma sens? Jeśli tak, to jakie to są parametry?"
+task9 = (unsafePerformIO makeTranslator) MsgArchQuestion9
 
 task10 :: String
-task10 = "Czy istnieje zagrożenie zwiększenia liczby użytkowników, zasobów, etc? Jeśli tak, to jak te problemy będą rozwiązywane?"
+task10 = (unsafePerformIO makeTranslator) MsgArchQuestion10
 
 task11 :: String
-task11 = "Czy program będzie wymieniał dane z innym oprogramowaniem? W jaki sposób będzie to realizowane?"
+task11 = (unsafePerformIO makeTranslator) MsgArchQuestion11
 
 task12 :: String
-task12 = "W jakim języku będzie wprowadzana treść programu? W języku ojczystym czy obcym? Czy program będzie wspierał wiele języków? Dlaczego?"
+task12 = (unsafePerformIO makeTranslator) MsgArchQuestion12
 
 task13 :: String
-task13 = "Na jakim poziomie wykrywane będą błędy wejścia-wyjścia: pola, rekordu, pliku, strumieni, itd?"
+task13 = (unsafePerformIO makeTranslator) MsgArchQuestion13
 
 task14 :: String
-task14 = "Czy program będzie podejmował próby naprawienia występowanych błędów? Czy będzie jedynie zgłaszał problem użytkownikowi i zamykał program?"
+task14 = (unsafePerformIO makeTranslator) MsgArchQuestion14
 
 task15 :: String
-task15 = "Czy program będzie sprawdzał poprawność wprowadzanych danych? W jakich miejscach?"
+task15 = (unsafePerformIO makeTranslator) MsgArchQuestion15
 
 task16 :: String
-task16 = "Czy wymagania wydają się rozsądne i możliwe w implementacji? Dlaczego?"
+task16 = (unsafePerformIO makeTranslator) MsgArchQuestion16
 
 task17 :: String
-task17 = "W jaki sposób program będzie propagował błędy użytkownikowi?"
+task17 = (unsafePerformIO makeTranslator) MsgArchQuestion17
 
 task18 :: String
-task18 = "Kiedy i czy kod będzie zgłaszać obsługę wyjątków? Czy j jak będą one przechwytywane, rejestrowane, dokumentowane?"
+task18 = (unsafePerformIO makeTranslator) MsgArchQuestion18
 
 task19 :: String
-task19 = "Obsługa błędów będzie odbywać się w miejscu wykrycia, w osobnej specjalnie przeznaczonej do tego klasie/module lub w jeszcze w inny sposób?"
+task19 = (unsafePerformIO makeTranslator) MsgArchQuestion19
 
 task20 :: String
-task20 = "Skorzystasz z gotowej biblioteki do obsługi błędów, czy zbudujesz własny? Dlaczego?"
+task20 = (unsafePerformIO makeTranslator) MsgArchQuestion20
 
 task21 :: String
-task21 = "Które miejsca w kodzie będą wymagały większej uwagi podczas konstrukcji niż inne z powodu występowania błędów, a w których miejscach wystarczą proste rozwiązania?" 
+task21 = (unsafePerformIO makeTranslator) MsgArchQuestion21
 
 task22 :: String
-task22 = "Jakie elementy do produkcji aplikacji będą kupowane, pobierane, a które będą tworzone? Czy istnieją plany wykorzystywania całości lub części istniejącego już oprogramowania? Dlaczego?"
+task22 = (unsafePerformIO makeTranslator) MsgArchQuestion22
 
 task23 :: String
-task23 = "W których miejscach w przyszłości można spodziewać się dalszej rozbudowy lub zmian? W jaki sposób będzie implementowana możliwość rozwoju? Jak będzie to ułatwiane?"
+task23 = (unsafePerformIO makeTranslator) MsgArchQuestion23
 
 task24 :: String
-task24 = "Jest to program tworzony indywidualnie czy w zespole/zespołach? Jak będą rozdzielane zadania, łączone rozwiązania i jakie zespoły będą potrzebne do stworzenia aplikacji?"
+task24 = (unsafePerformIO makeTranslator) MsgArchQuestion24
 
