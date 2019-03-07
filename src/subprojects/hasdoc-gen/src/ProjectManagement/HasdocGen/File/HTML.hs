@@ -143,15 +143,21 @@ writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered proje
              Right b -> B.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project.pdf") b
         
         
-readHtmlFile :: FilePath -> IO ()
-readHtmlFile filepath = 
+readHtmlFile :: WX.Frame () -> FilePath -> IO ()
+readHtmlFile mainWindow filepath = 
     do
+        translate <- makeTranslator
         htmld <- T.readFile filepath
         let tagsMap = iterateTags (parseTags htmld) []
-        let hhash = H.fromList [(TT.pack "Answers", tagsMap)]
-        home <- getHomeDirectory
-        createDirectoryIfMissing True (home ++ "/.hasdoc-gen/temp")
-        writeIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc") (Ini {iniGlobals=mempty, iniSections=hhash})
+        if null tagsMap 
+           then WX.infoDialog mainWindow (translate MsgWarningProject) (translate MsgNoHTMLParsedTags) 
+           else do 
+               let hhash = H.fromList [(TT.pack "Answers", tagsMap)] 
+               home <- getHomeDirectory
+               createDirectoryIfMissing True (home ++ "/.hasdoc-gen/temp")
+               writeIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc") (Ini {iniGlobals=mempty, iniSections=hhash})
+        
+        
          
  
 iterateTags :: [Tag TT.Text] -> [(TT.Text, TT.Text)] -> [(TT.Text, TT.Text)]

@@ -219,6 +219,7 @@ WarningProject: warning
 WaningProjectName: The title of the project was not given
 ProjectNameConsole: The title of the project is 
 WarningProjectEmpty: no field has been filled in
+NoHTMLParsedTags: The html file does not contain the correct structure for the current application
 
 
 PathExeError: The given path does not apply to the executable program

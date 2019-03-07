@@ -75,11 +75,16 @@ StateNone: Brak stanu
 WizardChangesWarning: Zmiany w wizardzie nie były wprowadzane
 Save: Zapis
 StateSave: Zapis stanu
+WarningLabel: ostrzeżenie
+NoChangesWarning: Nie wprowadzono ani nie załadowano żadnych zmian
+NoAllowedChars: Nazwa zapisu może składać się wyłącznie z liter i cyfr
+NoAllowedExt: Plik musi mieć rozszerzenie .hdoc
 ChosenPathSaveResult: Stan został pomyślnie zapisany w wybranej ścieżce
 
 LoadState: Odczyt stanu
+NoSufficientData: plik nie zawiera wystarczających danych
+NoChangesInFile: plik nie zawiera poprawnych lub wystarczających danych
 LoadStateResult: Stan został pomyślnie wczytany z wybranego pliku
-
 
 ConfirmClose: Potwierdzenie
 ConfirmCloseQuestion: Czy na pewno chcesz zamknąć aplikację?

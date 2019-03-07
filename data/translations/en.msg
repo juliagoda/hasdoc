@@ -75,12 +75,16 @@ StateNone: No state
 WizardChangesWarning: No changes have been made to the wizard
 Save: Save
 StateSave: Save of state
+WarningLabel: warning
+NoChangesWarning: No changes have been introduced or loaded
+NoAllowedChars: The name of the record may only consist of letters and numbers
+NoAllowedExt: The file must have the .hdoc extension
 ChosenPathSaveResult: The state has been successfully saved in the selected path
 
-
 LoadState: Load of state
+NoSufficientData: the file does not contain sufficient data
+NoChangesInFile: the file does not contain valid data or sufficient data
 LoadStateResult: The state was successfully loaded from the selected file
-
 
 ConfirmClose: Confirmation
 ConfirmCloseQuestion: Are you sure you want to close the application?

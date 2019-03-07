@@ -75,14 +75,15 @@ getProgramPane mainWindow tbar =
     do 
         translate <- makeTranslator
         programPane <- menuPane [ text := translate MsgProgramMenu ]
-        saveItem  <- menuItem programPane [ text := translate MsgSaveStateMenu, help := translate MsgSaveStateMenuHelp, on command := saveFileDialog mainWindow [(translate MsgLoadFilesExt, ["*.hdoc"])]] --image := (getAppIconsPath ++ "/save-menu.png") ]
-        loadItem  <- menuItem programPane [ text := translate MsgLoadStateMenu, help := translate MsgLoadStateMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.hdoc"])] False ] --image := (getAppIconsPath ++ "/load-menu.png") ]
-        importItem <- menuItem programPane [ text := translate MsgImportFromFileMenu, help := translate MsgImportFromFileMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.html"])] True ] -- image := (getAppIconsPath ++ "/import-menu.png") ]
+        saveItem  <- menuItem programPane [ text := translate MsgSaveStateMenu, help := translate MsgSaveStateMenuHelp, on command := saveFileDialog mainWindow [(translate MsgLoadFilesExt, ["*.hdoc"])]] 
+        loadItem  <- menuItem programPane [ text := translate MsgLoadStateMenu, help := translate MsgLoadStateMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.hdoc"])] False ] 
+        importItem <- menuItem programPane [ text := translate MsgImportFromFileMenu, help := translate MsgImportFromFileMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.html"])] True ] 
         menuLine programPane
-        quitItem <- menuItem programPane [ text := translate MsgQuitMenu, help := translate MsgQuitMenuHelp ] -- image := (getAppIconsPath ++ "/exit-menu.png") ]
+        quitItem <- menuItem programPane [ text := translate MsgQuitMenu, help := translate MsgQuitMenuHelp ]
         set quitItem  [on command := closeMainWindow mainWindow]
-        toolMenu tbar saveItem "Save" (getAppIconsPath ++ "/save-window.png")  []
-        toolMenu tbar loadItem "Load" (getAppIconsPath ++ "/load-window.png") []
+        toolMenu tbar saveItem (translate MsgSaveStateMenu) (getAppIconsPath ++ "/save-window.png")  []
+        toolMenu tbar importItem (translate MsgImportFromFileMenu) (getAppIconsPath ++ "/load-window.png") []
+        toolMenu tbar loadItem (translate MsgLoadStateMenu) (getAppIconsPath ++ "/load-window.png") []
         return programPane
         
         
@@ -91,9 +92,9 @@ getSettingsPane mainWindow tbar =
     do 
         translate <- makeTranslator
         optionsPane <- menuPane [ text := translate MsgOptionsMenu ]
-        settItem  <- menuItem optionsPane [ text := translate MsgSettingsMenu, help := translate MsgSettingsMenuHelp ] --image := (getAppIconsPath ++ "/settings-menu.png") ]
+        settItem  <- menuItem optionsPane [ text := translate MsgSettingsMenu, help := translate MsgSettingsMenuHelp ]
         set settItem [on command := openSettingsWindow mainWindow]
-        toolMenu tbar settItem "Settings" (getAppIconsPath ++ "/settings-window.png")  []
+        toolMenu tbar settItem (translate MsgSettingsMenu) (getAppIconsPath ++ "/settings-window.png")  []
         return optionsPane
           
         
@@ -102,12 +103,12 @@ getAboutPane mainWindow tbar =
     do 
         translate <- makeTranslator
         aboutPane <- menuPane [ text := translate MsgAboutMenu ]
-        authorItem  <- menuItem aboutPane [ text := translate MsgAuthorMenu, help := translate MsgAuthorMenuHelp, on command := openAuthorsWindow mainWindow ] --image := (getAppIconsPath ++ "/authors-menu.png") ]
-        websiteItem  <- menuItem aboutPane [ text := translate MsgHomepageMenu, help := translate MsgHomepageMenuHelp, on command := openHomepage mainWindow ] --image := (getAppIconsPath ++ "/homepage-menu.png") ]
-        issueItem <- menuItem aboutPane [ text := translate MsgIssuesMenu, help := translate MsgIssuesMenuHelp, on command := openIssuesPage mainWindow ] --image := (getAppIconsPath ++ "/issue-menu.png") ]
-        toolsItem <- menuItem aboutPane [ text := translate MsgToolsMenu, help := translate MsgToolsMenuHelp, on command := openToolsWindow mainWindow ] --image := (getAppIconsPath ++ "/tools-menu.png") ]
-        tipsItem <- menuItem aboutPane [ text := translate MsgTipsMenu, help := translate MsgTipsMenuHelp, on command := openTipsWindow mainWindow ] --image := (getAppIconsPath ++ "/tips-menu.png") ]
-        docItem <- menuItem aboutPane [ text := translate MsgDocMenu, help := translate MsgDocMenuHelp, on command := openDocWindow mainWindow ] --image := (getAppIconsPath ++ "/doc-menu.png") ]
-        toolMenu tbar docItem "Documentation" (getAppIconsPath ++ "/doc-window.png")  []
-        toolMenu tbar issueItem "Issue" (getAppIconsPath ++ "/issue-window.png")  []
+        authorItem  <- menuItem aboutPane [ text := translate MsgAuthorMenu, help := translate MsgAuthorMenuHelp, on command := openAuthorsWindow mainWindow ] 
+        websiteItem  <- menuItem aboutPane [ text := translate MsgHomepageMenu, help := translate MsgHomepageMenuHelp, on command := openHomepage mainWindow ] 
+        issueItem <- menuItem aboutPane [ text := translate MsgIssuesMenu, help := translate MsgIssuesMenuHelp, on command := openIssuesPage mainWindow ] 
+        toolsItem <- menuItem aboutPane [ text := translate MsgToolsMenu, help := translate MsgToolsMenuHelp, on command := openToolsWindow mainWindow ] 
+        tipsItem <- menuItem aboutPane [ text := translate MsgTipsMenu, help := translate MsgTipsMenuHelp, on command := openTipsWindow mainWindow ] 
+        docItem <- menuItem aboutPane [ text := translate MsgDocMenu, help := translate MsgDocMenuHelp, on command := openDocWindow mainWindow ]
+        toolMenu tbar docItem (translate MsgDocMenu) (getAppIconsPath ++ "/doc-window.png")  []
+        toolMenu tbar issueItem (translate MsgIssuesMenu) (getAppIconsPath ++ "/issue-window.png")  []
         return aboutPane

@@ -219,6 +219,7 @@ WarningProject: ostrzeżenie
 WaningProjectName: Tytuł projektu nie został podany
 ProjectNameConsole: Tytuł projektu to 
 WarningProjectEmpty: żadne pole nie zostało wypełnione
+NoHTMLParsedTags: Plik html nie zawiera poprawnej struktury dla aktualnej aplikacji
 
 
 PathExeError: Podana ścieżka nie dotyczy programu wykonywalnego
