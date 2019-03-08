@@ -66,6 +66,7 @@ library
                  shakespeare >=2.0.20,
                  filepath >=1.4.2.1,
                  ini >=0.4.1,
+                 http-types >=0.12.3,
                  hasdoc-gen >=1.0
   exposed-modules:
       Application.Hasdoc
@@ -122,6 +123,7 @@ executable hasdoc
     , shakespeare >=2.0.20
     , filepath >=1.4.2.1
     , ini >=0.4.1
+    , http-types >=0.12.3
     , hasdoc
     , hasdoc-gen
   buildable: True

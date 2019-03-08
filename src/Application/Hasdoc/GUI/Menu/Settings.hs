@@ -138,16 +138,14 @@ createTabsWidget settWindow =
         formatBox6   <- checkBox p5 [text := "EPUB v3", identity := 6]
         formatBox7   <- checkBox p5 [text := "Haddock", identity := 7]
         formatBox8   <- checkBox p5 [text := "LaTeX", identity := 8]
-        formatBox9   <- checkBox p5 [text := "JSON", identity := 9]
-        formatBox10   <- checkBox p5 [text := "PHP Markdown Extra", identity := 10]
-        formatBox11   <- checkBox p5 [text := "MediaWiki", identity := 11]
-        formatBox12   <- checkBox p5 [text := "OpenOffice text document", identity := 12]
-        formatBox13   <- checkBox p5 [text := "OpenDocument", identity := 13]
-        formatBox14   <- checkBox p5 [text := "PowerPoint slide show", identity := 14]
-        formatBox15   <- checkBox p5 [text := "Jupyter notebook", identity := 15]
-        formatBox16   <- checkBox p5 [text := "GitHub-Flavored Markdown", identity := 16]
+        formatBox9   <- checkBox p5 [text := "PHP Markdown Extra", identity := 9]
+        formatBox10   <- checkBox p5 [text := "MediaWiki", identity := 10]
+        formatBox11   <- checkBox p5 [text := "OpenOffice text document", identity := 11]
+        formatBox12   <- checkBox p5 [text := "OpenDocument", identity := 12]
+        formatBox13   <- checkBox p5 [text := "PowerPoint slide show", identity := 13]
+        formatBox14   <- checkBox p5 [text := "Jupyter notebook", identity := 14]
         
-        let formatsBoxes = [formatBox1, formatBox2,formatBox3, formatBox4, formatBox5, formatBox6, formatBox7, formatBox8, formatBox9, formatBox10, formatBox11, formatBox12, formatBox13, formatBox14, formatBox15, formatBox16]
+        let formatsBoxes = [formatBox1, formatBox2,formatBox3, formatBox4, formatBox5, formatBox6, formatBox7, formatBox8, formatBox9, formatBox10, formatBox11, formatBox12, formatBox13, formatBox14]
         
         
         p6   <- panel  notebook' []
@@ -163,19 +161,19 @@ createTabsWidget settWindow =
             
         let tab4 = tab (translate MsgPrintingTab) (container p4 (margin 10 $ column 10 [ floatTop $ widget printDesc, floatTopLeft $ (grid 3 5 [[label (translate MsgPrintLabel), widget printersBox], [label (translate MsgFormatLabel), widget formatBox], [label (translate MsgOrientLabel), widget orientationBox], [label (translate MsgColourLabel), widget coloursBox], [label (translate MsgBiPrintLabel), widget bilaterallyBox], [label (translate MsgResLabel), widget intSpinBox], [label (translate MsgMargingsLabel), widget marginsEntry], [label (translate MsgScopeLabel), widget scopeEntry]])]))
             
-        let tab5 = tab (translate MsgExtOfFilesTab) (container p5 (margin 10 $ column 10 [ floatTop $ widget formatsDesc, floatCenter $ (grid 3 5 [[widget formatBox1, widget formatBox2, widget formatBox3, widget formatBox4], [widget formatBox5, widget formatBox6, widget formatBox7, widget formatBox8], [widget formatBox9, widget formatBox10, widget formatBox11, widget formatBox12], [widget formatBox13, widget formatBox14, widget formatBox15, widget formatBox16]])]))
+        let tab5 = tab (translate MsgExtOfFilesTab) (container p5 (margin 10 $ column 10 [ floatTop $ widget formatsDesc, floatCenter $ (grid 3 5 [[widget formatBox1, widget formatBox2, widget formatBox3, widget formatBox4], [widget formatBox5, widget formatBox6, widget formatBox7, widget formatBox8], [widget formatBox9, widget formatBox10, widget formatBox11, widget formatBox12], [widget formatBox13, widget formatBox14]])]))
             
         let tab6 = tab (translate MsgTemplatesSetTab) (container p6 (margin 10 $ column 10 [ floatTop $ widget templateDesc, floatTopLeft $ (column 5 [hstretch (widget templatesRadioBox)])]))
             
         let nbtab = tabs notebook' [tab1, tab3, tab4, tab5, tab6]
             
-        setDefaults templatesRadioBox r1 c1 intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes         
+        setDefaults templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes         
         
         loadChanges templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes
         
         
         saveBtn <- button p [ text := (translate MsgSaveBtn), enabled := True, on command := saveChanges (holdInfoAboutLang r1) (holdInfoAboutTexts marginsEntry scopeEntry extExecPath c1 c2) (holdInfoAboutPrint listComboBoxes) (holdInfoAboutFormats formatsBoxes) (holdInfoAboutPrintRes intSpinBox) (holdInfoAboutTemplates templatesRadioBox) ]
-        resetBtn <- button p [ text := (translate MsgResetBtn), enabled := True, on command := setDefaults templatesRadioBox r1 c1 intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes  ]
+        resetBtn <- button p [ text := (translate MsgResetBtn), enabled := True, on command := setDefaults templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes  ]
         cancelBtn <- button p [ text := (translate MsgCancelBtn), on command := close settWindow ]
         
         -- =================================================
@@ -185,8 +183,7 @@ createTabsWidget settWindow =
                 column 3
                    [ nbtab, row 3 [floatLeft $ widget cancelBtn, floatLeft $ widget resetBtn, floatRight $ widget saveBtn]]]
         return ()
-        
-        --set notebook' [on click := onMouse notebook']
+
         
         
 -- pattern matching
@@ -222,11 +219,7 @@ patternM textEntry chbox False True = set textEntry [ text := "", enabled := Fal
 patternM textEntry chbox False False = return ()
              
         
--- Bool -> Bool
--- c1 -> c2
--- Domyślny podgląd wbudowany -> zewnętrzny
--- Inny -> Aktualny
--- chbox == Domyślny
+
 patternE :: TextCtrl () -> CheckBox () -> Bool -> Bool -> IO ()
 patternE textEntry chbox True True = set chbox [ checked := False ] >> set textEntry [ enabled := True ]
 patternE textEntry chbox False True = set textEntry [ enabled := True ]
@@ -240,7 +233,6 @@ getText w
            get w (item i)
  
  
--- detectAppName defaultChecked choosenChecked choosenAppName 
 detectAppName :: Bool -> Bool -> String -> String
 detectAppName True False "Brak" = "Off"
 detectAppName True False "Off" = "Off"
@@ -250,8 +242,8 @@ detectAppName _ _ _ = "Off"
 
 
 -- filter use
-filterChosenFormats :: [CheckBox ()] -> IO [CheckBox ()]
-filterChosenFormats = filterM (\x -> get x checked)
+-- filterChosenFormats :: [CheckBox ()] -> IO [CheckBox ()]
+-- filterChosenFormats = filterM (\x -> get x checked)
 
 
 holdInfoAboutTexts :: TextCtrl () -> TextCtrl () -> TextCtrl () -> CheckBox () -> CheckBox () -> IO (Map.Map String String)
@@ -278,15 +270,6 @@ holdInfoAboutPrintRes printScaleSpin =
         
 holdInfoAboutFormats :: [CheckBox ()] -> IO (Map.Map String Bool)
 holdInfoAboutFormats formatBoxes = return $ Map.fromList $ map (\x -> (convIdToText $ unsafePerformIO $ get x identity, unsafePerformIO $ get x checked)) formatBoxes
-
-
--- holdInfoAboutApp :: CheckBox () -> CheckBox () -> TextCtrl () -> IO (Map.Map String String)
--- holdInfoAboutApp builtinBox chosenBox appEntry = 
---     do
---         previewBoxDefault <- get builtinBox checked
---         previewBoxChosen <- get chosenBox checked
---         appEntry <- get appEntry text
---         return $ Map.fromList [("preview-app", detectAppName previewBoxDefault previewBoxChosen appEntry)]
 
 
 holdInfoAboutLang :: SingleListBox () -> IO (Map.Map String Int)
@@ -317,27 +300,26 @@ saveChanges langList textList printList formatList spinBoxScale templateList =
         writeNewValues unionLists formatsList textL "hasdoc-gen"
         
         
-        
--- items :: Attr w [a] --- All the items as a list
--- item :: Int -> Attr w a --- An item by zero-based index.
 loadChanges :: RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
 loadChanges = readNewValues
         
         
-setDefaults ::  RadioBox () -> SingleListBox () -> CheckBox () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
-setDefaults cssRadioBox langListBox builtinBox printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes = 
-    set cssRadioBox [selection := 0] >>
-    set langListBox [selection := 0] >>
-    set builtinBox [checked := True ] >>
-    set printScaleSpin [selection := 100] >>
-    set printersBox [selection := 0] >>
-    set formatBox [selection := 4] >>
-    set orientationBox [selection := 0] >>
-    set coloursBox [selection := 0] >>
-    set bilaterallyBox [selection := 0] >>
-    set printMarginCtrl [text := "5-5-5-5"] >>
-    set printScopeCtrl [text := ""] >>
-    mapM_ (\x -> set x [checked := False]) formatsBoxes
+setDefaults ::  RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
+setDefaults cssRadioBox langListBox builtinBox chosenBox pdfEntry printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes = 
+    set cssRadioBox [ selection := 0 ] >>
+    set langListBox [ selection := 0 ] >>
+    set builtinBox [ checked := True ] >>
+    set chosenBox [ checked := False ] >>
+    set pdfEntry [ text := "", enabled := False ] >>
+    set printScaleSpin [ selection := 100 ] >>
+    set printersBox [ selection := 0 ] >>
+    set formatBox [ selection := 4 ] >>
+    set orientationBox [ selection := 0 ] >>
+    set coloursBox [ selection := 0 ] >>
+    set bilaterallyBox [ selection := 0 ] >>
+    set printMarginCtrl [ text := "5-5-5-5" ] >>
+    set printScopeCtrl [ text := "" ] >>
+    mapM_ (\x -> set x [ checked := False] ) formatsBoxes
         
 
 convIdToText :: Int -> String  
@@ -349,14 +331,12 @@ convIdToText 5 = "fileformat-dokuwiki"
 convIdToText 6 = "fileformat-epubv3" 
 convIdToText 7 = "fileformat-haddock" 
 convIdToText 8 = "fileformat-latex" 
-convIdToText 9 = "fileformat-json" 
-convIdToText 10 = "fileformat-php" 
-convIdToText 11 = "fileformat-mediawiki" 
-convIdToText 12 = "fileformat-openoffice" 
-convIdToText 13 = "fileformat-opendocument" 
-convIdToText 14 = "fileformat-powerpoint" 
-convIdToText 15 = "fileformat-jupyter" 
-convIdToText 16 = "fileformat-github" 
+convIdToText 9 = "fileformat-php" 
+convIdToText 10 = "fileformat-mediawiki" 
+convIdToText 11 = "fileformat-openoffice" 
+convIdToText 12 = "fileformat-opendocument" 
+convIdToText 13 = "fileformat-powerpoint" 
+convIdToText 14 = "fileformat-jupyter" 
 convIdToText 17 = "print-printer" 
 convIdToText 18 = "print-format" 
 convIdToText 19 = "print-orientation" 
@@ -364,5 +344,3 @@ convIdToText 20 = "print-colour"
 convIdToText 21 = "print-bilaterally" 
 convIdToText x = "" 
                       
-        -- internationalization
--- https://wiki.wxwidgets.org/Internationalization

@@ -114,9 +114,6 @@ haddockFormat = Setting "haddockOutput" False
 latexFormat :: Setting Bool
 latexFormat = Setting "latexOutput" False
 
-jsonFormat :: Setting Bool
-jsonFormat = Setting "jsonOutput" False
-
 phpMarkdownFormat :: Setting Bool
 phpMarkdownFormat = Setting "phpMarkdownOutput" False
 
@@ -135,15 +132,12 @@ powerPointFormat = Setting "powerPointOutput" False
 jupyterFormat :: Setting Bool
 jupyterFormat = Setting "jupyterOutput" False
 
-githubMarkdownFormat :: Setting Bool
-githubMarkdownFormat = Setting "githubMarkdownOutput" False
-
 templateName :: Setting Int
 templateName = Setting "templateCss" 0
 
 
 formatsMap :: Map.Map Int (Setting Bool)
-formatsMap = Map.fromList [(1, zimWikiFormat), (2, teiFormat), (3, docbookFormat), (4, docxFormat), (5, dokuWikiFormat), (6, epubv3Format), (7, haddockFormat), (8, latexFormat), (9, jsonFormat), (10, phpMarkdownFormat), (11, mediaWikiFormat), (12, openOfficeFormat), (13, openDocFormat), (14, powerPointFormat), (15, jupyterFormat), (16, githubMarkdownFormat)]
+formatsMap = Map.fromList [(1, zimWikiFormat), (2, teiFormat), (3, docbookFormat), (4, docxFormat), (5, dokuWikiFormat), (6, epubv3Format), (7, haddockFormat), (8, latexFormat), (9, phpMarkdownFormat), (10, mediaWikiFormat), (11, openOfficeFormat), (12, openDocFormat), (13, powerPointFormat), (14, jupyterFormat)]
 
 
 
@@ -167,23 +161,20 @@ defaultConfig = getDefaultConfig $ do
     setting epubv3Format
     setting haddockFormat
     setting latexFormat
-    setting jsonFormat
     setting phpMarkdownFormat
     setting mediaWikiFormat
     setting openOfficeFormat
     setting openDocFormat
     setting powerPointFormat
     setting jupyterFormat
-    setting githubMarkdownFormat
     setting templateName
     
     
--- poprzenosić w miejsca argumentów widgety, bo wcześniejsze ich wydobycie zamiast po kliknięciu "zapisz" nie daje szans na zapisanie zmian. Wartości zawsze pozostają domyślne, stare
+
 writeNewValues :: Map.Map String Int -> Map.Map String Bool -> Map.Map String String -> String -> IO ()
 writeNewValues resultsSets formatsRes resultsTexts appName = do
     readResult <- readSettings (AutoFromAppName appName)
     let conf = fst readResult
-    --let gettSett = GetSetting $ getSetting conf languageSett
     let newConf = setSetting conf languageSett $ getOption resultsSets "lang-lang"
     let newConf2 = setSetting newConf previewAppSett $ getOption resultsTexts "preview-app"
     let newConf3 = setSetting newConf2 printerSett $ getOption resultsSets "print-printer"
@@ -202,25 +193,14 @@ writeNewValues resultsSets formatsRes resultsTexts appName = do
     let newConf16 = setSetting newConf15 epubv3Format $ getOption formatsRes "fileformat-epubv3"
     let newConf17 = setSetting newConf16 haddockFormat $ getOption formatsRes "fileformat-haddock"
     let newConf18 = setSetting newConf17 latexFormat $ getOption formatsRes "fileformat-latex"
-    let newConf19 = setSetting newConf18 jsonFormat $ getOption formatsRes "fileformat-json"
-    let newConf20 = setSetting newConf19 phpMarkdownFormat $ getOption formatsRes "fileformat-php"
+    let newConf20 = setSetting newConf18 phpMarkdownFormat $ getOption formatsRes "fileformat-php"
     let newConf21 = setSetting newConf20 mediaWikiFormat $ getOption formatsRes "fileformat-mediawiki"
     let newConf22 = setSetting newConf21 openOfficeFormat $ getOption formatsRes "fileformat-openoffice"
     let newConf23 = setSetting newConf22 openDocFormat $ getOption formatsRes "fileformat-opendocument"
     let newConf24 = setSetting newConf23 powerPointFormat $ getOption formatsRes "fileformat-powerpoint"
     let newConf25 = setSetting newConf24 jupyterFormat $ getOption formatsRes "fileformat-jupyter"
-    let newConf26 = setSetting newConf25 githubMarkdownFormat $ getOption formatsRes "fileformat-github"
-    let newConf27 = setSetting newConf26 templateName $ getOption resultsSets "template-template"
+    let newConf27 = setSetting newConf25 templateName $ getOption resultsSets "template-template"
     saveSettings defaultConfig (AutoFromAppName appName) newConf27
-    
-    
-    
--- readNewValues :: [CheckBox ()] -> IO ()
--- readNewValues formatsCheckboxes = do
---     readResult <- readSettings (AutoFromAppName "hasdoc")
---     let conf = fst readResult
---     let gettSett = snd readResult
---     loadChangesFormats formatsCheckboxes checked gettSett
     
     
 readNewValues :: RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
@@ -249,9 +229,9 @@ mapCheckboxes conf checkbox =
     
     
 readPreviewApp :: CheckBox () -> CheckBox () -> TextCtrl () -> String -> IO ()
-readPreviewApp builtinBox chosenBox textEntry "Brak" = set builtinBox [checked := True]
-readPreviewApp builtinBox chosenBox textEntry "Off" = set builtinBox [checked := True]
-readPreviewApp builtinBox chosenBox textEntry x = set chosenBox [checked := True] >> set textEntry [text := x]
+readPreviewApp builtinBox chosenBox textEntry "Brak" = set builtinBox [checked := True] >> set chosenBox [checked := False] >> set textEntry [text := "", enabled := False]
+readPreviewApp builtinBox chosenBox textEntry "Off" = set builtinBox [checked := True] >> set chosenBox [checked := False] >> set textEntry [text := "", enabled := False]
+readPreviewApp builtinBox chosenBox textEntry x = if null x then readPreviewApp builtinBox chosenBox textEntry "Off" else set builtinBox [checked := False] >> set chosenBox [checked := True] >> set textEntry [text := x, enabled := False]
     
     
 -- template    

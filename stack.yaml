@@ -35,6 +35,7 @@ extra-deps:
 - blaze-html-0.9.1.1
 - shakespeare-2.0.20
 - filepath-1.4.2.1
+- http-types-0.12.3
 - ini-0.4.1
 
 # line for installing helpful addons in Visual Studio Code without incompatiblities of Cabal versions

@@ -76,35 +76,35 @@ loadWriterOtherOpts defTemp =
 defDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 defDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --defDoc Just [] = str ""
-defDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("definitions", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgDefinitionTitle) <>
+defDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("definitions", ["pages"], [("lang", lang)]) ((headerWith ("defPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgDefinitionTitle) <>
   docLoop (Just x) wrOptions lang)
   
 
 reqDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 reqDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --reqDoc Just [] = str ""
-reqDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("requirements", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgReqTitle) <>
+reqDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("requirements", ["pages"], [("lang", lang)]) ((headerWith ("reqPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgReqTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 archDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 archDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --archDoc Just [] = str ""
-archDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("architecture", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgArchTitle) <>
+archDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("architecture", ["pages"], [("lang", lang)]) ((headerWith ("archPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgArchTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 techDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 techDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --techDoc Just [] = str ""
-techDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("technology", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgTechnologyTitle) <>
+techDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("technology", ["pages"], [("lang", lang)]) ((headerWith ("techPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgTechnologyTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 testDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 testDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --testDoc Just [] = str ""
-testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) (para ((strong . text . (unsafePerformIO makeTranslator)) MsgTestsTitle) <>
+testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) ((headerWith ("testPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgTestsTitle) <>
   docLoop (Just x) wrOptions lang)
   
     

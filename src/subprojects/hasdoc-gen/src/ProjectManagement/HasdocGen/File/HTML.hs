@@ -91,9 +91,6 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
         options <- loadWriterOtherOpts "latex"
         writeFilePandocOptsT writeLaTeX options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "tex" latexFormat projectTitle chosenDir
         
-        options <- loadWriterOtherOpts "json"
-        writeFilePandocOptsT writePlain options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "json" jsonFormat projectTitle chosenDir
-        
         options <- loadWriterOtherOpts "markdown_phpextra"
         writeFilePandocOptsT writeMarkdown options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "php" phpMarkdownFormat projectTitle chosenDir
         
@@ -201,16 +198,3 @@ loadReaderPandocOpts = return $ def { readerStripComments = True, readerStandalo
 thd :: (a, b, c) -> c
 thd (_,_,z) = z
              
--- writeGithubMarkdownFile :: Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> Maybe [(String, String)] -> IO ()
--- writeGithubMarkdownFile defFiltered reqFiltered archFiltered techFiltered testFiltered =     
---     do
---         readTemp <- readTemplate 
---         case readTemp jupyterFormat of
---              True -> do
---                  options <- loadWriterOtherOpts "gfm"
---                  rawOdt <- runIOorExplode $ writeIpynb options $ myDoc (defDoc defFiltered) (reqDoc reqFiltered) (archDoc archFiltered) (techDoc techFiltered) (testDoc testFiltered) 
---                  T.writeFile "test.gfm" rawOdt
---              False -> return ()
-             
-
-

@@ -12,10 +12,12 @@
 
 
 html {
+  margin: 0;
   background: #fff7ea;
 }
 
 body {
+  margin: 0;
   color: #cc8e2f;
   background: #fff7ea;
 }
@@ -54,7 +56,7 @@ p { margin-bottom:1.9em;
     background: #fff7ea; 
 }
 
-p strong { color: #111; 
+.pages-headers { color: #111; 
     font-family: 'Open Sans', sans-serif; 
     font-size: 2.4em; 
     font-weight: 300; 
@@ -102,8 +104,4 @@ p strong { color: #111;
   content: '\201C';
   font-family: 'Sanchez';
   color: #cc8e2f;
-}
-
-.answers:after {
-  content: '\201D';
 }

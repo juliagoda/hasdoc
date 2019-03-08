@@ -28,14 +28,12 @@ dokuWikiFormat,
 epubv3Format,
 haddockFormat,
 latexFormat,
-jsonFormat,
 phpMarkdownFormat,    
 mediaWikiFormat,
 openOfficeFormat,
 openDocFormat,
 powerPointFormat,
 jupyterFormat,
-githubMarkdownFormat
 )
 where
     
@@ -166,9 +164,6 @@ haddockFormat = Setting "haddockOutput" False
 
 latexFormat :: Setting Bool
 latexFormat = Setting "latexOutput" False
-
-jsonFormat :: Setting Bool
-jsonFormat = Setting "jsonOutput" False
 
 phpMarkdownFormat :: Setting Bool
 phpMarkdownFormat = Setting "phpMarkdownOutput" False
