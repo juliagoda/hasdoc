@@ -172,8 +172,8 @@ createTabsWidget settWindow =
         loadChanges templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes
         
         
-        saveBtn <- button p [ text := (translate MsgSaveBtn), enabled := True, on command := saveChanges (holdInfoAboutLang r1) (holdInfoAboutTexts marginsEntry scopeEntry extExecPath c1 c2) (holdInfoAboutPrint listComboBoxes) (holdInfoAboutFormats formatsBoxes) (holdInfoAboutPrintRes intSpinBox) (holdInfoAboutTemplates templatesRadioBox) ]
-        resetBtn <- button p [ text := (translate MsgResetBtn), enabled := True, on command := setDefaults templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes  ]
+        saveBtn <- button p [ text := (translate MsgSaveBtn), enabled := True, on command := saveChanges settWindow (holdInfoAboutLang r1) (holdInfoAboutTexts marginsEntry scopeEntry extExecPath c1 c2) (holdInfoAboutPrint listComboBoxes) (holdInfoAboutFormats formatsBoxes) (holdInfoAboutPrintRes intSpinBox) (holdInfoAboutTemplates templatesRadioBox) ]
+        resetBtn <- button p [ text := (translate MsgResetBtn), enabled := True, on command := confirmReset settWindow templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes  ]
         cancelBtn <- button p [ text := (translate MsgCancelBtn), on command := close settWindow ]
         
         -- =================================================
@@ -286,8 +286,8 @@ holdInfoAboutTemplates cssRadioBox =
         return $ Map.fromList [("template-template", cssText)]
 
     
-saveChanges :: IO (Map.Map String Int) -> IO (Map.Map String String) -> IO (Map.Map String Int) -> IO (Map.Map String Bool) -> IO (Map.Map String Int) -> IO (Map.Map String Int) -> IO ()
-saveChanges langList textList printList formatList spinBoxScale templateList = 
+saveChanges :: Frame () -> IO (Map.Map String Int) -> IO (Map.Map String String) -> IO (Map.Map String Int) -> IO (Map.Map String Bool) -> IO (Map.Map String Int) -> IO (Map.Map String Int) -> IO ()
+saveChanges mainWindow langList textList printList formatList spinBoxScale templateList = 
     do
         langL <- langList
         textL <- textList
@@ -296,8 +296,8 @@ saveChanges langList textList printList formatList spinBoxScale templateList =
         formatsList <- formatList
         scaleInt <- spinBoxScale
         let unionLists = langL `Map.union` scaleInt `Map.union` printL `Map.union` templateL
-        writeNewValues unionLists formatsList textL "hasdoc"
-        writeNewValues unionLists formatsList textL "hasdoc-gen"
+        writeNewValues mainWindow unionLists formatsList textL "hasdoc"
+        writeNewValues mainWindow unionLists formatsList textL "hasdoc-gen"
         
         
 loadChanges :: RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
@@ -320,6 +320,20 @@ setDefaults cssRadioBox langListBox builtinBox chosenBox pdfEntry printScaleSpin
     set printMarginCtrl [ text := "5-5-5-5" ] >>
     set printScopeCtrl [ text := "" ] >>
     mapM_ (\x -> set x [ checked := False] ) formatsBoxes
+    
+    
+    
+confirmReset :: Frame () -> RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO () 
+confirmReset mainWindow cssRadioBox langListBox builtinBox chosenBox pdfEntry printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes = 
+    do 
+        translate <- makeTranslator
+        answer <- confirmDialog mainWindow (translate MsgConfirmClose) (translate MsgConfirmResetQuestion) True 
+        if answer 
+           then do 
+               setDefaults cssRadioBox langListBox builtinBox chosenBox pdfEntry printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes 
+           else 
+               return ()
+       
         
 
 convIdToText :: Int -> String  

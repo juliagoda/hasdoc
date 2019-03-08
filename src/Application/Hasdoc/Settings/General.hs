@@ -1,7 +1,14 @@
-{-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE OverloadedStrings     #-}
-{-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE MultiParamTypeClasses
+            ,FlexibleInstances
+            ,FlexibleContexts
+            ,TypeSynonymInstances
+            ,UndecidableInstances
+            ,ScopedTypeVariables
+            ,TemplateHaskell
+            ,OverloadedStrings
+            ,DeriveGeneric
+            ,AllowAmbiguousTypes
+            ,MonoLocalBinds #-}
             
            
 module Application.Hasdoc.Settings.General
@@ -32,6 +39,19 @@ import qualified Paths_hasdoc as Paths
 import ProjectManagement.HasdocGen.File.HTML
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
+data GeneralSett = GeneralSett
+
+
+mkMessage "GeneralSett" ((unsafePerformIO $ Paths.getDataDir) ++ "/data/translations") "en"
+
+
+
+makeTranslator :: (RenderMessage GeneralSett GeneralSettMessage) => IO (GeneralSettMessage -> String)
+makeTranslator = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg GeneralSett (settLangIntToString $ getSetting' conf languageSett) message)
+
 
 
 settToLocale :: String -> T.Text
@@ -55,9 +75,10 @@ getAppIconsPath = (unsafePerformIO $ Paths.getDataDir) ++ "/data/icons"
 getAppCssPath :: FilePath
 getAppCssPath = (unsafePerformIO $ Paths.getDataDir) ++ "/data/templates"
 
-
 getAppLangPath :: FilePath
 getAppLangPath = (unsafePerformIO $ Paths.getDataDir) ++ "/data/translations"
+
+
 
 
 languageSett :: Setting Int
@@ -171,54 +192,63 @@ defaultConfig = getDefaultConfig $ do
     
     
 
-writeNewValues :: Map.Map String Int -> Map.Map String Bool -> Map.Map String String -> String -> IO ()
-writeNewValues resultsSets formatsRes resultsTexts appName = do
-    readResult <- readSettings (AutoFromAppName appName)
-    let conf = fst readResult
-    let newConf = setSetting conf languageSett $ getOption resultsSets "lang-lang"
-    let newConf2 = setSetting newConf previewAppSett $ getOption resultsTexts "preview-app"
-    let newConf3 = setSetting newConf2 printerSett $ getOption resultsSets "print-printer"
-    let newConf4 = setSetting newConf3 resolutionSett $ getOption resultsSets "print-resolution"
-    let newConf5 = setSetting newConf4 scopeSett $ getOption resultsTexts "print-scope"
-    let newConf6 = setSetting newConf5 formatSett $ getOption resultsSets "print-format"
-    let newConf7 = setSetting newConf6 orientationSett $ getOption resultsSets "print-orientation"
-    let newConf8 = setSetting newConf7 marginSett $ getOption resultsTexts "print-margins"
-    let newConf9 = setSetting newConf8 colourPrintSett $ getOption resultsSets "print-colour"
-    let newConf10 = setSetting newConf9 bilaterallySett $ getOption resultsSets "print-bilaterally"
-    let newConf11 = setSetting newConf10 zimWikiFormat $ getOption formatsRes "fileformat-zimwiki"
-    let newConf12 = setSetting newConf11 teiFormat $ getOption formatsRes "fileformat-tei"
-    let newConf13 = setSetting newConf12 docbookFormat $ getOption formatsRes "fileformat-docbook5"
-    let newConf14 = setSetting newConf13 docxFormat $ getOption formatsRes "fileformat-docx"
-    let newConf15 = setSetting newConf14 dokuWikiFormat $ getOption formatsRes "fileformat-dokuwiki"
-    let newConf16 = setSetting newConf15 epubv3Format $ getOption formatsRes "fileformat-epubv3"
-    let newConf17 = setSetting newConf16 haddockFormat $ getOption formatsRes "fileformat-haddock"
-    let newConf18 = setSetting newConf17 latexFormat $ getOption formatsRes "fileformat-latex"
-    let newConf20 = setSetting newConf18 phpMarkdownFormat $ getOption formatsRes "fileformat-php"
-    let newConf21 = setSetting newConf20 mediaWikiFormat $ getOption formatsRes "fileformat-mediawiki"
-    let newConf22 = setSetting newConf21 openOfficeFormat $ getOption formatsRes "fileformat-openoffice"
-    let newConf23 = setSetting newConf22 openDocFormat $ getOption formatsRes "fileformat-opendocument"
-    let newConf24 = setSetting newConf23 powerPointFormat $ getOption formatsRes "fileformat-powerpoint"
-    let newConf25 = setSetting newConf24 jupyterFormat $ getOption formatsRes "fileformat-jupyter"
-    let newConf27 = setSetting newConf25 templateName $ getOption resultsSets "template-template"
-    saveSettings defaultConfig (AutoFromAppName appName) newConf27
+writeNewValues :: Frame () -> Map.Map String Int -> Map.Map String Bool -> Map.Map String String -> String -> IO ()
+writeNewValues mainWindow resultsSets formatsRes resultsTexts appName = do
+    readResult <- try $ readSettings (AutoFromAppName appName)
+    translate <- makeTranslator
+    case readResult of
+         Left ex -> errorDialog mainWindow (translate MsgSaveSettFail) ((translate MsgSaveSettFailMessage) ++ show (ex :: SomeException)) 
+         Right (conf, GetSetting getSetting) -> do 
+             let newConf = setSetting conf languageSett $ getOption resultsSets "lang-lang"
+             let newConf2 = setSetting newConf previewAppSett $ getOption resultsTexts "preview-app"
+             let newConf3 = setSetting newConf2 printerSett $ getOption resultsSets "print-printer"
+             let newConf4 = setSetting newConf3 resolutionSett $ getOption resultsSets "print-resolution"
+             let newConf5 = setSetting newConf4 scopeSett $ getOption resultsTexts "print-scope"
+             let newConf6 = setSetting newConf5 formatSett $ getOption resultsSets "print-format"
+             let newConf7 = setSetting newConf6 orientationSett $ getOption resultsSets "print-orientation"
+             let newConf8 = setSetting newConf7 marginSett $ getOption resultsTexts "print-margins"
+             let newConf9 = setSetting newConf8 colourPrintSett $ getOption resultsSets "print-colour"
+             let newConf10 = setSetting newConf9 bilaterallySett $ getOption resultsSets "print-bilaterally"
+             let newConf11 = setSetting newConf10 zimWikiFormat $ getOption formatsRes "fileformat-zimwiki"
+             let newConf12 = setSetting newConf11 teiFormat $ getOption formatsRes "fileformat-tei"
+             let newConf13 = setSetting newConf12 docbookFormat $ getOption formatsRes "fileformat-docbook5"
+             let newConf14 = setSetting newConf13 docxFormat $ getOption formatsRes "fileformat-docx"
+             let newConf15 = setSetting newConf14 dokuWikiFormat $ getOption formatsRes "fileformat-dokuwiki"
+             let newConf16 = setSetting newConf15 epubv3Format $ getOption formatsRes "fileformat-epubv3"
+             let newConf17 = setSetting newConf16 haddockFormat $ getOption formatsRes "fileformat-haddock"
+             let newConf18 = setSetting newConf17 latexFormat $ getOption formatsRes "fileformat-latex"
+             let newConf20 = setSetting newConf18 phpMarkdownFormat $ getOption formatsRes "fileformat-php"
+             let newConf21 = setSetting newConf20 mediaWikiFormat $ getOption formatsRes "fileformat-mediawiki"
+             let newConf22 = setSetting newConf21 openOfficeFormat $ getOption formatsRes "fileformat-openoffice"
+             let newConf23 = setSetting newConf22 openDocFormat $ getOption formatsRes "fileformat-opendocument"
+             let newConf24 = setSetting newConf23 powerPointFormat $ getOption formatsRes "fileformat-powerpoint"
+             let newConf25 = setSetting newConf24 jupyterFormat $ getOption formatsRes "fileformat-jupyter"
+             let newConf27 = setSetting newConf25 templateName $ getOption resultsSets "template-template"
+             saveSettings defaultConfig (AutoFromAppName appName) newConf27
+             if appName == "hasdoc" then infoDialog mainWindow (translate MsgSaveSettSuccess) (translate MsgSaveSettSuccessMessage) else infoDialog mainWindow (translate MsgSaveSettSuccess) (translate MsgSaveSettWizardSuccessMessage)
+    
     
     
 readNewValues :: RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
 readNewValues cssRadioBox langListBox builtinBox chosenBox appEntry printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    set cssRadioBox [selection := getSetting' conf templateName]
-    set langListBox [selection := getSetting' conf languageSett]
-    set printScaleSpin [selection := getSetting' conf resolutionSett]
-    set printersBox [selection := getSetting' conf printerSett]
-    set formatBox [selection := getSetting' conf formatSett]
-    set orientationBox [selection := getSetting' conf orientationSett]
-    set coloursBox [selection := getSetting' conf colourPrintSett]
-    set bilaterallyBox [selection := getSetting' conf bilaterallySett]
-    set printMarginCtrl [text := getSetting' conf marginSett]
-    set printScopeCtrl [text := getSetting' conf scopeSett]
-    readPreviewApp builtinBox chosenBox appEntry $ getSetting' conf previewAppSett
-    mapM_ (mapCheckboxes conf) formatsBoxes
+    translate <- makeTranslator
+    readResult <- try $ readSettings (AutoFromAppName "hasdoc")
+    case readResult of
+         Left ex -> putStrLn $ (translate MsgReadSettFailMessage) ++ show (ex :: SomeException)
+         Right (conf, GetSetting getSetting) -> do 
+             set cssRadioBox [selection := getSetting' conf templateName]
+             set langListBox [selection := getSetting' conf languageSett]
+             set printScaleSpin [selection := getSetting' conf resolutionSett]
+             set printersBox [selection := getSetting' conf printerSett]
+             set formatBox [selection := getSetting' conf formatSett]
+             set orientationBox [selection := getSetting' conf orientationSett]
+             set coloursBox [selection := getSetting' conf colourPrintSett]
+             set bilaterallyBox [selection := getSetting' conf bilaterallySett]
+             set printMarginCtrl [text := getSetting' conf marginSett]
+             set printScopeCtrl [text := getSetting' conf scopeSett]
+             readPreviewApp builtinBox chosenBox appEntry $ getSetting' conf previewAppSett
+             mapM_ (mapCheckboxes conf) formatsBoxes
+    
     
     
 mapCheckboxes :: Conf -> CheckBox () -> IO ()
@@ -228,10 +258,14 @@ mapCheckboxes conf checkbox =
         set checkbox [checked := getSetting' conf $ fromJust $ Map.lookup ident formatsMap]
     
     
+    
 readPreviewApp :: CheckBox () -> CheckBox () -> TextCtrl () -> String -> IO ()
 readPreviewApp builtinBox chosenBox textEntry "Brak" = set builtinBox [checked := True] >> set chosenBox [checked := False] >> set textEntry [text := "", enabled := False]
+
 readPreviewApp builtinBox chosenBox textEntry "Off" = set builtinBox [checked := True] >> set chosenBox [checked := False] >> set textEntry [text := "", enabled := False]
+
 readPreviewApp builtinBox chosenBox textEntry x = if null x then readPreviewApp builtinBox chosenBox textEntry "Off" else set builtinBox [checked := False] >> set chosenBox [checked := True] >> set textEntry [text := x, enabled := False]
+    
     
     
 -- template    

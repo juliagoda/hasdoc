@@ -66,6 +66,7 @@ ExtOfFilesTab: File formats
 TemplatesSetTab: Templates
 SaveBtn: Save
 ResetBtn: Reset
+ConfirmResetQuestion: Are you sure you want to reset your settings?
 CancelBtn: Cancel
 
 SaveLocation: Select a location to save progress
@@ -85,6 +86,14 @@ LoadState: Load of state
 NoSufficientData: the file does not contain sufficient data
 NoChangesInFile: the file does not contain valid data or sufficient data
 LoadStateResult: The state was successfully loaded from the selected file
+
+SaveSettFail: Write error
+SaveSettFailMessage: An error has occurred while saving the settings: 
+ReadSettFail: Reading error
+ReadSettFailMessage: An error has occurred while reading the settings: 
+SaveSettSuccess: Save settings
+SaveSettSuccessMessage: The settings for main window have been saved
+SaveSettWizardSuccessMessage: The settings for wizard have been saved
 
 ConfirmClose: Confirmation
 ConfirmCloseQuestion: Are you sure you want to close the application?

@@ -66,6 +66,7 @@ ExtOfFilesTab: Formaty plików
 TemplatesSetTab: Szablony
 SaveBtn: Zapisz
 ResetBtn: Resetuj
+ConfirmResetQuestion: Czy na pewno chcesz zresetować ustawienia?
 CancelBtn: Anuluj
 
 SaveLocation: Wybierz lokalizację dla zapisania postępu
@@ -85,6 +86,14 @@ LoadState: Odczyt stanu
 NoSufficientData: plik nie zawiera wystarczających danych
 NoChangesInFile: plik nie zawiera poprawnych lub wystarczających danych
 LoadStateResult: Stan został pomyślnie wczytany z wybranego pliku
+
+SaveSettFail: Błąd zapisu
+SaveSettFailMessage: Wystąpił błąd podczas zapisu ustawień: 
+ReadSettFail: Błąd odczytu
+ReadSettFailMessage: Wystąpił błąd podczas odczytywania ustawień: 
+SaveSettSuccess: Zapis ustawień
+SaveSettSuccessMessage: Ustawienia dla głównego okna zostały zapisane
+SaveSettWizardSuccessMessage: Ustawienia dla wizarda zostały zapisane
 
 ConfirmClose: Potwierdzenie
 ConfirmCloseQuestion: Czy na pewno chcesz zamknąć aplikację?
