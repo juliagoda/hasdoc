@@ -53,7 +53,7 @@ createIntroPage mainwizard =
         sw <- scrolledWindow firstPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 997 ]
         st1 <- staticText sw [text := (translate MsgIntroductionTitle), fontSize := 16, fontWeight := WeightBold, identity := 998 ]
         st2 <- staticText sw [text := (translate MsgIntroductionDesc), identity := 999]
-        set sw [ layout := fill $ minsize (sz 500 700) $ margin 10 $ column 5 [floatTop $ marginTop $ margin 20 $ widget st1, minsize (sz 400 300) $ floatCenter $ marginBottom $ margin 20 $ widget st2] ]
+        set sw [ layout := margin 10 $ column 5 [floatTop $ marginTop $ margin 20 $ widget st1, minsize (sz 400 300) $ floatCenter $ marginBottom $ margin 20 $ widget st2] ]
         set firstPage [layout := fill $ widget sw]
         return firstPage
         

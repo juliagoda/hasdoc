@@ -298,6 +298,7 @@ saveChanges mainWindow langList textList printList formatList spinBoxScale templ
         let unionLists = langL `Map.union` scaleInt `Map.union` printL `Map.union` templateL
         writeNewValues mainWindow unionLists formatsList textL "hasdoc"
         writeNewValues mainWindow unionLists formatsList textL "hasdoc-gen"
+        refresh mainWindow
         
         
 loadChanges :: RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
@@ -331,6 +332,7 @@ confirmReset mainWindow cssRadioBox langListBox builtinBox chosenBox pdfEntry pr
         if answer 
            then do 
                setDefaults cssRadioBox langListBox builtinBox chosenBox pdfEntry printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes 
+               refresh mainWindow
            else 
                return ()
        

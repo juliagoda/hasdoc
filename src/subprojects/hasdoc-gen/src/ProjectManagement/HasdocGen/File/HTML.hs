@@ -14,6 +14,7 @@
 module ProjectManagement.HasdocGen.File.HTML
 (
 writeChosenFormats,
+writeDefaultFormats,
 thd,
 readHtmlFile
 )
@@ -61,6 +62,19 @@ makeTranslator = do
     return (\message -> TT.unpack $ renderMsg HTMLfile (settLangIntToString $ getSetting' conf languageSett) message)
 
     
+writeDefaultFormats :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> WX.TextCtrl () -> FilePath -> IO ()
+writeDefaultFormats defFiltered reqFiltered archFiltered techFiltered testFiltered projectEntry chosenDir = 
+    do
+        projectTitle <- WX.get projectEntry WX.text
+        readTemp <- readTemplate
+        let lang = ((settLangIntToStringShort . readTemp) languageSett)
+        createDirectory (chosenDir ++ "/" ++ projectTitle)
+        
+        writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
+        
+        writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
+
+    
 
 -- the function stays here, because HTML is always generated and as first
 writeChosenFormats :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> WX.TextCtrl () -> FilePath -> IO ()
@@ -70,10 +84,7 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
         readTemp <- readTemplate
         let lang = ((settLangIntToStringShort . readTemp) languageSett)
         createDirectory (chosenDir ++ "/" ++ projectTitle)
-        
-        writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
-        
-        
+                
         options <- loadWriterOtherOpts "docbook"
         writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dbk" docbookFormat projectTitle chosenDir
         
@@ -114,8 +125,6 @@ writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltere
         
         options <- loadWriterOtherOpts "pptx"
         writeFilePandocOptsB writePowerpoint options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "pptx" powerPointFormat projectTitle chosenDir
-        
-        writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
         
         
  
