@@ -21,14 +21,17 @@ where
 import Graphics.UI.WX
 import System.Directory
 import Data.AppSettings
+import System.IO.Unsafe
 import qualified Data.Text as T
+
 import Application.Hasdoc.Settings.General 
+
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data AppCloseWindow = AppCloseWindow
 
-mkMessage "AppCloseWindow" getAppLangPath "en"
+mkMessage "AppCloseWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

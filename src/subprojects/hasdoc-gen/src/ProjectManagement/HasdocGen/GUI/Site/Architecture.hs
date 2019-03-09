@@ -28,12 +28,13 @@ import ProjectManagement.HasdocGen.Text.Site.Architecture.Content
 import ProjectManagement.HasdocGen.File.Settings
 
 import Data.AppSettings
+import System.IO.Unsafe
 import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data ArchPage = ArchPage
 
-mkMessage "ArchPage" getAppLangPath "en"
+mkMessage "ArchPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

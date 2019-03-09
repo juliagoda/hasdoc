@@ -51,7 +51,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data TechPageContent = TechPageContent
 
-mkMessage "TechPageContent" getAppLangPath "en"
+mkMessage "TechPageContent" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

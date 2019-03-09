@@ -17,7 +17,7 @@ copyright:      (c) 2019 Jagoda "juliagoda" Górska
 stability:      alpha
 license:        BSD3
 license-file:   LICENSE
-build-type:     Simple
+build-type:     Custom
 category:       Application
 data-files:
                  -- templates
@@ -38,6 +38,12 @@ source-repository head
   type: git
   location: https://github.com/juliagoda/hasdoc
 
+custom-setup
+  setup-depends: filepath >=1.4.2.1,
+                 directory,
+                 Cabal >=2.2 && <2.5,
+                 base >=4.4 && <4.11
+  
 
 library
   build-depends: wx >=0.93,

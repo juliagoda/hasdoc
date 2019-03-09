@@ -40,7 +40,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data TestPageHelp = TestPageHelp
 
-mkMessage "TestPageHelp" getAppLangPath "en"
+mkMessage "TestPageHelp" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

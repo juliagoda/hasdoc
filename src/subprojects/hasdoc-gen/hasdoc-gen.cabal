@@ -17,7 +17,7 @@ copyright:      (c) 2019 Jagoda "juliagoda" Górska
 license:        BSD3
 license-file:   LICENSE
 category:       Application
-build-type:     Simple
+build-type:     Custom
 data-files:
                  -- templates
                  data/templates/*.css
@@ -32,10 +32,14 @@ extra-source-files:
                  ChangeLog.md,
                  -- stack build plan
                  stack.yaml
-
-source-repository head
-  type: git
-  location: https://github.com/juliagoda/hasdoc-gen
+  
+  
+custom-setup
+  setup-depends: filepath >=1.4.2.1,
+                 directory,
+                 Cabal >=2.2 && <2.5,
+                 base >=4.4 && <4.11
+                 
 
 library
   build-depends: wx >=0.93,

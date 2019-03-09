@@ -16,6 +16,7 @@ openSettingsWindow
 ) 
 where
     
+    
 import Application.Hasdoc.Settings.General    
     
 import Graphics.UI.WX
@@ -39,7 +40,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data SettingsApp = SettingsApp
 
-mkMessage "SettingsApp" getAppLangPath "en"
+mkMessage "SettingsApp" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

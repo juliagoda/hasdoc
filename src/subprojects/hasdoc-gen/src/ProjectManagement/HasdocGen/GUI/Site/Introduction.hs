@@ -26,6 +26,7 @@ import Graphics.UI.WXCore
 import Graphics.UI.WX.Window
 
 import Data.AppSettings
+import System.IO.Unsafe
 import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
@@ -33,7 +34,7 @@ import ProjectManagement.HasdocGen.File.Settings
 
 data IntroPage = IntroPage
 
-mkMessage "IntroPage" getAppLangPath "en"
+mkMessage "IntroPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

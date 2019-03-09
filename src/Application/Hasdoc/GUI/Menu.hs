@@ -37,11 +37,12 @@ import Application.Hasdoc.Settings.General
 import Data.AppSettings
 import qualified Data.Text as T
 import System.FilePath
+import System.IO.Unsafe
 
 
 data MenuWidget = MenuWidget
 
-mkMessage "MenuWidget" getAppLangPath "en"
+mkMessage "MenuWidget" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

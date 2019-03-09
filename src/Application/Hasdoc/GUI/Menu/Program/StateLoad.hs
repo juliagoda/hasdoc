@@ -24,15 +24,18 @@ import Data.Ini
 import Data.AppSettings
 import qualified Data.Text as T
 import System.IO
+import System.IO.Unsafe
 
 import ProjectManagement.HasdocGen.File.HTML
 import Application.Hasdoc.Settings.General 
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
+
+
 data StateLoadWindow = StateLoadWindow
 
-mkMessage "StateLoadWindow" getAppLangPath "en"
+mkMessage "StateLoadWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
@@ -80,4 +83,3 @@ loadState mainWindow filepath =
 importFromFile :: Frame () -> FilePath -> IO ()
 importFromFile mainWindow filepath = readHtmlFile mainWindow filepath
         
-    

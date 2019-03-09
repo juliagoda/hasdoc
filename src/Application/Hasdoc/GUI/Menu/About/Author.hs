@@ -23,13 +23,15 @@ import Graphics.UI.WXCore
 
 import Data.AppSettings
 import qualified Data.Text as T
+import System.IO.Unsafe
 import Application.Hasdoc.Settings.General 
+
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data AuthorsWindow = AuthorsWindow
 
-mkMessage "AuthorsWindow" getAppLangPath "en"
+mkMessage "AuthorsWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

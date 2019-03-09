@@ -34,6 +34,7 @@ openOfficeFormat,
 openDocFormat,
 powerPointFormat,
 jupyterFormat,
+chooseTransPath
 )
 where
     
@@ -208,3 +209,10 @@ patternTemplate False = return $ (\sett -> removeSett sett)
     
 removeSett :: (Show a, Read a) => Setting a -> a
 removeSett (Setting _ x) = x
+
+
+chooseTransPath :: IO String
+chooseTransPath = do
+    home <- getHomeDirectory
+    appDataPathExists <- doesDirectoryExist getAppLangPath
+    if appDataPathExists then return getAppLangPath else return (home ++ "/.hasdoc-gen")

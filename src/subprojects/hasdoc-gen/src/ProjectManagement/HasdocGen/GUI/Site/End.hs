@@ -36,12 +36,13 @@ import ProjectManagement.HasdocGen.File.View
 import ProjectManagement.HasdocGen.File.Settings
 
 import Data.AppSettings
+import System.IO.Unsafe
 import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data EndPage = EndPage
 
-mkMessage "EndPage" getAppLangPath "en"
+mkMessage "EndPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

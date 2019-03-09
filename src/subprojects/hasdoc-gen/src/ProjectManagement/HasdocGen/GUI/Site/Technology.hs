@@ -28,12 +28,13 @@ import ProjectManagement.HasdocGen.Text.Site.Technology.Content
 import ProjectManagement.HasdocGen.File.Settings
 
 import Data.AppSettings
+import System.IO.Unsafe
 import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data TechPage = TechPage
 
-mkMessage "TechPage" getAppLangPath "en"
+mkMessage "TechPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
 makeTranslator :: (RenderMessage TechPage TechPageMessage) => IO (TechPageMessage -> String)

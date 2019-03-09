@@ -35,7 +35,7 @@ import Data.Text (Text, unpack)
 import qualified Data.ByteString.Lazy as B
 import qualified Data.Text.IO as T
 import System.IO.Unsafe
-
+import Control.Exception
 import Data.AppSettings
 
 import Text.Pandoc.Builder
@@ -48,7 +48,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data ConversionPandoc = ConversionPandoc
 
-mkMessage "ConversionPandoc" getAppLangPath "en"
+mkMessage "ConversionPandoc" (unsafePerformIO $ chooseTransPath) "en"
 
 
 makeTranslator :: (RenderMessage ConversionPandoc ConversionPandocMessage) => IO (ConversionPandocMessage -> String)
@@ -56,7 +56,7 @@ makeTranslator = do
     readResult <- readSettings (AutoFromAppName "hasdoc")
     let conf = fst readResult
     return (\message -> unpack $ renderMsg ConversionPandoc (settLangIntToString $ getSetting' conf languageSett) message)
-
+             
 
 -- mappend from Monoid - joining of pandoc parts
 -- http://hackage.haskell.org/package/pandoc-types-1.19/docs/Text-Pandoc-Builder.html#v:-60--62-

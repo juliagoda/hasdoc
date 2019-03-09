@@ -24,9 +24,9 @@ import qualified Data.Text as T
 import qualified Data.HashMap.Strict as H
 import Data.Ini
 import System.Directory
+import System.IO.Unsafe
 import System.FilePath (takeExtension)
 import Data.Char (isAlphaNum)
-
 import Data.AppSettings
 
 
@@ -34,7 +34,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data StateSaveWindow = StateSaveWindow
 
-mkMessage "StateSaveWindow" getAppLangPath "en"
+mkMessage "StateSaveWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

@@ -16,7 +16,7 @@ runPdfPreview
 )
 where
 
-
+import System.IO.Unsafe
 import System.Process
 import System.Directory
 import System.Exit
@@ -28,7 +28,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data ViewFile = ViewFile
 
-mkMessage "ViewFile" getAppLangPath "en"
+mkMessage "ViewFile" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

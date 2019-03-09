@@ -33,7 +33,7 @@ import ProjectManagement.HasdocGen.File.Settings
         
 openWizard :: Frame () -> IO ()
 openWizard mainWindow = 
-    do 
+    do        
         mainwizard <- wizard mainWindow [text := "Wizard", resizeable := True, visible := True, wizardPageSize := sz 500 700, clipChildren := False, tabTraversal := True, on wizardEvent ::= saveTempChanges]-- picture := (getAppIconsPath ++ "/wizard.png")]
         
         introPage <- createIntroPage mainwizard

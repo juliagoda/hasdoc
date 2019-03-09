@@ -22,6 +22,7 @@ import Graphics.UI.WX.Window
 import Graphics.UI.WXCore
 
 import Data.AppSettings
+import System.IO.Unsafe
 import qualified Data.Text as T
 import Application.Hasdoc.Settings.General 
 
@@ -29,7 +30,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data ToolsWindow = ToolsWindow
 
-mkMessage "ToolsWindow" getAppLangPath "en"
+mkMessage "ToolsWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

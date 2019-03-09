@@ -25,6 +25,13 @@ dependencies:
 
 library:
   source-dirs: src
+  
+custom-setup:
+  dependencies:
+    - base
+    - Cabal
+    - directory
+    - filepath
 
 executables:
   hasdoc:
@@ -33,7 +40,7 @@ executables:
     ghc-options:
     - -threaded
     - -rtsopts
-    - -with-rtsopts=-M2G
+    - -with-rtsopts=-M3G
     - -Wall
     - -fno-warn-unused-do-bind
     dependencies:

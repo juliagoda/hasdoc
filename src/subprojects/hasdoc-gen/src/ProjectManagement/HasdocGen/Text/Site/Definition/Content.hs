@@ -35,7 +35,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data DefPageContent = DefPageContent
 
-mkMessage "DefPageContent" getAppLangPath "en"
+mkMessage "DefPageContent" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

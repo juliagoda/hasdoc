@@ -21,13 +21,15 @@ where
 import Graphics.UI.WX
 import Data.AppSettings
 import qualified Data.Text as T
+import System.IO.Unsafe
 import Application.Hasdoc.Settings.General 
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data AboutMenu = AboutMenu
 
-mkMessage "AboutMenu" getAppLangPath "en"
+mkMessage "AboutMenu" (unsafePerformIO $ chooseTransPath) "en"
+
 
 
 makeTranslator :: (RenderMessage AboutMenu AboutMenuMessage) => IO (AboutMenuMessage -> String)

@@ -50,7 +50,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data ArchPageContent = ArchPageContent
 
-mkMessage "ArchPageContent" getAppLangPath "en"
+mkMessage "ArchPageContent" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

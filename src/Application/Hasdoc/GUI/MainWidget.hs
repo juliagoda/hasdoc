@@ -23,6 +23,7 @@ import ProjectManagement.HasdocGen.GUI.MainWizard
 import Application.Hasdoc.Settings.General
 
 import qualified Data.Text as T
+import System.IO.Unsafe
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 import Data.AppSettings
 
@@ -32,7 +33,7 @@ import qualified Paths_hasdoc as Paths
 data MainWidget = MainWidget
 
 
-mkMessage "MainWidget" getAppLangPath "en"
+mkMessage "MainWidget" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

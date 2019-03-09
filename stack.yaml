@@ -1,6 +1,7 @@
 
 # solver extra for last version of wxHaskell
 resolver: lts-11.9
+jobs: 1
 
 # for stability
 packages:

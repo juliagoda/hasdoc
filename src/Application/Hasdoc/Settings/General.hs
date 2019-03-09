@@ -21,7 +21,8 @@ languageSett,
 getDataDirPath,
 getAppIconsPath,
 getAppCssPath,
-getAppLangPath
+getAppLangPath,
+chooseTransPath
 ) 
 where
 
@@ -32,6 +33,8 @@ import qualified Data.Map.Lazy as Map
 import qualified Data.Text as T
 import Data.Maybe
 import Data.AppSettings
+import System.Directory
+import Control.Monad
 import Control.Exception
 import System.IO.Unsafe
 import qualified Paths_hasdoc as Paths
@@ -42,9 +45,13 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 data GeneralSett = GeneralSett
 
 
-mkMessage "GeneralSett" ((unsafePerformIO $ Paths.getDataDir) ++ "/data/translations") "en"
+mkMessage "GeneralSett" (unsafePerformIO (do
+    home <- getHomeDirectory
+    appDataPathExists <- doesDirectoryExist $ (unsafePerformIO $ Paths.getDataDir) ++ "/data/translations"
+    if appDataPathExists then liftM (++ "/data/translations") Paths.getDataDir else return (home ++ "/.hasdoc"))) "en"
 
 
+    
 
 makeTranslator :: (RenderMessage GeneralSett GeneralSettMessage) => IO (GeneralSettMessage -> String)
 makeTranslator = do
@@ -279,3 +286,10 @@ settLangIntToString 1 = "english"
 settLangIntToString _ = "english"
 
 -- setSetting conf (Setting key _) v
+
+
+chooseTransPath :: IO String
+chooseTransPath = do
+    home <- getHomeDirectory
+    appDataPathExists <- doesDirectoryExist getAppLangPath
+    if appDataPathExists then return getAppLangPath else return (home ++ "/.hasdoc")

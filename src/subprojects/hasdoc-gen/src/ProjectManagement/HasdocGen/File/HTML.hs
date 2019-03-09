@@ -41,6 +41,7 @@ import Text.HTML.TagSoup
 import Text.StringLike
 import Text.Read (readMaybe)
 import Data.Ini
+import System.IO.Unsafe
 
 --import Text.Blaze.Html
 import qualified Data.Text.IO as T
@@ -51,7 +52,7 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data HTMLfile = HTMLfile
 
-mkMessage "HTMLfile" getAppLangPath "en"
+mkMessage "HTMLfile" (unsafePerformIO $ chooseTransPath) "en"
 
 
 

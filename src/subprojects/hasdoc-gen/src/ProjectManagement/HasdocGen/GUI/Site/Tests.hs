@@ -31,12 +31,13 @@ import ProjectManagement.HasdocGen.Text.Site.Tests.Help
 import ProjectManagement.HasdocGen.File.Settings
 
 import Data.AppSettings
+import System.IO.Unsafe
 import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data TestsPage = TestsPage
 
-mkMessage "TestsPage" getAppLangPath "en"
+mkMessage "TestsPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
 makeTranslator :: (RenderMessage TestsPage TestsPageMessage) => IO (TestsPageMessage -> String)
