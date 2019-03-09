@@ -1,0 +1,96 @@
+Summary: A Haskell library for wxWidgets
+Name: wxhaskell
+Version: %{wxhversion}
+Release: %{wxhrelease}
+License: wxWindows Library license
+Group: Development/Libraries
+URL: http://wxhaskell.sourceforge.net
+Source: %{name}-src-%{version}.zip
+BuildRoot: %{_builddir}/%{name}-%{wxtoolkit}%{wxversion}-%{hcomp}%{hcversion}-%{version}-%{release}-root
+
+%description
+
+# Some useful shorthands
+%define wxhpackage  %{wxtoolkit}%{wxversion}-%{hcomp}%{hcversion}
+%define wxhlibdir   %{_libdir}/%{hcomp}-%{hcversion}/%{name}-%{version}
+%define libwxc      libwxc-%{wxtoolkit}%{wxversion}-%{version}.so
+%define source	    %{name}-src-%{version}.zip
+
+# We define a sub package to build for a specific wxGTK and Haskell compiler
+%package %{wxhpackage}
+Summary: A Haskell library for wxWidgets
+Group: Development/Libraries
+BuildRequires: %{hcomp} = %{hcversion}
+Requires: %{hcomp} = %{hcversion}
+Requires(post,preun): %{hcomp} = %{hcversion}
+
+%description %{wxhpackage}
+wxHaskell is a portable GUI library for Haskell that uses wxWidgets.
+wxWidgets is a comprehensive C++ library that is portable across all major 
+GUI platforms; including GTK, Windows, X11, and MacOS X. Furthermore, it is 
+a mature library (in development since 1992) that supports a wide range of 
+widgets with native look-and-feel.
+
+wxHaskell exposes almost all relevant wxWidgets functionality -- about 500
+classes with 2800 methods and 1200 constants. Furthermore, it adds many
+functional abstractions which lead to short and consise code.
+
+This package contains the libraries compiled 
+- for : %{hcomp}-%{hcversion}
+- with: wx%{wxToolkit}-%{wxversion}
+
+We would like to thank the people of the ELJ Eiffel project, and in 
+particular Uwe Sanders, for providing the basic C interface to wxWidgets.
+
+%prep
+%setup -q
+
+%build
+# - set the "shared-prefix" to null, such that wxHaskell apps are 
+#   independent of the location of libwxc.
+# - explicitly force a specific haskell compiler
+./configure %{configflags} --shared-prefix="" --hc=%{hcomp}-%{hcversion} --hcpkg=%{hcpkg}-%{hcversion} --libdir=%{wxhlibdir}
+make
+
+%install
+# - we use "install-files" so that the packages are not registered with ghc.
+# - we move "libwxc" to "_libdir" so that it can be found by the loader.
+rm -rf $RPM_BUILD_ROOT
+make DESTDIR=$RPM_BUILD_ROOT install-files
+mv %buildroot%{wxhlibdir}/%{libwxc} %buildroot%{_libdir}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post %{wxhpackage}
+if %{hcpkg}-%{hcversion} list > /dev/null 2> /dev/null; then
+ wxhlibdir=%{wxhlibdir}
+ cat %{wxhlibdir}/wxcore.pkg | sed -e "s|\${wxhlibdir}|${wxhlibdir}|" | %{hcpkg}-%{hcversion} --global update -
+ cat %{wxhlibdir}/wx.pkg | sed -e "s|\${wxhlibdir}|${wxhlibdir}|" | %{hcpkg}-%{hcversion} --global update -
+else
+ env wxhlibdir=%{wxhlibdir} %{hcpkg}-%{hcversion} -u -i %{wxhlibdir}/wxcore.pkg
+ env wxhlibdir=%{wxhlibdir} %{hcpkg}-%{hcversion} -u -i %{wxhlibdir}/wx.pkg
+fi
+
+%preun %{wxhpackage}
+if [ "$1" = 0 ]; then
+  if %{hcpkg}-%{hcversion} list > /dev/null 2> /dev/null; then
+   %{hcpkg}-%{hcversion} unregister wx || :
+   %{hcpkg}-%{hcversion} unregister wxcore || :
+  else
+   %{hcpkg}-%{hcversion} -r wx || :
+   %{hcpkg}-%{hcversion} -r wxcore || :
+  fi
+fi
+
+%files %{wxhpackage}
+%defattr(-,root,root,-)
+%{wxhlibdir}/*
+%{_libdir}/%{libwxc}
+
+%changelog
+* Fri Apr 30 2005 Daan Leijen <http://www.cs.uu.nl/~daan> - 0.9.4
+- Updated for ghc-pkg version 6.4+
+* Fri Mar 26 2004 Daan Leijen <http://www.cs.uu.nl/~daan> - 0.7-0
+- Initial build
+- Original spec file was kindly provided by Jens Petersen <petersen@haskell.org>.
