@@ -141,7 +141,7 @@ In the main directory of the hasdoc project, you have to perform the following c
 
 Once the construction is complete, it can be completed:
 
-`stack install hasdoc`
+`stack install hasdoc-gen`
 
 However, if you want to install the files in a different place than the default one, you can use this option:
 
