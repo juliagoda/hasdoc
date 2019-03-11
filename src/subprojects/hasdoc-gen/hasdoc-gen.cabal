@@ -96,5 +96,5 @@ library
       ProjectManagement.HasdocGen.Text.Site.Tests.Help
   other-modules: Paths_hasdoc_gen
   hs-source-dirs: src
-  ghc-options:   -rtsopts -with-rtsopts=-M2G -Wall -fno-warn-unused-do-bind -threaded
+  ghc-options:   -rtsopts -Wall -fno-warn-unused-do-bind -threaded
   default-language: Haskell2010

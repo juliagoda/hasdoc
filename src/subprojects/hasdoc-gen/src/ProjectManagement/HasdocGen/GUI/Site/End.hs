@@ -27,7 +27,6 @@ import Graphics.UI.WX.Window
 import System.IO.Unsafe
 
 import Control.Monad
-import Control.Monad.Plus
 import Control.Concurrent
 
 import ProjectManagement.HasdocGen.File.Print
