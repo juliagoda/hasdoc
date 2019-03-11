@@ -1,3 +1,8 @@
 # Changelog for hasdoc-gen
 
-## Unreleased changes
+## hasdoc-gen 1.0
+
+- Initial version
+- Open pdf viewer
+- Generate default html and pdf file of project
+- Test empty pages and empty name of project
