@@ -14,8 +14,8 @@ bug-reports:    https://github.com/juliagoda/hasdoc/issues
 author:         Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
 maintainer:     Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
 copyright:      (c) 2019 Jagoda "juliagoda" Górska
-stability:      alpha
-license:        BSD3
+stability:      stable
+license:        LGPL-3
 license-file:   LICENSE
 build-type:     Custom
 category:       Application
