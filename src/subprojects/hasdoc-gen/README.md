@@ -83,7 +83,7 @@ There are several dependencies without which it will not be possible to start or
     • wxgtk2
     • libglu
     • g++  (dla Windows – MinGW, dla MacOS X – Developer Tools)
-    • ghc w wersji 8.2.2 lub nowszej
+    • ghc version 8.2.2 or higher
     • ghc-libs
     • stack
     • wkhtmltopdf
@@ -116,8 +116,10 @@ For wxWidgets in Windows, you will probably need to run additional commands afte
 
 The project is located on the Github website, from which you can clone it with one command using the "git" program. The program will download the project to the path in which "git" is currently active:
 
-`git clone https://github.com/juliagoda/hasdoc-gen`
-
+```
+git clone https://github.com/juliagoda/hasdoc
+cd src/subprojects/hasdoc-gen
+```
 
 ## Remarks
 
