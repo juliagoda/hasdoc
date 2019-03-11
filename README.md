@@ -92,7 +92,7 @@ There are several dependencies without which it will not be possible to start or
     • wxgtk2
     • libglu
     • g++  (dla Windows – MinGW, dla MacOS X – Developer Tools)
-    • ghc w wersji 8.2.2 lub nowszej
+    • ghc version 8.2.2 or higher
     • ghc-libs
     • stack
     • wkhtmltopdf
