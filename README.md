@@ -107,11 +107,11 @@ For Windows you can download these dependencies from the following pages:
     • wxWidgets in version 3.0.4 or below (install in the path C:\Libs\wxWidgets\3.0.4) – 
   
 Links:  
-[wkhtmltopdf.org/downloads.html](wkhtmltopdf.org/downloads.html)
-[https://git-scm.com/download/win](https://git-scm.com/download/win)
-[https://haskell.org/platform/windows.html](https://haskell.org/platform/windows.html)
-[sourceforge.net/projects/mingw-w64](hsourceforge.net/projects/mingw-w64)
-[https://www.wxwidgets.org/downloads](https://www.wxwidgets.org/downloads)
+[wkhtmltopdf.org/downloads.html](wkhtmltopdf.org/downloads.html)  
+[https://git-scm.com/download/win](https://git-scm.com/download/win)  
+[https://haskell.org/platform/windows.html](https://haskell.org/platform/windows.html)  
+[sourceforge.net/projects/mingw-w64](hsourceforge.net/projects/mingw-w64)  
+[https://www.wxwidgets.org/downloads](https://www.wxwidgets.org/downloads)  
 
 
 For wxWidgets in Windows, you will probably need to run additional commands after installation to make the library detectable by wxHaskell. You can find a description of the additional steps on the page: 
