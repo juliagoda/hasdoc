@@ -195,5 +195,6 @@ During the design of this application, it was determined that it will be possibl
 
 ## Sources
 
-[github.com/wxHaskell/wxHaskell](github.com/wxHaskell/wxHaskell)
+[github.com/wxHaskell/wxHaskell](github.com/wxHaskell/wxHaskell)  
+
 [docs.wxwidgets.org/3.0/page_introduction.html#page_introduction_requirements](docs.wxwidgets.org/3.0/page_introduction.html#page_introduction_requirements)
