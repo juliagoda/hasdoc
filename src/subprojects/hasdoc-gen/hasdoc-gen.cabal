@@ -8,13 +8,14 @@ cabal-version: 1.12
 
 name:           hasdoc-gen
 version:        1.0
-description:    Please see the README on GitHub at <https://github.com/juliagoda/hasdoc-gen#readme>
-homepage:       https://github.com/juliagoda/hasdoc-gen#readme
-bug-reports:    https://github.com/juliagoda/hasdoc-gen/issues
+description:    Please see the README on GitHub at <https://github.com/juliagoda/hasdoc/tree/master/src/subprojects/hasdoc-gen#readme>
+homepage:       https://github.com/juliagoda/hasdoc/tree/master/src/subprojects/hasdoc-gen#readme
+bug-reports:    https://github.com/juliagoda/hasdoc/issues
 author:         Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
 maintainer:     Jagoda "juliagoda" Górska <juliagoda.pl@protonmail.com>
 copyright:      (c) 2019 Jagoda "juliagoda" Górska
-license:        BSD3
+stability:      stable
+license:        LGPL-3
 license-file:   LICENSE
 category:       Application
 build-type:     Custom
