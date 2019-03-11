@@ -1,0 +1,3 @@
+
+- printing at the moment is disabled because of segmentation fault in wxHaskell (hasdoc-gen)
+- hotkeys don't work (hasdoc)
