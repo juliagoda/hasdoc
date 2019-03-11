@@ -29,8 +29,8 @@ import System.IO.Unsafe
 import Control.Monad
 import Control.Concurrent
 
-import ProjectManagement.HasdocGen.File.Print
 import ProjectManagement.HasdocGen.File.Default
+import ProjectManagement.HasdocGen.File.Conversion
 import ProjectManagement.HasdocGen.File.View
 import ProjectManagement.HasdocGen.File.Settings
 

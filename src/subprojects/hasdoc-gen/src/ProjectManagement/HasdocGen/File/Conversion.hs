@@ -25,7 +25,8 @@ archDoc,
 techDoc,
 testDoc,
 convIntToCss,
-settLangIntToStringShort
+settLangIntToStringShort,
+writeChosenFormats
 )
 where
     
@@ -118,6 +119,59 @@ docLoop (Just ((x,y,z):xs)) wrOptions lang =
     
 docLoop (Just []) wrOptions lang = para linebreak
 docLoop Nothing wrOptions lang = para linebreak
+
+
+
+
+
+writeChosenFormats :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> WX.TextCtrl () -> FilePath -> IO ()
+writeChosenFormats defFiltered reqFiltered archFiltered techFiltered testFiltered projectEntry chosenDir = 
+    do
+        projectTitle <- WX.get projectEntry WX.text
+        readTemp <- readTemplate
+        let lang = ((settLangIntToStringShort . readTemp) languageSett)
+        createDirectory (chosenDir ++ "/" ++ projectTitle)
+                
+        options <- loadWriterOtherOpts "docbook"
+        writeFilePandocOptsT writeDocbook5 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dbk" docbookFormat projectTitle chosenDir
+        
+        writeZimWikiFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir
+        
+        options <- loadWriterOtherOpts "tei"
+        writeFilePandocOptsT writeTEI options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "tei" teiFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "dokuwiki"
+        writeFilePandocOptsT writeDokuWiki options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "dokuwiki" dokuWikiFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "haddock"
+        writeFilePandocOptsT writeHaddock options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "haddock" haddockFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "latex"
+        writeFilePandocOptsT writeLaTeX options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "tex" latexFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "markdown_phpextra"
+        writeFilePandocOptsT writeMarkdown options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "php" phpMarkdownFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "mediawiki"
+        writeFilePandocOptsT writeMediaWiki options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "mediawiki" mediaWikiFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "opendocument"
+        writeFilePandocOptsT writeOpenDocument options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "sxw" openDocFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "ipynb"
+        writeFilePandocOptsT writeIpynb options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "ipynb" jupyterFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "docx"
+        writeFilePandocOptsB writeDocx options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "docx" docxFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "epub"
+        writeFilePandocOptsB writeEPUB3 options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "epub" epubv3Format projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "odt"
+        writeFilePandocOptsB writeODT options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "odt" openOfficeFormat projectTitle chosenDir
+        
+        options <- loadWriterOtherOpts "pptx"
+        writeFilePandocOptsB writePowerpoint options (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang) "pptx" powerPointFormat projectTitle chosenDir
 
 
 

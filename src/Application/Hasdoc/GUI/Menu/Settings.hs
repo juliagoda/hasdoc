@@ -242,11 +242,6 @@ detectAppName False True app = app
 detectAppName _ _ _ = "Off"
 
 
--- filter use
--- filterChosenFormats :: [CheckBox ()] -> IO [CheckBox ()]
--- filterChosenFormats = filterM (\x -> get x checked)
-
-
 holdInfoAboutTexts :: TextCtrl () -> TextCtrl () -> TextCtrl () -> CheckBox () -> CheckBox () -> IO (Map.Map String String)
 holdInfoAboutTexts printMarginCtrl printScopeCtrl appEntry builtinBox chosenBox = 
     do
