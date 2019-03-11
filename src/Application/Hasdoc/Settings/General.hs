@@ -39,7 +39,7 @@ import Control.Exception
 import System.IO.Unsafe
 import qualified Paths_hasdoc as Paths
 
-import ProjectManagement.HasdocGen.File.HTML
+import ProjectManagement.HasdocGen.File.Default
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data GeneralSett = GeneralSett

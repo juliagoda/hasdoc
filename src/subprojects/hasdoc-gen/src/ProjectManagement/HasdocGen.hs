@@ -1,7 +1,7 @@
 module ProjectManagement.HasdocGen
                (
                module ProjectManagement.HasdocGen.File.Conversion
-               , module ProjectManagement.HasdocGen.File.HTML
+               , module ProjectManagement.HasdocGen.File.Default
                , module ProjectManagement.HasdocGen.File.Print
                , module ProjectManagement.HasdocGen.File.View
                , module ProjectManagement.HasdocGen.GUI.MainWizard
@@ -16,7 +16,7 @@ module ProjectManagement.HasdocGen
 
              
 import ProjectManagement.HasdocGen.File.Conversion
-import ProjectManagement.HasdocGen.File.HTML
+import ProjectManagement.HasdocGen.File.Default
 import ProjectManagement.HasdocGen.File.Print
 import ProjectManagement.HasdocGen.File.View
 import ProjectManagement.HasdocGen.GUI.MainWizard

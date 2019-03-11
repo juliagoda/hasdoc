@@ -11,7 +11,7 @@
             ,MonoLocalBinds #-}
 
             
-module ProjectManagement.HasdocGen.File.HTML
+module ProjectManagement.HasdocGen.File.Default
 (
 writeChosenFormats,
 writeDefaultFormats,

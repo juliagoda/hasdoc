@@ -30,7 +30,7 @@ import Control.Monad
 import Control.Concurrent
 
 import ProjectManagement.HasdocGen.File.Print
-import ProjectManagement.HasdocGen.File.HTML
+import ProjectManagement.HasdocGen.File.Default
 import ProjectManagement.HasdocGen.File.View
 import ProjectManagement.HasdocGen.File.Settings
 

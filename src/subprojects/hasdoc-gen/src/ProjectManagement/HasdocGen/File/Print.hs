@@ -6,22 +6,14 @@ printFile
 where
     
     
-import ProjectManagement.HasdocGen.File.HTML
+import ProjectManagement.HasdocGen.File.Default
     
     
 import Graphics.UI.WXCore.Print
 import Graphics.UI.WX
 
 
--- createPreview :: Frame () -> Maybe [(String, String)] -> IO ()
--- createPreview mainwindow defWidgets = 
---     do
---         pageSetup <- pageSetupDialog mainwindow 25
---         printPreview pageSetup "Test" pageFun $ printFun defWidgets 
---         
---         
-
-   
+-- disabled module temporarily   
    
 createPreview :: Frame () -> Maybe [(Int, String, String)] -> IO ()
 createPreview mainwindow defWidgets = 

@@ -26,7 +26,7 @@ import qualified Data.Text as T
 import System.IO
 import System.IO.Unsafe
 
-import ProjectManagement.HasdocGen.File.HTML
+import ProjectManagement.HasdocGen.File.Default
 import Application.Hasdoc.Settings.General 
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())

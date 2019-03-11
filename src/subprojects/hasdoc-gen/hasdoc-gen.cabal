@@ -73,7 +73,7 @@ library
   exposed-modules:
       ProjectManagement.HasdocGen
       ProjectManagement.HasdocGen.File.Conversion
-      ProjectManagement.HasdocGen.File.HTML
+      ProjectManagement.HasdocGen.File.Default
       ProjectManagement.HasdocGen.File.Print
       ProjectManagement.HasdocGen.File.View
       ProjectManagement.HasdocGen.File.Settings
