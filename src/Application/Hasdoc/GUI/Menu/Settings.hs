@@ -83,7 +83,7 @@ createTabsWidget settWindow =
 
         
         -- create panel with print options (temporarily disabled)
-        p4   <- panel  notebook' [enabled := False]
+        p4   <- panel  notebook' [enabled := False, visible := False]
         
         printDesc <- staticText p4 [ text := (translate MsgPrintDesc) ]
 
