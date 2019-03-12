@@ -10,6 +10,7 @@
             ,AllowAmbiguousTypes
             ,MonoLocalBinds #-}
 
+            
 module ProjectManagement.HasdocGen.GUI.Site.Architecture
 (
 createArchPage
@@ -27,9 +28,7 @@ import ProjectManagement.HasdocGen.Text.Site.Architecture.Help
 import ProjectManagement.HasdocGen.Text.Site.Architecture.Content
 import ProjectManagement.HasdocGen.File.Settings
 
-import Data.AppSettings
 import System.IO.Unsafe
-import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data ArchPage = ArchPage
@@ -38,18 +37,10 @@ mkMessage "ArchPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-
-makeTranslator :: (RenderMessage ArchPage ArchPageMessage) => IO (ArchPageMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg ArchPage (settLangIntToString $ getSetting' conf languageSett) message)
-
-
 createArchPage :: Wizard () -> IO (WizardPageSimple (), [(StaticText (), TextCtrl ())])
 createArchPage mainwizard = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator ArchPage
         archPage <- wizardPageSimple mainwizard [text := (translate MsgArchTitle), style := wxEVT_WIZARD_HELP, identity := 1034]
         sw <- scrolledWindow archPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1035]
         

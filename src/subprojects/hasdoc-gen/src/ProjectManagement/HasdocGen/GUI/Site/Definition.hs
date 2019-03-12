@@ -10,6 +10,7 @@
             ,AllowAmbiguousTypes
             ,MonoLocalBinds #-}
 
+            
 module ProjectManagement.HasdocGen.GUI.Site.Definition
 (
 createDefPage
@@ -27,9 +28,7 @@ import ProjectManagement.HasdocGen.Text.Site.Definition.Help
 import ProjectManagement.HasdocGen.Text.Site.Definition.Content
 import ProjectManagement.HasdocGen.File.Settings
 
-import Data.AppSettings
 import System.IO.Unsafe
-import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data DefPage = DefPage
@@ -37,20 +36,11 @@ data DefPage = DefPage
 mkMessage "DefPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
-
-
-makeTranslator :: (RenderMessage DefPage DefPageMessage) => IO (DefPageMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg DefPage (settLangIntToString $ getSetting' conf languageSett) message)
-
-
     
 createDefPage :: Wizard () -> IO (WizardPageSimple (), [(StaticText (), TextCtrl ())])
 createDefPage mainwizard = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator DefPage
         defPage <- wizardPageSimple mainwizard [text := (translate MsgDefinitionTitle), style := wxEVT_WIZARD_HELP, identity := 1000]
         sw <- scrolledWindow defPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1001]
     

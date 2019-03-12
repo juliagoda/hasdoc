@@ -25,9 +25,10 @@ body {
 
 @media print {
     
-    div:before { background: #fff7ea; }
-    div:after { background: #fff7ea; }
-    div { page-break-before: always; background: #fff7ea; }
+    div 
+	{
+		page-break-before: always;
+	}
 
     #title-block-header { 
         height: 15%;
@@ -56,7 +57,11 @@ p { margin-bottom:1.9em;
     background: #fff7ea; 
 }
 
-.pages-headers { color: #111; 
+.pages-headers { 
+    display: flex;
+    position: relative;
+    width: 100%;
+    color: #111; 
     font-family: 'Open Sans', sans-serif; 
     font-size: 2.4em; 
     font-weight: 300; 

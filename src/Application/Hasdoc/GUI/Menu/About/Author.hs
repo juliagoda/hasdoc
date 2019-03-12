@@ -21,8 +21,6 @@ import Graphics.UI.WX
 import Graphics.UI.WX.Window
 import Graphics.UI.WXCore
 
-import Data.AppSettings
-import qualified Data.Text as T
 import System.IO.Unsafe
 import Application.Hasdoc.Settings.General 
 
@@ -35,18 +33,10 @@ mkMessage "AuthorsWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage AuthorsWindow AuthorsWindowMessage) => IO (AuthorsWindowMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg AuthorsWindow (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
 openAuthorsWindow :: Frame () -> IO ()
 openAuthorsWindow mainWindow = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator AuthorsWindow
         authorWindow <- dialog mainWindow [text := (translate MsgAuthorMenu), visible := True, clientSize  := sz 640 480, picture := (getAppIconsPath ++ "/authors-window.png")] 
         p <- panel authorWindow []
         titleText <- staticText p [ text := (translate MsgAuthorsList), fontSize := 16, fontWeight := WeightBold ]

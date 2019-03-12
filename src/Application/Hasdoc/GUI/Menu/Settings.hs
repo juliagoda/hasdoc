@@ -32,9 +32,6 @@ import Data.AppSettings
 import System.IO.Unsafe
 import System.FilePath
 
-import qualified Data.Text as T
-
-
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
@@ -44,17 +41,10 @@ mkMessage "SettingsApp" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage SettingsApp SettingsAppMessage) => IO (SettingsAppMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg SettingsApp (settLangIntToString $ getSetting' conf languageSett) message)
-
-
 openSettingsWindow :: Frame () -> IO ()
 openSettingsWindow mainWindow = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator SettingsApp
         settWindow <- frameTool [text := translate MsgSettWindow, resizeable := True, visible := True, clientSize  := sz 640 480, picture := (getAppIconsPath ++ "/settings-window.png")]  mainWindow  
         createTabsWidget settWindow
         
@@ -62,12 +52,13 @@ openSettingsWindow mainWindow =
 createTabsWidget :: Frame () -> IO ()
 createTabsWidget settWindow = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator SettingsApp
         
         p <- panel settWindow []
         notebook' <- notebook p []
         
-        -- radio box page
+        
+        -- create panel with languages
         p1   <- panel  notebook' []
         
         let rlabels = ["polski", "english"]
@@ -76,6 +67,7 @@ createTabsWidget settWindow =
         r1 <- singleListBox p1 [items := ["polski","english"]] --on select ::= do something after selecting]
         
         
+        -- create panel with choice of pdf viewer
         p3   <- panel notebook' []        
         
         execPath <- getExecutablePath
@@ -83,13 +75,14 @@ createTabsWidget settWindow =
         c1   <- checkBox p3 []
         c2   <- checkBox p3 []
         
-        let openWidget = openAfterFocus c2 extExecPath $ fileOpenDialog settWindow True True (translate MsgLoadLabel) [((translate MsgExeFiles), ["*"])] execPath "" -- Higher order functions, Curried functions
+        let openWidget = openAfterFocus c2 extExecPath $ fileOpenDialog settWindow True True (translate MsgLoadLabel) [((translate MsgExeFiles), ["*"])] execPath ""
         set extExecPath [ on focus := openWidget, enabled := False, clientSize  := sz 200 20 ] 
         peviewDesc <- staticText p3 [ text := (translate MsgViewerLabel) ]
         set c1 [text :=(translate MsgNoViewer), on command ::= changeAppTextEntry patternM extExecPath c2 False True, checked := True ]
         set c2 [text := (translate MsgExternalViewer), on command ::= changeAppTextEntry patternE extExecPath c1 True True, checked := False ]       
 
         
+        -- create panel with print options (temporarily disabled)
         p4   <- panel  notebook' [enabled := False]
         
         printDesc <- staticText p4 [ text := (translate MsgPrintDesc) ]
@@ -128,6 +121,7 @@ createTabsWidget settWindow =
         let listComboBoxes = [printersBox, formatBox, orientationBox, coloursBox, bilaterallyBox]
         
         
+        -- create panel with choice of additional file formats
         p5   <- panel notebook' []
         
         formatsDesc <- staticText p5 [ text := (translate MsgExtFilesLabel) ]
@@ -148,14 +142,15 @@ createTabsWidget settWindow =
         
         let formatsBoxes = [formatBox1, formatBox2,formatBox3, formatBox4, formatBox5, formatBox6, formatBox7, formatBox8, formatBox9, formatBox10, formatBox11, formatBox12, formatBox13, formatBox14]
         
-        
+        -- create panel with choice of css template
         p6   <- panel  notebook' []
         
         let rlabels = ["default", "blue", "green", "orange"]
         templateDesc <- staticText p6 [ text := (translate MsgTemplatesLabel) ]
         templatesRadioBox   <- radioBox p6 Vertical rlabels   [text := (translate MsgTemplatesList) ]
         
-
+        
+        -- create tabs from panels and describe layouts for them 
         let tab1 = tab (translate MsgLangTab) (container p1 (margin 10 $ column 10 [ floatTop $ widget langDesc, floatTopLeft $ (column 5 [fill (widget r1)])]))
         
         let tab3 = tab (translate MsgPreviewTab) (container p3 (margin 10 $ column 10 [ floatTop $ widget peviewDesc, floatTopLeft $ (grid 3 5 [[widget c1, label ""], [widget c2, widget extExecPath]])]))
@@ -165,20 +160,23 @@ createTabsWidget settWindow =
         let tab5 = tab (translate MsgExtOfFilesTab) (container p5 (margin 10 $ column 10 [ floatTop $ widget formatsDesc, floatCenter $ (grid 3 5 [[widget formatBox1, widget formatBox2, widget formatBox3, widget formatBox4], [widget formatBox5, widget formatBox6, widget formatBox7, widget formatBox8], [widget formatBox9, widget formatBox10, widget formatBox11, widget formatBox12], [widget formatBox13, widget formatBox14]])]))
             
         let tab6 = tab (translate MsgTemplatesSetTab) (container p6 (margin 10 $ column 10 [ floatTop $ widget templateDesc, floatTopLeft $ (column 5 [hstretch (widget templatesRadioBox)])]))
-            
+        
+        -- join all tabs
         let nbtab = tabs notebook' [tab1, tab3, tab4, tab5, tab6]
             
+        -- set default options     
         setDefaults templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes         
         
         loadChanges templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes
         
-        
+        -- create buttons for save, reset and cancel and add signals to them
         saveBtn <- button p [ text := (translate MsgSaveBtn), enabled := True, on command := saveChanges settWindow (holdInfoAboutLang r1) (holdInfoAboutTexts marginsEntry scopeEntry extExecPath c1 c2) (holdInfoAboutPrint listComboBoxes) (holdInfoAboutFormats formatsBoxes) (holdInfoAboutPrintRes intSpinBox) (holdInfoAboutTemplates templatesRadioBox) ]
         resetBtn <- button p [ text := (translate MsgResetBtn), enabled := True, on command := confirmReset settWindow templatesRadioBox r1 c1 c2 extExecPath intSpinBox printersBox formatBox orientationBox coloursBox bilaterallyBox marginsEntry scopeEntry formatsBoxes  ]
         cancelBtn <- button p [ text := (translate MsgCancelBtn), on command := close settWindow ]
         
         -- =================================================
         
+        -- describe layout of all tabs and buttons for current page
         set settWindow [layout :=
               container p $
                 column 3
@@ -323,7 +321,7 @@ setDefaults cssRadioBox langListBox builtinBox chosenBox pdfEntry printScaleSpin
 confirmReset :: Frame () -> RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO () 
 confirmReset mainWindow cssRadioBox langListBox builtinBox chosenBox pdfEntry printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator SettingsApp
         answer <- confirmDialog mainWindow (translate MsgConfirmClose) (translate MsgConfirmResetQuestion) True 
         if answer 
            then do 

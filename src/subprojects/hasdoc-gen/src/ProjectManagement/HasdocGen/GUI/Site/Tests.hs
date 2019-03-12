@@ -25,34 +25,23 @@ import Graphics.UI.WXCore
 import Graphics.UI.WXCore.Frame
 import Graphics.UI.WX.Window
 
-import ProjectManagement.HasdocGen.File.Print
 import ProjectManagement.HasdocGen.Text.Site.Tests.Content
 import ProjectManagement.HasdocGen.Text.Site.Tests.Help
 import ProjectManagement.HasdocGen.File.Settings
 
-import Data.AppSettings
 import System.IO.Unsafe
-import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data TestsPage = TestsPage
 
 mkMessage "TestsPage" (unsafePerformIO $ chooseTransPath) "en"
 
-
-makeTranslator :: (RenderMessage TestsPage TestsPageMessage) => IO (TestsPageMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg TestsPage (settLangIntToString $ getSetting' conf languageSett) message)
-
-
     
     
 createTestsPage :: Wizard () -> IO (WizardPageSimple (), [(StaticText (), TextCtrl ())])
 createTestsPage mainwizard = 
     do        
-        translate <- makeTranslator
+        translate <- makeTranslator TestsPage
         testPage <- wizardPageSimple mainwizard [text := (translate MsgTestsTitle), style := wxEVT_WIZARD_HELP, identity := 1089]
         sw <- scrolledWindow testPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1090]
         

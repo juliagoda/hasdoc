@@ -27,7 +27,6 @@ import System.Directory
 import System.IO.Unsafe
 import System.FilePath (takeExtension)
 import Data.Char (isAlphaNum)
-import Data.AppSettings
 
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
@@ -38,17 +37,10 @@ mkMessage "StateSaveWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage StateSaveWindow StateSaveWindowMessage) => IO (StateSaveWindowMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg StateSaveWindow (settLangIntToString $ getSetting' conf languageSett) message)
-
-
 saveFileDialog :: Frame () -> [(String, [String])] -> IO ()
 saveFileDialog mainWindow regex = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator StateSaveWindow
         home <- getHomeDirectory
         tempHdocExists <- doesFileExist (home ++ "/.hasdoc-gen/temp/temp.hdoc")
         

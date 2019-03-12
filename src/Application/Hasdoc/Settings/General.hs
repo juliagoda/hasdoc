@@ -22,7 +22,8 @@ getDataDirPath,
 getAppIconsPath,
 getAppCssPath,
 getAppLangPath,
-chooseTransPath
+chooseTransPath,
+makeTranslator
 ) 
 where
 
@@ -53,11 +54,11 @@ mkMessage "GeneralSett" (unsafePerformIO (do
 
     
 
-makeTranslator :: (RenderMessage GeneralSett GeneralSettMessage) => IO (GeneralSettMessage -> String)
-makeTranslator = do
+makeTranslator :: (RenderMessage a b) => a -> IO (b -> String)
+makeTranslator master = do
     readResult <- readSettings (AutoFromAppName "hasdoc")
     let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg GeneralSett (settLangIntToString $ getSetting' conf languageSett) message)
+    return (\message -> T.unpack $ renderMsg master (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 
@@ -202,7 +203,7 @@ defaultConfig = getDefaultConfig $ do
 writeNewValues :: Frame () -> Map.Map String Int -> Map.Map String Bool -> Map.Map String String -> String -> IO ()
 writeNewValues mainWindow resultsSets formatsRes resultsTexts appName = do
     readResult <- try $ readSettings (AutoFromAppName appName)
-    translate <- makeTranslator
+    translate <- makeTranslator GeneralSett
     case readResult of
          Left ex -> errorDialog mainWindow (translate MsgSaveSettFail) ((translate MsgSaveSettFailMessage) ++ show (ex :: SomeException)) 
          Right (conf, GetSetting getSetting) -> do 
@@ -238,7 +239,7 @@ writeNewValues mainWindow resultsSets formatsRes resultsTexts appName = do
     
 readNewValues :: RadioBox () -> SingleListBox () -> CheckBox () -> CheckBox () -> TextCtrl () -> SpinCtrl () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> ComboBox () -> TextCtrl () -> TextCtrl () -> [CheckBox ()] -> IO ()
 readNewValues cssRadioBox langListBox builtinBox chosenBox appEntry printScaleSpin printersBox formatBox orientationBox coloursBox bilaterallyBox printMarginCtrl printScopeCtrl formatsBoxes = do
-    translate <- makeTranslator
+    translate <- makeTranslator GeneralSett
     readResult <- try $ readSettings (AutoFromAppName "hasdoc")
     case readResult of
          Left ex -> putStrLn $ (translate MsgReadSettFailMessage) ++ show (ex :: SomeException)

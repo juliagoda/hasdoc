@@ -10,6 +10,7 @@
             ,AllowAmbiguousTypes
             ,MonoLocalBinds #-}
 
+            
 module ProjectManagement.HasdocGen.GUI.Site.End
 (
 createEndPage
@@ -34,9 +35,7 @@ import ProjectManagement.HasdocGen.File.Conversion
 import ProjectManagement.HasdocGen.File.View
 import ProjectManagement.HasdocGen.File.Settings
 
-import Data.AppSettings
 import System.IO.Unsafe
-import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data EndPage = EndPage
@@ -45,18 +44,10 @@ mkMessage "EndPage" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage EndPage EndPageMessage) => IO (EndPageMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg EndPage (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
 createEndPage :: Frame () -> Wizard () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> IO (WizardPageSimple ())
 createEndPage mainwindow mainwizard defWidgets reqWidgets archWidgets techWidgets testWidgets = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator EndPage
         endPage <- wizardPageSimple mainwizard [text := (translate MsgFinishTitle), style := wxHELP, identity := 1106]
         
         sw <- scrolledWindow endPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1107]
@@ -81,7 +72,7 @@ createEndPage mainwindow mainwizard defWidgets reqWidgets archWidgets techWidget
 runGenerationSeq :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> TextCtrl () -> IO ()
 runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator EndPage
         entriesNotEmpty <- checkAllEntries mainwindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry
         if entriesNotEmpty 
            then do 
@@ -106,7 +97,7 @@ checkAllEntries mainWindow defWidgets reqWidgets archWidgets techWidgets testWid
 checkIfAllEmpty :: Frame () -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> TextCtrl () -> IO Bool
 checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets textEntry = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator EndPage
         titleText <- get textEntry text
         case null (dropWhile isSpace titleText) of
              True -> (warningDialog mainWindow (translate MsgWarningProject) (translate MsgWaningProjectName)) >> return False

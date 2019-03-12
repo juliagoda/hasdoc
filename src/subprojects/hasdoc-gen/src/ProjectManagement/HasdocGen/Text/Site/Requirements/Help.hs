@@ -37,8 +37,6 @@ where
     
 import ProjectManagement.HasdocGen.File.Settings
 
-import Data.AppSettings
-import qualified Data.Text as T
 import System.IO.Unsafe
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
@@ -48,65 +46,56 @@ mkMessage "ReqPageHelp" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-
-makeTranslator :: (RenderMessage ReqPageHelp ReqPageHelpMessage) => IO (ReqPageHelpMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg ReqPageHelp (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
 hint1 :: String
-hint1 = (unsafePerformIO makeTranslator) MsgReqHint1
+hint1 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint1
 
 hint2 :: String
-hint2 = (unsafePerformIO makeTranslator) MsgReqHint2
+hint2 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint2
 
 hint3 :: String
-hint3 = (unsafePerformIO makeTranslator) MsgReqHint3
+hint3 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint3
 
 hint4 :: String
-hint4 = (unsafePerformIO makeTranslator) MsgReqHint4
+hint4 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint4
 
 hint5 :: String
-hint5 = (unsafePerformIO makeTranslator) MsgReqHint5
+hint5 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint5
 
 hint6 :: String
-hint6 = (unsafePerformIO makeTranslator) MsgReqHint6
+hint6 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint6
 
 hint7 :: String
-hint7 = (unsafePerformIO makeTranslator) MsgReqHint7
+hint7 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint7
 
 hint8 :: String
-hint8 = (unsafePerformIO makeTranslator) MsgReqHint8 
+hint8 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint8 
 
 hint9 :: String
-hint9 = (unsafePerformIO makeTranslator) MsgReqHint9
+hint9 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint9
 
 hint10 :: String
-hint10 = (unsafePerformIO makeTranslator) MsgReqHint10
+hint10 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint10
 
 hint11 :: String
-hint11 = (unsafePerformIO makeTranslator) MsgReqHint11
+hint11 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint11
 
 hint12 :: String
-hint12 = (unsafePerformIO makeTranslator) MsgReqHint12
+hint12 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint12
 
 hint13 :: String
-hint13 = (unsafePerformIO makeTranslator) MsgReqHint13
+hint13 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint13
 
 hint14 :: String
-hint14 = (unsafePerformIO makeTranslator) MsgReqHint14
+hint14 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint14
 
 hint15 :: String
-hint15 = (unsafePerformIO makeTranslator) MsgReqHint15
+hint15 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint15
 
 hint16 :: String
-hint16 = (unsafePerformIO makeTranslator) MsgReqHint16
+hint16 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint16
 
 hint17 :: String
-hint17 = (unsafePerformIO makeTranslator) MsgReqHint17
+hint17 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint17
 
 hint18 :: String
-hint18 = (unsafePerformIO makeTranslator) MsgReqHint18
+hint18 = (unsafePerformIO $ makeTranslator ReqPageHelp) MsgReqHint18

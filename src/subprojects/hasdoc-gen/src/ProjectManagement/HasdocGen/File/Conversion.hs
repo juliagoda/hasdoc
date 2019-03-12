@@ -52,13 +52,6 @@ import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 data ConversionPandoc = ConversionPandoc
 
 mkMessage "ConversionPandoc" (unsafePerformIO $ chooseTransPath) "en"
-
-
-makeTranslator :: (RenderMessage ConversionPandoc ConversionPandocMessage) => IO (ConversionPandocMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> unpack $ renderMsg ConversionPandoc (settLangIntToString $ getSetting' conf languageSett) message)
              
 
 -- mappend from Monoid - joining of pandoc parts
@@ -79,35 +72,35 @@ loadWriterOtherOpts defTemp =
 defDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 defDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --defDoc Just [] = str ""
-defDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("definitions", ["pages"], [("lang", lang)]) ((headerWith ("defPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgDefinitionTitle) <>
+defDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("definitions", ["pages"], [("lang", lang)]) ((headerWith ("defPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO $ makeTranslator ConversionPandoc) $ MsgDefinitionTitle) <>
   docLoop (Just x) wrOptions lang)
   
 
 reqDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 reqDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --reqDoc Just [] = str ""
-reqDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("requirements", ["pages"], [("lang", lang)]) ((headerWith ("reqPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgReqTitle) <>
+reqDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("requirements", ["pages"], [("lang", lang)]) ((headerWith ("reqPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO $ makeTranslator ConversionPandoc) $ MsgReqTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 archDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 archDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --archDoc Just [] = str ""
-archDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("architecture", ["pages"], [("lang", lang)]) ((headerWith ("archPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgArchTitle) <>
+archDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("architecture", ["pages"], [("lang", lang)]) ((headerWith ("archPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO $ makeTranslator ConversionPandoc) $ MsgArchTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 techDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 techDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --techDoc Just [] = str ""
-techDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("technology", ["pages"], [("lang", lang)]) ((headerWith ("techPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgTechnologyTitle) <>
+techDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("technology", ["pages"], [("lang", lang)]) ((headerWith ("techPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO $ makeTranslator ConversionPandoc) $ MsgTechnologyTitle) <>
   docLoop (Just x) wrOptions lang)
   
   
 testDoc :: Maybe [(Int, String, String)] -> WriterOptions -> String -> Pandoc
 testDoc Nothing wrOptions lang = setAuthors [""] $ doc $ para linebreak
 --testDoc Just [] = str ""
-testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) ((headerWith ("testPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO makeTranslator) $ MsgTestsTitle) <>
+testDoc (Just x) wrOptions lang = doc $ para linebreak <> divWith ("tests", ["pages"], [("lang", lang)]) ((headerWith ("testPage", ["pages-headers"], [("lang", lang)]) 2 $ text $ (unsafePerformIO $ makeTranslator ConversionPandoc) $ MsgTestsTitle) <>
   docLoop (Just x) wrOptions lang)
   
     

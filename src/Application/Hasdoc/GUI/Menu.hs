@@ -34,8 +34,6 @@ import Application.Hasdoc.GUI.Menu.About.Doc
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 import Application.Hasdoc.Settings.General
-import Data.AppSettings
-import qualified Data.Text as T
 import System.FilePath
 import System.IO.Unsafe
 
@@ -44,19 +42,12 @@ data MenuWidget = MenuWidget
 
 mkMessage "MenuWidget" (unsafePerformIO $ chooseTransPath) "en"
 
-
-
-makeTranslator :: (RenderMessage MenuWidget MenuWidgetMessage) => IO (MenuWidgetMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg MenuWidget (settLangIntToString $ getSetting' conf languageSett) message)
     
     
 createMainMenu :: Frame () -> ToolBar () -> IO ()
 createMainMenu mainWindow tbar = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator MenuWidget
         programPane <- getProgramPane mainWindow tbar
         settingsPane <- getSettingsPane mainWindow tbar
         aboutPane <- getAboutPane mainWindow tbar
@@ -74,7 +65,7 @@ createMainMenu mainWindow tbar =
 getProgramPane :: Frame () -> ToolBar () -> IO (Menu ())
 getProgramPane mainWindow tbar =
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator MenuWidget
         programPane <- menuPane [ text := translate MsgProgramMenu ]
         saveItem  <- menuItem programPane [ text := translate MsgSaveStateMenu, help := translate MsgSaveStateMenuHelp, on command := saveFileDialog mainWindow [(translate MsgLoadFilesExt, ["*.hdoc"])]] 
         loadItem  <- menuItem programPane [ text := translate MsgLoadStateMenu, help := translate MsgLoadStateMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.hdoc"])] False ] 
@@ -91,7 +82,7 @@ getProgramPane mainWindow tbar =
 getSettingsPane :: Frame () -> ToolBar () -> IO (Menu ())
 getSettingsPane mainWindow tbar =
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator MenuWidget
         optionsPane <- menuPane [ text := translate MsgOptionsMenu ]
         settItem  <- menuItem optionsPane [ text := translate MsgSettingsMenu, help := translate MsgSettingsMenuHelp ]
         set settItem [on command := openSettingsWindow mainWindow]
@@ -102,7 +93,7 @@ getSettingsPane mainWindow tbar =
 getAboutPane :: Frame () -> ToolBar () -> IO (Menu ())
 getAboutPane mainWindow tbar =
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator MenuWidget
         aboutPane <- menuPane [ text := translate MsgAboutMenu ]
         authorItem  <- menuItem aboutPane [ text := translate MsgAuthorMenu, help := translate MsgAuthorMenuHelp, on command := openAuthorsWindow mainWindow ] 
         websiteItem  <- menuItem aboutPane [ text := translate MsgHomepageMenu, help := translate MsgHomepageMenuHelp, on command := openHomepage mainWindow ] 

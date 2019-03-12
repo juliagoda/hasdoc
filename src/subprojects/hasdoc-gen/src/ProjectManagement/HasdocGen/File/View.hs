@@ -31,19 +31,10 @@ data ViewFile = ViewFile
 mkMessage "ViewFile" (unsafePerformIO $ chooseTransPath) "en"
 
 
-
-
-makeTranslator :: (RenderMessage ViewFile ViewFileMessage) => IO (ViewFileMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg ViewFile (settLangIntToString $ getSetting' conf languageSett) message)
-
-
 runPdfPreview :: FilePath -> IO ()
 runPdfPreview pdfPath = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator ViewFile
         readTemp <- readTemplate
         case readTemp previewAppSett of
              "Brak" -> return ()

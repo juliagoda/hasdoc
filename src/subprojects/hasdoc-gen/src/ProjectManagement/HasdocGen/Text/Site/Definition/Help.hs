@@ -28,8 +28,6 @@ where
     
 import ProjectManagement.HasdocGen.File.Settings
 
-import Data.AppSettings
-import qualified Data.Text as T
 import System.IO.Unsafe
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
@@ -39,41 +37,32 @@ mkMessage "DefPageHelp" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-
-makeTranslator :: (RenderMessage DefPageHelp DefPageHelpMessage) => IO (DefPageHelpMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg DefPageHelp (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
 hint1 :: String
-hint1 = (unsafePerformIO makeTranslator) MsgDefHint1
+hint1 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint1
 
 hint2 :: String
-hint2 = (unsafePerformIO makeTranslator) MsgDefHint2
+hint2 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint2
 
 hint3 :: String
-hint3 = (unsafePerformIO makeTranslator) MsgDefHint3
+hint3 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint3
 
 hint4 :: String
-hint4 = (unsafePerformIO makeTranslator) MsgDefHint4
+hint4 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint4
 
 hint5 :: String
-hint5 = (unsafePerformIO makeTranslator) MsgDefHint5
+hint5 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint5
 
 hint6 :: String
-hint6 = (unsafePerformIO makeTranslator) MsgDefHint6
+hint6 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint6
 
 hint7 :: String
-hint7 = (unsafePerformIO makeTranslator) MsgDefHint7
+hint7 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint7
 
 hint8 :: String
-hint8 = (unsafePerformIO makeTranslator) MsgDefHint8
+hint8 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint8
 
 hint9 :: String
-hint9 = (unsafePerformIO makeTranslator) MsgDefHint9
+hint9 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint9
 
 hint10 :: String
-hint10 = (unsafePerformIO makeTranslator) MsgDefHint10 
+hint10 = (unsafePerformIO $ makeTranslator DefPageHelp) MsgDefHint10 

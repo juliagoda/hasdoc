@@ -21,7 +21,6 @@ where
 import Graphics.UI.WX
 import System.Directory
 import Data.Ini
-import Data.AppSettings
 import qualified Data.Text as T
 import System.IO
 import System.IO.Unsafe
@@ -37,22 +36,13 @@ data StateLoadWindow = StateLoadWindow
 
 mkMessage "StateLoadWindow" (unsafePerformIO $ chooseTransPath) "en"
 
-
-
-
-
-makeTranslator :: (RenderMessage StateLoadWindow StateLoadWindowMessage) => IO (StateLoadWindowMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg StateLoadWindow (settLangIntToString $ getSetting' conf languageSett) message)  
     
     
 -- IO (Maybe FilePath)
 openFileDialog :: Frame () -> FilePath -> String -> [(String, [String])] -> Bool -> IO ()
 openFileDialog mainWindow title path regex imported = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator StateLoadWindow
         fileState <- fileOpenDialog mainWindow True True title regex path ""
         case fileState of
              Nothing -> return ()
@@ -68,7 +58,7 @@ openFileDialog mainWindow title path regex imported =
 loadState :: Frame () -> FilePath -> IO ()
 loadState mainWindow filepath = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator StateLoadWindow
         home <- getHomeDirectory
         loadedParser <- readIniFile filepath
         case loadedParser of

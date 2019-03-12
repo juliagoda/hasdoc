@@ -21,9 +21,7 @@ import Graphics.UI.WX
 import Graphics.UI.WX.Window
 import Graphics.UI.WXCore
 
-import Data.AppSettings
 import System.IO.Unsafe
-import qualified Data.Text as T
 import Application.Hasdoc.Settings.General 
 
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
@@ -34,18 +32,11 @@ mkMessage "ToolsWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage ToolsWindow ToolsWindowMessage) => IO (ToolsWindowMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg ToolsWindow (settLangIntToString $ getSetting' conf languageSett) message)
-
-
 
 openToolsWindow :: Frame () -> IO ()
 openToolsWindow mainWindow = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator ToolsWindow
         toolsWindow <- dialog mainWindow [text := (translate MsgToolsMenu), visible := True, clientSize  := sz 640 480, picture := (getAppIconsPath ++ "/tools-window.png")] 
         p <- panel toolsWindow []
         titleText <- staticText p [ text := (translate MsgToolsMenu), fontSize := 16, fontWeight := WeightBold ]

@@ -53,13 +53,6 @@ data HTMLfile = HTMLfile
 mkMessage "HTMLfile" (unsafePerformIO $ chooseTransPath) "en"
 
 
-
-makeTranslator :: (RenderMessage HTMLfile HTMLfileMessage) => IO (HTMLfileMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> TT.unpack $ renderMsg HTMLfile (settLangIntToString $ getSetting' conf languageSett) message)
-
     
 writeDefaultFormats :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> WX.TextCtrl () -> FilePath -> IO ()
 writeDefaultFormats defFiltered reqFiltered archFiltered techFiltered testFiltered projectEntry chosenDir = 
@@ -88,7 +81,7 @@ writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered project
 writePDFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> FilePath -> IO ()
 writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator HTMLfile
         options <- loadWriterPandocOpts
         rawPdf <- runIOorExplode $ makePDF "wkhtmltopdf" [] writeHtml5String options $ myDoc projectTitle (defDoc defFiltered options lang) (reqDoc reqFiltered options lang) (archDoc archFiltered options lang) (techDoc techFiltered options lang) (testDoc testFiltered options lang)
         case rawPdf of
@@ -99,7 +92,7 @@ writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered proje
 readHtmlFile :: WX.Frame () -> FilePath -> IO ()
 readHtmlFile mainWindow filepath = 
     do
-        translate <- makeTranslator
+        translate <- makeTranslator HTMLfile
         htmld <- T.readFile filepath
         let tagsMap = iterateTags (parseTags htmld) []
         if null tagsMap 

@@ -20,9 +20,7 @@ where
 
 import Graphics.UI.WX
 import System.Directory
-import Data.AppSettings
 import System.IO.Unsafe
-import qualified Data.Text as T
 
 import Application.Hasdoc.Settings.General 
 
@@ -35,18 +33,10 @@ mkMessage "AppCloseWindow" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage AppCloseWindow AppCloseWindowMessage) => IO (AppCloseWindowMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg AppCloseWindow (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
 closeMainWindow :: Frame () -> IO ()
 closeMainWindow mainWindow =
     do
-        translate <- makeTranslator
+        translate <- makeTranslator AppCloseWindow
         answer <- confirmDialog mainWindow (translate MsgConfirmClose) (translate MsgConfirmCloseQuestion) True
         if answer
            then do 

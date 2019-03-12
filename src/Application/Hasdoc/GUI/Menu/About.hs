@@ -19,8 +19,6 @@ where
 
 
 import Graphics.UI.WX
-import Data.AppSettings
-import qualified Data.Text as T
 import System.IO.Unsafe
 import Application.Hasdoc.Settings.General 
 
@@ -32,18 +30,9 @@ mkMessage "AboutMenu" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage AboutMenu AboutMenuMessage) => IO (AboutMenuMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg AboutMenu (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
 showBrowserStatus :: Frame () -> Bool -> IO ()
 showBrowserStatus mainWindow True = return ()
 showBrowserStatus mainWindow False = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator AboutMenu
         errorDialog mainWindow (translate MsgErrorBrowser) (translate MsgErrorBrowserDesc)
-    

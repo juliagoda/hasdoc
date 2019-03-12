@@ -27,28 +27,19 @@ import ProjectManagement.HasdocGen.Text.Site.Technology.Help
 import ProjectManagement.HasdocGen.Text.Site.Technology.Content
 import ProjectManagement.HasdocGen.File.Settings
 
-import Data.AppSettings
 import System.IO.Unsafe
-import qualified Data.Text as T
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
 data TechPage = TechPage
 
 mkMessage "TechPage" (unsafePerformIO $ chooseTransPath) "en"
-
-
-makeTranslator :: (RenderMessage TechPage TechPageMessage) => IO (TechPageMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg TechPage (settLangIntToString $ getSetting' conf languageSett) message)
     
 
 
 createTechPage :: Wizard () -> IO (WizardPageSimple (), [(StaticText (), TextCtrl ())])
 createTechPage mainwizard = 
     do 
-        translate <- makeTranslator
+        translate <- makeTranslator TechPage
         techPage <- wizardPageSimple mainwizard [text := (translate MsgTechnologyTitle), style := wxEVT_WIZARD_HELP, identity := 1061]
         sw <- scrolledWindow techPage [ scrollRate := sz 10 10, style := wxVSCROLL, identity := 1062]
         

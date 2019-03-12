@@ -37,8 +37,6 @@ where
     
 import ProjectManagement.HasdocGen.File.Settings
     
-import Data.AppSettings
-import qualified Data.Text as T
 import System.IO.Unsafe
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
@@ -48,65 +46,56 @@ mkMessage "ReqPageContent" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-
-makeTranslator :: (RenderMessage ReqPageContent ReqPageContentMessage) => IO (ReqPageContentMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg ReqPageContent (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
 task1 :: String
-task1 = (unsafePerformIO makeTranslator) MsgReqQuestion1
+task1 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion1
 
 task2 :: String
-task2 = (unsafePerformIO makeTranslator) MsgReqQuestion2
+task2 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion2
 
 task3 :: String
-task3 = (unsafePerformIO makeTranslator) MsgReqQuestion3
+task3 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion3
 
 task4 :: String
-task4 = (unsafePerformIO makeTranslator) MsgReqQuestion4
+task4 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion4
 
 task5 :: String
-task5 = (unsafePerformIO makeTranslator) MsgReqQuestion5
+task5 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion5
 
 task6 :: String
-task6 = (unsafePerformIO makeTranslator) MsgReqQuestion6
+task6 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion6
 
 task7 :: String
-task7 = (unsafePerformIO makeTranslator) MsgReqQuestion7
+task7 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion7
 
 task8 :: String
-task8 = (unsafePerformIO makeTranslator) MsgReqQuestion8 
+task8 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion8 
 
 task9 :: String
-task9 = (unsafePerformIO makeTranslator) MsgReqQuestion9
+task9 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion9
 
 task10 :: String
-task10 = (unsafePerformIO makeTranslator) MsgReqQuestion10
+task10 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion10
 
 task11 :: String
-task11 = (unsafePerformIO makeTranslator) MsgReqQuestion11
+task11 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion11
 
 task12 :: String
-task12 = (unsafePerformIO makeTranslator) MsgReqQuestion12
+task12 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion12
 
 task13 :: String
-task13 = (unsafePerformIO makeTranslator) MsgReqQuestion13
+task13 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion13
 
 task14 :: String
-task14 = (unsafePerformIO makeTranslator) MsgReqQuestion14
+task14 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion14
 
 task15 :: String
-task15 = (unsafePerformIO makeTranslator) MsgReqQuestion15
+task15 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion15
 
 task16 :: String
-task16 = (unsafePerformIO makeTranslator) MsgReqQuestion16
+task16 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion16
 
 task17 :: String
-task17 = (unsafePerformIO makeTranslator) MsgReqQuestion17
+task17 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion17
 
 task18 :: String
-task18 = (unsafePerformIO makeTranslator) MsgReqQuestion18
+task18 = (unsafePerformIO $ makeTranslator ReqPageContent) MsgReqQuestion18

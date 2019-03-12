@@ -34,7 +34,8 @@ openOfficeFormat,
 openDocFormat,
 powerPointFormat,
 jupyterFormat,
-chooseTransPath
+chooseTransPath,
+makeTranslator
 )
 where
     
@@ -62,6 +63,13 @@ settLangIntToString :: Int -> String
 settLangIntToString 0 = "polski"
 settLangIntToString 1 = "english"
 settLangIntToString _ = "english"
+
+
+makeTranslator :: (RenderMessage a b) => a -> IO (b -> String)
+makeTranslator master = do
+    readResult <- readSettings (AutoFromAppName "hasdoc")
+    let conf = fst readResult
+    return (\message -> T.unpack $ renderMsg master (settLangIntToString $ getSetting' conf languageSett) message)
 
 
 renderMsg :: (RenderMessage a b) => a -> String -> b -> T.Text

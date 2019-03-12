@@ -43,8 +43,6 @@ where
 
 import ProjectManagement.HasdocGen.File.Settings
     
-import Data.AppSettings
-import qualified Data.Text as T
 import System.IO.Unsafe
 import Text.Shakespeare.I18N (mkMessage, renderMessage, RenderMessage())
 
@@ -55,84 +53,75 @@ mkMessage "ArchPageContent" (unsafePerformIO $ chooseTransPath) "en"
 
 
 
-makeTranslator :: (RenderMessage ArchPageContent ArchPageContentMessage) => IO (ArchPageContentMessage -> String)
-makeTranslator = do
-    readResult <- readSettings (AutoFromAppName "hasdoc")
-    let conf = fst readResult
-    return (\message -> T.unpack $ renderMsg ArchPageContent (settLangIntToString $ getSetting' conf languageSett) message)
-
-
-
-
 task1 :: String
-task1 = (unsafePerformIO makeTranslator) MsgArchQuestion1
+task1 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion1
 
 task2 :: String
-task2 = (unsafePerformIO makeTranslator) MsgArchQuestion2
+task2 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion2
 
 task3 :: String
-task3 = (unsafePerformIO makeTranslator) MsgArchQuestion3
+task3 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion3
 
 task4 :: String
-task4 = (unsafePerformIO makeTranslator) MsgArchQuestion4
+task4 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion4
 
 task5 :: String
-task5 = (unsafePerformIO makeTranslator) MsgArchQuestion5
+task5 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion5
 
 task6 :: String
-task6 = (unsafePerformIO makeTranslator) MsgArchQuestion6
+task6 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion6
 
 task7 :: String
-task7 = (unsafePerformIO makeTranslator) MsgArchQuestion7
+task7 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion7
 
 task8 :: String
-task8 = (unsafePerformIO makeTranslator) MsgArchQuestion8
+task8 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion8
 
 task9 :: String
-task9 = (unsafePerformIO makeTranslator) MsgArchQuestion9
+task9 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion9
 
 task10 :: String
-task10 = (unsafePerformIO makeTranslator) MsgArchQuestion10
+task10 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion10
 
 task11 :: String
-task11 = (unsafePerformIO makeTranslator) MsgArchQuestion11
+task11 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion11
 
 task12 :: String
-task12 = (unsafePerformIO makeTranslator) MsgArchQuestion12
+task12 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion12
 
 task13 :: String
-task13 = (unsafePerformIO makeTranslator) MsgArchQuestion13
+task13 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion13
 
 task14 :: String
-task14 = (unsafePerformIO makeTranslator) MsgArchQuestion14
+task14 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion14
 
 task15 :: String
-task15 = (unsafePerformIO makeTranslator) MsgArchQuestion15
+task15 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion15
 
 task16 :: String
-task16 = (unsafePerformIO makeTranslator) MsgArchQuestion16
+task16 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion16
 
 task17 :: String
-task17 = (unsafePerformIO makeTranslator) MsgArchQuestion17
+task17 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion17
 
 task18 :: String
-task18 = (unsafePerformIO makeTranslator) MsgArchQuestion18
+task18 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion18
 
 task19 :: String
-task19 = (unsafePerformIO makeTranslator) MsgArchQuestion19
+task19 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion19
 
 task20 :: String
-task20 = (unsafePerformIO makeTranslator) MsgArchQuestion20
+task20 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion20
 
 task21 :: String
-task21 = (unsafePerformIO makeTranslator) MsgArchQuestion21
+task21 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion21
 
 task22 :: String
-task22 = (unsafePerformIO makeTranslator) MsgArchQuestion22
+task22 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion22
 
 task23 :: String
-task23 = (unsafePerformIO makeTranslator) MsgArchQuestion23
+task23 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion23
 
 task24 :: String
-task24 = (unsafePerformIO makeTranslator) MsgArchQuestion24
+task24 = (unsafePerformIO $ makeTranslator ArchPageContent) MsgArchQuestion24
 

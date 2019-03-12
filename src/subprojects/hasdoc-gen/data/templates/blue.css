@@ -11,20 +11,18 @@
 
 html {
     margin: 0;
-	background: #f8f8f7;
 }
 
 body {
     margin: 0;
 	color: #3d748f;
-	background: #f8f8f7;
 }
 
 @media print {
     
-	div {
+	div 
+	{
 		page-break-before: always;
-		background: #f8f8f7;
 	}
 	
 	#title-block-header {
@@ -46,15 +44,17 @@ body {
 	line-height: 1;
 	text-align: center;
 	margin: 0 auto;
-	background: #f8f8f7;
 }
 
 p {
 	margin-bottom: 1.3em;
-	padding-bottom: 1.3em, background: #f8f8f7;
+	padding-bottom: 1.3em,
 }
 
 .pages-headers {
+    display: flex;
+    position: relative;
+    width: 100%;
 	color: #111;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 2.4em;
@@ -64,7 +64,6 @@ p {
 	border-bottom: 1px solid #333;
 	margin-bottom: 2em;
 	text-align: center;
-	background: #f8f8f7;
 }
 
 .questions {
@@ -74,7 +73,6 @@ p {
 	line-height: 1.5;
 	font-style: italic;
 	text-align: justify;
-	background: #f8f8f7;
 }
 
 .questions:before {
@@ -96,7 +94,6 @@ p {
 	line-height: 1.5;
 	font-weight: 100;
 	text-align: justify;
-	background: #f8f8f7;
 }
 
 .answers:before,
