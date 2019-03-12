@@ -1,40 +1,73 @@
+/*
+ * Source: https://1stwebdesigner.com/css-snippets-blockquotes/
+ * Name: BQ Patterns
+ * Author: Derek Wheelden
+ */
+
+
+
 @import url(https://fonts.googleapis.com/css?family=Noto+Sans:400,700);
 @import url(https://fonts.googleapis.com/css?family=Sanchez:400italic,400);
 @import url(https://fonts.googleapis.com/css?family=Roboto:100);
 
 
 html {
-  background: #fff7ea;
+  margin: 0;
 }
 
 body {
+  margin: 0;
   color: #cc8e2f;
 }
 
 
 @media print {
     
-    div { page-break-before: always; }
+    div 
+	{
+		page-break-before: always;
+	}
 
     #title-block-header { 
-    height: 100%;
-    width: 100%;
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
+        height: 15%;
+        width: 100%;
+        display: flex;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
     }
 }
 
+.title { color: #111; 
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 3.4em; 
+    font-weight: bold; 
+    letter-spacing: -1px; 
+    line-height: 1; 
+    text-align: center; 
+    margin: 0 auto; 
+}
 
-.title { color: #111; font-family: 'Open Sans', sans-serif; font-size:3.4em; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; margin: 0 auto;  }
 
+p { margin-bottom:1.9em; 
+    padding-bottom: 1.9em; 
+}
 
-p { margin-bottom:1.9em; padding-bottom: 1.9em }
-
-
-p strong { color: #111; font-family: 'Open Sans', sans-serif; font-size:2.4em; font-weight: 300; line-height: 32px; padding-bottom:.2em; border-bottom:1px solid #333; margin: 0 auto; text-align: center; }
-
+.pages-headers { 
+    display: flex;
+    position: relative;
+    width: 100%;
+    color: #111; 
+    font-family: 'Open Sans', sans-serif; 
+    font-size: 2.4em; 
+    font-weight: 300; 
+    line-height: 32px; 
+    padding-bottom:.2em; 
+    border-bottom:1px solid #333; 
+    margin: 0 auto; 
+    text-align: center; 
+    background: #fff7ea; 
+}
 
 .questions {
   position: relative;
@@ -70,8 +103,4 @@ p strong { color: #111; font-family: 'Open Sans', sans-serif; font-size:2.4em; f
   content: '\201C';
   font-family: 'Sanchez';
   color: #cc8e2f;
-}
-
-.answers:after {
-  content: '\201D';
 }

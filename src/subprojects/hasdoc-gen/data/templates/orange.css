@@ -13,13 +13,11 @@
 
 html {
   margin: 0;
-  background: #fff7ea;
 }
 
 body {
   margin: 0;
   color: #cc8e2f;
-  background: #fff7ea;
 }
 
 
@@ -48,13 +46,11 @@ body {
     line-height: 1; 
     text-align: center; 
     margin: 0 auto; 
-    background: #fff7ea;  
 }
 
 
 p { margin-bottom:1.9em; 
     padding-bottom: 1.9em; 
-    background: #fff7ea; 
 }
 
 .pages-headers { 
@@ -80,7 +76,6 @@ p { margin-bottom:1.9em;
   line-height:1.5;
   font-style: italic;
   text-align: justify;
-  background: #fff7ea;
 }
 
 .questions:before {
@@ -102,7 +97,6 @@ p { margin-bottom:1.9em;
   line-height:1.5;
   font-weight: 100;
   text-align: justify;
-  background: #fff7ea;
 }
 
 .answers:before, .answers:after {
