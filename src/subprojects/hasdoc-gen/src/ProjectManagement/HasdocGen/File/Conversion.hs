@@ -31,6 +31,7 @@ writeChosenFormats
 where
     
 import ProjectManagement.HasdocGen.File.Settings 
+import qualified Graphics.UI.WX as WX
 
 import Data.Text (Text, unpack)
 import qualified Data.ByteString.Lazy as B
@@ -39,6 +40,7 @@ import System.IO.Unsafe
 import Control.Exception
 import Data.AppSettings
 
+import System.Directory
 import Text.Pandoc.Builder
 import Text.Pandoc.Options
 import Text.Pandoc.Writers.HTML

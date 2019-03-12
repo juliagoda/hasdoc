@@ -1,6 +1,5 @@
 
 resolver: lts-11.9
-jobs: 2
 
 packages:
 - .
