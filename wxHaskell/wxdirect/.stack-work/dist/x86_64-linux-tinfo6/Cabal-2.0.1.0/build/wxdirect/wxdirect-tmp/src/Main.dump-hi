@@ -1,0 +1,1489 @@
+
+==================== FINAL INTERFACE ====================
+2019-03-12 00:15:52.783555878 UTC
+
+interface main:Main 8022
+  interface hash: a69546924489cf679d7690155402295b
+  ABI hash: a59ec6d93623161ff00195e9ab480183
+  export-list hash: e8e6b88e1aade271193c64ca693e21ab
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: cbd705bd8a083e5fc40c137310e76bef
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Main.compileOpts
+  Main.defaultOutputDirWxh
+  Main.getDefaultFiles
+  Main.getDefaultHeaderFiles
+  Main.getDefaultOutputDirWxc
+  Main.getDefaultSTCHeaderFile
+  Main.helpMessage
+  Main.invokeError
+  Main.isHelp
+  Main.isOutput
+  Main.isTarget
+  Main.isVerbose
+  Main.main
+  Main.moduleClassInfoName
+  Main.moduleClassTypesName
+  Main.moduleClassesName
+  Main.moduleClassesShortName
+  Main.moduleDefsName
+  Main.moduleRootDir
+  Main.moduleRootWx
+  Main.moduleRootWxCore
+  Main.options
+  Main.showHelp
+  Main.Flag{Main.Help Main.Output Main.Target Main.Verbose Main.WxcDir}
+  Main.Mode{Main.ModeCHeader Main.ModeClassInfo Main.ModeClassTypes Main.ModeClasses Main.ModeHelp Main.ModeSTC inputFiles outputDir verbose}
+  Main.Target{Main.TClassInfo Main.TClassTypes Main.TClasses Main.THeader Main.TSTC}
+module dependencies: Classes CompileClassInfo CompileClassTypes
+                     CompileClasses CompileHeader CompileSTC DeriveTypes HaskellNames
+                     IOExtra ParseC Types
+package dependencies: array-0.5.2.0 base-4.10.1.0 binary-0.8.5.1
+                      bytestring-0.10.8.2 containers-0.5.11.0 deepseq-1.4.3.0
+                      filepath-1.4.2.1 ghc-prim-0.5.1.1 integer-gmp-1.0.1.0 mtl-2.2.2
+                      parsec-3.1.13.0 process-1.4.3.0 strict-0.3.2 text-1.2.3.1
+                      time-1.8.0.2 transformers-0.5.2.0 unix-2.7.2.2
+orphans: time-1.8.0.2:Data.Time.Format.Parse
+         time-1.8.0.2:Data.Time.LocalTime.Internal.ZonedTime
+         time-1.8.0.2:Data.Time.LocalTime.Internal.LocalTime
+         time-1.8.0.2:Data.Time.Calendar.Gregorian
+         text-1.2.3.1:Data.Text.Lazy text-1.2.3.1:Data.Text
+         binary-0.8.5.1:Data.Binary.Generic
+         bytestring-0.10.8.2:Data.ByteString.Builder
+         text-1.2.3.1:Data.Text.Show
+         transformers-0.5.2.0:Control.Monad.Trans.Error
+         base-4.10.1.0:GHC.Float base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Complex base-4.10.1.0:Data.Either
+                         base-4.10.1.0:Data.Functor.Compose base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity
+                         base-4.10.1.0:Data.Functor.Product base-4.10.1.0:Data.Functor.Sum
+                         base-4.10.1.0:Data.List.NonEmpty base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Semigroup base-4.10.1.0:Data.Type.Equality
+                         base-4.10.1.0:Data.Version base-4.10.1.0:Data.Void
+                         base-4.10.1.0:GHC.Exts base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats containers-0.5.11.0:Data.IntMap.Internal
+                         containers-0.5.11.0:Data.IntSet.Internal
+                         containers-0.5.11.0:Data.Map.Internal
+                         containers-0.5.11.0:Data.Sequence.Internal
+                         containers-0.5.11.0:Data.Set.Internal containers-0.5.11.0:Data.Tree
+                         text-1.2.3.1:Data.Text text-1.2.3.1:Data.Text.Lazy
+import  -/  base-4.10.1.0:Data.Foldable 9ed87455d68e87ff2b5b8725eae9897e
+import  -/  base-4.10.1.0:Data.OldList 555420b092ca8cf0a8f9666bc0e07dcf
+import  -/  base-4.10.1.0:GHC.Base 782fd99b5e36f3698a26179a49afca64
+import  -/  base-4.10.1.0:GHC.IO e261d8b68ccf81a359626fa520b57d1d
+import  -/  base-4.10.1.0:GHC.IO.Exception c72758923693d771268bed5d3d52443d
+import  -/  base-4.10.1.0:GHC.List e3060fbeb44ce0038e6b4dedf2dd9cf1
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+import  -/  base-4.10.1.0:System.Console.GetOpt 12175f7c3c7663087065ba898a9e33ea
+import  -/  base-4.10.1.0:System.Environment c9f912affeed5beb387a8c5d2b2c6102
+import  -/  base-4.10.1.0:System.IO 6e5bb580370d8d71dc5888f723cea4b4
+import  -/  filepath-1.4.2.1:System.FilePath 80ac24565c406c0581e22be8d3d04755
+import  -/  filepath-1.4.2.1:System.FilePath.Posix f01f9812819d174101ce0d3e93864549
+import  -/  ghc-prim-0.5.1.1:GHC.Classes 93e2660065dce9329577e83d76d8f0d4
+import  -/  ghc-prim-0.5.1.1:GHC.Types b1fd0716441595db508c1a74387bf394
+import  -/  Classes 066ef4de8df5a8a4a0e734d7381f059e
+  exports: 83c87d4726fdb7b54ac491b4af7589a6
+  getWxcDir 7733e7e58ca329e0eb2e569153d88445
+  setWxcDir bc3f64eb14b29514f269ffc1275c71f9
+import  -/  CompileClassInfo 2e171d02c5c30a9db90ee82979ab2639
+  exports: 4c0238bc8f46082fd0459b30f21f1fb4
+  compileClassInfo c992de683149c9738e057e2c809d4a61
+import  -/  CompileClassTypes e0cd3dfe64a22fa509d16b4371eec19b
+  exports: ab87efd18352bfb0fbc64fa3061f7bab
+  compileClassTypes 5779c89f1b25731faa3f1edca3e3d51d
+import  -/  CompileClasses d5ef29c540a57a9f8c63742a4f48b2e4
+  exports: ca65114b9b7de3b717f312994c80f799
+  compileClasses eb6bd52a8cb76052e6ff9cf7886842fd
+import  -/  CompileHeader 7207158efbe7bc0ec3dfd9709e5cfbf7
+  exports: 0257146ad975fbd56a12b78091c1e8ea
+  compileHeader 10c66f6d6386a1aa7b8aa54a10c906b1
+import  -/  CompileSTC 9596d0c48a8911714895128fa6adc85a
+  exports: 3e7f94c319be59c844db41f21d769cb7
+  compileSTC 998a1b3ac38f5f83c184b978d23e6540
+4a26106b4b5890d8d431f2cad6a4d8b1
+  $tc'Help :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   4458707310531848700##
+                   14670892153773095930##
+                   Main.$trModule
+                   Main.$tc'Help2
+                   0#
+                   Main.$tc'Help1) -}
+7f129c57aef058b5f34e67c330cb692b
+  $tc'Help1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m1, Inline: [~] -}
+bce190c3cb87e29c90ccc166cc295a0f
+  $tc'Help2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'Help3) -}
+3073015861561380003b8c460088176e
+  $tc'Help3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'Help"#) -}
+164f8805e54289f975d1c9f61452987c
+  $tc'ModeCHeader :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   16605283772188037749##
+                   6151144593463862300##
+                   Main.$trModule
+                   Main.$tc'ModeCHeader2
+                   0#
+                   Main.$tc'ModeCHeader1) -}
+ed9e8fae866229231301479cf620e803
+  $tc'ModeCHeader1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+caf9c6f916f27a7e1edc541221a0ca8f
+  $tc'ModeCHeader2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'ModeCHeader3) -}
+a2e324bfb4a90f519646ba72fa0d9ee5
+  $tc'ModeCHeader3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'ModeCHeader"#) -}
+5d9238366016994a42fa07d67974dc98
+  $tc'ModeClassInfo :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   8005067696823531169##
+                   4377869627388785191##
+                   Main.$trModule
+                   Main.$tc'ModeClassInfo2
+                   0#
+                   Main.$tc'ModeClassInfo1) -}
+352116fc568a38408a911d64f297c2f2
+  $tc'ModeClassInfo1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+c7e4f9d0f170bc7e04902d9364b7a2cd
+  $tc'ModeClassInfo2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'ModeClassInfo3) -}
+45d35ddfb14773a8a057cae5ec73214b
+  $tc'ModeClassInfo3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'ModeClassInfo"#) -}
+3d911cdcff57f6cebd44f1a71e0ca204
+  $tc'ModeClassTypes :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   16133775899175913590##
+                   18274920959300864316##
+                   Main.$trModule
+                   Main.$tc'ModeClassTypes1
+                   0#
+                   Main.$tc'ModeCHeader1) -}
+3e7c5f7dbf20f22d7fd6d20243d8e4d2
+  $tc'ModeClassTypes1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'ModeClassTypes2) -}
+8e06da8c97d113d66bd4a1ce948eeacf
+  $tc'ModeClassTypes2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'ModeClassTypes"#) -}
+ac8ff6652df29a84fab76d8299be37fc
+  $tc'ModeClasses :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   3361168638068065743##
+                   17792292808644601215##
+                   Main.$trModule
+                   Main.$tc'ModeClasses1
+                   0#
+                   Main.$tc'ModeCHeader1) -}
+bb0709482040b353610b683052f049f6
+  $tc'ModeClasses1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'ModeClasses2) -}
+8b14c298a3f4e8ef7aa2ce0e4ccd3bb4
+  $tc'ModeClasses2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'ModeClasses"#) -}
+75a9ce068a3754624011844702a25dc0
+  $tc'ModeHelp :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   7806827042674092675##
+                   7687881689029191797##
+                   Main.$trModule
+                   Main.$tc'ModeHelp2
+                   0#
+                   Main.$tc'ModeHelp1) -}
+1b8506df4c99238585f8a08743a75ba0
+  $tc'ModeHelp1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m1, Inline: [~] -}
+725eb3ef8493440c86bab301be3d1c59
+  $tc'ModeHelp2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'ModeHelp3) -}
+13685c7b46a1b7fddecacbb5da88f4c7
+  $tc'ModeHelp3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'ModeHelp"#) -}
+2e2e8e8ebf140af66ba8ad89c6ba1f31
+  $tc'ModeSTC :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   18382437291010510856##
+                   8662994653928911247##
+                   Main.$trModule
+                   Main.$tc'ModeSTC1
+                   0#
+                   Main.$tc'ModeCHeader1) -}
+83c583703b2ac9336ae3897fcc73e835
+  $tc'ModeSTC1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'ModeSTC2) -}
+4b85b3f3a74887f03ed398bf60ce87d2
+  $tc'ModeSTC2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'ModeSTC"#) -}
+a9a48e933d1fa5d0009abd6091e90d19
+  $tc'Output :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   13784598551935372185##
+                   14799132830708404937##
+                   Main.$trModule
+                   Main.$tc'Output2
+                   0#
+                   Main.$tc'Output1) -}
+7281ed1ec8e0b054e288b832b21b9446
+  $tc'Output1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+2babbbd4c4048180a8dd17ffd0951ee1
+  $tc'Output2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'Output3) -}
+cf2cd6730ba8975f468acc69e3de951f
+  $tc'Output3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'Output"#) -}
+8e77b29b6362cd5e61618bcae5fcc94e
+  $tc'TClassInfo :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   4409038940199947706##
+                   14131563376115437591##
+                   Main.$trModule
+                   Main.$tc'TClassInfo2
+                   0#
+                   Main.$tc'TClassInfo1) -}
+7ece78b6c1f29d16045b4980e3a911ac
+  $tc'TClassInfo1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m1, Inline: [~] -}
+bde63ecd2e5b2f55c290cc878a3a88dd
+  $tc'TClassInfo2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'TClassInfo3) -}
+7e07300ca70b315a7bc47772773f1b09
+  $tc'TClassInfo3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'TClassInfo"#) -}
+541362dae9e63e91607b866f092466df
+  $tc'TClassTypes :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   12390385680983219579##
+                   8818247479650116236##
+                   Main.$trModule
+                   Main.$tc'TClassTypes1
+                   0#
+                   Main.$tc'TClassInfo1) -}
+61cc4f5b26c6cba0b5b886e2587ab72e
+  $tc'TClassTypes1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'TClassTypes2) -}
+181ab30f88f0e48ca00628e1c7d5af55
+  $tc'TClassTypes2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'TClassTypes"#) -}
+effc6448c9bbf9eefcb9b2b9f6cbd3f5
+  $tc'TClasses :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   2951423686820713328##
+                   15689763260174574041##
+                   Main.$trModule
+                   Main.$tc'TClasses1
+                   0#
+                   Main.$tc'TClassInfo1) -}
+8b1843d33fbf457133d1876cec8b86bc
+  $tc'TClasses1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'TClasses2) -}
+b3a2ea37500c546a8199cbabf384d635
+  $tc'TClasses2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'TClasses"#) -}
+7dd390af9ee6b3d096783f418359321a
+  $tc'THeader :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   14420833787406087112##
+                   15965162127294483405##
+                   Main.$trModule
+                   Main.$tc'THeader1
+                   0#
+                   Main.$tc'TClassInfo1) -}
+9eb8196ad606746acb9715b100bcf758
+  $tc'THeader1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'THeader2) -}
+062dd1294f56b961561f7ac4b55b6ab7
+  $tc'THeader2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'THeader"#) -}
+6d6fff27485bcc49436129146decb922
+  $tc'TSTC :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   5809827733244743569##
+                   3446030950939155711##
+                   Main.$trModule
+                   Main.$tc'TSTC1
+                   0#
+                   Main.$tc'TClassInfo1) -}
+ade45c75ede6540821b3e069bb1f4eb1
+  $tc'TSTC1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'TSTC2) -}
+cd8aaf72b720e079ae6f8f07914b9814
+  $tc'TSTC2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'TSTC"#) -}
+9f013138513e2dd3298aecb976cec334
+  $tc'Target :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   2691644912148879391##
+                   11796272459645446249##
+                   Main.$trModule
+                   Main.$tc'Target2
+                   0#
+                   Main.$tc'Target1) -}
+e9362183c5fac4621707c2b9719177b2
+  $tc'Target1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+034c04a25924b660615967fb091e2c96
+  $tc'Target2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'Target3) -}
+0a2e8085b2ea71b1e66999ab5f60ae82
+  $tc'Target3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'Target"#) -}
+21231b285189755ccdef3556ef2644fb
+  $tc'Verbose :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   17279356160017476746##
+                   14404698556595415759##
+                   Main.$trModule
+                   Main.$tc'Verbose1
+                   0#
+                   Main.$tc'Help1) -}
+00ddfff6f35469aa39c45f920d28c192
+  $tc'Verbose1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'Verbose2) -}
+67aaf67c99e6cb22c42b67fbc18ca371
+  $tc'Verbose2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'Verbose"#) -}
+e97b96b0f5b1554dac5b72e268803d80
+  $tc'WxcDir :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   16486198112734806179##
+                   785322188989420237##
+                   Main.$trModule
+                   Main.$tc'WxcDir1
+                   0#
+                   Main.$tc'Output1) -}
+9648abb4db63ec0c57a9adede736a9fe
+  $tc'WxcDir1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tc'WxcDir2) -}
+b4d1fab4dbd097e16337000208376f8a
+  $tc'WxcDir2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'WxcDir"#) -}
+0edb2946ed74790fec41feb6ecd73fe5
+  $tcFlag :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   765580092068838181##
+                   9208971811078348203##
+                   Main.$trModule
+                   Main.$tcFlag1
+                   0#
+                   GHC.Types.krep$*) -}
+19a26d314b04e98064197c12164fe6c5
+  $tcFlag1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tcFlag2) -}
+f24eb97fdacb015c46544d47613b497e
+  $tcFlag2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Flag"#) -}
+a7cac1c2969687d76584afe7fbb5bef5
+  $tcMode :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   3931013417371853809##
+                   9275087900407655097##
+                   Main.$trModule
+                   Main.$tcMode1
+                   0#
+                   GHC.Types.krep$*) -}
+a333e6abbc52e74bb0173c7ec6fa3a10
+  $tcMode1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tcMode2) -}
+3ef9dad7b1b99be1a28609c09c74a9cb
+  $tcMode2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Mode"#) -}
+9aca968f2f8f82e890b4002a33804b16
+  $tcTarget :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   14376309348902922356##
+                   4332180037719897483##
+                   Main.$trModule
+                   Main.$tcTarget1
+                   0#
+                   GHC.Types.krep$*) -}
+6dfce83fc13e39ff336e216d5fde6a2e
+  $tcTarget1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$tcTarget2) -}
+f18246d320a90420b606b442d158afe8
+  $tcTarget2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Target"#) -}
+9d72b2fddb818bcd8919052935e0f1f3
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module Main.$trModule3 Main.$trModule1) -}
+3108ceeaf5a318be844de422b45de9d8
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$trModule2) -}
+e5875966b74dad2d29772660b8a75e33
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Main"#) -}
+33bd129667974f0a0ba4a893af79107d
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Main.$trModule4) -}
+d026be77cb9ced20e35a61514e0458aa
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("main"#) -}
+e9e4971b1364f64e5594997a1d3a5802
+  data Flag
+    = Verbose
+    | Output GHC.IO.FilePath
+    | Target Main.Target
+    | Help
+    | WxcDir GHC.IO.FilePath
+2d48e338074586b021df9773c5f64d6d
+  data Mode
+    = ModeHelp
+    | ModeClasses {outputDir :: GHC.IO.FilePath,
+                   inputFiles :: [GHC.IO.FilePath],
+                   verbose :: GHC.Types.Bool}
+    | ModeClassTypes {outputDir :: GHC.IO.FilePath,
+                      inputFiles :: [GHC.IO.FilePath],
+                      verbose :: GHC.Types.Bool}
+    | ModeClassInfo {outputDir :: GHC.IO.FilePath,
+                     verbose :: GHC.Types.Bool}
+    | ModeCHeader {outputDir :: GHC.IO.FilePath,
+                   inputFiles :: [GHC.IO.FilePath],
+                   verbose :: GHC.Types.Bool}
+    | ModeSTC {outputDir :: GHC.IO.FilePath,
+               inputFiles :: [GHC.IO.FilePath],
+               verbose :: GHC.Types.Bool}
+83cede24184d6b4842ecb21eff6a0567
+  data Target = TClasses | TClassTypes | THeader | TClassInfo | TSTC
+bab4eed27d3d537ebccd7b5fd40cf305
+  compileOpts :: GHC.Types.IO Main.Mode
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.compileOpts1 `cast` (Sym (GHC.Types.N:IO[0] <Main.Mode>_R)) -}
+eec95f53e01127f82380b28de356cf5d
+  compileOpts1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, Main.Mode #)
+  {- Arity: 1, Strictness: <S,U> -}
+a448e6746106d470f9bf135d612496dd
+  defaultOutputDirWxh :: GHC.IO.FilePath
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Main.defaultOutputDirWxh3
+                   Main.defaultOutputDirWxh1) -}
+974eb78e86960e308aeaed1f149b6193
+  defaultOutputDirWxh1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.Base.map
+                   @ GHC.Types.Char
+                   @ GHC.Types.Char
+                   Main.defaultOutputDirWxh2
+                   Main.moduleRootWxCore) -}
+ad4743afe5e72c0e11ab51c45ae7d700
+  defaultOutputDirWxh2 :: GHC.Types.Char -> GHC.Types.Char
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(S),1*U(U)>m,
+     Unfolding: InlineRule (1, True, False)
+                (\ (c :: GHC.Types.Char) ->
+                 case c of wild { GHC.Types.C# x ->
+                 case x of wild1 {
+                   DEFAULT -> wild '.'# -> System.FilePath.Posix.pathSeparator } }) -}
+97ae9fdc1afe44ef00ac20a9a9bc4796
+  defaultOutputDirWxh3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("../wxcore/src/"#) -}
+8fbc597ef823c04230ed41f5843b6723
+  getDefaultFiles :: GHC.Types.IO [GHC.IO.FilePath]
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.getDefaultFiles1
+                  `cast`
+                (Sym (GHC.Types.N:IO[0] <[GHC.IO.FilePath]>_R)) -}
+89a3bc468de6727448a1e51aa80c34eb
+  getDefaultFiles1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.IO.FilePath] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Classes.wxcdir
+                        `cast`
+                      (Nth:2
+                           (Trans
+                                (<GHC.IORef.IORef GHC.Base.String>_R
+                                 ->_R GHC.Types.N:IO[0] <GHC.Base.String>_R)
+                                (GHC.IORef.N:IORef[0] <GHC.Base.String>_N
+                                 ->_R <GHC.Prim.State# GHC.Prim.RealWorld
+                                       -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                             GHC.Base.String #)>_R))) of wild { GHC.STRef.STRef var# ->
+                 case GHC.Prim.readMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ GHC.Base.String
+                        var#
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 (# ipv,
+                    GHC.Types.:
+                      @ [GHC.Types.Char]
+                      (GHC.Base.++ @ GHC.Types.Char ipv1 Main.getDefaultFiles2)
+                      (GHC.Types.[] @ [GHC.Types.Char]) #) } }) -}
+ded4eee8ef5bf1741924738d182f9842
+  getDefaultFiles2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.getDefaultFiles3) -}
+ce25af3f9f96beaec4fb61d090a48662
+  getDefaultFiles3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("/include/wxc.h"#) -}
+bb08196edefc989653e6155e60ba5024
+  getDefaultHeaderFiles :: GHC.Types.IO [GHC.IO.FilePath]
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.getDefaultFiles1
+                  `cast`
+                (Sym (GHC.Types.N:IO[0] <[GHC.IO.FilePath]>_R)) -}
+08030e29bac312afcb1b3f6866f0bace
+  getDefaultOutputDirWxc :: GHC.Types.IO GHC.IO.FilePath
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.getDefaultOutputDirWxc1
+                  `cast`
+                (Sym (GHC.Types.N:IO[0] <GHC.IO.FilePath>_R)) -}
+e9df67dd49177a53cfa704514f5c8c0a
+  getDefaultOutputDirWxc1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, GHC.IO.FilePath #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Classes.wxcdir
+                        `cast`
+                      (Nth:2
+                           (Trans
+                                (<GHC.IORef.IORef GHC.Base.String>_R
+                                 ->_R GHC.Types.N:IO[0] <GHC.Base.String>_R)
+                                (GHC.IORef.N:IORef[0] <GHC.Base.String>_N
+                                 ->_R <GHC.Prim.State# GHC.Prim.RealWorld
+                                       -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                             GHC.Base.String #)>_R))) of wild { GHC.STRef.STRef var# ->
+                 case GHC.Prim.readMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ GHC.Base.String
+                        var#
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 (# ipv,
+                    GHC.Base.++
+                      @ GHC.Types.Char
+                      ipv1
+                      Main.getDefaultOutputDirWxc2 #) } }) -}
+ca6c60dfa78dd41eba5351db0379637d
+  getDefaultOutputDirWxc2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Main.getDefaultOutputDirWxc3) -}
+88f7801b8bf90005780487781e09a3a6
+  getDefaultOutputDirWxc3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("/include/"#) -}
+575422a1ef6d6a7156ad988007619414
+  getDefaultSTCHeaderFile :: GHC.Types.IO [GHC.IO.FilePath]
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.getDefaultSTCHeaderFile1
+                  `cast`
+                (Sym (GHC.Types.N:IO[0] <[GHC.IO.FilePath]>_R)) -}
+e4355264007e6ae0c614c5d7314812da
+  getDefaultSTCHeaderFile1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [GHC.IO.FilePath] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Classes.wxcdir
+                        `cast`
+                      (Nth:2
+                           (Trans
+                                (<GHC.IORef.IORef GHC.Base.String>_R
+                                 ->_R GHC.Types.N:IO[0] <GHC.Base.String>_R)
+                                (GHC.IORef.N:IORef[0] <GHC.Base.String>_N
+                                 ->_R <GHC.Prim.State# GHC.Prim.RealWorld
+                                       -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                             GHC.Base.String #)>_R))) of wild { GHC.STRef.STRef var# ->
+                 case GHC.Prim.readMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ GHC.Base.String
+                        var#
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 (# ipv,
+                    GHC.Types.:
+                      @ [GHC.Types.Char]
+                      (GHC.Base.++ @ GHC.Types.Char ipv1 Main.getDefaultSTCHeaderFile2)
+                      (GHC.Types.[] @ [GHC.Types.Char]) #) } }) -}
+246adcb03b01651fd116fc96177bbed5
+  getDefaultSTCHeaderFile2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Main.getDefaultSTCHeaderFile3) -}
+dabb4221ed3b3ba27c627ad7ab76b3a8
+  getDefaultSTCHeaderFile3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("/wxSTC-D3/stc.h"#) -}
+82a71dd2bd360266420b43220ab5d448
+  helpMessage :: GHC.Types.IO GHC.Base.String
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.helpMessage1
+                  `cast`
+                (Sym (GHC.Types.N:IO[0] <GHC.Base.String>_R)) -}
+06f995814424a58bfc259c483bcd57a6
+  helpMessage1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, GHC.Base.String #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Classes.wxcdir
+                        `cast`
+                      (Nth:2
+                           (Trans
+                                (<GHC.IORef.IORef GHC.Base.String>_R
+                                 ->_R GHC.Types.N:IO[0] <GHC.Base.String>_R)
+                                (GHC.IORef.N:IORef[0] <GHC.Base.String>_N
+                                 ->_R <GHC.Prim.State# GHC.Prim.RealWorld
+                                       -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                             GHC.Base.String #)>_R))) of wild { GHC.STRef.STRef var# ->
+                 case GHC.Prim.readMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ GHC.Base.String
+                        var#
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 (# ipv,
+                    GHC.Base.++
+                      @ GHC.Types.Char
+                      Main.helpMessage5
+                      (GHC.CString.unpackAppendCString#
+                         Main.helpMessage4
+                         (Data.OldList.unlines
+                            (GHC.Types.:
+                               @ [GHC.Types.Char]
+                               (GHC.Base.++
+                                  @ GHC.Types.Char
+                                  Main.helpMessage2
+                                  (GHC.Base.++ @ GHC.Types.Char ipv1 Main.getDefaultFiles2))
+                               (GHC.Types.[] @ [GHC.Types.Char])))) #) } }) -}
+739c93a5cd9f96d954441d9be141ffae
+  helpMessage2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.helpMessage3) -}
+9427ddfb9a7a01d94b06c09f01f12379
+  helpMessage3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("  "#) -}
+5522b1a5642bd0d3a59b8e5a995e9623
+  helpMessage4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("\n\
+                 \default input files:\n"#) -}
+74410d98c44fe0c530dd582fbef35178
+  helpMessage5 :: GHC.Base.String
+  {- Unfolding: (System.Console.GetOpt.usageInfo
+                   @ Main.Flag
+                   Main.helpMessage6
+                   Main.options) -}
+e6c8ac1e9254b50e12149b1115b98025
+  helpMessage6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.helpMessage7) -}
+0e6b94cdbbf792ce858a6a1f9c8c44e1
+  helpMessage7 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("usage: wxDirect -[dcti] [other options] [header-files..]"#) -}
+2d48e338074586b021df9773c5f64d6d
+  inputFiles :: Main.Mode -> [GHC.IO.FilePath]
+  RecSel Left Main.Mode
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Main.Mode) ->
+                 case ds of wild {
+                   DEFAULT -> Main.inputFiles1
+                   Main.ModeClasses ds1 ds2 ds3 -> ds2
+                   Main.ModeClassTypes ds1 ds2 ds3 -> ds2
+                   Main.ModeCHeader ds1 ds2 ds3 -> ds2
+                   Main.ModeSTC ds1 ds2 ds3 -> ds2 }) -}
+c450fe58601c0f991efde58fbc0f1216
+  inputFiles1 :: [GHC.IO.FilePath]
+  {- Strictness: x -}
+77f87aac14eeb2f14db4189cd1000372
+  invokeError :: [GHC.Base.String] -> GHC.Types.IO a
+  {- Arity: 2, Strictness: <L,1*U><S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.invokeError1
+                  `cast`
+                (forall (a :: <*>_N).
+                 <[GHC.Base.String]>_R ->_R Sym (GHC.Types.N:IO[0] <a>_R)) -}
+9bef48eeef13fcb1e8b679f050a3f55b
+  invokeError1 ::
+    [GHC.Base.String]
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, a #)
+  {- Arity: 2, Strictness: <L,1*U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ @ a
+                   (errs :: [GHC.Base.String])
+                   (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Main.helpMessage1 s of ds1 { (#,#) ipv ipv1 ->
+                 Main.invokeError2 @ a errs ipv1 ipv }) -}
+9154fe80257d4f10f76a4a9bd97a6e96
+  invokeError2 ::
+    [GHC.Base.String]
+    -> GHC.Base.String
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, a #)
+  {- Arity: 3, Strictness: <B,1*U><B,U><B,U>x -}
+185b0747d17a06978fe3d0b72a210135
+  isHelp :: Main.Flag -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Main.Flag) ->
+                 case ds of wild {
+                   DEFAULT -> GHC.Types.False Main.Help -> GHC.Types.True }) -}
+eb4c874a557966d384cbb1d222b11ab7
+  isOutput :: Main.Flag -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Main.Flag) ->
+                 case ds of wild {
+                   DEFAULT -> GHC.Types.False Main.Output ds1 -> GHC.Types.True }) -}
+05edfed1568c18f0b3655df01cf9f0bb
+  isTarget :: Main.Flag -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Main.Flag) ->
+                 case ds of wild {
+                   DEFAULT -> GHC.Types.False Main.Target ds1 -> GHC.Types.True }) -}
+b7f11c0e2a4880f8ca74f6f8dad3fc56
+  isVerbose :: Main.Flag -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Main.Flag) ->
+                 case ds of wild {
+                   DEFAULT -> GHC.Types.False Main.Verbose -> GHC.Types.True }) -}
+88d2db2ab1b6f7a582fda9940e9deda2
+  main :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
+0fee40d618a1cc80045473e033bd5a8a
+  main1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Main.compileOpts1 s of ds1 { (#,#) ipv ipv1 ->
+                 case ipv1 of wild {
+                   Main.ModeHelp -> Main.main8 ipv
+                   Main.ModeClasses outputDir' inputFiles' verbose'
+                   -> CompileClasses.compileClasses1
+                        verbose'
+                        Main.moduleRootWxCore
+                        Main.moduleClassTypesName
+                        Main.moduleClassesName
+                        (GHC.Base.++ @ GHC.Types.Char outputDir' Main.moduleClassesName)
+                        inputFiles'
+                        ipv
+                   Main.ModeClassTypes outputDir' inputFiles' verbose'
+                   -> CompileClassTypes.$wcompileClassTypes
+                        Main.moduleRootWxCore
+                        Main.moduleClassTypesName
+                        (GHC.Base.++ @ GHC.Types.Char outputDir' Main.main7)
+                        inputFiles'
+                        ipv
+                   Main.ModeClassInfo outputDir' verbose'
+                   -> CompileClassInfo.$wcompileClassInfo
+                        Main.moduleRootWxCore
+                        Main.moduleClassesName
+                        Main.moduleClassTypesName
+                        Main.moduleClassInfoName
+                        (GHC.Base.++ @ GHC.Types.Char outputDir' Main.main4)
+                        ipv
+                   Main.ModeCHeader outputDir' inputFiles' verbose'
+                   -> CompileHeader.compileHeader1
+                        verbose'
+                        (GHC.Base.++ @ GHC.Types.Char outputDir' Main.main2)
+                        inputFiles'
+                        ipv
+                   Main.ModeSTC outputDir' inputFiles' verbose'
+                   -> CompileSTC.compileSTC1
+                        verbose'
+                        outputDir'
+                        inputFiles'
+                        ipv } }) -}
+cd5719551565b19d23396c34f924f067
+  main2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.main3) -}
+95cf21fe7974f4a2dcc931d29264193d
+  main3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxc_glue.h"#) -}
+e6cfa4db8e98b7516eab0e7af7e75f65
+  main4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.Base.++
+                   @ GHC.Types.Char
+                   Main.moduleClassInfoName
+                   Main.main5) -}
+c93eac94fd425c81a3175bd035091cfa
+  main5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.main6) -}
+16e2d11a0ae4c287c8ccc6da4a668d72
+  main6 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: (".hs"#) -}
+91faf4f26c1071543bbd4996083fe1bc
+  main7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.Base.++
+                   @ GHC.Types.Char
+                   Main.moduleClassTypesName
+                   Main.main5) -}
+d24972523466d408dbe666a77978b084
+  main8 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case Main.helpMessage1 s of ds1 { (#,#) ipv ipv1 ->
+                 GHC.IO.Handle.Text.hPutStr2
+                   GHC.IO.Handle.FD.stdout
+                   ipv1
+                   GHC.Types.True
+                   ipv }) -}
+a8939401f1b5c7ee1624c599b8f5ab5d
+  main9 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 1,
+     Unfolding: (GHC.TopHandler.runMainIO1
+                   @ ()
+                   Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
+a478a9b5d5279bb10ff7b10524f50788
+  moduleClassInfoName :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Main.moduleClassInfoName1) -}
+a8a86d1af386aa0427a6ac58240f0ba0
+  moduleClassInfoName1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("WxcClassInfo"#) -}
+3033ff514d028b5c0dff391b3ddfbcf9
+  moduleClassTypesName :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Main.moduleClassTypesName1) -}
+d8b5df3409b2d16b4ca093d0f827ade0
+  moduleClassTypesName1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("WxcClassTypes"#) -}
+3b3c62164e70f5f828847458b6415344
+  moduleClassesName :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Main.moduleClassesName1) -}
+fc6c90eac276fc50a0145b66a6c6e044
+  moduleClassesName1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("WxcClasses"#) -}
+17afa19bb66c19ce5f90a6448786ff54
+  moduleClassesShortName :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Main.moduleClassesShortName1) -}
+1a93896c9b77101c8f83f0951467b79a
+  moduleClassesShortName1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Classes"#) -}
+ddae570b5c62957f978014ace655586b
+  moduleDefsName :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString# Main.moduleDefsName1) -}
+ca1a14c9922af077178b0d75bc712623
+  moduleDefsName1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("WxcDefs"#) -}
+53b54943a3748985ae626e93797d9c91
+  moduleRootDir :: GHC.Base.String -> GHC.IO.FilePath
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (moduleRoot :: GHC.Base.String) ->
+                 GHC.Base.build
+                   @ GHC.Types.Char
+                   (\ @ b1
+                      (c :: GHC.Types.Char -> b1 -> b1)[OneShot]
+                      (n :: b1)[OneShot] ->
+                    GHC.Base.foldr
+                      @ GHC.Types.Char
+                      @ b1
+                      (GHC.Base.mapFB
+                         @ GHC.Types.Char
+                         @ b1
+                         @ GHC.Types.Char
+                         c
+                         Main.defaultOutputDirWxh2)
+                      n
+                      moduleRoot)) -}
+65f00daa0c03ae571058249ad5a9b8a5
+  moduleRootWx :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString# Main.moduleRootWx1) -}
+db4dc64a1fa6f973821d1cab68e50562
+  moduleRootWx1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Graphics.UI.WX."#) -}
+b83293934a906cccac3a4fe2acb40366
+  moduleRootWxCore :: GHC.Base.String
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Main.moduleRootWxCore1) -}
+3b89e0feb7681ac293aec679a6239fe2
+  moduleRootWxCore1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Graphics.UI.WXCore."#) -}
+32317906a5c5096c859c383ec214282a
+  options :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options87
+                   Main.options1) -}
+04a1647bc5da6a966ad55cc3fc95c9b8
+  options1 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options77
+                   Main.options2) -}
+281f1b37076af98b7854cb45919a9dad
+  options10 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options11) -}
+b31fae69e2a543d638a26b166cee018e
+  options11 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("show this information"#) -}
+659027b589d32d7880730dd394750571
+  options12 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (System.Console.GetOpt.NoArg @ Main.Flag Main.Help) -}
+64207352ce159107c1147cee5e211960
+  options13 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options14
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+8afd0b76e753d7df64e4590dc21d2e4a
+  options14 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options15) -}
+e72c3d8ecda19225ea2c4fe41a43cce9
+  options15 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("help"#) -}
+bbb20da740e350acdd18a11b83e792bb
+  options16 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options17
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+37a55f135204db1cef036f8185688324
+  options17 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# '?'#) -}
+4e41f0da809aec92a763bb589424bfb6
+  options18 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options27
+                   Main.options24
+                   Main.options21
+                   Main.options19) -}
+b56f23694c6d005f58e14ba888056c34
+  options19 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options20) -}
+bb2d479150c4a9fd60814afd93623549
+  options2 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options67
+                   Main.options3) -}
+73ea7f57bff3f3d1845af7a93ed25fdb
+  options20 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("optional 'wxc' directory (=../wxc)"#) -}
+d89aee123636873b91f7970c302751f7
+  options21 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- Strictness: m2,
+     Unfolding: (System.Console.GetOpt.ReqArg
+                   @ Main.Flag
+                   Main.WxcDir
+                   Main.options22) -}
+3e39b70ffa1939c87a44d9526630ca23
+  options22 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options23) -}
+99da78caea7383032fc18dabf4192c6b
+  options23 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("DIR"#) -}
+15332dd6316ba141817b931b0d95a906
+  options24 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options25
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+ff2842d33310410d2c852771db6e695b
+  options25 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options26) -}
+6480aa3b68f951738d859f894ec8c66b
+  options26 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxc"#) -}
+346f9644f92d8dd86f94724930e4dc12
+  options27 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options28
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+34edb730374c4d920fa4533dd67621e0
+  options28 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 'w'#) -}
+ea0a386bf591fec864c3cfc9dc1584ed
+  options29 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options36
+                   Main.options33
+                   Main.options32
+                   Main.options30) -}
+f0e137d48b0dd388d4595598f7ee1136
+  options3 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options57
+                   Main.options4) -}
+1fe7bb36fe14da355db29bcaeb1e007a
+  options30 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options31) -}
+a375d987ff2aeffd063e5646db375b8e
+  options31 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("optional output directory"#) -}
+ecbf06a7d621503d9a1ad6e9baf80ad3
+  options32 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- Strictness: m2,
+     Unfolding: (System.Console.GetOpt.ReqArg
+                   @ Main.Flag
+                   Main.Output
+                   Main.options22) -}
+07d36e0d11fa773a3a07d1b12753caf9
+  options33 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options34
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+427e35b16c968e00049efaaef652c2eb
+  options34 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options35) -}
+8b5611fb9b1a2a5e24aa5925407fd655
+  options35 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("output"#) -}
+3f7dffd94ebf7ff7cae5a376235152ed
+  options36 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options37
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+e2e998cfe154bf96a715eaefe8e5f0c1
+  options37 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 'o'#) -}
+6ad8260b270ccac945d899eeebef8ff9
+  options38 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options45
+                   Main.options42
+                   Main.options41
+                   Main.options39) -}
+b35dafb7fb20d6f86171f2290fe60c9f
+  options39 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options40) -}
+8996838586da61c20b2aa052493c1dc2
+  options4 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options47
+                   Main.options5) -}
+da409b74a506ed125f430da71c9f7f5f
+  options40 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("verbose: show ignored definitions"#) -}
+44612a2cde1e10613df77e274678db26
+  options41 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (System.Console.GetOpt.NoArg
+                   @ Main.Flag
+                   Main.Verbose) -}
+61cd694f6310ddfcdea96ff662572356
+  options42 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options43
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+4177e447045f7e50069b22204c8a7998
+  options43 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options44) -}
+5529146e71bce87fadab4453b329d3b7
+  options44 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("verbose"#) -}
+033e4342dff8d3667722de036f112f05
+  options45 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options46
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+805893e822f2d42e6db7f2067a502f34
+  options46 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 'v'#) -}
+cbe5b1a86e0d6db4d21eabad91dddf53
+  options47 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options55
+                   Main.options52
+                   Main.options50
+                   Main.options48) -}
+fb1fbac1949bca7a487b035a3629e92c
+  options48 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options49) -}
+7ab3f3008db8dc1b4fe99a7f02815c0b
+  options49 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("generate wxSTC wrapper from .h file"#) -}
+607afe1ceae8cf04050996450877a6b4
+  options5 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options38
+                   Main.options6) -}
+9d1ce19847252478469292e6263cdba0
+  options50 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (System.Console.GetOpt.NoArg
+                   @ Main.Flag
+                   Main.options51) -}
+02b34f8deb52c13c5a62fdc54c4489ad
+  options51 :: Main.Flag
+  {- HasNoCafRefs, Strictness: m3,
+     Unfolding: (Main.Target Main.TSTC) -}
+00203c94a7f0ef02d8fbdf1950590d20
+  options52 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options53
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+49f99a53997a02ca2f3bddec0d94eacf
+  options53 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options54) -}
+b27e0929437c5c18d5c351507173007d
+  options54 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("stc"#) -}
+f41dfbd63657aed03303843f7a9c1a0a
+  options55 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options56
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+849c046916538925df99a0bdfdec86fa
+  options56 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 's'#) -}
+263401aca651b5feb0bad5a94f357093
+  options57 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options65
+                   Main.options62
+                   Main.options60
+                   Main.options58) -}
+0e4340dc7f91f11356070656a0ed4135
+  options58 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options59) -}
+68e2c53a9ceee6c282237804d425f4c0
+  options59 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("generate typed C header file -- development use only"#) -}
+a6b28b3957e2a729fa6267c3fd3fa35d
+  options6 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options29
+                   Main.options7) -}
+530d4a928f77e6de88db563999bdc5ef
+  options60 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (System.Console.GetOpt.NoArg
+                   @ Main.Flag
+                   Main.options61) -}
+b841b29855bca9692887030d7bf01e6f
+  options61 :: Main.Flag
+  {- HasNoCafRefs, Strictness: m3,
+     Unfolding: (Main.Target Main.THeader) -}
+64ec4f43181647fee5d91da99972e4a0
+  options62 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options63
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+4d533135d0d0dc8f703c706baf0bff92
+  options63 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options64) -}
+5be852f6a19f700dc459f55aa2a7857e
+  options64 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("header"#) -}
+92c8b9281e384f4b58f461636da5cbc4
+  options65 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options66
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+e0596578e05e90f0bdbb28499c5d2256
+  options66 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 'h'#) -}
+75efea000bb93cffc743a2e67aefb4f7
+  options67 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options75
+                   Main.options72
+                   Main.options70
+                   Main.options68) -}
+c5b7a3a66b476502320fa9cf27b41889
+  options68 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options69) -}
+ba1429cda982341a3b343d879fb8ba60
+  options69 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("generate class info definitions"#) -}
+7167c866be72dbeac11fab54f503f76c
+  options7 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options18
+                   Main.options8) -}
+4f19bbcce3575665d90e0842bb400e70
+  options70 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (System.Console.GetOpt.NoArg
+                   @ Main.Flag
+                   Main.options71) -}
+19bcd008af5a00c3462809368ac38519
+  options71 :: Main.Flag
+  {- HasNoCafRefs, Strictness: m3,
+     Unfolding: (Main.Target Main.TClassInfo) -}
+4eecbc1699a4b5eb3917ee0cd71bf6be
+  options72 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options73
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+7ba89434bfcb42ddab463b992a6ab177
+  options73 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options74) -}
+c554bbece2eff5ba3be769038435e373
+  options74 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("classinfo"#) -}
+c6dc78f27c9b3ba09eeaa93f1b291dcd
+  options75 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options76
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+fad5a19ccc5d710d1d70c3aeaead546c
+  options76 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 'i'#) -}
+435ac01ca39946181043d5ab16a5e700
+  options77 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options85
+                   Main.options82
+                   Main.options80
+                   Main.options78) -}
+3c631f628d98123ee9b3f5292c429c28
+  options78 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options79) -}
+a48f217b15d819b877e4d772c817d6c0
+  options79 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("generate class type definitions from .h files"#) -}
+772884bd8f548fb1905b58849a4417b5
+  options8 :: [System.Console.GetOpt.OptDescr Main.Flag]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (System.Console.GetOpt.OptDescr Main.Flag)
+                   Main.options9
+                   (GHC.Types.[] @ (System.Console.GetOpt.OptDescr Main.Flag))) -}
+920c7809a46bb49763b3495465348c8e
+  options80 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (System.Console.GetOpt.NoArg
+                   @ Main.Flag
+                   Main.options81) -}
+ed0156c3ad73e2546da38d87fb665b28
+  options81 :: Main.Flag
+  {- HasNoCafRefs, Strictness: m3,
+     Unfolding: (Main.Target Main.TClassTypes) -}
+496744fe90da854ef315b19612fcde28
+  options82 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options83
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+b9d1bad1e382dd42806fa053a43afbf1
+  options83 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options84) -}
+37bc4ea929517615946e23fa45b93882
+  options84 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("classtypes"#) -}
+ffb6d2c09cb7d9618e3d705b22236871
+  options85 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options86
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+354220017fa3686da23f22391edb047f
+  options86 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 't'#) -}
+964654c1be6f362896eef3a55fe8ff67
+  options87 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options95
+                   Main.options92
+                   Main.options90
+                   Main.options88) -}
+f2f12af3a46ed19a68c237be53b02fb2
+  options88 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options89) -}
+64ad413ef244ce93aed7bed08714e3c9
+  options89 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("generate class method definitions from .h files"#) -}
+1734a1c78633f3d5719a62066a2de632
+  options9 :: System.Console.GetOpt.OptDescr Main.Flag
+  {- Strictness: m,
+     Unfolding: (System.Console.GetOpt.Option
+                   @ Main.Flag
+                   Main.options16
+                   Main.options13
+                   Main.options12
+                   Main.options10) -}
+1e302bc853be1262d35080f049fe29e2
+  options90 :: System.Console.GetOpt.ArgDescr Main.Flag
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (System.Console.GetOpt.NoArg
+                   @ Main.Flag
+                   Main.options91) -}
+124987fb537c736ce711e9f11a1c6bf6
+  options91 :: Main.Flag
+  {- HasNoCafRefs, Strictness: m3,
+     Unfolding: (Main.Target Main.TClasses) -}
+8ec9d1b54470337e1b17c026a9ff7948
+  options92 :: [GHC.Base.String]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Base.String
+                   Main.options93
+                   (GHC.Types.[] @ GHC.Base.String)) -}
+e806de5565aa7147f4b68fd9bd02691b
+  options93 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Main.options94) -}
+679825bc6eb4b62ee43544b97f27a1b7
+  options94 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("classes"#) -}
+13ee80c4cc8188e78a6e6c04912a9950
+  options95 :: [GHC.Types.Char]
+  {- HasNoCafRefs, Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   Main.options96
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+270c5b4db1a055cecfeb838b96f91a65
+  options96 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# 'c'#) -}
+2d48e338074586b021df9773c5f64d6d
+  outputDir :: Main.Mode -> GHC.IO.FilePath
+  RecSel Left Main.Mode
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Main.Mode) ->
+                 case ds of wild {
+                   Main.ModeHelp -> Main.outputDir1
+                   Main.ModeClasses ds1 ds2 ds3 -> ds1
+                   Main.ModeClassTypes ds1 ds2 ds3 -> ds1
+                   Main.ModeClassInfo ds1 ds2 -> ds1
+                   Main.ModeCHeader ds1 ds2 ds3 -> ds1
+                   Main.ModeSTC ds1 ds2 ds3 -> ds1 }) -}
+d0134aaff1e107450e09a3fcc34e45aa
+  outputDir1 :: GHC.IO.FilePath
+  {- Strictness: x -}
+34cc3a870e95afcce9a43bcf45a73601
+  showHelp :: GHC.Types.IO ()
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (0, True, True)
+                Main.main8 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
+2d48e338074586b021df9773c5f64d6d
+  verbose :: Main.Mode -> GHC.Types.Bool
+  RecSel Left Main.Mode
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Main.Mode) ->
+                 case ds of wild {
+                   Main.ModeHelp -> Main.verbose1
+                   Main.ModeClasses ds1 ds2 ds3 -> ds3
+                   Main.ModeClassTypes ds1 ds2 ds3 -> ds3
+                   Main.ModeClassInfo ds1 ds2 -> ds2
+                   Main.ModeCHeader ds1 ds2 ds3 -> ds3
+                   Main.ModeSTC ds1 ds2 ds3 -> ds3 }) -}
+253e245df9fd5e68a055955c137754f3
+  verbose1 :: GHC.Types.Bool
+  {- Strictness: x -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

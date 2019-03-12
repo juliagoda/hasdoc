@@ -1,0 +1,153 @@
+
+==================== FINAL INTERFACE ====================
+2019-03-12 00:15:16.493673218 UTC
+
+interface main:IOExtra 8022
+  interface hash: 455866c6df7506bd8bd89c95e1c6d922
+  ABI hash: a49661dcd5e4450c5fc428426774e486
+  export-list hash: b37c1d5f6b6852a66107e04cbbb02e01
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 7b41f4c34acbabee58f1204dde4baf28
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  IOExtra.writeFileLazy
+module dependencies:
+package dependencies: base-4.10.1.0* ghc-prim-0.5.1.1
+                      integer-gmp-1.0.1.0 strict-0.3.2
+orphans: base-4.10.1.0:GHC.Float base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Either base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Type.Equality base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats
+import  -/  base-4.10.1.0:Control.Exception c134ea327d158f2eebf26e12a1d4ad47
+import  -/  base-4.10.1.0:Control.Exception.Base a0c09fb1722df56c4c26d548157007ca
+import  -/  base-4.10.1.0:Control.Monad ebed2e8e7444944e0c1d827c6faf40a4
+import  -/  base-4.10.1.0:Data.Either d7dae5d9bf298dee616e465c14b5d60e
+import  -/  base-4.10.1.0:GHC.Base 782fd99b5e36f3698a26179a49afca64
+import  -/  base-4.10.1.0:GHC.IO e261d8b68ccf81a359626fa520b57d1d
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+import  -/  base-4.10.1.0:System.IO 6e5bb580370d8d71dc5888f723cea4b4
+import  -/  base-4.10.1.0:System.IO.Error 93d92b7da56c5ff8e1a9c831cb2a2e3f
+import  -/  ghc-prim-0.5.1.1:GHC.Classes 93e2660065dce9329577e83d76d8f0d4
+import  -/  ghc-prim-0.5.1.1:GHC.Types b1fd0716441595db508c1a74387bf394
+import  -/  strict-0.3.2:System.IO.Strict 6451e3f935821223c25368b098d26933
+ac0187b985899035b90e1ec671f11f9d
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   IOExtra.$trModule3
+                   IOExtra.$trModule1) -}
+39d0bf40542a7d1cee1cf4186073bb31
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS IOExtra.$trModule2) -}
+c4a4a70610b0a35b61521f67f7f0957c
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("IOExtra"#) -}
+4bebffa9e3afe1ff0ad5e65467a29c65
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS IOExtra.$trModule4) -}
+12cf1f0ec0d534fd6927248fa8e821e0
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("main"#) -}
+7d6c7b8c538822bfa5ec52cbd757eaf5
+  writeFileLazy ::
+    GHC.IO.FilePath -> GHC.Base.String -> GHC.Types.IO ()
+  {- Arity: 3, Strictness: <L,U><L,U><S,U>,
+     Unfolding: InlineRule (0, True, True)
+                IOExtra.writeFileLazy1
+                  `cast`
+                (<GHC.IO.FilePath>_R
+                 ->_R <GHC.Base.String>_R
+                 ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
+979d249827ff9290a6db1999b5e8d747
+  writeFileLazy1 ::
+    GHC.IO.FilePath
+    -> GHC.Base.String
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 3, Strictness: <L,U><L,U><S,U>,
+     Unfolding: (\ (f :: GHC.IO.FilePath)
+                   (str :: GHC.Base.String)
+                   (s :: GHC.Prim.State# GHC.Prim.RealWorld) ->
+                 case GHC.Prim.catch#
+                        @ (Data.Either.Either GHC.IO.Exception.IOError GHC.Base.String)
+                        @ GHC.Exception.SomeException
+                        (\ (s1 :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                         case GHC.IO.Handle.FD.openFile1
+                                f
+                                GHC.IO.IOMode.ReadMode
+                                s1 of ds1 { (#,#) ipv ipv1 ->
+                         case GHC.IO.Handle.Text.hGetContents1
+                                ipv1
+                                ipv of ds2 { (#,#) ipv2 ipv3 ->
+                         case GHC.List.$wlenAcc @ GHC.Types.Char ipv3 0# of ww2 { DEFAULT ->
+                         (# ipv2,
+                            Data.Either.Right
+                              @ GHC.IO.Exception.IOError
+                              @ GHC.Base.String
+                              ipv3 #) } } })
+                        IOExtra.writeFileLazy2
+                        s of ds1 { (#,#) ipv ipv1 ->
+                 case ipv1 of wild {
+                   Data.Either.Left e1
+                   -> case e1 of wild1 { GHC.IO.Exception.IOError ds2 ds3 ds4 ds5 ds6 ds7 ->
+                      case ds3 of wild2 {
+                        DEFAULT
+                        -> case GHC.Prim.raiseIO#
+                                  @ GHC.Exception.SomeException
+                                  @ (Data.Either.Either () GHC.Base.String)
+                                  (GHC.IO.Exception.$fExceptionIOException_$ctoException wild1)
+                                  ipv
+                           ret_ty (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+                           of {}
+                        GHC.IO.Exception.NoSuchThing -> System.IO.writeFile1 f str ipv } }
+                   Data.Either.Right v
+                   -> case GHC.Classes.$fEqModule_$s$c== v str of wild1 {
+                        GHC.Types.False -> System.IO.writeFile1 f str ipv
+                        GHC.Types.True -> (# ipv, GHC.Tuple.() #) } } }) -}
+1aa8d938e329053b879f986138129fea
+  writeFileLazy2 ::
+    GHC.Exception.SomeException
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Data.Either.Either GHC.IO.Exception.IOError GHC.Base.String #)
+  {- Arity: 2, Strictness: <S,1*U><S,U>,
+     Unfolding: (\ (e1 :: GHC.Exception.SomeException)[OneShot]
+                   (eta1 :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 case e1 of wild { GHC.Exception.SomeException e2 $dException1 e3 ->
+                 case Data.Typeable.Internal.eqTypeRep
+                        @ *
+                        @ *
+                        @ e2
+                        @ GHC.IO.Exception.IOException
+                        (GHC.Exception.$p1Exception @ e2 $dException1)
+                          `cast`
+                        (Data.Typeable.Internal.N:Typeable[0] <*>_N <e2>_N)
+                        GHC.IO.Exception.$fExceptionIOException4 of wild1 {
+                   GHC.Base.Nothing
+                   -> GHC.Prim.raiseIO#
+                        @ GHC.Exception.SomeException
+                        @ (Data.Either.Either GHC.IO.Exception.IOError GHC.Base.String)
+                        wild
+                        eta1
+                   GHC.Base.Just ds1
+                   -> case ds1 of wild2 { Data.Type.Equality.HRefl cobox cobox1 ->
+                      (# eta1,
+                         Data.Either.Left
+                           @ GHC.IO.Exception.IOError
+                           @ GHC.Base.String
+                           e3 `cast` (Sub (Sym cobox1)) #) } } }) -}
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

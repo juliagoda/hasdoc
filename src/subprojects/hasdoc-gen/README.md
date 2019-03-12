@@ -124,11 +124,19 @@ cd src/subprojects/hasdoc-gen
 ## Remarks
 
 
-To ensure stability for the current version of the software, the wxHaskell module was downloaded from [https://github.com/wxHaskell/wxHaskell](https://github.com/wxHaskell/wxHaskell) from the commit number: b7ac21d1dba48076dc7538d1967a14d59cfeb615 . This module can be found in the main hasdoc and hasdoc-gen catalogues. The stack.yaml files contain references to these paths.
+1) To ensure stability for the current version of the software, the wxHaskell module was downloaded from [https://github.com/wxHaskell/wxHaskell](https://github.com/wxHaskell/wxHaskell) from the commit number: b7ac21d1dba48076dc7538d1967a14d59cfeb615 . This module can be found in the main hasdoc and hasdoc-gen catalogues. The stack.yaml files contain references to these paths.
 
-It is also required to build in a path that does not contain white characters (e.g. spaces). It is worth changing the path to another one or overwrite the white characters in the directories.
+2) It is also required to build in a path that does not contain white characters (e.g. spaces). It is worth changing the path to another one or overwrite the white characters in the directories.
 
-If an "out of memory" error nevertheless occurs during the building process, you can create a swap file with a larger capacity than you currently have and try again.
+3) If an "out of memory" error nevertheless occurs during the building process, you can create a swap file with a larger capacity than you currently have and try again.
+
+4) If you accidentally deleted the directories ".hasdoc" and ".hasdoc-gen" in the home path or you see an error regarding "mkMessage" (about not finding translation files, try to run the script:
+
+`scripts/./copymsg.sh`
+
+on Windows:
+
+Double-click on the "copymsg.bat" file in the "scripts" directory.
 
 
 

@@ -1,0 +1,468 @@
+
+==================== FINAL INTERFACE ====================
+2019-03-12 00:15:15.799297877 UTC
+
+interface main:HaskellNames 8022
+  interface hash: 3a5d324c7c0bcd9fed0c3707856a18bf
+  ABI hash: 2aeff701ad26fc4f92c5cb2c30c510e3
+  export-list hash: 785fe048c21ede4738198716d8bb3725
+  orphan hash: 8740ecd9c72bb8e67a16b342e8eea890
+  flag hash: 7b41f4c34acbabee58f1204dde4baf28
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  HaskellNames.getPrologue
+  HaskellNames.haskellArgName
+  HaskellNames.haskellDeclName
+  HaskellNames.haskellName
+  HaskellNames.haskellTypeName
+  HaskellNames.haskellUnBuiltinTypeName
+  HaskellNames.haskellUnderscoreName
+  HaskellNames.isBuiltin
+module dependencies:
+package dependencies: array-0.5.2.0 base-4.10.1.0*
+                      containers-0.5.11.0 deepseq-1.4.3.0 ghc-prim-0.5.1.1
+                      integer-gmp-1.0.1.0
+orphans: base-4.10.1.0:GHC.Float base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Complex base-4.10.1.0:Data.Either
+                         base-4.10.1.0:Data.Functor.Compose base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity
+                         base-4.10.1.0:Data.Functor.Product base-4.10.1.0:Data.Functor.Sum
+                         base-4.10.1.0:Data.List.NonEmpty base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Semigroup base-4.10.1.0:Data.Type.Equality
+                         base-4.10.1.0:Data.Version base-4.10.1.0:Data.Void
+                         base-4.10.1.0:GHC.Exts base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats containers-0.5.11.0:Data.Set.Internal
+import  -/  base-4.10.1.0:Data.Char fe4e3458190deeac19969ce15e33bed9
+import  -/  base-4.10.1.0:Data.Foldable 9ed87455d68e87ff2b5b8725eae9897e
+import  -/  base-4.10.1.0:Data.List 4ab7fa2a1b87502b23af891a384f0506
+import  -/  base-4.10.1.0:Data.OldList 555420b092ca8cf0a8f9666bc0e07dcf
+import  -/  base-4.10.1.0:GHC.Base 782fd99b5e36f3698a26179a49afca64
+import  -/  base-4.10.1.0:GHC.List e3060fbeb44ce0038e6b4dedf2dd9cf1
+import  -/  base-4.10.1.0:GHC.Unicode 49c9de4fffed0d9be65aaeb6a60b757c
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+import  -/  containers-0.5.11.0:Data.Set 98985b2a3e51cd3e6cde78e7142cb8c9
+import  -/  containers-0.5.11.0:Data.Set.Internal b20be47d5e4200d3ef58734fb567b8bc
+import  -/  ghc-prim-0.5.1.1:GHC.Classes 93e2660065dce9329577e83d76d8f0d4
+fe7e048024cc6843d7f1e5bbeafdae91
+  $sfromList ::
+    [[GHC.Types.Char]] -> Data.Set.Internal.Set [GHC.Types.Char]
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ (ds :: [[GHC.Types.Char]]) ->
+                 case ds of wild {
+                   [] -> Data.Set.Internal.Tip @ [GHC.Types.Char]
+                   : x1 ds1
+                   -> case ds1 of wild1 {
+                        []
+                        -> case x1 of dt { DEFAULT ->
+                           Data.Set.Internal.Bin
+                             @ [GHC.Types.Char]
+                             1#
+                             dt
+                             (Data.Set.Internal.Tip @ [GHC.Types.Char])
+                             (Data.Set.Internal.Tip @ [GHC.Types.Char]) }
+                        : ipv ipv1
+                        -> case GHC.Classes.$fOrd[]_$s$ccompare1 x1 ipv of wild2 {
+                             DEFAULT
+                             -> case x1 of dt { DEFAULT ->
+                                HaskellNames.$sfromList_$sgo4
+                                  ipv
+                                  ipv1
+                                  (Data.Set.Internal.Bin
+                                     @ [GHC.Types.Char]
+                                     1#
+                                     dt
+                                     (Data.Set.Internal.Tip @ [GHC.Types.Char])
+                                     (Data.Set.Internal.Tip @ [GHC.Types.Char])) }
+                             GHC.Types.LT
+                             -> case x1 of dt { DEFAULT ->
+                                HaskellNames.$sfromList_$s$wgo3
+                                  ipv
+                                  ipv1
+                                  (Data.Set.Internal.Bin
+                                     @ [GHC.Types.Char]
+                                     1#
+                                     dt
+                                     (Data.Set.Internal.Tip @ [GHC.Types.Char])
+                                     (Data.Set.Internal.Tip @ [GHC.Types.Char]))
+                                  1# } } } }) -}
+1befe3a067c6ad6d380d02ae602e8458
+  $sfromList_$s$wgo3 ::
+    [GHC.Types.Char]
+    -> [[GHC.Types.Char]]
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+    -> GHC.Prim.Int#
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+  {- Arity: 4, Strictness: <S,U><S,1*U><S,1*U><L,U> -}
+7e2ae32e64f01bb7a05201109a631b59
+  $sfromList_$sgo4 ::
+    [GHC.Types.Char]
+    -> [[GHC.Types.Char]]
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+  {- Arity: 3, Strictness: <S,U><S,1*U><S,1*U> -}
+6e90e45de6e0f432e7850598d6fb28fd
+  $sinsert_$sgo3 ::
+    [GHC.Types.Char]
+    -> [GHC.Types.Char]
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+  {- Arity: 3, Strictness: <L,U><S,1*U><S,1*U> -}
+fed87789505e274c8dface064a77683c
+  $smember_go3 ::
+    GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+b064e0611947f28a5e9ab7614736d168
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   HaskellNames.$trModule3
+                   HaskellNames.$trModule1) -}
+4cb9f263d2b650258570e82d41fd8ee1
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS HaskellNames.$trModule2) -}
+4097968753826c1c9bef1004a734f1dc
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("HaskellNames"#) -}
+75c298404d59462c554fe122c3558acf
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS HaskellNames.$trModule4) -}
+f2900cfcbe05f785f2d12c23885df732
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("main"#) -}
+3237e791eb2a14dfa04e50e773c79987
+  $wgetPrologue ::
+    GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> [GHC.Base.String]
+    -> (# GHC.Base.String, [GHC.Base.String] #)
+  {- Arity: 4, Strictness: <L,U><L,1*U><L,U><L,1*U>, Inline: [0] -}
+ed3374bbe251cace7cbb808d200c1713
+  builtinObjects :: Data.Set.Internal.Set GHC.Base.String
+  {- Unfolding: (HaskellNames.$sfromList
+                   HaskellNames.haskellUnBuiltinTypeName3) -}
+28607b58d9a0f56723716f90b575c4ce
+  getPrologue ::
+    GHC.Base.String
+    -> GHC.Base.String
+    -> GHC.Base.String
+    -> [GHC.Base.String]
+    -> [GHC.Base.String]
+  {- Arity: 4, Strictness: <L,U><L,1*U><L,U><L,1*U>m2, Inline: [0],
+     Unfolding: InlineRule (4, True, False)
+                (\ (w :: GHC.Base.String)
+                   (w1 :: GHC.Base.String)
+                   (w2 :: GHC.Base.String)
+                   (w3 :: [GHC.Base.String]) ->
+                 case HaskellNames.$wgetPrologue w w1 w2 w3 of ww { (#,#) ww1 ww2 ->
+                 GHC.Types.: @ GHC.Base.String ww1 ww2 }) -}
+6de4f7f42a157c545bc7fa2af50ea8ab
+  haskellArgName :: GHC.Base.String -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (name :: GHC.Base.String) ->
+                 HaskellNames.haskellName
+                   (GHC.List.dropWhile
+                      @ GHC.Types.Char
+                      HaskellNames.haskellArgName1
+                      name)) -}
+df2c6114877bd739df3230f773054ed0
+  haskellArgName1 :: GHC.Types.Char -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(S),1*U(1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: GHC.Types.Char) ->
+                 case ds of wild { GHC.Types.C# x1 ->
+                 case x1 of wild1 {
+                   DEFAULT -> GHC.Types.False '_'# -> GHC.Types.True } }) -}
+0f78349a25f2cbe78d693be13e921a53
+  haskellDeclName :: GHC.Base.String -> GHC.Base.String
+  {- Arity: 1, Strictness: <L,U> -}
+835c46ec335e3233ec7b7450ec332d65
+  haskellName :: GHC.Base.String -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ (name :: GHC.Base.String) ->
+                 let {
+                   suggested :: [GHC.Types.Char]
+                   = case name of wild {
+                       [] -> HaskellNames.haskellName24
+                       : c cs
+                       -> GHC.Types.:
+                            @ GHC.Types.Char
+                            (GHC.Unicode.toLower c)
+                            (GHC.List.filter @ GHC.Types.Char HaskellNames.haskellName23 cs) }
+                 } in
+                 case HaskellNames.$smember_go3
+                        suggested
+                        HaskellNames.reservedVarNames of wild {
+                   GHC.Types.False -> suggested
+                   GHC.Types.True
+                   -> GHC.CString.unpackAppendCString#
+                        HaskellNames.haskellName1
+                        suggested }) -}
+864a4772b5b29dd48996198edbe84423
+  haskellName1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wx"#) -}
+a78e628509d1f9ad261e979c64aafea8
+  haskellName10 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("objectDelete"#) -}
+d722eb05f460b6472dca35359c3048fc
+  haskellName11 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName12) -}
+72eeca1072c4871ef1bbec18be4a9bb9
+  haskellName12 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("type"#) -}
+7419dc256d2365c3ea4df350ada87882
+  haskellName13 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName14) -}
+ff34dd7ff9901eb829e2c9626b0f53f0
+  haskellName14 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("raise"#) -}
+b747da1b8894f6e3bdfb48fb04950b9e
+  haskellName15 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName16) -}
+ad1c8ac35dbb37a5b6d56ce980ac5680
+  haskellName16 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("module"#) -}
+41283a08ee66ee288421c6cfba1bde8d
+  haskellName17 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName18) -}
+0d03c56f1a3060a171e360f325e191ee
+  haskellName18 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("init"#) -}
+d7558a1144aedb56f2e86901fc83ec46
+  haskellName19 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName20) -}
+a3ad54deb59135bcf4d7c4cad99d5422
+  haskellName2 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellName21
+                   HaskellNames.haskellName3) -}
+1b27314e54dd3e2b8bf88795d02919d7
+  haskellName20 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("int"#) -}
+713eb2b2ed1a01d317a22750611e9810
+  haskellName21 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName22) -}
+a1aab2614cee19387156b3e230392570
+  haskellName22 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("data"#) -}
+d584e1c923aa5a793a9ecf23a5c57a71
+  haskellName23 :: GHC.Types.Char -> GHC.Types.Bool
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(S),1*U(1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: GHC.Types.Char) ->
+                 case ds of wild { GHC.Types.C# x1 ->
+                 case x1 of wild1 {
+                   DEFAULT -> GHC.Types.True '_'# -> GHC.Types.False } }) -}
+4524270a48c2c0ecc6d48138fdd84844
+  haskellName24 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName1) -}
+413c0e438cfb3d106ccb601b5670157f
+  haskellName3 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellName19
+                   HaskellNames.haskellName4) -}
+87bb1375622676b9fd5759821542311b
+  haskellName4 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellName17
+                   HaskellNames.haskellName5) -}
+ca1d3253a9de847fb3354b717e967d0c
+  haskellName5 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellName15
+                   HaskellNames.haskellName6) -}
+e1fe34026f8779a0648f431138d44b06
+  haskellName6 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellName13
+                   HaskellNames.haskellName7) -}
+b278d1dfeb8b632ce468546d512e10f6
+  haskellName7 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellName11
+                   HaskellNames.haskellName8) -}
+e4f64a08159e55c8aa17e7f064245077
+  haskellName8 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellName9
+                   (GHC.Types.[] @ [GHC.Types.Char])) -}
+2b3ed17baa2c4d373d5c8cb3c9b675c3
+  haskellName9 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellName10) -}
+8b052a4e385454532f273172b325f1d2
+  haskellTypeName :: GHC.Base.String -> GHC.Base.String
+  {- Arity: 1, Strictness: <L,U> -}
+51bd26941d71a270b3b2fe2f8e77dbbc
+  haskellUnBuiltinTypeName :: GHC.Base.String -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (name :: GHC.Base.String) ->
+                 case HaskellNames.$smember_go3
+                        name
+                        HaskellNames.builtinObjects of wild {
+                   GHC.Types.False -> HaskellNames.haskellTypeName name
+                   GHC.Types.True
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        (HaskellNames.haskellTypeName name)
+                        HaskellNames.haskellUnBuiltinTypeName1 }) -}
+da057d9ddf2199ef2f519cd74c292ee4
+  haskellUnBuiltinTypeName1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellUnBuiltinTypeName2) -}
+94c9e66e769fc83f0f82316c6d324542
+  haskellUnBuiltinTypeName2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Object"#) -}
+81d6671ba57b8208799229dd6591d51e
+  haskellUnBuiltinTypeName3 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellUnBuiltinTypeName7
+                   HaskellNames.haskellUnBuiltinTypeName4) -}
+8b802b0a6b9dae2d92cdfb12952b6ca1
+  haskellUnBuiltinTypeName4 :: [[GHC.Types.Char]]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ [GHC.Types.Char]
+                   HaskellNames.haskellUnBuiltinTypeName5
+                   (GHC.Types.[] @ [GHC.Types.Char])) -}
+699600a1fa1baf7804c9c417cb6efcd8
+  haskellUnBuiltinTypeName5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellUnBuiltinTypeName6) -}
+daa586090a8f430d5898c510a046e2e4
+  haskellUnBuiltinTypeName6 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxString"#) -}
+bfd70a9f49fe9ecd7b2dc0a1e27142df
+  haskellUnBuiltinTypeName7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   HaskellNames.haskellUnBuiltinTypeName8) -}
+5e5e1f85ec8fbed6096b1839c247440d
+  haskellUnBuiltinTypeName8 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxColour"#) -}
+d6a8e65bef1088520218706a09d8ecfd
+  haskellUnderscoreName :: GHC.Base.String -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ (name :: GHC.Base.String) ->
+                 let {
+                   suggested :: [GHC.Types.Char]
+                   = case name of wild {
+                       [] -> HaskellNames.haskellName24
+                       : ds ds1
+                       -> case ds of wild1 { GHC.Types.C# ds2 ->
+                          case ds2 of ds3 {
+                            DEFAULT
+                            -> GHC.Types.:
+                                 @ GHC.Types.Char
+                                 (case {__pkg_ccall base-4.10.1.0 GHC.Prim.Int#
+                                                                  -> GHC.Prim.State#
+                                                                       GHC.Prim.RealWorld
+                                                                  -> (# GHC.Prim.State#
+                                                                          GHC.Prim.RealWorld,
+                                                                        GHC.Prim.Int# #)}
+                                         (GHC.Prim.ord# ds3)
+                                         GHC.Prim.realWorld# of wild2 { (#,#) ds4 ds5 ->
+                                  case GHC.Prim.tagToEnum#
+                                         @ GHC.Types.Bool
+                                         (GHC.Prim.leWord#
+                                            (GHC.Prim.int2Word# ds5)
+                                            1114111##) of wild3 {
+                                    GHC.Types.False -> GHC.Char.$wlvl ds5
+                                    GHC.Types.True -> GHC.Types.C# (GHC.Prim.chr# ds5) } })
+                                 ds1
+                            'W'#
+                            -> case ds1 of wild2 {
+                                 [] -> HaskellNames.haskellUnderscoreName2
+                                 : ds4 cs
+                                 -> case ds4 of wild3 { GHC.Types.C# ds5 ->
+                                    case ds5 of ds6 {
+                                      DEFAULT
+                                      -> GHC.Types.:
+                                           @ GHC.Types.Char
+                                           HaskellNames.haskellUnderscoreName1
+                                           wild2
+                                      'X'#
+                                      -> GHC.CString.unpackAppendCString#
+                                           HaskellNames.haskellName1
+                                           cs } } } } } }
+                 } in
+                 case HaskellNames.$smember_go3
+                        suggested
+                        HaskellNames.reservedVarNames of wild {
+                   GHC.Types.False -> suggested
+                   GHC.Types.True
+                   -> GHC.CString.unpackAppendCString#
+                        HaskellNames.haskellName1
+                        suggested }) -}
+b4fbb1f8eb1364079410251d93f9e961
+  haskellUnderscoreName1 :: GHC.Types.Char
+  {- Unfolding: (case {__pkg_ccall base-4.10.1.0 GHC.Prim.Int#
+                                                 -> GHC.Prim.State# GHC.Prim.RealWorld
+                                                 -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                                       GHC.Prim.Int# #)}
+                        87#
+                        GHC.Prim.realWorld# of wild { (#,#) ds ds1 ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.leWord# (GHC.Prim.int2Word# ds1) 1114111##) of wild1 {
+                   GHC.Types.False -> GHC.Char.$wlvl ds1
+                   GHC.Types.True -> GHC.Types.C# (GHC.Prim.chr# ds1) } }) -}
+eddf20c2cfbc9153fcf9881b1ce56676
+  haskellUnderscoreName2 :: [GHC.Types.Char]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ GHC.Types.Char
+                   HaskellNames.haskellUnderscoreName1
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+807feb07877475926b404283cd433bd7
+  isBuiltin :: GHC.Base.String -> GHC.Types.Bool
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (name :: GHC.Base.String) ->
+                 HaskellNames.$smember_go3 name HaskellNames.builtinObjects) -}
+4ec0dbf86afb380ad04058905e437e02
+  reservedVarNames :: Data.Set.Internal.Set GHC.Base.String
+  {- Unfolding: (HaskellNames.$sfromList
+                   HaskellNames.haskellName2) -}
+"SPEC/HaskellNames fromList @ [Char]" [orphan] forall ($dOrd :: GHC.Classes.Ord
+                                                                  [GHC.Types.Char])
+  Data.Set.Internal.fromList @ [GHC.Types.Char] $dOrd
+  = HaskellNames.$sfromList
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: safe
+require own pkg trusted: False
+

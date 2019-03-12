@@ -1,0 +1,2250 @@
+
+==================== FINAL INTERFACE ====================
+2019-03-12 00:15:32.8772724 UTC
+
+interface main:Classes 8022
+  interface hash: 7c97702eb499d2c587825451442e51b2
+  ABI hash: 066ef4de8df5a8a4a0e734d7381f059e
+  export-list hash: 83c87d4726fdb7b54ac491b4af7589a6
+  orphan hash: 6c692fcb139caee365d514865a10a069
+  flag hash: 7b41f4c34acbabee58f1204dde4baf28
+  sig of: Nothing
+  used TH splices: False
+  where
+exports:
+  Classes.classExtends
+  Classes.classInfo
+  Classes.classIsManaged
+  Classes.classNames
+  Classes.findManaged
+  Classes.getWxcDir
+  Classes.haskellClassDefs
+  Classes.isClassName
+  Classes.managedClasses
+  Classes.objectClassNames
+  Classes.setWxcDir
+  HaskellNames.isBuiltin
+  Classes.ClassInfo{Classes.ClassInfo classTypeName classWxName objDelete withPtr withRef withResult withSelf}
+module dependencies: HaskellNames ParseC Types
+package dependencies: array-0.5.2.0 base-4.10.1.0 binary-0.8.5.1
+                      bytestring-0.10.8.2 containers-0.5.11.0 deepseq-1.4.3.0
+                      ghc-prim-0.5.1.1 integer-gmp-1.0.1.0 mtl-2.2.2 parsec-3.1.13.0
+                      process-1.4.3.0 text-1.2.3.1 transformers-0.5.2.0 unix-2.7.2.2
+orphans: text-1.2.3.1:Data.Text.Lazy text-1.2.3.1:Data.Text
+         binary-0.8.5.1:Data.Binary.Generic
+         bytestring-0.10.8.2:Data.ByteString.Builder
+         text-1.2.3.1:Data.Text.Show
+         transformers-0.5.2.0:Control.Monad.Trans.Error
+         base-4.10.1.0:GHC.Float base-4.10.1.0:GHC.Base
+family instance modules: base-4.10.1.0:Control.Applicative
+                         base-4.10.1.0:Data.Complex base-4.10.1.0:Data.Either
+                         base-4.10.1.0:Data.Functor.Compose base-4.10.1.0:Data.Functor.Const
+                         base-4.10.1.0:Data.Functor.Identity
+                         base-4.10.1.0:Data.Functor.Product base-4.10.1.0:Data.Functor.Sum
+                         base-4.10.1.0:Data.List.NonEmpty base-4.10.1.0:Data.Monoid
+                         base-4.10.1.0:Data.Semigroup base-4.10.1.0:Data.Type.Equality
+                         base-4.10.1.0:Data.Version base-4.10.1.0:Data.Void
+                         base-4.10.1.0:GHC.Exts base-4.10.1.0:GHC.Generics
+                         base-4.10.1.0:GHC.IO.Exception base-4.10.1.0:GHC.TypeLits
+                         base-4.10.1.0:GHC.TypeNats containers-0.5.11.0:Data.IntMap.Internal
+                         containers-0.5.11.0:Data.IntSet.Internal
+                         containers-0.5.11.0:Data.Map.Internal
+                         containers-0.5.11.0:Data.Sequence.Internal
+                         containers-0.5.11.0:Data.Set.Internal containers-0.5.11.0:Data.Tree
+                         text-1.2.3.1:Data.Text text-1.2.3.1:Data.Text.Lazy
+import  -/  base-4.10.1.0:Data.Either d7dae5d9bf298dee616e465c14b5d60e
+import  -/  base-4.10.1.0:Data.Foldable 9ed87455d68e87ff2b5b8725eae9897e
+import  -/  base-4.10.1.0:Data.IORef 27e590a10ae158b4075a28a9902178b2
+import  -/  base-4.10.1.0:Data.Tuple 8fa1305aa5032ea35e2a54fa5f1e78f9
+import  -/  base-4.10.1.0:GHC.Base 782fd99b5e36f3698a26179a49afca64
+import  -/  base-4.10.1.0:GHC.IO e261d8b68ccf81a359626fa520b57d1d
+import  -/  base-4.10.1.0:GHC.IO.Unsafe 0aa7e5adc396c9f651baef415ce018da
+import  -/  base-4.10.1.0:GHC.IORef fcf9a9efa120217c33e71b5dc4a08e1f
+import  -/  base-4.10.1.0:GHC.List e3060fbeb44ce0038e6b4dedf2dd9cf1
+import  -/  base-4.10.1.0:GHC.Num 6e1dc5d36d99a802edb39b92bb1923b8
+import  -/  base-4.10.1.0:GHC.Show 0a8ce2b5e533d1c2cfb7954e6736be45
+import  -/  base-4.10.1.0:Prelude 31945b7d0084063347fc52506d3a4020
+import  -/  base-4.10.1.0:System.IO 6e5bb580370d8d71dc5888f723cea4b4
+import  -/  base-4.10.1.0:System.IO.Unsafe 00b3b8853d06169d9bfd9af46118ba88
+import  -/  containers-0.5.11.0:Data.Map b8016412c0c9d02a223b61b88cbed323
+import  -/  containers-0.5.11.0:Data.Map.Internal faa2fa6113327afc683adbf414b6042d
+import  -/  containers-0.5.11.0:Data.Set 98985b2a3e51cd3e6cde78e7142cb8c9
+import  -/  containers-0.5.11.0:Data.Set.Internal b20be47d5e4200d3ef58734fb567b8bc
+import  -/  ghc-prim-0.5.1.1:GHC.Classes 93e2660065dce9329577e83d76d8f0d4
+import  -/  ghc-prim-0.5.1.1:GHC.Types b1fd0716441595db508c1a74387bf394
+import  -/  HaskellNames 2aeff701ad26fc4f92c5cb2c30c510e3
+  exports: 785fe048c21ede4738198716d8bb3725
+  haskellTypeName 8b052a4e385454532f273172b325f1d2
+  isBuiltin 807feb07877475926b404283cd433bd7
+import  -/  ParseC 778d08eb65aa0844a1b8de78dd3377bb
+  exports: dce6b4551c2ba4fe0249873e5e2b8d85
+  readHeaderFile 1e308e0ecf0db9d7e806c5219645e6c8
+import  -/  Types d6dc9286e28636bbae650be1bd7de3cb
+  exports: ed53130f5c912c3a103d78fa401826c3
+  trace fd863916eea291868447c23d9d4ff63d
+import  -/  parsec-3.1.13.0:Text.Parsec.Char 15ac881d3b4dbfb6700b86194f7a1166
+import  -/  parsec-3.1.13.0:Text.Parsec.Combinator 2c40039ae17accd5aaab0578be689f6b
+import  -/  parsec-3.1.13.0:Text.Parsec.Prim 68f1e1d093707e912184986edf6c12d4
+import  -/  parsec-3.1.13.0:Text.Parsec.String e77a4b7d7117fc048af0ea7b7726efee
+import  -/  parsec-3.1.13.0:Text.ParserCombinators.Parsec e6b126a18a842e0587b388c58823b2b0
+import  -/  parsec-3.1.13.0:Text.ParserCombinators.Parsec.Prim eabd31a2e0d5c1cb0714cfc506926e0c
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fEqClass :: GHC.Classes.Eq Classes.Class
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Classes.Class Classes.$fEqClass_$c== Classes.$fEqClass_$c/= -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fEqClass_$c/= :: Classes.Class -> Classes.Class -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U)><S(SL),1*U(1*U,1*U)>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: Classes.Class) (b :: Classes.Class) ->
+                 case Classes.$fEqClass_$c== a b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fEqClass_$c== :: Classes.Class -> Classes.Class -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SL),1*U(1*U,1*U)><S(SL),1*U(1*U,1*U)>, Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: Classes.Class) (w1 :: Classes.Class) ->
+                 case w of ww { Classes.Class ww1 ww2 ->
+                 case w1 of ww3 { Classes.Class ww4 ww5 ->
+                 Classes.$w$c== ww1 ww2 ww4 ww5 } }) -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fShowClass :: GHC.Show.Show Classes.Class
+  DFunId
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun:.
+                  @ Classes.Class
+                  Classes.$fShowClass_$cshowsPrec
+                  Classes.$fShowClass_$cshow
+                  Classes.$fShowClass_$cshowList -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fShowClass1 ::
+    Classes.Class -> [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,1*U(1*U,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (c :: Classes.Class) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   (Classes.showClass Classes.$fShowClass2 c)) -}
+d470d198c80868f75b590e958440f203
+  $fShowClass2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fShowClass_$cshow :: Classes.Class -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U(1*U,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x :: Classes.Class) ->
+                 Classes.showClass Classes.$fShowClass2 x) -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fShowClass_$cshowList :: [Classes.Class] -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <S,1*U><L,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ls :: [Classes.Class]) (s :: GHC.Base.String) ->
+                 GHC.Show.showList__ @ Classes.Class Classes.$fShowClass1 ls s) -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $fShowClass_$cshowsPrec ::
+    GHC.Types.Int -> Classes.Class -> GHC.Show.ShowS
+  {- Arity: 2, Strictness: <L,A><L,1*U(1*U,1*U)>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (ds :: GHC.Types.Int) (c :: Classes.Class) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   (Classes.showClass Classes.$fShowClass2 c)) -}
+df3ebc361588c2bb6f9e43adedb88176
+  $s$fStream[]mtok ::
+    Text.Parsec.Prim.Stream [tok] Data.Functor.Identity.Identity tok
+  {- Strictness: m, Inline: CONLIKE,
+     Unfolding: DFun: @ tok.
+                  @ [tok]
+                  @ Data.Functor.Identity.Identity
+                  @ tok
+                  Data.Functor.Identity.$fMonadIdentity
+                  (Classes.$s$fStream[]mtok_$s$fStream[]mtok_$cuncons @ tok) -}
+e9ca5d67b3b7dbe5779fde625dc99d8c
+  $s$fStream[]mtok_$s$fStream[]mtok_$cuncons ::
+    [tok]
+    -> Data.Functor.Identity.Identity (GHC.Base.Maybe (tok, [tok]))
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Inline: (sat-args=1),
+     Unfolding: InlineRule (1, False, False)
+                (\ @ tok (ds :: [tok]) ->
+                 case ds of wild {
+                   []
+                   -> (GHC.Base.Nothing @ (tok, [tok]))
+                        `cast`
+                      (Sym (Data.Functor.Identity.N:Identity[0]
+                                <GHC.Base.Maybe (tok, [tok])>_R))
+                   : t ts
+                   -> (GHC.Base.Just @ (tok, [tok]) (t, ts))
+                        `cast`
+                      (Sym (Data.Functor.Identity.N:Identity[0]
+                                <GHC.Base.Maybe (tok, [tok])>_R)) }) -}
+56c4f3ef3eb8d1537e1900d1f8f2e196
+  $s$wsplitS ::
+    GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String
+    -> (# Data.Set.Internal.Set GHC.Base.String,
+          Data.Set.Internal.Set GHC.Base.String #)
+  {- Arity: 2, Strictness: <L,U><S,1*U>, Inline: [~] -}
+789a2a1d05479050aeb6dcf5cad4e362
+  $s$wsplit_$s$wpoly_go13 ::
+    GHC.Prim.Int#
+    -> [GHC.Types.Char]
+    -> a
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+    -> [GHC.Types.Char]
+    -> (# Data.Map.Internal.Map GHC.Base.String a,
+          Data.Map.Internal.Map GHC.Base.String a #)
+  {- Arity: 6, Strictness: <L,A><S,U><L,U><L,U><L,U><S,U> -}
+10d052036d0eca44fe65f1fa6e6e769b
+  $sfromList ::
+    [([GHC.Types.Char], a)] -> Data.Map.Internal.Map [GHC.Types.Char] a
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ @ a (ds :: [([GHC.Types.Char], a)]) ->
+                 case ds of wild {
+                   [] -> Data.Map.Internal.Tip @ [GHC.Types.Char] @ a
+                   : ds1 ds2
+                   -> case ds1 of wild1 { (,) kx x ->
+                      case ds2 of wild2 {
+                        []
+                        -> case kx of dt { DEFAULT ->
+                           Data.Map.Internal.Bin
+                             @ [GHC.Types.Char]
+                             @ a
+                             1#
+                             dt
+                             x
+                             (Data.Map.Internal.Tip @ [GHC.Types.Char] @ a)
+                             (Data.Map.Internal.Tip @ [GHC.Types.Char] @ a) }
+                        : ipv ipv1
+                        -> case ipv of wild3 { (,) ky ds3 ->
+                           case GHC.Classes.$fOrd[]_$s$ccompare1 kx ky of wild4 {
+                             DEFAULT
+                             -> case kx of dt { DEFAULT ->
+                                Classes.$sfromList_$spoly_go14
+                                  @ a
+                                  ky
+                                  ds3
+                                  ipv1
+                                  (Data.Map.Internal.Bin
+                                     @ [GHC.Types.Char]
+                                     @ a
+                                     1#
+                                     dt
+                                     x
+                                     (Data.Map.Internal.Tip @ [GHC.Types.Char] @ a)
+                                     (Data.Map.Internal.Tip @ [GHC.Types.Char] @ a)) }
+                             GHC.Types.LT
+                             -> case kx of dt { DEFAULT ->
+                                Classes.$sfromList_$s$wpoly_go13
+                                  @ a
+                                  ky
+                                  ds3
+                                  ipv1
+                                  (Data.Map.Internal.Bin
+                                     @ [GHC.Types.Char]
+                                     @ a
+                                     1#
+                                     dt
+                                     x
+                                     (Data.Map.Internal.Tip @ [GHC.Types.Char] @ a)
+                                     (Data.Map.Internal.Tip @ [GHC.Types.Char] @ a))
+                                  1# } } } } } }) -}
+c79d80a4a98e9993cee8654958af3a4d
+  $sfromList_$s$wpoly_go13 ::
+    [GHC.Types.Char]
+    -> a
+    -> [([GHC.Types.Char], a)]
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+    -> GHC.Prim.Int#
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+  {- Arity: 5, Strictness: <S,U><L,U><S,1*U><S,1*U><L,U> -}
+ac54f057d9f899f80f8454a5bafc2af8
+  $sfromList_$spoly_go14 ::
+    [GHC.Types.Char]
+    -> a
+    -> [([GHC.Types.Char], a)]
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+  {- Arity: 4, Strictness: <S,U><L,U><S,1*U><S,1*U> -}
+0fe721602d26228c426eb57329676e40
+  $sinsertR_$sgo13 ::
+    GHC.Base.String
+    -> GHC.Base.String
+    -> a1
+    -> Data.Map.Internal.Map GHC.Base.String a1
+    -> Data.Map.Internal.Map GHC.Base.String a1
+  {- Arity: 4, Strictness: <L,U><S,1*U><L,U><S,1*U> -}
+89d7a3a17afc69b37082d65a83e216ca
+  $sinsertR_$sgo3 ::
+    GHC.Base.String
+    -> GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String
+  {- Arity: 3, Strictness: <L,U><S,1*U><S,1*U> -}
+7a860603bae3d896a107add113351f0a
+  $sinsert_$s$sgo13 ::
+    GHC.Prim.Int#
+    -> [GHC.Types.Char]
+    -> a
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+    -> Data.Map.Internal.Map [GHC.Types.Char] a
+    -> a
+    -> [GHC.Types.Char]
+    -> [GHC.Types.Char]
+    -> Data.Map.Internal.Map GHC.Base.String a
+  {- Arity: 8,
+     Strictness: <L,U><S,U><L,U><L,U><L,U><L,U><S,1*U><L,U> -}
+ad77d54c8fb4944ea438ceae845f2edd
+  $sinsert_$s$sgo3 ::
+    GHC.Prim.Int#
+    -> [GHC.Types.Char]
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+    -> Data.Set.Internal.Set [GHC.Types.Char]
+    -> [GHC.Types.Char]
+    -> [GHC.Types.Char]
+    -> Data.Set.Internal.Set GHC.Base.String
+  {- Arity: 6, Strictness: <L,U><S,U><L,U><L,U><S,1*U><L,U> -}
+1919b99f88218acafe6dbf86d1bb261e
+  $sinsert_$sgo13 ::
+    GHC.Base.String
+    -> GHC.Base.String
+    -> a1
+    -> Data.Map.Internal.Map GHC.Base.String a1
+    -> Data.Map.Internal.Map GHC.Base.String a1
+  {- Arity: 4, Strictness: <L,U><S,1*U><L,U><S,1*U> -}
+9daa42aaf280419df1c036c42d7f2d3b
+  $sinsert_$sgo3 ::
+    GHC.Base.String
+    -> GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String
+  {- Arity: 3, Strictness: <L,U><S,1*U><S,1*U> -}
+e1442ec74e56e40630ce6da4f63e6d29
+  $slookup1 ::
+    GHC.Base.String
+    -> Data.Map.Internal.Map GHC.Base.String a -> GHC.Base.Maybe a
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+4f9326ab29d042d0e37e78ca602eb942
+  $smember_go3 ::
+    GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U> -}
+ec92adae389010f78585387a2e8ee898
+  $sunion ::
+    Data.Set.Internal.Set GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String
+    -> Data.Set.Internal.Set GHC.Base.String
+  {- Arity: 2, Strictness: <S,1*U><S,1*U>, Inline: [~] -}
+bc818531a0efe28e5c26e47700a50f11
+  $sunion1 ::
+    Data.Map.Internal.Map GHC.Base.String a
+    -> Data.Map.Internal.Map GHC.Base.String a
+    -> Data.Map.Internal.Map GHC.Base.String a
+  {- Arity: 2, Strictness: <S,1*U><S,1*U>, Inline: [~] -}
+3fcec72e205fda233735d92aafcb9564
+  $sunions_go3 ::
+    Data.Set.Internal.Set GHC.Base.String
+    -> [Data.Set.Internal.Set GHC.Base.String]
+    -> Data.Set.Internal.Set GHC.Base.String
+  {- Arity: 2, Strictness: <S,1*U><S,1*U> -}
+81f4b47dc6df5d7bf454ae42fc5a9ad9
+  $tc'Class :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   14038457395063850785##
+                   5246877866012053994##
+                   Classes.$trModule
+                   Classes.$tc'Class2
+                   0#
+                   Classes.$tc'Class1) -}
+61bd5fd7779f8814453e6a09c921d675
+  $tc'Class1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+75e8c227f32b73b7160ed19d8f4930de
+  $tc'Class2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Classes.$tc'Class3) -}
+7ac03d2d513d19d4900e27b633715c66
+  $tc'Class3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'Class"#) -}
+88a0c10812ba6e38751a07bf511c1a3e
+  $tc'ClassInfo :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   17971654639136803160##
+                   162105243441641049##
+                   Classes.$trModule
+                   Classes.$tc'ClassInfo2
+                   0#
+                   Classes.$tc'ClassInfo1) -}
+bce4d0230bd1d8dd60173ffdbf37cff7
+  $tc'ClassInfo1 :: GHC.Types.KindRep
+  {- HasNoCafRefs, Strictness: m4, Inline: [~] -}
+5681f39cbff99720371724eb95f80a6e
+  $tc'ClassInfo2 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Classes.$tc'ClassInfo3) -}
+3e903db271fb03bb23ecb8bffcf2ad22
+  $tc'ClassInfo3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("'ClassInfo"#) -}
+f807463add21c9c7454d3d98d13d24e2
+  $tcClass :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   12784308960178932130##
+                   12419468798132703847##
+                   Classes.$trModule
+                   Classes.$tcClass1
+                   0#
+                   GHC.Types.krep$*) -}
+f6aa819b0dca88a60ade8555cd6f730c
+  $tcClass1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Classes.$tcClass2) -}
+4320cc2a28686d17ce7e1cf1ebc93d3f
+  $tcClass2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Class"#) -}
+5c9adf0ede19a6836c2691144054b17d
+  $tcClassInfo :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   16161008056494992492##
+                   10356350489333152612##
+                   Classes.$trModule
+                   Classes.$tcClassInfo1
+                   0#
+                   GHC.Types.krep$*) -}
+ddb6265066dec9a9d5a0105ca62be447
+  $tcClassInfo1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Classes.$tcClassInfo2) -}
+1a3418bddc6d2fd83041eafb85b4f918
+  $tcClassInfo2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("ClassInfo"#) -}
+dfe36897f0bddb2d1b4321c446c71108
+  $trModule :: GHC.Types.Module
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.Module
+                   Classes.$trModule3
+                   Classes.$trModule1) -}
+3da0a48cc220e308fa665974f6c23463
+  $trModule1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Classes.$trModule2) -}
+58f45d4ac093a2ce223a2b52aaed06d0
+  $trModule2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Classes"#) -}
+9e3a259c131eba7553c1b0b44685edc9
+  $trModule3 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS Classes.$trModule4) -}
+e5610e8699b31e299800ee14ca18f285
+  $trModule4 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("main"#) -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $w$c== ::
+    GHC.Base.String
+    -> [Classes.Class]
+    -> GHC.Base.String
+    -> [Classes.Class]
+    -> GHC.Types.Bool
+  {- Arity: 4, HasNoCafRefs,
+     Strictness: <S,1*U><L,1*U><S,1*U><L,1*U>, Inline: [0] -}
+a83d14f841fb8394e3fd6d4bc1345044
+  $wflatten ::
+    GHC.Base.String
+    -> GHC.Base.String
+    -> [Classes.Class]
+    -> Data.Map.Internal.Map GHC.Base.String GHC.Base.String
+  {- Arity: 3, Strictness: <L,U><S,U><S,1*U>, Inline: [0] -}
+e5995084fd4fd31dc89b97a2268691f5
+  $wflatten1 ::
+    GHC.Base.String
+    -> [Classes.Class] -> Data.Set.Internal.Set GHC.Base.String
+  {- Arity: 2, Strictness: <S,U><S,1*U>, Inline: [0] -}
+9a0273faa4de103ece0fbc409128adf4
+  $wmergeClass ::
+    Classes.Class
+    -> [Classes.Class] -> (# Classes.Class, [Classes.Class] #)
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U(U,U)><S,1*U>,
+     Inline: [0] -}
+9bbb78a84e4c4fcbfeacd5c131fad2e3
+  $wpoly_go13 ::
+    GHC.Base.String
+    -> Data.Map.Internal.Map GHC.Base.String a
+    -> (# Data.Map.Internal.Map GHC.Base.String a,
+          Data.Map.Internal.Map GHC.Base.String a #)
+  {- Arity: 2, Strictness: <L,U><S,1*U>, Inline: [0] -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  $wshowClass ::
+    GHC.Prim.Int#
+    -> GHC.Base.String -> [Classes.Class] -> [GHC.Types.Char]
+  {- Arity: 3, Strictness: <S,U><L,1*U><L,1*U>, Inline: [0] -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  data Class = Class GHC.Base.String [Classes.Class]
+80b670c9fb06e5e9bffa8985fdc2953a
+  data ClassInfo
+    = ClassInfo {classWxName :: GHC.Base.String,
+                 withSelf :: GHC.Base.String -> GHC.Base.String,
+                 withPtr :: GHC.Base.String,
+                 withResult :: GHC.Base.String,
+                 withRef :: GHC.Base.String,
+                 objDelete :: GHC.Base.String,
+                 classTypeName :: GHC.Base.String -> GHC.Base.String}
+5692b2e98f79fe4fbe1a250db83d5d1c
+  classExtends ::
+    Data.Map.Internal.Map GHC.Base.String GHC.Base.String
+  {- Unfolding: (Classes.classExtends_go13
+                   (Data.Map.Internal.Tip @ GHC.Base.String @ GHC.Base.String)
+                   (GHC.Base.map
+                      @ Classes.Class
+                      @ (Data.Map.Internal.Map GHC.Base.String GHC.Base.String)
+                      Classes.classExtends8
+                      Classes.classes)) -}
+8914f96590fe9c4530b51cdcd84311f5
+  classExtends1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, [Classes.Class] #)
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (s :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
+                 case GHC.Prim.noDuplicate#
+                        @ GHC.Prim.RealWorld
+                        s of s' { DEFAULT ->
+                 case Classes.wxcdir
+                        `cast`
+                      (Nth:2
+                           (Trans
+                                (<GHC.IORef.IORef GHC.Base.String>_R
+                                 ->_R GHC.Types.N:IO[0] <GHC.Base.String>_R)
+                                (GHC.IORef.N:IORef[0] <GHC.Base.String>_N
+                                 ->_R <GHC.Prim.State# GHC.Prim.RealWorld
+                                       -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                             GHC.Base.String #)>_R))) of wild { GHC.STRef.STRef var# ->
+                 case GHC.Prim.readMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ GHC.Base.String
+                        var#
+                        s' of ds1 { (#,#) ipv ipv1 ->
+                 case GHC.IO.Handle.Text.hPutStr2
+                        GHC.IO.Handle.FD.stdout
+                        Classes.classExtends6
+                        GHC.Types.True
+                        ipv of ds2 { (#,#) ipv2 ipv3 ->
+                 case ParseC.parseC178
+                        (GHC.Base.++ @ GHC.Types.Char ipv1 Classes.classExtends4)
+                        ipv2 of ds3 { (#,#) ipv4 ipv5 ->
+                 (# ipv4,
+                    let {
+                      defs :: [([GHC.Types.Char], GHC.Base.String)]
+                      = Classes.classExtends_go ipv5
+                    } in
+                    let {
+                      extends :: Data.Map.Internal.Map [GHC.Types.Char] GHC.Base.String
+                      = Classes.$sfromList @ [GHC.Types.Char] defs
+                    } in
+                    letrec {
+                      go :: [(GHC.Base.String, GHC.Base.String)] -> [Classes.Class]
+                        {- Arity: 1, Strictness: <S,1*U> -}
+                      = \ (ds :: [(GHC.Base.String, GHC.Base.String)]) ->
+                        case ds of wild1 {
+                          [] -> GHC.Types.[] @ Classes.Class
+                          : y ys
+                          -> case Classes.$wmergeClass
+                                    (case y of wild2 { (,) x ds4 ->
+                                     let {
+                                       lvl33 :: [GHC.Types.Char]
+                                       = GHC.CString.unpackAppendCString#
+                                           Classes.classExtends3
+                                           (GHC.Types.:
+                                              @ GHC.Types.Char
+                                              GHC.Show.$fShow(,)3
+                                              (GHC.Show.showLitString x GHC.Show.$fShow[]1))
+                                     } in
+                                     letrec {
+                                       $wcomplete :: GHC.Base.String
+                                                     -> [Classes.Class] -> Classes.Class
+                                         <join 2> {- Arity: 2, Strictness: <S,U><L,U>m,
+                                                     Inline: [0] -}
+                                       = \ (ww :: GHC.Base.String) (ww1 :: [Classes.Class]) ->
+                                         case Classes.$slookup1
+                                                @ [GHC.Types.Char]
+                                                ww
+                                                extends of wild3 {
+                                           GHC.Base.Nothing
+                                           -> case GHC.Magic.runRW#
+                                                     @ ('GHC.Types.TupleRep
+                                                          '['GHC.Types.TupleRep '[],
+                                                            'GHC.Types.LiftedRep])
+                                                     @ (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+                                                     (\ (s1 :: GHC.Prim.State#
+                                                                 GHC.Prim.RealWorld)[OneShot] ->
+                                                      case GHC.Prim.noDuplicate#
+                                                             @ GHC.Prim.RealWorld
+                                                             s1 of s'1 { DEFAULT ->
+                                                      GHC.IO.Handle.Text.hPutStr2
+                                                        GHC.IO.Handle.FD.stdout
+                                                        (GHC.CString.unpackAppendCString#
+                                                           Classes.classExtends2
+                                                           (GHC.Base.++
+                                                              @ GHC.Types.Char
+                                                              (GHC.Types.:
+                                                                 @ GHC.Types.Char
+                                                                 GHC.Show.$fShow(,)3
+                                                                 (GHC.Show.showLitString
+                                                                    ww
+                                                                    GHC.Show.$fShow[]1))
+                                                              lvl33))
+                                                        GHC.Types.True
+                                                        s'1 }) of ds5 { (#,#) ipv6 ipv7 ->
+                                              case ipv7 of wild4 { () -> Classes.Class ww ww1 } }
+                                           GHC.Base.Just ds5
+                                           -> case ds5 of wild4 {
+                                                [] -> Classes.Class ww ww1
+                                                : ipv6 ipv7
+                                                -> $wcomplete
+                                                     wild4
+                                                     (GHC.Types.:
+                                                        @ Classes.Class
+                                                        (Classes.Class ww ww1)
+                                                        (GHC.Types.[] @ Classes.Class)) } }
+                                     } in
+                                     $wcomplete x (GHC.Types.[] @ Classes.Class) })
+                                    (go ys) of ww { (#,#) ww1 ww2 ->
+                             GHC.Types.: @ Classes.Class ww1 ww2 } }
+                    } in
+                    go defs #) } } } } }) -}
+63252bb2ab71f47dacd9ad1d98db5d6b
+  classExtends2 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("warning: undefined base class "#) -}
+0b603ea16f28c92dbd4928b9d55a1425
+  classExtends3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: (" in definition of "#) -}
+fcb7f03285054de2a46f691e924b7bee
+  classExtends4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.classExtends5) -}
+e69479a6519b1b161779ed1085cc95bd
+  classExtends5 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("/include/wxc.h"#) -}
+0eb3775141706fc04af3cc6c4115dbab
+  classExtends6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.classExtends7) -}
+6644f881f1c7aa797e5561aa5c3be20c
+  classExtends7 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("reading class definitions:"#) -}
+6d08dded9af0aa39cf287e028df3bede
+  classExtends8 ::
+    Classes.Class
+    -> Data.Map.Internal.Map GHC.Base.String GHC.Base.String
+  {- Arity: 1, Strictness: <S(SS),1*U(U,1*U)>,
+     Unfolding: (\ (w :: Classes.Class) ->
+                 case w of ww { Classes.Class ww1 ww2 ->
+                 Classes.$wflatten (GHC.Types.[] @ GHC.Types.Char) ww1 ww2 }) -}
+b481639b4415bd3d8e3f3585c6fd2992
+  classExtends_$s$wmergeClass ::
+    [Classes.Class]
+    -> [GHC.Types.Char]
+    -> [Classes.Class]
+    -> (# Classes.Class, [Classes.Class] #)
+  {- Arity: 3, HasNoCafRefs, Strictness: <S,1*U><L,U><L,U> -}
+1c2edc08dc9b563b8b9f67a8cac449a3
+  classExtends_go ::
+    [[GHC.Types.Char]] -> [([GHC.Types.Char], GHC.Base.String)]
+  {- Arity: 1, Strictness: <S,1*U> -}
+9a35d5425f3f5df7abe5e7540c54fca8
+  classExtends_go13 ::
+    Data.Map.Internal.Map GHC.Base.String GHC.Base.String
+    -> [Data.Map.Internal.Map GHC.Base.String GHC.Base.String]
+    -> Data.Map.Internal.Map GHC.Base.String GHC.Base.String
+  {- Arity: 2, Strictness: <S,1*U><S,1*U> -}
+8c04a23858e34bbf51ece46d2c28a12e
+  classInfo :: GHC.Base.String -> Classes.ClassInfo
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (name :: GHC.Base.String) ->
+                 case Classes.findManaged name of wild {
+                   GHC.Base.Nothing
+                   -> let {
+                        lvl33 :: GHC.Base.String = HaskellNames.haskellTypeName name
+                      } in
+                      Classes.ClassInfo
+                        name
+                        Classes.classInfo8
+                        Classes.classInfo6
+                        Classes.classInfo4
+                        (GHC.Types.[] @ GHC.Types.Char)
+                        Classes.classInfo2
+                        (\ (typevar :: GHC.Base.String) ->
+                         GHC.Base.++
+                           @ GHC.Types.Char
+                           lvl33
+                           (GHC.CString.unpackAppendCString# Classes.classInfo1 typevar))
+                   GHC.Base.Just info -> info }) -}
+a61fcf2bcde8488ce08e0cdc2a98469c
+  classInfo1 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: (" "#) -}
+4d9ac3d4b031fffeb49b902d6a4a3b6f
+  classInfo2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.classInfo3) -}
+2e0d01e38df5638a7275c76c0880059a
+  classInfo3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("objectDelete"#) -}
+b5cdba47953a692529932ce806d1b99b
+  classInfo4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.classInfo5) -}
+8ed345a9afff483e6ab2f03ddebc0482
+  classInfo5 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withObjectResult"#) -}
+2b7551332cd408cf0c1db305ac2e6588
+  classInfo6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.classInfo7) -}
+2d14a74401c9607b81dd435c95bf713e
+  classInfo7 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withObjectPtr"#) -}
+ecf3e87ba4fb5ab11aadcc843a8f70e0
+  classInfo8 :: GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (methodName :: GHC.Base.String) ->
+                 GHC.CString.unpackAppendCString# "withObjectRef "# methodName) -}
+6073777e6e536b979d36a4a2f9e41b9f
+  classIsManaged :: GHC.Base.String -> GHC.Types.Bool
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (name :: GHC.Base.String) ->
+                 case Classes.findManaged name of wild {
+                   GHC.Base.Nothing -> GHC.Types.False
+                   GHC.Base.Just ds -> GHC.Types.True }) -}
+c00fff322a646dc8daf7a0c1412c181b
+  classNames :: Data.Set.Internal.Set GHC.Base.String
+  {- Unfolding: (Classes.$sunions_go3
+                   (Data.Set.Internal.Tip @ GHC.Base.String)
+                   (GHC.Base.map
+                      @ Classes.Class
+                      @ (Data.Set.Internal.Set GHC.Base.String)
+                      Classes.classNames_flatten
+                      Classes.classes)) -}
+0b5c573f9b85d198c1e147eca302efcb
+  classNames_flatten ::
+    Classes.Class -> Data.Set.Internal.Set GHC.Base.String
+  {- Arity: 1, Strictness: <S(SS),1*U(U,1*U)>, Inline: [0],
+     Unfolding: InlineRule (1, True, False)
+                (\ (w :: Classes.Class) ->
+                 case w of ww { Classes.Class ww1 ww2 ->
+                 Classes.$wflatten1 ww1 ww2 }) -}
+80b670c9fb06e5e9bffa8985fdc2953a
+  classTypeName ::
+    Classes.ClassInfo -> GHC.Base.String -> GHC.Base.String
+  RecSel Left Classes.ClassInfo
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLLLS),1*U(A,A,A,A,A,A,1*U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Classes.ClassInfo) ->
+                 case ds of wild { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                 ds7 }) -}
+80b670c9fb06e5e9bffa8985fdc2953a
+  classWxName :: Classes.ClassInfo -> GHC.Base.String
+  RecSel Left Classes.ClassInfo
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SLLLLLL),1*U(1*U,A,A,A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Classes.ClassInfo) ->
+                 case ds of wild { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                 ds1 }) -}
+7f949a8f2c0706a85f26790f4b0b0f79
+  classes :: [Classes.Class]
+  {- Unfolding: (case GHC.Magic.runRW#
+                        @ ('GHC.Types.TupleRep
+                             '['GHC.Types.TupleRep '[], 'GHC.Types.LiftedRep])
+                        @ (# GHC.Prim.State# GHC.Prim.RealWorld, [Classes.Class] #)
+                        Classes.classExtends1 of ds { (#,#) ipv ipv1 ->
+                 ipv1 }) -}
+bbe7311c46781914d18953467807f52a
+  findManaged :: GHC.Base.String -> GHC.Base.Maybe Classes.ClassInfo
+  {- Arity: 1, Strictness: <S,U>,
+     Unfolding: (\ (name :: GHC.Base.String) ->
+                 letrec {
+                   find :: [Classes.ClassInfo] -> GHC.Base.Maybe Classes.ClassInfo
+                     <join 1> {- Arity: 1, Strictness: <S,1*U> -}
+                   = \ (ds :: [Classes.ClassInfo]) ->
+                     case ds of wild {
+                       [] -> GHC.Base.Nothing @ Classes.ClassInfo
+                       : info rest
+                       -> case info of wild1 { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                          case GHC.Base.eqString ds1 name of wild2 {
+                            GHC.Types.False -> find rest
+                            GHC.Types.True -> GHC.Base.Just @ Classes.ClassInfo wild1 } } }
+                 } in
+                 let {
+                   $sfind :: [GHC.Types.Char]
+                             -> [GHC.Types.Char]
+                             -> [GHC.Types.Char]
+                             -> [GHC.Types.Char]
+                             -> [GHC.Types.Char]
+                             -> [Classes.ClassInfo]
+                             -> GHC.Base.Maybe Classes.ClassInfo
+                     <join 6> {- Arity: 6,
+                                 Strictness: <S,U><L,U><L,U><L,U><L,U><L,1*U> -}
+                   = \ (sc :: [GHC.Types.Char])
+                       (sc1 :: [GHC.Types.Char])
+                       (sc2 :: [GHC.Types.Char])
+                       (sc3 :: [GHC.Types.Char])
+                       (sc4 :: [GHC.Types.Char])
+                       (sc5 :: [Classes.ClassInfo]) ->
+                     case GHC.Base.eqString sc name of wild {
+                       GHC.Types.False -> find sc5
+                       GHC.Types.True
+                       -> GHC.Base.Just
+                            @ Classes.ClassInfo
+                            (Classes.ClassInfo
+                               sc
+                               Classes.findManaged106
+                               sc1
+                               sc2
+                               sc3
+                               sc4
+                               Classes.findManaged208) }
+                 } in
+                 $sfind
+                   Classes.findManaged207
+                   Classes.classInfo6
+                   Classes.findManaged206
+                   Classes.findManaged203
+                   Classes.classInfo2
+                   Classes.findManaged1) -}
+22fd9ee1c4a25a3727e360428d720cb3
+  findManaged1 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged196
+                   Classes.findManaged2) -}
+ab951d5054b4b6cba5f8a9b96583cb3d
+  findManaged10 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged140
+                   Classes.findManaged11) -}
+572463dca4250b034d85b9e0e657c1d5
+  findManaged100 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxColour"#) -}
+ebb4cca5a36667b477a830aa705406b8
+  findManaged101 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged109
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged104
+                   (GHC.Types.[] @ GHC.Types.Char)
+                   Classes.classInfo2
+                   Classes.findManaged102) -}
+6ce3e359b5a9dbaf3bbd38ba2120d022
+  findManaged102 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged_name)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+e9e17b0937af671857d179d540f856a8
+  findManaged103 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Sound"#) -}
+0a20396eaf05a7fd30eda44fcfef773f
+  findManaged104 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged105) -}
+438e3347a5349e32352565b3ec38b680
+  findManaged105 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withManagedObjectResult"#) -}
+972a1d8f06ba212d2f79068314aeec18
+  findManaged106 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged107)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+019acda6e17a2b61168deaf78220852f
+  findManaged107 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged108) -}
+6272fd27cf6054aa2333935666a2d69b
+  findManaged108 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withObjectRef"#) -}
+b7c667fd833b3703e792850ce6a81058
+  findManaged109 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged_name) -}
+ee277bac6ad374c6940127c11ef3afa1
+  findManaged11 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged134
+                   Classes.findManaged12) -}
+ce1b4d9431ee967fb63e4a21929ec885
+  findManaged110 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wx"#) -}
+f4be4b0f434f46cd2412d19c7de660f6
+  findManaged111 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged121
+                   Classes.findManaged120
+                   Classes.classInfo6
+                   Classes.findManaged118
+                   Classes.findManaged116
+                   Classes.findManaged114
+                   Classes.findManaged112) -}
+fe9225e667b33059536cdd4fec9d0ee0
+  findManaged112 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged113
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+edd6a5b7a8803ff576cb455b2b4d1e0b
+  findManaged113 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("GridCellCoordsArray"#) -}
+e867d56d7067fd58c18f186bbda663b2
+  findManaged114 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged115) -}
+5efe035ebec87f1bbc3478c144f882d4
+  findManaged115 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("gridCellCoordsArrayDelete"#) -}
+ac6ce2f3e8455d0d1a1c6d734944e946
+  findManaged116 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged117) -}
+70bf3bfe442bbb9a859bdb1252dd7f68
+  findManaged117 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefGridCellCoordsArray"#) -}
+715c0e6cdad4221bb6530712a36fbd54
+  findManaged118 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged119) -}
+3bcbfd385af00de799154c031544b084
+  findManaged119 :: GHC.Prim.Addr#
+  {- HasNoCafRefs,
+     Unfolding: ("withManagedGridCellCoordsArrayResult"#) -}
+6be65ff14eaee84b497382e0a6ddcad1
+  findManaged12 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged123
+                   Classes.findManaged13) -}
+8a726a1fd2b9657b2a5abb248aa7994c
+  findManaged120 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged108
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+5c98c08732cff39651aff311971da3bc
+  findManaged121 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged122) -}
+4bca5186b2b9a1abf44f8a0f1b3d70a5
+  findManaged122 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxGridCellCoordsArray"#) -}
+52c2ee6479fe86a6fdc75b1a9facb055
+  findManaged123 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged132
+                   Classes.findManaged120
+                   Classes.classInfo6
+                   Classes.findManaged130
+                   Classes.findManaged128
+                   Classes.findManaged126
+                   Classes.findManaged124) -}
+2d4423325e022947b300b9ef2a037c92
+  findManaged124 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged125
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+b009f45bd7f1dd7103a1d320fbed34ec
+  findManaged125 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("DateTime"#) -}
+83fd48a0b602043ffd6f1831b0977bec
+  findManaged126 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged127) -}
+19550d597764533fae0e1c7a12d71175
+  findManaged127 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("dateTimeDelete"#) -}
+29e0df1607c0591b3f561b8ec852cd1a
+  findManaged128 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged129) -}
+ff36144661f5d84607448f559bcaac13
+  findManaged129 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefDateTime"#) -}
+f1e589a41013691e9ff5c1c63d976c41
+  findManaged13 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged111
+                   Classes.findManaged14) -}
+22b01e9ef7304ec3d2daa56440eb5b48
+  findManaged130 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged131) -}
+082d76e9aaea53665d037813541856e0
+  findManaged131 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withManagedDateTimeResult"#) -}
+831b0ba188e9378e6f6691347419ea14
+  findManaged132 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged133) -}
+181026aedfacb0f47bf256523d8922ee
+  findManaged133 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxDateTime"#) -}
+edb320d9c8693ca139d87fe9374ec3d5
+  findManaged134 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged139
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged104
+                   Classes.findManaged137
+                   Classes.classInfo2
+                   Classes.findManaged135) -}
+99da5c92bb7d938cd750f19d74f4197a
+  findManaged135 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged_name1)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+48215179cf3eaae5587ab181f6361566
+  findManaged136 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("PageSetupDialogData"#) -}
+9b6aa941f057792014b51b9835a97288
+  findManaged137 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged_name1) -}
+63e3b2baf125d5b7e3dc692565de3316
+  findManaged138 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRef"#) -}
+0c43d74310b1e31fbae24bab66dbfa95
+  findManaged139 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged_name1) -}
+e421a551ba2a9961bae4478a35f49d58
+  findManaged14 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged101
+                   Classes.findManaged15) -}
+5990b023c89d80e5db9b623e361588bd
+  findManaged140 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged144
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged104
+                   Classes.findManaged143
+                   Classes.classInfo2
+                   Classes.findManaged141) -}
+8b809bec8d6f9820f004080c663c4177
+  findManaged141 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged_name2)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+ca7ea0169a6a0d22d4afdad6fd141754
+  findManaged142 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("PrintDialogData"#) -}
+f7c16c022c84a2ee512b68dabe3807b5
+  findManaged143 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged_name2) -}
+3a179418636db79399fce04f046b5873
+  findManaged144 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged_name2) -}
+d87e3be39a45447cdc3582e68314f5b8
+  findManaged145 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged149
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged104
+                   Classes.findManaged148
+                   Classes.classInfo2
+                   Classes.findManaged146) -}
+6f73b0c80d861893c9adfacee90cbc8a
+  findManaged146 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged_name3)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+8a6d796331ec045353bc1e3055d95323
+  findManaged147 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("PrintData"#) -}
+fe83587d774e4040963fa0aa6da3b231
+  findManaged148 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged_name3) -}
+befdaa65d576e7f55f89d03dc31f2a67
+  findManaged149 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged_name3) -}
+9139ee8d28d4835144340ebfb1141622
+  findManaged15 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged88
+                   Classes.findManaged16) -}
+21030ae0e303bef9dec7a060f686df64
+  findManaged150 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged154
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged104
+                   Classes.findManaged153
+                   Classes.classInfo2
+                   Classes.findManaged151) -}
+0d829fc49df161a4cdfd8f17ce328f87
+  findManaged151 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged_name4)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+8f18206736d6bfa3fefcbefc741f8e49
+  findManaged152 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("ListItem"#) -}
+59f8bb05a21d861177b39f5e3f6e7286
+  findManaged153 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged_name4) -}
+95b1b9d03b1ec0ead623ce539f739616
+  findManaged154 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged_name4) -}
+5fd103acd74f609f46ce230969a37fa4
+  findManaged155 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged159
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged104
+                   Classes.findManaged158
+                   Classes.classInfo2
+                   Classes.findManaged156) -}
+4592b1c70c3cf17473591985759c14cc
+  findManaged156 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged_name5)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+7eec46a8973a551a06e2a579606eb4ed
+  findManaged157 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("FontData"#) -}
+bd201eaaac03e398e047a20623fa2b96
+  findManaged158 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged_name5) -}
+bc5f708d5130b786f256779c515ecbd0
+  findManaged159 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged_name5) -}
+0858a820efdcd97bcbfb7e94b6458df4
+  findManaged16 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged75
+                   Classes.findManaged17) -}
+63689102229932e21da5f7a126758120
+  findManaged160 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged164
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged104
+                   Classes.findManaged163
+                   Classes.classInfo2
+                   Classes.findManaged161) -}
+0b6934d862435d4fef28456e41b66b36
+  findManaged161 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.augment
+                   @ GHC.Types.Char
+                   (\ @ b
+                      (c :: GHC.Types.Char -> b -> b)[OneShot]
+                      (n :: b)[OneShot] ->
+                    GHC.Base.foldr @ GHC.Types.Char @ b c n Classes.findManaged_name6)
+                   (GHC.CString.unpackAppendCString# " "# arg)) -}
+b58b327af4d78977298756a14339354f
+  findManaged162 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Image"#) -}
+096144d521d33c26be6552042da49ba9
+  findManaged163 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged_name6) -}
+d1d3b86436cc4ea687b008240078f246
+  findManaged164 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged_name6) -}
+3665688f2a461624df0d75a65bd717f8
+  findManaged165 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged174
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged170
+                   Classes.findManaged169
+                   Classes.classInfo2
+                   Classes.findManaged166) -}
+7b5f4319c622dedc32249a85fe1063e8
+  findManaged166 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   Classes.findManaged167
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+bbe5d5fe54aa57f4b7f15dae8f03ad50
+  findManaged167 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged168) -}
+9aef13847eb6a9c0c7e3ab5ea52378fd
+  findManaged168 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Brush"#) -}
+e68b55e7c6ce0587357c9aa4b40aa974
+  findManaged169 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged167) -}
+0eb4a0e6edd0bba17ad1244774e93366
+  findManaged17 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged62
+                   Classes.findManaged18) -}
+61c0a97daebe54d5c709ae8fd7529405
+  findManaged170 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged173
+                   (GHC.Base.++
+                      @ GHC.Types.Char
+                      Classes.findManaged167
+                      Classes.findManaged171)) -}
+0060187bab9b546bd9ed7c14d32095af
+  findManaged171 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged172) -}
+2f8483deb74d45d155b844a3a0d76fba
+  findManaged172 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Result"#) -}
+10a1dd70fca73e07781cb6421182f157
+  findManaged173 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withManaged"#) -}
+cd4729ac6acb95af6e1bc351f8858c17
+  findManaged174 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged167) -}
+63930422e458dcc59d386df1e2776681
+  findManaged175 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged181
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged180
+                   Classes.findManaged179
+                   Classes.classInfo2
+                   Classes.findManaged176) -}
+d3c1dac3b13fc02a9981ad4014161870
+  findManaged176 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   Classes.findManaged177
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+a13e98e6ab3223ef70c4adc46dc4bbd9
+  findManaged177 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged178) -}
+602cb629b4dd71a8abb2e8658c42996b
+  findManaged178 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Pen"#) -}
+a90e7a1289edb18eaf88b3af68bd7474
+  findManaged179 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged177) -}
+96e5edca7e8d89c15e6c22fc5fd5b7f4
+  findManaged18 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged49
+                   Classes.findManaged19) -}
+1441b24dac821a4b040f24da0c43d683
+  findManaged180 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged173
+                   (GHC.Base.++
+                      @ GHC.Types.Char
+                      Classes.findManaged177
+                      Classes.findManaged171)) -}
+06dd28dc8e7ac7c1f6cb149f166e9929
+  findManaged181 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged177) -}
+9e221b67eb2e9c03247a1dde557a6715
+  findManaged182 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged188
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged187
+                   Classes.findManaged186
+                   Classes.classInfo2
+                   Classes.findManaged183) -}
+cdce6b4b0d9f08a9e21225eb9606f31d
+  findManaged183 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   Classes.findManaged184
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+aa9172800a02021a452c62523601a03a
+  findManaged184 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged185) -}
+94b5972ff14a5e9ee0f99e2964b0ba25
+  findManaged185 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Font"#) -}
+cffe82992870e33fd8d3e1c9b03b11f3
+  findManaged186 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged184) -}
+9bf457d2c1a95fd18d216e743e492409
+  findManaged187 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged173
+                   (GHC.Base.++
+                      @ GHC.Types.Char
+                      Classes.findManaged184
+                      Classes.findManaged171)) -}
+969091b781ee951db74c6e6c808f191d
+  findManaged188 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged184) -}
+02b7992d4cbcb64bbab704759c03f1aa
+  findManaged189 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged195
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged194
+                   Classes.findManaged193
+                   Classes.classInfo2
+                   Classes.findManaged190) -}
+f716495a281ff57bc939e43eca76f0c5
+  findManaged19 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged36
+                   Classes.findManaged20) -}
+c458d0131a4f3cb2a8e25d93bb1e3731
+  findManaged190 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   Classes.findManaged191
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+3ce317f01aa14b591c9741a7fc1eed50
+  findManaged191 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged192) -}
+8626b4eb35b8f71f85c29abc7e105c84
+  findManaged192 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Icon"#) -}
+037c2ed9816c34608928bb1e7f0c3504
+  findManaged193 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged191) -}
+83012729f4f83d510d0301900ba593d9
+  findManaged194 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged173
+                   (GHC.Base.++
+                      @ GHC.Types.Char
+                      Classes.findManaged191
+                      Classes.findManaged171)) -}
+aa1f5aec42a942775e9672a8b964e95c
+  findManaged195 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged191) -}
+1c52ac9b0ede599712376beb667ed952
+  findManaged196 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged202
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged201
+                   Classes.findManaged200
+                   Classes.classInfo2
+                   Classes.findManaged197) -}
+192ca8154c0ef42700bc51b924cef1b7
+  findManaged197 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   Classes.findManaged198
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+6691ec5f4c9cf746a9fee39471118de0
+  findManaged198 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged199) -}
+5ad27852d134efb5d3c68e7540ce6c24
+  findManaged199 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Cursor"#) -}
+e9c2cfe6290cffbe0e55c92923bca27f
+  findManaged2 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged189
+                   Classes.findManaged3) -}
+8edf5aadf1a0988a255dc11c415f597b
+  findManaged20 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged21
+                   (GHC.Types.[] @ Classes.ClassInfo)) -}
+f02662256e3ce83194f4af6081908a62
+  findManaged200 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged198) -}
+a62bd5f9941fce33aa09892614bab147
+  findManaged201 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged173
+                   (GHC.Base.++
+                      @ GHC.Types.Char
+                      Classes.findManaged198
+                      Classes.findManaged171)) -}
+7b7a7cabb99b09b020e28f3ae5f6d871
+  findManaged202 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged198) -}
+6fb1a4ca78b07c832f28582f9d3a4204
+  findManaged203 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged138
+                   Classes.findManaged204) -}
+995b7075f84940ae44c9b2c3f51d0464
+  findManaged204 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged205) -}
+24e58f45a1591f93597eeae678e972d2
+  findManaged205 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Bitmap"#) -}
+77d73bddfc27c8bcc5876e801f43ad75
+  findManaged206 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged173
+                   (GHC.Base.++
+                      @ GHC.Types.Char
+                      Classes.findManaged204
+                      Classes.findManaged171)) -}
+81c71dee3469b431def97e700fa04fb9
+  findManaged207 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackAppendCString#
+                   Classes.findManaged110
+                   Classes.findManaged204) -}
+0d608aba3325ee7dcae94cb06516fa31
+  findManaged208 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.Base.++
+                   @ GHC.Types.Char
+                   Classes.findManaged204
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+33a5e481cb61fee767458c225f6d8b44
+  findManaged21 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged34
+                   Classes.findManaged32
+                   Classes.findManaged30
+                   Classes.findManaged28
+                   Classes.findManaged26
+                   Classes.findManaged24
+                   Classes.findManaged22) -}
+5b252db48242100eb616be02b8c3b402
+  findManaged22 :: GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ (ds :: GHC.Base.String) -> Classes.findManaged_x) -}
+97cf08b916817353b41574bb31c543bf
+  findManaged23 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("TreeItem"#) -}
+9af4c468ed0c6d6f2ecbfa4a99e173c6
+  findManaged24 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged25) -}
+87a1b787c0b89ff0ce67524bc6512b91
+  findManaged25 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("const (return ())"#) -}
+10531fba3be66ab589195aac0b9b53a5
+  findManaged26 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged27) -}
+a9de4ffdfdd02d3f5f705d0313d27642
+  findManaged27 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefTreeItemId"#) -}
+8aade07ac97a347faed447f203e31038
+  findManaged28 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged29) -}
+da267d525c32d936b07cf1a41b6410b3
+  findManaged29 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withManagedTreeItemIdResult"#) -}
+cdc89fd5cf4e450d086826ddd2c7ab56
+  findManaged3 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged182
+                   Classes.findManaged4) -}
+96a7d1a4c4a0d15e15161a2264a7a016
+  findManaged30 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged31) -}
+4c1bf17d7e22f60e7eb2f9ac27a53eb2
+  findManaged31 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withTreeItemIdPtr"#) -}
+4aa2a74e076985409ca9e685ea5a7da9
+  findManaged32 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged33
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+ed54b7c7b2e0b427edec2cf4807268e0
+  findManaged33 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withTreeItemIdRef"#) -}
+8cd39e0b21fa0dbc08bdbb1bf96e9f59
+  findManaged34 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged35) -}
+0808d15f0eaac3dd32f132156987793b
+  findManaged35 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxTreeItemId"#) -}
+1ee570d7728110567a057e55bf9856bb
+  findManaged36 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged47
+                   Classes.findManaged45
+                   Classes.findManaged43
+                   Classes.findManaged41
+                   Classes.findManaged39
+                   Classes.findManaged24
+                   Classes.findManaged37) -}
+e905d05b4cb62047dfeb17645f87734b
+  findManaged37 :: GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ (ds :: GHC.Base.String) -> Classes.findManaged_x1) -}
+f7754d7dc551fe2ab54f3f65deccca08
+  findManaged38 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Rect"#) -}
+0a095e558818af41abbcbc1782a87477
+  findManaged39 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged40) -}
+fb941b332171b8599990a7401cc40c1e
+  findManaged4 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged175
+                   Classes.findManaged5) -}
+ae1d4573c84fce13d711c18304a7122f
+  findManaged40 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefRect"#) -}
+fa67564e28fa4c84098209ff897355da
+  findManaged41 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged42) -}
+546c5b79098fe5c8f56e5036369a6047
+  findManaged42 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withWxRectResult"#) -}
+51c53aaf6356bc70e0d4ccb50c63719d
+  findManaged43 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged44) -}
+9a302bdf2ec4129f4fcf3068278e9e56
+  findManaged44 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withWxRectPtr"#) -}
+454aac5330d2d7fe20330b67e6dacd5d
+  findManaged45 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged46
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+3809ba557b2d1d91e75902bbdbdefc2f
+  findManaged46 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withWxRectRef"#) -}
+dfd2d376bfa9a1bdc15e857b6633a2b0
+  findManaged47 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged48) -}
+403b5bc2314c0cd48b464435a313fe29
+  findManaged48 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxRect"#) -}
+1c72abc03800f26c632d5e7930f94c77
+  findManaged49 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged60
+                   Classes.findManaged58
+                   Classes.findManaged56
+                   Classes.findManaged54
+                   Classes.findManaged52
+                   Classes.findManaged24
+                   Classes.findManaged50) -}
+2945c5735d163ae442525e4a610a5e72
+  findManaged5 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged165
+                   Classes.findManaged6) -}
+bf7bb964edb1e33c210593a38933f430
+  findManaged50 :: GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ (ds :: GHC.Base.String) -> Classes.findManaged_x2) -}
+6463c79e1bb88d0b68faaf70fa4e7c7e
+  findManaged51 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Size"#) -}
+232b6ab887e4bdbe7733c353635aea26
+  findManaged52 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged53) -}
+59f79ef01f1bca37958ddfc56c2e043d
+  findManaged53 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefSize"#) -}
+8b55412fb2ea2f3996c7b06334be5a89
+  findManaged54 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged55) -}
+a0ec320fcdcaa31c11305cfb8ab66a73
+  findManaged55 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withWxSizeResult"#) -}
+e93f2d6425d0838517896ff689d555c6
+  findManaged56 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged57) -}
+407c681fbdefc016f671ea4feffda26b
+  findManaged57 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withSizePtr"#) -}
+9115a767210a1f458a567ff046b18c9c
+  findManaged58 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged59
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+ab2f3ac9a322541cb94feac6d4ed3125
+  findManaged59 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withSizeRef"#) -}
+ebde032a09166130ef64265ad96f9966
+  findManaged6 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged160
+                   Classes.findManaged7) -}
+2c1b8d5d2dab7d357cd8410c485ab84e
+  findManaged60 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged61) -}
+32b069509e07a0aad30394ee6b7fdefa
+  findManaged61 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxSize"#) -}
+4b1934184ead806d27718a03e6c5e4ae
+  findManaged62 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged73
+                   Classes.findManaged71
+                   Classes.findManaged69
+                   Classes.findManaged67
+                   Classes.findManaged65
+                   Classes.findManaged24
+                   Classes.findManaged63) -}
+4cfb7d82d7422f2eaedf8c789d91d8e7
+  findManaged63 :: GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ (ds :: GHC.Base.String) -> Classes.findManaged_x3) -}
+c9e74348e99acf797fd745dc5dc2844b
+  findManaged64 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Point"#) -}
+53d02aa81920f639d5d120d102f07b3e
+  findManaged65 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged66) -}
+23cdb45b053839cefb2e681fc545a22e
+  findManaged66 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefPoint"#) -}
+20a618edd60645c563535733a137e661
+  findManaged67 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged68) -}
+ebb2f3378fdd3ca5284f52f141f3d4a4
+  findManaged68 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withWxPointResult"#) -}
+6d9aea73d42d0228d61e6a363ba8299c
+  findManaged69 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged70) -}
+4ab5e6e10c4854f6cacdffec65cd0363
+  findManaged7 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged155
+                   Classes.findManaged8) -}
+0c825118223e6bd32b4b1dc37d4001ac
+  findManaged70 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withPointPtr"#) -}
+c4efca55b0c5937de60d57b6b3ee15a5
+  findManaged71 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged72
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+cb8e22083fc0b85830438a02b0537c95
+  findManaged72 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withPointRef"#) -}
+12b5b2e5a5795d4aa2f0dd887658f542
+  findManaged73 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged74) -}
+4f1a7090a68355815bdf4b1bd3047150
+  findManaged74 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxPoint"#) -}
+d66b116d92edc17c347891f82cd24c8c
+  findManaged75 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged86
+                   Classes.findManaged84
+                   Classes.findManaged82
+                   Classes.findManaged80
+                   Classes.findManaged78
+                   Classes.findManaged24
+                   Classes.findManaged76) -}
+06911f3a15a6149045e8c8db70b6616d
+  findManaged76 :: GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ (ds :: GHC.Base.String) -> Classes.findManaged_x4) -}
+957f77c94a31c8bddc604b897f721350
+  findManaged77 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("String"#) -}
+65ff3f68079a5d435dda668852f2b39c
+  findManaged78 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged79) -}
+1069100cabd3b87e8a2a54b1d06f6e68
+  findManaged79 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefString"#) -}
+0b75e6761a22edc07585ecc1707f5ac5
+  findManaged8 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged150
+                   Classes.findManaged9) -}
+ab3681ee4955fa5e579018795a0653f9
+  findManaged80 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged81) -}
+62997b15262b0999fa548f0ce836d3b1
+  findManaged81 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withManagedStringResult"#) -}
+852055be5877e2fee7eb0d17e633ffe4
+  findManaged82 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged83) -}
+cf489a9a4b78e930ca362071883a7d72
+  findManaged83 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withStringPtr"#) -}
+5ba7f1e301698b74a487cde47de27ed5
+  findManaged84 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged85
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+7b636abb80136c8aa2af1ae794d668b5
+  findManaged85 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withStringRef"#) -}
+59794933d125c77680fe155ee13e038e
+  findManaged86 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged87) -}
+48efebd9e3552e1bf52bdad330dd96e0
+  findManaged87 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxString"#) -}
+c38f35cd6657d5879075f1e0e568764c
+  findManaged88 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged99
+                   Classes.findManaged97
+                   Classes.findManaged95
+                   Classes.findManaged93
+                   Classes.findManaged91
+                   Classes.findManaged24
+                   Classes.findManaged89) -}
+5629209671f30db61617aeab2cfd1c95
+  findManaged89 :: GHC.Base.String -> [GHC.Types.Char]
+  {- Arity: 1, Strictness: <L,A>,
+     Unfolding: InlineRule (1, True, True)
+                (\ (ds :: GHC.Base.String) -> Classes.findManaged_x5) -}
+13256cc92bc55e7d056cec259e7a5cfa
+  findManaged9 :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.findManaged145
+                   Classes.findManaged10) -}
+197827820fd23e3cfeac64dc88df08af
+  findManaged90 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("Color"#) -}
+303025a5b8b21ba8c56243512f9e1698
+  findManaged91 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged92) -}
+a9eed13c86419fd64db200d9850d8a7e
+  findManaged92 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withRefColour"#) -}
+9ac85199d63831f1cebaf0b43fa9f342
+  findManaged93 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged94) -}
+d6628ce2f50da4ad927650279cd21126
+  findManaged94 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withManagedColourResult"#) -}
+453e6667132f4ef74b49bdb4c0e5997d
+  findManaged95 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged96) -}
+9f50219f8e4228d9211f5d8915cd02ee
+  findManaged96 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withColourPtr"#) -}
+df84fab526ac8758dbd02f8002a66faf
+  findManaged97 :: [GHC.Types.Char] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,U>,
+     Unfolding: (\ (arg :: [GHC.Types.Char]) ->
+                 GHC.CString.unpackAppendCString#
+                   Classes.findManaged98
+                   (GHC.CString.unpackAppendCString# Classes.classInfo1 arg)) -}
+26a041e9ae0c9efad162f7b441d335a4
+  findManaged98 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("withColourRef"#) -}
+d96f52045f8320584dabdcfa9ac4a7e2
+  findManaged99 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged100) -}
+cd4fea9126f9e90647a1a36b826ebe8d
+  findManaged_name :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged103) -}
+2ff1864c982e49d934f0c02fefac2f4c
+  findManaged_name1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged136) -}
+dc635cdbbb035d23fe7338af0c497ec8
+  findManaged_name2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged142) -}
+ad143ed4d42aa10483dc730c7f3c6250
+  findManaged_name3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged147) -}
+2975bc96c1d9b8efc015e4583edf4f06
+  findManaged_name4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged152) -}
+309abb920ced08dc2356d567716ed7ce
+  findManaged_name5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged157) -}
+11d04d3d0883ea088578e18c07a673cd
+  findManaged_name6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.findManaged162) -}
+d1149be3e4087227c09bf8934d28e684
+  findManaged_x :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged23) -}
+86b18059185a50bef6eaf8467b2a81d8
+  findManaged_x1 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged38) -}
+840036f1ab13fa10c33009430874d55a
+  findManaged_x2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged51) -}
+74507ecaeb0761d2dfd537c413896522
+  findManaged_x3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged64) -}
+315ce6e3a9bcdd826b7188e290676d5c
+  findManaged_x4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged77) -}
+2daa00635128ea087abb64129e015dca
+  findManaged_x5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# Classes.findManaged90) -}
+7733e7e58ca329e0eb2e569153d88445
+  getWxcDir :: GHC.Types.IO GHC.Base.String
+  {- Arity: 1,
+     Unfolding: InlineRule (0, True, True)
+                Classes.getWxcDir1
+                  `cast`
+                (Nth:3
+                     (Trans
+                          (Sym (GHC.IORef.N:IORef[0]) <GHC.Base.String>_N
+                           ->_R <GHC.Prim.State# GHC.Prim.RealWorld
+                                 -> (# GHC.Prim.State# GHC.Prim.RealWorld, GHC.Base.String #)>_R)
+                          (<GHC.IORef.IORef GHC.Base.String>_R
+                           ->_R Sym (GHC.Types.N:IO[0] <GHC.Base.String>_R)))) -}
+392ae6cc7a93f5e99a647159e121f38e
+  getWxcDir1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, GHC.Base.String #)
+  {- Arity: 1,
+     Unfolding: (GHC.STRef.readSTRef1
+                   @ GHC.Prim.RealWorld
+                   @ GHC.Base.String
+                   Classes.wxcdir
+                     `cast`
+                   (Nth:2
+                        (Trans
+                             (<GHC.IORef.IORef GHC.Base.String>_R
+                              ->_R GHC.Types.N:IO[0] <GHC.Base.String>_R)
+                             (GHC.IORef.N:IORef[0] <GHC.Base.String>_N
+                              ->_R <GHC.Prim.State# GHC.Prim.RealWorld
+                                    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+                                          GHC.Base.String #)>_R)))) -}
+3a5ead19f4bf5c82370611b084d16827
+  haskellClassDefs ::
+    ([(GHC.Base.String, [GHC.Base.String])], [GHC.Base.String])
+  {- Unfolding: (Classes.haskellClassDefs_go Classes.classes) -}
+de8897b3c7d05cc934b444d3347b6c0d
+  haskellClassDefs_go ::
+    [Classes.Class]
+    -> ([([GHC.Types.Char], [[GHC.Types.Char]])], [[GHC.Types.Char]])
+  {- Arity: 1, Strictness: <S,1*U>m -}
+61809f9f0cbb3813a1489c7bcc82cb87
+  isClassName :: GHC.Base.String -> GHC.Types.Bool
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (s :: GHC.Base.String) ->
+                 Classes.$smember_go3 s Classes.classNames) -}
+f7eef9e131b65597c18f070f748c2089
+  managedClasses :: [Classes.ClassInfo]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ Classes.ClassInfo
+                   Classes.managedClasses1
+                   Classes.findManaged1) -}
+457f1203516db2d2195188d30afc6b67
+  managedClasses1 :: Classes.ClassInfo
+  {- Strictness: m,
+     Unfolding: (Classes.ClassInfo
+                   Classes.findManaged207
+                   Classes.findManaged106
+                   Classes.classInfo6
+                   Classes.findManaged206
+                   Classes.findManaged203
+                   Classes.classInfo2
+                   Classes.findManaged208) -}
+80b670c9fb06e5e9bffa8985fdc2953a
+  objDelete :: Classes.ClassInfo -> GHC.Base.String
+  RecSel Left Classes.ClassInfo
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLLSL),1*U(A,A,A,A,A,1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Classes.ClassInfo) ->
+                 case ds of wild { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                 ds6 }) -}
+e8f70a46c7305f58a317744189000f95
+  objectClassNames :: [GHC.Base.String]
+  {- Unfolding: (case GHC.List.filter
+                        @ Classes.Class
+                        Classes.objectClassNames1
+                        Classes.classes of wild {
+                   [] -> GHC.Types.[] @ GHC.Base.String
+                   : classObject ds
+                   -> case ds of wild1 {
+                        []
+                        -> case classObject of ww { Classes.Class ww1 ww2 ->
+                           GHC.Types.:
+                             @ GHC.Base.String
+                             ww1
+                             (Classes.objectClassNames_go ww2) }
+                        : ipv ipv1 -> GHC.Types.[] @ GHC.Base.String } }) -}
+9c78aec067cda7afafef93feb9fe0153
+  objectClassNames1 :: Classes.Class -> GHC.Types.Bool
+  {- Arity: 1, Strictness: <S(SL),1*U(1*U,A)>,
+     Unfolding: (\ (ds :: Classes.Class) ->
+                 case ds of wild { Classes.Class name _derived ->
+                 GHC.Base.eqString name Classes.objectClassNames2 }) -}
+9b61ef844f408323ec5c02eadfa56813
+  objectClassNames2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   Classes.objectClassNames3) -}
+5af9b7623e24aafe4060da3f417608c9
+  objectClassNames3 :: GHC.Prim.Addr#
+  {- HasNoCafRefs, Unfolding: ("wxObject"#) -}
+3d12f04f8ef5e3fbe97617f031113a92
+  objectClassNames_go :: [Classes.Class] -> [GHC.Base.String]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+bc3f64eb14b29514f269ffc1275c71f9
+  setWxcDir :: GHC.Base.String -> GHC.Types.IO ()
+  {- Arity: 2, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Classes.setWxcDir1
+                  `cast`
+                (<GHC.Base.String>_R
+                 ->_R Nth:3
+                          (Nth:3
+                               (Trans
+                                    (Sym (GHC.IORef.N:IORef[0]) <GHC.Base.String>_N
+                                     ->_R <GHC.Base.String
+                                           -> GHC.Prim.State# GHC.Prim.RealWorld
+                                           -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)>_R)
+                                    (<GHC.IORef.IORef GHC.Base.String>_R
+                                     ->_R <GHC.Base.String>_R
+                                     ->_R Sym (GHC.Types.N:IO[0] <()>_R))))) -}
+190c648198b3ea4730ced9eee1daabff
+  setWxcDir1 ::
+    GHC.Base.String
+    -> GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
+  {- Arity: 2, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (dir :: GHC.Base.String) ->
+                 GHC.STRef.writeSTRef1
+                   @ GHC.Prim.RealWorld
+                   @ GHC.Base.String
+                   Classes.wxcdir
+                     `cast`
+                   (Nth:2
+                        (Trans
+                             (<GHC.IORef.IORef GHC.Base.String>_R
+                              ->_R <GHC.Base.String>_R
+                              ->_R GHC.Types.N:IO[0] <()>_R)
+                             (GHC.IORef.N:IORef[0] <GHC.Base.String>_N
+                              ->_R <GHC.Base.String
+                                    -> GHC.Prim.State# GHC.Prim.RealWorld
+                                    -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)>_R)))
+                   dir) -}
+efaa57dd55b8efca86b73e1aa0dcfdb5
+  showClass :: GHC.Types.Int -> Classes.Class -> [GHC.Types.Char]
+  {- Arity: 2, Strictness: <S(S),1*U(U)><S,1*U(1*U,1*U)>,
+     Inline: [0],
+     Unfolding: InlineRule (2, True, False)
+                (\ (w :: GHC.Types.Int) (w1 :: Classes.Class) ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { Classes.Class ww3 ww4 ->
+                 Classes.$wshowClass ww1 ww3 ww4 } }) -}
+80b670c9fb06e5e9bffa8985fdc2953a
+  withPtr :: Classes.ClassInfo -> GHC.Base.String
+  RecSel Left Classes.ClassInfo
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLSLLLL),1*U(A,A,1*U,A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Classes.ClassInfo) ->
+                 case ds of wild { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                 ds3 }) -}
+80b670c9fb06e5e9bffa8985fdc2953a
+  withRef :: Classes.ClassInfo -> GHC.Base.String
+  RecSel Left Classes.ClassInfo
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLSLL),1*U(A,A,A,A,1*U,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Classes.ClassInfo) ->
+                 case ds of wild { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                 ds5 }) -}
+80b670c9fb06e5e9bffa8985fdc2953a
+  withResult :: Classes.ClassInfo -> GHC.Base.String
+  RecSel Left Classes.ClassInfo
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLSLLL),1*U(A,A,A,1*U,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Classes.ClassInfo) ->
+                 case ds of wild { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                 ds4 }) -}
+80b670c9fb06e5e9bffa8985fdc2953a
+  withSelf :: Classes.ClassInfo -> GHC.Base.String -> GHC.Base.String
+  RecSel Left Classes.ClassInfo
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LSLLLLL),1*U(A,1*U,A,A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Classes.ClassInfo) ->
+                 case ds of wild { Classes.ClassInfo ds1 ds2 ds3 ds4 ds5 ds6 ds7 ->
+                 ds2 }) -}
+c7b3de346d0c7a1d68d2dde6ff46da5c
+  wxcdir :: GHC.IORef.IORef GHC.Base.String
+  {- Inline: -}
+instance GHC.Classes.Eq [Classes.Class] = Classes.$fEqClass
+instance GHC.Show.Show [Classes.Class] = Classes.$fShowClass
+"SC:$sgo130" forall @ a
+                    (sc :: GHC.Prim.Int#)
+                    (sc1 :: [GHC.Types.Char])
+                    (sc2 :: a)
+                    (sc3 :: Data.Map.Internal.Map [GHC.Types.Char] a)
+                    (sc4 :: Data.Map.Internal.Map [GHC.Types.Char] a)
+                    (sc5 :: a)
+                    (sc6 :: [GHC.Types.Char])
+                    (sc7 :: [GHC.Types.Char])
+  Classes.$sinsert_$sgo13 @ a
+                          sc7
+                          sc6
+                          sc5
+                          (Data.Map.Internal.Bin @ GHC.Base.String @ a sc sc1 sc2 sc3 sc4)
+  = Classes.$sinsert_$s$sgo13 @ a sc sc1 sc2 sc3 sc4 sc5 sc6 sc7
+"SC:$sgo30" forall (sc :: GHC.Prim.Int#)
+                   (sc1 :: [GHC.Types.Char])
+                   (sc2 :: Data.Set.Internal.Set [GHC.Types.Char])
+                   (sc3 :: Data.Set.Internal.Set [GHC.Types.Char])
+                   (sc4 :: [GHC.Types.Char])
+                   (sc5 :: [GHC.Types.Char])
+  Classes.$sinsert_$sgo3 sc5
+                         sc4
+                         (Data.Set.Internal.Bin @ GHC.Base.String sc sc1 sc2 sc3)
+  = Classes.$sinsert_$s$sgo3 sc sc1 sc2 sc3 sc4 sc5
+"SC:$wmergeClass0" [0] forall (sc :: [Classes.Class])
+                              (sc1 :: [GHC.Types.Char])
+                              (sc2 :: [Classes.Class])
+  Classes.$wmergeClass (Classes.Class sc1 sc2) sc
+  = Classes.classExtends_$s$wmergeClass sc sc1 sc2
+"SC:$wpoly_go130" [0] forall @ a
+                             (sc :: GHC.Prim.Int#)
+                             (sc1 :: [GHC.Types.Char])
+                             (sc2 :: a)
+                             (sc3 :: Data.Map.Internal.Map [GHC.Types.Char] a)
+                             (sc4 :: Data.Map.Internal.Map [GHC.Types.Char] a)
+                             (sc5 :: [GHC.Types.Char])
+  Classes.$wpoly_go13 @ a
+                      sc5
+                      (Data.Map.Internal.Bin @ GHC.Base.String @ a sc sc1 sc2 sc3 sc4)
+  = Classes.$s$wsplit_$s$wpoly_go13 @ a sc sc1 sc2 sc3 sc4 sc5
+"SPEC/Classes $fStream[]mtok @ Identity _" [orphan] forall @ tok
+                                                           (v :: GHC.Base.Monad
+                                                                   Data.Functor.Identity.Identity)
+  Text.Parsec.Prim.$fStream[]mtok @ Data.Functor.Identity.Identity
+                                  @ tok
+                                  v
+  = Classes.$s$fStream[]mtok @ tok
+"SPEC/Classes $fStream[]mtok_$cuncons @ Identity _" [orphan] forall @ tok
+                                                                    ($dMonad :: GHC.Base.Monad
+                                                                                  Data.Functor.Identity.Identity)
+  Text.Parsec.Prim.$fStream[]mtok_$cuncons @ Data.Functor.Identity.Identity
+                                           @ tok
+                                           $dMonad
+  = Classes.$s$fStream[]mtok_$s$fStream[]mtok_$cuncons @ tok
+"SPEC/Classes $wsplitS @ String" [orphan] [0] forall (w :: GHC.Classes.Ord
+                                                             GHC.Base.String)
+  Data.Set.Internal.$wsplitS @ [GHC.Types.Char] w
+  = Classes.$s$wsplitS
+"SPEC/Classes fromList @ [Char] _" [orphan] forall @ a
+                                                   ($dOrd :: GHC.Classes.Ord [GHC.Types.Char])
+  Data.Map.Internal.fromList @ [GHC.Types.Char] @ a $dOrd
+  = Classes.$sfromList @ a
+"SPEC/Classes union @ String" [orphan] forall ($dOrd :: GHC.Classes.Ord
+                                                          GHC.Base.String)
+  Data.Set.Internal.union @ [GHC.Types.Char] $dOrd = Classes.$sunion
+"SPEC/Classes union @ String _" [orphan] forall @ a
+                                                ($dOrd :: GHC.Classes.Ord GHC.Base.String)
+  Data.Map.Internal.union @ [GHC.Types.Char] @ a $dOrd
+  = Classes.$sunion1 @ a
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

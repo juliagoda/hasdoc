@@ -26,7 +26,7 @@ data-files:
                  data/translations/*.msg
                  data/icons/*.png
                  -- documentation
-                 doc/doc-*.pdf
+                 doc/*.pdf
 extra-source-files:
                  -- documentation
                  INSTALL.md, AUTHORS.md, README.md,
@@ -93,7 +93,7 @@ library
       Application.Hasdoc.Settings.General
   other-modules:
       Paths_hasdoc
-  ghc-options:   -rtsopts -Wall -fno-warn-unused-do-bind -threaded
+  ghc-options:   -O2 -Wall -fno-warn-unused-do-bind -threaded
   hs-source-dirs:
       src
   default-language: Haskell2010
@@ -103,7 +103,7 @@ executable hasdoc
   main-is: Hasdoc.hs
   other-modules: Paths_hasdoc
   hs-source-dirs: .
-  ghc-options:   -rtsopts -Wall -fno-warn-unused-do-bind -threaded
+  ghc-options:   -O2 -Wall -fno-warn-unused-do-bind -threaded
   build-depends:
     base >=4.4 && <4.11
     , wx >=0.93
