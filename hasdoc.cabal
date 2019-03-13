@@ -27,6 +27,8 @@ data-files:
                  data/icons/*.png
                  -- documentation
                  doc/*.pdf
+                 -- screenshots
+                 data/screenshots/*.png
 extra-source-files:
                  -- documentation
                  INSTALL.md, AUTHORS.md, README.md,

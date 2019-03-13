@@ -27,6 +27,8 @@ data-files:
                  data/icons/*.png
                  -- documentation
                  doc/generator-contents.md
+                 -- screenshots
+                 data/screenshots/*.png
 extra-source-files:
                  -- documentation
                  README.md,
