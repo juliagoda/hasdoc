@@ -217,6 +217,9 @@ CheckHint: Uruchamia same testy wprowadzonych danych z całego wizarda.
 ChoosePathProject: Wybierz folder dla wygenerowania plików
 WarningProject: ostrzeżenie
 WaningProjectName: Tytuł projektu nie został podany
+SuccessCheckProject: sukces
+SuccessCheckProjectMsg: Warunki wprowadzanych danych zostały spełnione
+SuccessGenProjectMsg: Zakończono generowanie plików
 ProjectNameConsole: Tytuł projektu to 
 WarningProjectEmpty: żadne pole nie zostało wypełnione
 NoHTMLParsedTags: Plik html nie zawiera poprawnej struktury dla aktualnej aplikacji
@@ -229,3 +232,7 @@ ClosedAppError: Wystąpił błąd podczas zamykania aplikacji nr
 
 CreatedPdfError: Nastąpił błąd podczas tworzenia pliku Pdf
 PdfviewerNone: Brak
+
+
+LoadState: Odczyt stanu
+LoadStateResult: Stan został pomyślnie wczytany z wybranego pliku

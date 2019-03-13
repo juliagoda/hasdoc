@@ -32,6 +32,21 @@ DocMenu: Documentation  D
 DocMenuHelp: FAQ
 
 
+Tip1: Customer requirements for program functionality may change during code creation.  It is worth keeping this in mind and prepare a method/technique that would allow for easy application of changes.  However, you cannot accept sudden changes to most of the code. Some people think that changes should not exceed 25% of the whole project. In case of cooperation with a difficult or undecided client, it is easier to write the code in short cycles (e.g. weekly, monthly, etc.).
+
+Tip2: If you don't have ideas about tests, imagine that you are the user who launched your application for the first time. What mistakes could he make before he became fully acquainted with the rules of the program?
+
+Tip3: If you have no idea about the application, look around. Surely there is any problem in your environment, which could be solved by the application.
+
+Tip4: It is commonly said that heuristics is only suitable for small projects. However, looking at it even if it is not written in detail, you can already think about the steps in creating a project and look for suitable tools that meet the priority requirements. If necessary, the existing modules can be expanded with new features to meet the requirements of the program.
+
+Tip5: The most important, first stage of code creation is to create a skeleton, which must be solid and tested. However, it does not have to return temporarily correct values or even anything. 
+
+Tip6: After writing a full heuristics, it is worth looking at the whole "story" and then listing all the programming languages taken into account in the first stage. Then it is worth noting the advantages and disadvantages of each of the languages. On this basis you can make an initial choice. While reading about the required functionalities, it is worth looking for libraries and tools for each language, which are helpful in achieving the goal. If there is still a problem in the choice of language and additional technologies, it is worth answering the question: "Will the program use elements of the paradigm of a given language? Of course, as long as they differ in paradigms". Maybe it is better to choose a multiparadigmatic language? Which of the pre-selected technologies contains the best solution for each of the missing functionalities separately? Maybe the one with one particular paradigm is sufficient? Does the choice of tools and libraries and language include support for the target system architecture and platform?
+
+
+
+
 SettWindow: Settings
 LangLabel: Select one of the following languages. After selecting and saving, you will need to restart the program.
 LoadLabel: load a previously saved session

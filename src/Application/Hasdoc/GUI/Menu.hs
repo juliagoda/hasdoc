@@ -54,7 +54,7 @@ createMainMenu mainWindow tbar =
         set mainWindow [menuBar := [programPane, settingsPane, aboutPane], 
             on (charKey 's') := saveFileDialog mainWindow [(translate MsgLoadFilesExt, ["*.hdoc"])],
             on (charKey 'l') := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.hdoc"])] False,
-            on (charKey 'i') := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.html"])] True,
+            on (charKey 'i') := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadImportedFilesExt, ["*.html"])] True,
             on (charKey 'q') := closeMainWindow mainWindow,
             on (charKey 't') := openSettingsWindow mainWindow,
             on (charKey 'w') := openHomepage mainWindow,
@@ -69,7 +69,7 @@ getProgramPane mainWindow tbar =
         programPane <- menuPane [ text := translate MsgProgramMenu ]
         saveItem  <- menuItem programPane [ text := translate MsgSaveStateMenu, help := translate MsgSaveStateMenuHelp, on command := saveFileDialog mainWindow [(translate MsgLoadFilesExt, ["*.hdoc"])]] 
         loadItem  <- menuItem programPane [ text := translate MsgLoadStateMenu, help := translate MsgLoadStateMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.hdoc"])] False ] 
-        importItem <- menuItem programPane [ text := translate MsgImportFromFileMenu, help := translate MsgImportFromFileMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadFilesExt, ["*.html"])] True ] 
+        importItem <- menuItem programPane [ text := translate MsgImportFromFileMenu, help := translate MsgImportFromFileMenuHelp, on command := openFileDialog mainWindow (translate MsgLoadStateMenuHelp) "" [(translate MsgLoadImportedFilesExt, ["*.html"])] True ] 
         menuLine programPane
         quitItem <- menuItem programPane [ text := translate MsgQuitMenu, help := translate MsgQuitMenuHelp ]
         set quitItem  [on command := closeMainWindow mainWindow]

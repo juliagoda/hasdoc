@@ -80,7 +80,7 @@ runGenerationSeq mainwindow defWidgets reqWidgets archWidgets techWidgets testWi
                chosenPath <- dirOpenDialog mainwindow True (translate MsgChoosePathProject) ""
                case chosenPath of
                     Nothing -> return ()
-                    Just a -> writeDefaultFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry a >> forkIO (writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry a) >> runPdfPreview (a ++ "/" ++ projectTitle ++ "/project.pdf")
+                    Just a -> writeDefaultFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry a >> forkIO (writeChosenFormats (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry a) >> runPdfPreview (a ++ "/" ++ projectTitle ++ "/project.pdf") >> infoDialog mainwindow (translate MsgSuccessCheckProject) (translate MsgSuccessGenProjectMsg)
            else do
                return ()
         
@@ -91,8 +91,12 @@ mapAndFilter listWidgets = mapToStrings listWidgets >>= filterEmptyLines
         
 
 checkAllEntries :: Frame () -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> [(StaticText (), TextCtrl ())] -> TextCtrl () -> IO Bool
-checkAllEntries mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = checkIfAllEmpty mainWindow (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
+checkAllEntries mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets titleEntry = do 
+    allNotEmpty <- checkIfAllEmpty mainWindow (mapAndFilter defWidgets) (mapAndFilter reqWidgets) (mapAndFilter archWidgets) (mapAndFilter techWidgets) (mapAndFilter testWidgets) titleEntry
+    translate <- makeTranslator EndPage
+    if allNotEmpty then infoDialog mainWindow (translate MsgSuccessCheckProject) (translate MsgSuccessCheckProjectMsg) >> return True else return False
 
+    
 
 checkIfAllEmpty :: Frame () -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> TextCtrl () -> IO Bool
 checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWidgets textEntry = 
@@ -101,12 +105,12 @@ checkIfAllEmpty mainWindow defWidgets reqWidgets archWidgets techWidgets testWid
         titleText <- get textEntry text
         case null (dropWhile isSpace titleText) of
              True -> (warningDialog mainWindow (translate MsgWarningProject) (translate MsgWaningProjectName)) >> return False
-             False -> (putStrLn $ (translate MsgProjectNameConsole) ++ titleText) >> return True
-        case defWidgets `mplus` reqWidgets `mplus` archWidgets `mplus` techWidgets `mplus` testWidgets of
-                                                                                 Nothing -> warningDialog mainWindow (translate MsgWarningProject) (translate MsgWarningProjectEmpty) >> return False
-                                                                                 Just [] -> warningDialog mainWindow (translate MsgWarningProject) (translate MsgWarningProjectEmpty) >> return False
-                                                                                 Just [x] -> return True
-                                                                                 Just ((x,y,z):xs) -> return True
+             False -> case defWidgets `mplus` reqWidgets `mplus` archWidgets `mplus` techWidgets `mplus` testWidgets of 
+                           Nothing -> warningDialog mainWindow (translate MsgWarningProject) (translate MsgWarningProjectEmpty) >> return False 
+                           Just [] -> warningDialog mainWindow (translate MsgWarningProject) (translate MsgWarningProjectEmpty) >> return False 
+                           Just [x] -> return True 
+                           Just ((x,y,z):xs) -> return True
+        
 
 
 mapToStrings :: [(StaticText (), TextCtrl ())] -> Maybe [(Int, String, String)]

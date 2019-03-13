@@ -1,7 +1,6 @@
 
 # solver extra for last version of wxHaskell
 resolver: lts-11.9
-#jobs: 2
 
 # for stability
 packages:
@@ -11,6 +10,7 @@ packages:
 - wxHaskell/wxcore
 - wxHaskell/wxdirect
 - src/subprojects/hasdoc-gen
+
 
 # extra deps in versions run on current lts
 extra-deps: 

@@ -217,6 +217,9 @@ CheckHint: Launches the tests of the entered data from the entire wizard.
 ChoosePathProject: Select a folder to generate files
 WarningProject: warning
 WaningProjectName: The title of the project was not given
+SuccessCheckProject: success
+SuccessCheckProjectMsg: The conditions for entering the data have been met
+SuccessGenProjectMsg: Generation of files has been completed
 ProjectNameConsole: The title of the project is 
 WarningProjectEmpty: no field has been filled in
 NoHTMLParsedTags: The html file does not contain the correct structure for the current application
@@ -229,3 +232,7 @@ ClosedAppError: An error occurred when closing the application no.
 
 CreatedPdfError: An error occurred while creating the Pdf file
 PdfviewerNone: Off
+
+
+LoadState: Load of state
+LoadStateResult: The state was successfully loaded from the selected file

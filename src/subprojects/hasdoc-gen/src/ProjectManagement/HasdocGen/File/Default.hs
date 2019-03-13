@@ -76,8 +76,9 @@ writeHtml defFiltered reqFiltered archFiltered techFiltered testFiltered project
         T.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project.html") rawHtml
         
         
+        
 -- as first whhtmltopdf is needed - find and install it on your system
--- without installed wkhtmltopdf appears error: hasdoc: wkhtmltopdf: createProcess: runInteractiveProcess: exec: invalid argument (Bad file descriptor) - but it doesn't crash application
+-- without installed wkhtmltopdf appears error: hasdoc: wkhtmltopdf: createProcess: runInteractiveProcess: exec: invalid argument (Bad file descriptor)
 writePDFile :: Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> Maybe [(Int, String, String)] -> String -> String -> FilePath -> IO ()
 writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered projectTitle lang chosenDir = 
     do
@@ -87,6 +88,7 @@ writePDFile defFiltered reqFiltered archFiltered techFiltered testFiltered proje
         case rawPdf of
              Left a -> putStrLn $ (translate MsgCreatedPdfError)
              Right b -> B.writeFile (chosenDir ++ "/" ++ projectTitle ++ "/project.pdf") b
+        
         
         
 readHtmlFile :: WX.Frame () -> FilePath -> IO ()
@@ -102,7 +104,7 @@ readHtmlFile mainWindow filepath =
                home <- getHomeDirectory
                createDirectoryIfMissing True (home ++ "/.hasdoc-gen/temp")
                writeIniFile (home ++ "/.hasdoc-gen/temp/temp.hdoc") (Ini {iniGlobals=mempty, iniSections=hhash})
-        
+               WX.infoDialog mainWindow (translate MsgLoadState) (translate MsgLoadStateResult)
         
          
  
@@ -137,7 +139,7 @@ loadWriterPandocOpts =
         template <- runIOorExplode $ getDefaultTemplate "html" 
         readTemp <- readTemplate 
         let gg = Just template
-        return $ def { writerTOCDepth = 4, writerTableOfContents = True, writerTemplate = gg, writerVariables = [("css", getAppCssPath ++ "/" ++ ((convIntToCss . readTemp) templateName))]} --("header-includes", "<style>p { background-color: magenta; }</style>")] } 
+        return $ def { writerTOCDepth = 4, writerTableOfContents = True, writerTemplate = gg, writerVariables = [("css", getAppCssPath ++ "/" ++ ((convIntToCss . readTemp) templateName))]} 
                 
         
 loadReaderPandocOpts :: IO ReaderOptions                

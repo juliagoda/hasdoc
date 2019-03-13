@@ -11,7 +11,7 @@ LoadStateMenuHelp: wczytuje zapisaną wcześniej sesję
 LoadFilesExt: Pliki hasdoc
 LoadImportedFilesExt: pliki html
 ImportFromFileMenu: Importuj z pliku  I 
-ImportFromFileMenuHelp: importuje treści do wizarda z wygenerowanego wcześniej pliku (domyślnie z formatem *.pdf)
+ImportFromFileMenuHelp: importuje treści do wizarda z wygenerowanego wcześniej pliku (domyślnie z formatem *.html)
 QuitMenu: Zakończ  Q
 QuitMenuHelp: zamyka program
 OptionsMenu: Opcje
@@ -30,6 +30,20 @@ TipsMenu: Wskazówki
 TipsMenuHelp: zawiera listę dodatkowych pomysłów
 DocMenu: Dokumentacja  D
 DocMenuHelp: podręcznik elektroniczny o używaniu programu
+
+
+Tip1: Wymagania klienta dotyczące funkcjonalności programu mogą się zmieniać w trakcie tworzenia kodu.  Warto mieć to na uwadze i przygotować sposób/technikę na, która pozwoliłaby w łatwy sposób nanosić zmiany.  Jednak nie można godzić się na nagłe zmiany większości w kodzie. Niektórzy sądzą, że zmiany nie powinny przekraczać 25% całego projektu. W przypadku współpracy z trudnym lub niezdecydowanym klientem, prościej jest pisać kod krótkimi cyklami (np. cotygodniowymi, miesięcznymi itp.).
+
+Tip2: Jeśli nie masz pomysłów dotyczących testów, wyobraź sobie, że jesteś użytkownikiem, który pierwszy raz uruchomił twoją aplikację. Jakie błędy mógłby popełnić, zanim by się w pełni zapoznał z zasadami działania programu?
+
+Tip3: Jeśli nie masz pomysłu na temat aplikacji, rozejrzyj się dookoła. Na pewno w twoim otoczeniu znajduje się jakikolwiek problem, który mógłaby rozwiązać aplikacja
+
+Tip4: Mówi się powszechnie, że heurystyka nadaje się tylko do małych projektów. Jednak patrząc na nią nawet, gdy nie jest napisana szczegółowo, można już pomyśleć o krokach w tworzeniu projektu i poszukać odpowiednich narzędzi, które spełniają priorytetowe wymagania. W razie konieczności, można istniejące moduły rozbudować o nowe cechy tak, aby spełniały wymagania programu
+
+Tip5: Najważniejszym, pierwszym etapem tworzenia kodu jest stworzenie szkieletu, który musi być solidny i przetestowany. Nie musi jednak zwracać na razie poprawnych wartości, ani nawet czegokolwiek zwracać. 
+
+Tip6: Po napisaniu pełnej heurystyki (co warto zrobić), warto spojrzeć na całość, a następnie wypisać wszystkie języki programowania, brane pod uwagę w pierwszym etapie. Następnie warto odnotować wady i zalety każdego z języków. Na tej podstawie można dokonać wstępnego wyboru. Czytając o wymaganych funkcjonalnościach, warto poszukać bibliotek oraz narzędzi dla każdego języka, które są pomocne w osiągnięciu celu. Jeśli nadal istnieje problem w wyborze języka i dodatkowych technologii, to warto odpowiedzieć sobie na pytanie: "Czy program będzie korzystał z elementów paradygmatu danego języka? Oczywiście, o ile one się różnią między sobą paradygmatami". Może lepiej wybrać język multiparadygmatyczny? Który z wybranych wstępnie technologii zawiera najlepsze rozwiązanie dla każdego z brakujących funkcjonalności z osobna? A może wystarczy w zupełności ten o jednym konkretnym paradygmacie? Czy wybór narzędzi i bibliotek i języka zawiera wsparcie dla docelowej architektury systemowej oraz platformy?
+
 
 
 SettWindow: Ustawienia
