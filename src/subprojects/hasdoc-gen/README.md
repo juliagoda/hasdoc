@@ -85,6 +85,8 @@ There are several dependencies without which it will not be possible to start or
     • g++  (dla Windows – MinGW, dla MacOS X – Developer Tools)
     • ghc version 8.2.2 or higher
     • ghc-libs
+    • haskell-cabal-doctest
+    • cabal-install
     • stack
     • wkhtmltopdf
 
@@ -130,7 +132,7 @@ cd src/subprojects/hasdoc-gen
 
 3) If an "out of memory" error nevertheless occurs during the building process, you can create a swap file with a larger capacity than you currently have and try again.
 
-4) If you accidentally deleted the directories ".hasdoc" and ".hasdoc-gen" in the home path or you see an error regarding "mkMessage" (about not finding translation files, try to run the script:
+4) If you accidentally deleted the directories ".hasdoc" and ".hasdoc-gen" in the home path or you see an error regarding "mkMessage" (about not finding translation files), try to run the script:
 
 `scripts/./copymsg.sh`
 

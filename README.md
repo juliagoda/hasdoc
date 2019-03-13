@@ -94,6 +94,8 @@ There are several dependencies without which it will not be possible to start or
     • g++  (dla Windows – MinGW, dla MacOS X – Developer Tools)
     • ghc version 8.2.2 or higher
     • ghc-libs
+    • haskell-cabal-doctest
+    • cabal-install
     • stack
     • wkhtmltopdf
 

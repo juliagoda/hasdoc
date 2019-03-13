@@ -1,4 +1,9 @@
 .stack-work/
+wxHaskell/wx/.stack-work/
+wxHaskell/wx-config-win/.stack-work/
+wxHaskell/wxc/.stack-work/
+wxHaskell/wxcore/.stack-work/
+wxHaskell/wxdirect/.stack-work/
 *~
 dist
 dist-*
@@ -17,7 +22,6 @@ cabal.sandbox.config
 *.aux
 *.hp
 *.eventlog
-.stack-work/
 cabal.project.local
 cabal.project.local~
 .HTF/
