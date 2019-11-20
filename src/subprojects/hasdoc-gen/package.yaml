@@ -21,6 +21,32 @@ description:         Please see the README on GitHub at <https://github.com/juli
 
 dependencies:
 - base >=4.4 && <4.11
+- containers
+- unordered-containers
+- process
+- pandoc
+- HsYAML
+- haddock-library
+- hslua
+- hslua-module-text
+- ipynb
+- pandoc-types
+- skylighting
+- skylighting-core
+- texmath
+- text
+- blaze-html
+- shakespeare
+- monadplus
+- app-settings
+- directory
+- bytestring
+- ini
+- tagsoup
+- http-types
+- binary
+- wx
+- wxcore
 
 library:
   source-dirs: src
