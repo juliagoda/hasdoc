@@ -21,7 +21,33 @@ description:         Please see the README on GitHub at <https://github.com/juli
 
 dependencies:
 - base >=4.4 && <4.11
-#- hasdoc-gen >= 1.0
+- containers
+- unordered-containers
+- process
+- app-settings
+- open-browser
+- directory
+- executable-path
+- pandoc
+- HsYAML
+- haddock-library
+- hslua
+- hslua-module-text
+- ipynb
+- pandoc-types
+- skylighting
+- skylighting-core
+- texmath
+- text
+- blaze-html
+- shakespeare
+- filepath
+- http-types
+- ini
+- binary
+- wx
+- wxcore
+- hasdoc-gen
 
 library:
   source-dirs: src
